@@ -3,9 +3,6 @@ contracts/access-control/*
 contracts/Box.sol
 contracts/BoxV2.sol
 contracts/AuthorizableUpgradeable.sol
-contracts/EvoToken.sol
-contracts/IEvoToken.sol
-contracts/IProfiles.sol
 migrations/4_upgrade_box.js.bak
 migrations/3_deploy_upgradeable_evotoken.js.bak
 test/Box.test.js.bak
