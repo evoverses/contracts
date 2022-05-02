@@ -5,10 +5,6 @@ const MasterInvestor = artifacts.require('MasterInvestor');
 
 
 // MasterInvestor
-const DEV_ADDRESS = "0x946d5Cb6C3A329BD859e5C3Ba01767457Ea2DcA2";
-const LIQUIDITY_ADDRESS = "0xA511794340216a49Ac8Ae4b5495631CcD80BCfcc";
-const COMMUNITY_ADDRESS = "0xA511794340216a49Ac8Ae4b5495631CcD80BCfcc";
-const FOUNDER_ADDRESS = "0x946d5Cb6C3A329BD859e5C3Ba01767457Ea2DcA2";
 const REWARD_PER_BLOCK = "1000000000000000000"; //
 const START_BLOCK = "25918276";
 const HALVING_AFTER_BLOCK = "302400"; // 1 epoch
@@ -172,10 +168,6 @@ module.exports = async function (deployer) {
     await deployer.deploy(
         MasterInvestor,
         tokenAddress,
-        DEV_ADDRESS,
-        LIQUIDITY_ADDRESS,
-        COMMUNITY_ADDRESS,
-        FOUNDER_ADDRESS,
         REWARD_PER_BLOCK,
         START_BLOCK,
         HALVING_AFTER_BLOCK,

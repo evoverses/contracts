@@ -4,15 +4,15 @@ pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./libraries/Authorizable.sol";
 
-import "./libraries/IProfiles.sol";
+import "../libraries/Authorizable.sol";
+import "../libraries/IProfiles.sol";
 
 /**
  * @author EvoVerses (forked from DefiKingdoms, ty for your awesome work!)
  * @title EvoToken
  */
-contract EvoToken is ERC20, Ownable, Authorizable {
+contract TestToken is ERC20, Ownable, Authorizable {
     uint256 private _cap;
     uint256 private _totalLock;
     uint256 public lockFromBlock;
