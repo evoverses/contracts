@@ -203,7 +203,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
         ) = getPoolReward(pool.lastRewardTime, block.timestamp, pool.allocPoint);
         // Mint some new EVO tokens for the farmer and store them in MasterInvestor.
         GOV_TOKEN.mint(address(this), GovTokenForFarmer);
-        pool.accGovTokenPerShare = pool.accGovTokenPerShare + (GovTokenForFarmer * 1e12 / lpSupply);
+        pool.accGovTokenPerShare += (GovTokenForFarmer * 1e12) / lpSupply;
         pool.lastRewardTime = block.timestamp;
         if (GovTokenForDev > 0) {
             GOV_TOKEN.mint(address(DEV_ADDRESS), GovTokenForDev);
@@ -313,9 +313,9 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
         if (block.timestamp > pool.lastRewardTime && lpSupply > 0) {
             uint256 GovTokenForFarmer;
             (, GovTokenForFarmer, , , ) = getPoolReward(pool.lastRewardTime, block.timestamp, pool.allocPoint);
-            accGovTokenPerShare = (((accGovTokenPerShare + GovTokenForFarmer) * 1e12) / lpSupply);
+            accGovTokenPerShare += (GovTokenForFarmer * 1e12) / lpSupply;
         }
-        return (((user.amount * accGovTokenPerShare) / 1e12) - user.rewardDebt);
+        return ((user.amount * accGovTokenPerShare) / 1e12) - user.rewardDebt;
     }
 
     function claimRewards(uint256[] memory _pids) public {
@@ -388,10 +388,9 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
         if (user.amount == 0) {
             user.rewardDebtAtTime = block.timestamp;
         }
-        user.amount += (_amount - ((_amount * USER_DEP_FEE) / 10000));
+        user.amount += _amount - ((_amount * USER_DEP_FEE) / 10000);
         user.rewardDebt = (user.amount * pool.accGovTokenPerShare) / 1e12;
-        devr.amount += (_amount - ((_amount * DEV_DEP_FEE
-        ) / 10000));
+        devr.amount += _amount - ((_amount * DEV_DEP_FEE) / 10000);
         devr.rewardDebt = (devr.amount * pool.accGovTokenPerShare) / 1e12;
         emit Deposit(_msgSender(), _pid, _amount);
         if (user.firstDepositTime > 0) {} else {
