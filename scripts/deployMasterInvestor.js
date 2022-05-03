@@ -1,10 +1,9 @@
 const { ethers, upgrades } = require("hardhat")
 require("dotenv").config()
 
-//const GOV_TOKEN = '0x5b747e23a9E4c509dd06fbd2c0e3cB8B846e398F'
-const GOV_TOKEN = '0xae21188a2a0c885e0249bac5e6f0599585267f48' // TestToken
+const GOV_TOKEN = '0x5b747e23a9E4c509dd06fbd2c0e3cB8B846e398F'
 const REWARD_PER_SECOND = ethers.utils.parseEther("0.5");
-const START_TIME = Date.parse('Mon May 02 2022 19:30:00 GMT') / 1000;
+const START_TIME = Date.parse('Tue May 04 2022 4:00:00 GMT') / 1000;
 const HALVING_AFTER_TIME = 7 * 24 * 60 * 60; // 1 epoch (1 week | 604800)
 
 const REWARD_MULTIPLIERS = [ 128, 64, 48, 32, 28, 24, 20, 16, 14, 12, 10, 9, 8, 7, 6, 5 ]

@@ -9,6 +9,8 @@
     "deploy:masterInvestor:harmony": "npx hardhat run --network harmony scripts/deployMasterInvestor.js",
     "upgrade:masterInvestor:harmony": "npx hardhat run --network harmony scripts/updateMasterInvestor.js",
     "deploy:EWRU:harmony": "npx hardhat run --network harmony scripts/deployEWRU.js",
+    "upgrade:EWRU:harmony": "npx hardhat run --network harmony scripts/updateEWRU.js",
+    "scanner:EWRU:harmony": "npx hardhat run --network harmony scripts/ERWUScanner.js",
     "test:masterInvestor:harmonyTest": "npx hardhat run --network harmonyTest scripts/mgManual.js"
   },
   "keywords": [],
@@ -16,15 +18,15 @@
   "license": "ISC",
   "dependencies": {
     "@nomiclabs/hardhat-etherscan": "^3.0.3",
-    "@openzeppelin/contracts": "^4.5.0",
+    "@openzeppelin/contracts": "^4.6.0",
     "dotenv": "^16.0.0",
-    "hardhat": "^2.9.1"
+    "hardhat": "^2.9.3"
   },
   "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.5",
-    "@nomiclabs/hardhat-waffle": "^2.0.3",
-    "@openzeppelin/contracts-upgradeable": "^4.5.2",
-    "@openzeppelin/hardhat-upgrades": "^1.16.1",
+    "@nomiclabs/hardhat-ethers": "2.0.5",
+    "@nomiclabs/hardhat-waffle": "2.0.3",
+    "@openzeppelin/contracts-upgradeable": "4.6.0",
+    "@openzeppelin/hardhat-upgrades": "1.17.0",
     "ethers": "^5.6.1"
   }
 }

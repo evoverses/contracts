@@ -22,10 +22,16 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
 
     uint256 public GENESIS_REFUND_FROM_BLOCK;
     uint256 public LAST_SNAPSHOT_BLOCK;
-    IERC20Upgradeable public REFUND_TOKEN;
+
     uint256 public TOTAL_FEES;
     uint256 public TOTAL_REFUNDED;
     uint256 public TOTAL_TO_REFUND;
+
+    IERC20Upgradeable public REFUND_TOKEN;
+
+    struct User {
+        Refund[] refunds;
+    }
 
     struct Refund {
         address _address;
@@ -37,7 +43,7 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
         bool paid;
     }
 
-    mapping (address => Refund[]) public refunds;
+    mapping (address => User) private users;
 
     EnumerableSetUpgradeable.AddressSet private _wallets;
 
@@ -47,6 +53,7 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
     function initialize() initializer public {
         __AccessControl_init();
         __ReentrancyGuard_init();
+        __Pausable_init();
 
         _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
         _grantRole(ADMIN_ROLE, _msgSender());
@@ -60,20 +67,33 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
         TOTAL_TO_REFUND = 0;
     }
 
-    function addRefund(Refund memory refund) public onlyRole(SCRIBE_ROLE) {
-        Refund[] storage _refunds = refunds[_msgSender()];
+    function addRefund(Refund memory _refund) public onlyRole(SCRIBE_ROLE) {
+        User storage user = users[_refund._address];
         bool exists = false;
-        for (uint256 i = 0; i < _refunds.length; i++) {
-            if (compareStrings(_refunds[i].txHash, refund.txHash)) {
+        for (uint256 i = 0; i < user.refunds.length; i++) {
+            if (compareStrings(user.refunds[i].txHash, _refund.txHash)) {
                 exists = true;
                 break;
             }
         }
         if (!exists) {
-            _refunds[_refunds.length] = refund;
+            Refund memory refund;
+
+            refund._address = _refund._address;
+            refund.withdrawn = _refund.withdrawn;
+            refund.txHash = _refund.txHash;
+            refund.block = _refund.block;
+            refund.time = _refund.time;
+            refund.fee = _refund.fee;
+            refund.paid = _refund.paid;
+
+            user.refunds.push(refund);
+
             _wallets.add(refund._address);
+
             TOTAL_FEES += refund.fee;
             TOTAL_TO_REFUND += refund.fee;
+
             if (LAST_SNAPSHOT_BLOCK < refund.block) {
                 LAST_SNAPSHOT_BLOCK = refund.block;
             }
@@ -87,30 +107,31 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
     }
 
     function refundsByAddress(address _address) public view returns (Refund[] memory) {
-        return refunds[_address];
+        return users[_address].refunds;
     }
 
     function pendingRefundsByAddress(address _address) public view returns (Refund[] memory) {
-        Refund[] memory _refunds;
-        for (uint256 i = 0; i < refunds[_address].length; i++) {
-            if (!refunds[_address][i].paid) {
-                _refunds[_refunds.length] = refunds[_address][i];
+        User storage user = users[_address];
+        Refund[] memory refunds;
+        for (uint256 i = 0; i < user.refunds.length; i++) {
+            if (! user.refunds[i].paid) {
+                refunds[refunds.length] = user.refunds[i];
             }
         }
-        return _refunds;
+        return refunds;
     }
 
     function claimRefund() public nonReentrant whenNotPaused {
         require(pendingRefundsByAddress(_msgSender()).length > 0, "No pending refunds");
-        Refund[] storage _refunds = refunds[_msgSender()];
-        for (uint256 i = 0; i < _refunds.length; i++) {
-            if (!_refunds[i].paid) {
+        User storage user = users[_msgSender()];
+        for (uint256 i = 0; i < user.refunds.length; i++) {
+            if (! user.refunds[i].paid) {
                 uint256 funds = REFUND_TOKEN.balanceOf(address(this));
-                require(funds > _refunds[i].fee, "Insufficient contract balance to refund. Notify in discord");
-                _refunds[i].paid = true;
-                TOTAL_REFUNDED += _refunds[i].fee;
-                TOTAL_TO_REFUND -= _refunds[i].fee;
-                REFUND_TOKEN.safeTransfer(_msgSender(), _refunds[i].fee);
+                require(funds > user.refunds[i].fee, "Insufficient contract balance to refund. Notify in discord");
+                user.refunds[i].paid = true;
+                TOTAL_REFUNDED += user.refunds[i].fee;
+                TOTAL_TO_REFUND -= user.refunds[i].fee;
+                REFUND_TOKEN.safeTransfer(_msgSender(), user.refunds[i].fee);
             }
         }
     }
@@ -120,14 +141,14 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
     }
 
     function allRefunds() public view onlyRole(ADMIN_ROLE) returns(Refund[][] memory) {
-        Refund[][] memory _refunds;
+        Refund[][] memory refunds;
         address[] memory _addresses = allAffectedAddresses();
         for (uint256 i = 0; i < _addresses.length; i++) {
-            for (uint256 j = 0; j < refunds[_addresses[i]].length; j++) {
-                _refunds[i][j] = refunds[_addresses[i]][j];
+            for (uint256 j = 0; j < users[_addresses[i]].refunds.length; j++) {
+                refunds[i][j] = users[_addresses[i]].refunds[j];
             }
         }
-        return _refunds;
+        return refunds;
     }
 
     function pause() public onlyRole(ADMIN_ROLE) {
@@ -138,7 +159,15 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
         _unpause();
     }
 
-    function compareStrings(string memory a, string memory b) public pure returns (bool) {
+    function compareStrings(string memory a, string memory b) internal pure returns (bool) {
         return keccak256(bytes(a)) == keccak256(bytes(b));
+    }
+
+    function updateRefundToken(IERC20Upgradeable refundToken) public onlyRole(ADMIN_ROLE) {
+        REFUND_TOKEN = refundToken;
+    }
+
+    function updateGenesisBlock(uint256 genesisBlock) public onlyRole(ADMIN_ROLE) {
+        GENESIS_REFUND_FROM_BLOCK = genesisBlock;
     }
 }
