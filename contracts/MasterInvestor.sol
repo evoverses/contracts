@@ -48,6 +48,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
         uint256[] rewardMultipliers;
         uint256[] userFeeStages;
         uint256[] devFeeStages;
+        uint256[] percentLockBonusReward;
     }
 
     // The EVO token
@@ -126,6 +127,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
         LP_ADDRESS = params.lpAddress;
         COMMUNITY_FUND_ADDRESS = params.communityFundAddress;
         FOUNDER_ADDRESS = params.founderAddress;
+        PERCENT_LOCK_BONUS_REWARD = params.percentLockBonusReward;
         TOTAL_ALLOCATION_POINTS = 0;
         for (uint256 i = 0; i < REWARD_MULTIPLIERS.length - 1; i++) {
             uint256 halvingAtTime = (params.halvingAfterTime * (i+1)) + params.startTime + 1;
@@ -183,7 +185,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
             return;
         }
         uint256 lpSupply = pool.lpToken.balanceOf(address(this));
-        if (lpSupply == 0) {
+        if (lpSupply == 0 || pool.allocPoint == 0) {
             pool.lastRewardTime = block.timestamp;
             return;
         }
@@ -201,7 +203,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
         ) = getPoolReward(pool.lastRewardTime, block.timestamp, pool.allocPoint);
         // Mint some new EVO tokens for the farmer and store them in MasterInvestor.
         GOV_TOKEN.mint(address(this), GovTokenForFarmer);
-        pool.accGovTokenPerShare = (((pool.accGovTokenPerShare + GovTokenForFarmer) * 1e12) / lpSupply);
+        pool.accGovTokenPerShare = pool.accGovTokenPerShare + (GovTokenForFarmer * 1e12 / lpSupply);
         pool.lastRewardTime = block.timestamp;
         if (GovTokenForDev > 0) {
             GOV_TOKEN.mint(address(DEV_ADDRESS), GovTokenForDev);
@@ -336,7 +338,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
         if (user.amount > 0) {
             // Calculate the pending reward. This is the user's amount of LP tokens multiplied by
             // the accGovTokenPerShare of the pool, minus the user's rewardDebt.
-            uint256 pending = (((user.amount * pool.accGovTokenPerShare) / 1e12) - user.rewardDebt);
+            uint256 pending = ((user.amount * pool.accGovTokenPerShare) / 1e12) - user.rewardDebt;
 
             // Make sure we aren't giving more tokens than we have in the MasterInvestor contract.
             uint256 masterBal = GOV_TOKEN.balanceOf(address(this));
@@ -364,7 +366,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
                 emit SendGovernanceTokenReward(_msgSender(), _pid, pending, lockAmount);
             }
             // Recalculate the rewardDebt for the user.
-            user.rewardDebt = ((user.amount * pool.accGovTokenPerShare) / 1e12);
+            user.rewardDebt = (user.amount * pool.accGovTokenPerShare) / 1e12;
         }
     }
 
@@ -387,10 +389,10 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
             user.rewardDebtAtTime = block.timestamp;
         }
         user.amount += (_amount - ((_amount * USER_DEP_FEE) / 10000));
-        user.rewardDebt = ((user.amount * pool.accGovTokenPerShare) / 1e12);
+        user.rewardDebt = (user.amount * pool.accGovTokenPerShare) / 1e12;
         devr.amount += (_amount - ((_amount * DEV_DEP_FEE
         ) / 10000));
-        devr.rewardDebt = ((devr.amount * pool.accGovTokenPerShare) / 1e12);
+        devr.rewardDebt = (devr.amount * pool.accGovTokenPerShare) / 1e12;
         emit Deposit(_msgSender(), _pid, _amount);
         if (user.firstDepositTime > 0) {} else {
             user.firstDepositTime = block.timestamp;

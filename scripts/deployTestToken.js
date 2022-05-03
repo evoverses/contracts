@@ -15,12 +15,13 @@ async function main(name) {
   console.log("Starting deployment...")
   const contractFactory = await ethers.getContractFactory(name)
   console.log("Deploying", name)
-  const contract = await contractFactory.deploy(constructorArguments)
+  const contract = await contractFactory.deploy(...constructorArguments)
   console.log(name, "deployed! Address:", contract.address)
   console.log("Verifying", name)
   await hre.run("verify:verify", {
-      address: contract.address,
-      constructorArguments
+    contract: "contracts/examples/TestToken.sol:TestToken",
+    address: contract.address,
+    constructorArguments
   })
 
 }
