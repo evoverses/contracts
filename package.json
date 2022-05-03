@@ -6,10 +6,9 @@
   "scripts": {
     "compile": "npx hardhat compile",
     "deploy:testToken:harmony": "npx hardhat run --network harmony scripts/deployTestToken.js",
-    "deploy:testToken:harmonyTest": "npx hardhat run --network harmonyTest scripts/deployTestToken.js",
     "deploy:masterInvestor:harmony": "npx hardhat run --network harmony scripts/deployMasterInvestor.js",
     "upgrade:masterInvestor:harmony": "npx hardhat run --network harmony scripts/updateMasterInvestor.js",
-    "deploy:masterInvestor:harmonyTest": "npx hardhat run --network harmonyTest scripts/deployMasterInvestor.js",
+    "deploy:EWRU:harmony": "npx hardhat run --network harmony scripts/deployEWRU.js",
     "test:masterInvestor:harmonyTest": "npx hardhat run --network harmonyTest scripts/mgManual.js"
   },
   "keywords": [],

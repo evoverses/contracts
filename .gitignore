@@ -7,7 +7,6 @@ migrations/4_upgrade_box.js.bak
 migrations/3_deploy_upgradeable_evotoken.js.bak
 test/Box.test.js.bak
 test/EvoToken.test.js.bak
-.openzeppelin/*
 
 ### VisualStudioCode template
 .vscode/*
