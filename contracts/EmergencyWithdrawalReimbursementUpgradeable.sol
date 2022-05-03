@@ -47,6 +47,21 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
 
     EnumerableSetUpgradeable.AddressSet private _wallets;
 
+    // upgrade below for additional storage
+    struct ExtendedRefund {
+        IERC20Upgradeable refundToken;
+        uint256 totalFees;
+        uint256 totalRefunded;
+        uint256 totalToRefund;
+    }
+
+    // txHash to poolId retroactive
+    mapping (string => uint256) private txHashPoolId;
+    // poolId to RefundToken retroactive
+    mapping (uint256 => ExtendedRefund) private extendedRefund;
+    // wallets that have been upgraded
+    EnumerableSetUpgradeable.AddressSet private _walletsUpgaded;
+
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() initializer {}
 
@@ -61,13 +76,13 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
 
         GENESIS_REFUND_FROM_BLOCK = 25481041;
         LAST_SNAPSHOT_BLOCK = 25481041;
-        REFUND_TOKEN = IERC20Upgradeable(0x5b747e23a9E4c509dd06fbd2c0e3cB8B846e398F);
+        REFUND_TOKEN = IERC20Upgradeable(0xD6e76742962379e234E9Fd4E73768cEF779f38B5);
         TOTAL_FEES = 0;
         TOTAL_REFUNDED = 0;
         TOTAL_TO_REFUND = 0;
     }
 
-    function addRefund(Refund memory _refund) public onlyRole(SCRIBE_ROLE) {
+    function addRefund(Refund memory _refund, uint256 poolId) public onlyRole(SCRIBE_ROLE) {
         User storage user = users[_refund._address];
         bool exists = false;
         for (uint256 i = 0; i < user.refunds.length; i++) {
@@ -91,8 +106,14 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
 
             _wallets.add(refund._address);
 
-            TOTAL_FEES += refund.fee;
-            TOTAL_TO_REFUND += refund.fee;
+            if (!_walletsUpgaded.contains(_refund._address)) {
+                upgradeRefundValuesByAddress(_refund._address);
+            } else {
+                extendedRefund[poolId].totalFees += _refund.fee;
+                extendedRefund[poolId].totalToRefund += _refund.fee;
+            }
+
+            txHashPoolId[_refund.txHash] = poolId;
 
             if (LAST_SNAPSHOT_BLOCK < refund.block) {
                 LAST_SNAPSHOT_BLOCK = refund.block;
@@ -100,9 +121,26 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
         }
     }
 
-    function batchAddRefunds(Refund[] memory _refunds) public onlyRole(SCRIBE_ROLE) {
+    function upgradeRefundValuesByAddress(address _address) public onlyRole(ADMIN_ROLE) {
+        if (_walletsUpgaded.contains(_address)) {
+            return;
+        }
+
+        Refund[] memory refunds = refundsByAddress(_address);
+        for (uint256 i = 0; i < refunds.length; i++) {
+            uint256 poolId = txHashPoolId[refunds[i].txHash];
+            extendedRefund[poolId].totalFees += refunds[i].fee;
+            extendedRefund[poolId].totalToRefund += refunds[i].fee;
+        }
+        _walletsUpgaded.add(_address);
+
+    }
+
+    function batchAddRefunds(Refund[] memory _refunds, uint256[] memory poolIds) public onlyRole(SCRIBE_ROLE) {
+        require(_refunds.length == poolIds.length, "Refund length must match poolId length");
+        require(_refunds.length > 0, "Empty input");
         for (uint256 i = 0; i < _refunds.length; i++) {
-            addRefund(_refunds[i]);
+            addRefund(_refunds[i], poolIds[i]);
         }
     }
 
@@ -111,14 +149,22 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
     }
 
     function pendingRefundsByAddress(address _address) public view returns (Refund[] memory) {
-        User storage user = users[_address];
-        Refund[] memory refunds;
-        for (uint256 i = 0; i < user.refunds.length; i++) {
-            if (! user.refunds[i].paid) {
-                refunds[refunds.length] = user.refunds[i];
+        Refund[] memory refunds = refundsByAddress(_address);
+        uint256 count = 0;
+        for (uint256 i = 0; i < refunds.length; i++) {
+            if (refunds[i].paid == false) {
+                count++;
             }
         }
-        return refunds;
+        Refund[] memory pending = new Refund[](count);
+        uint256 index = 0;
+        for (uint256 i = 0; i < refunds.length; i++) {
+            if (refunds[i].paid == false) {
+                pending[index] = refunds[i];
+                index++;
+            }
+        }
+        return pending;
     }
 
     function claimRefund() public nonReentrant whenNotPaused {
@@ -126,12 +172,16 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
         User storage user = users[_msgSender()];
         for (uint256 i = 0; i < user.refunds.length; i++) {
             if (! user.refunds[i].paid) {
-                uint256 funds = REFUND_TOKEN.balanceOf(address(this));
+                uint256 poolId = txHashPoolId[user.refunds[i].txHash];
+                ExtendedRefund storage eRefund = extendedRefund[poolId];
+
+                uint256 funds = eRefund.refundToken.balanceOf(address(this));
                 require(funds > user.refunds[i].fee, "Insufficient contract balance to refund. Notify in discord");
+
                 user.refunds[i].paid = true;
-                TOTAL_REFUNDED += user.refunds[i].fee;
-                TOTAL_TO_REFUND -= user.refunds[i].fee;
-                REFUND_TOKEN.safeTransfer(_msgSender(), user.refunds[i].fee);
+                eRefund.totalRefunded += user.refunds[i].fee;
+                eRefund.totalToRefund -= user.refunds[i].fee;
+                eRefund.refundToken.safeTransfer(_msgSender(), user.refunds[i].fee);
             }
         }
     }
@@ -163,11 +213,26 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
         return keccak256(bytes(a)) == keccak256(bytes(b));
     }
 
-    function updateRefundToken(IERC20Upgradeable refundToken) public onlyRole(ADMIN_ROLE) {
-        REFUND_TOKEN = refundToken;
-    }
-
     function updateGenesisBlock(uint256 genesisBlock) public onlyRole(ADMIN_ROLE) {
         GENESIS_REFUND_FROM_BLOCK = genesisBlock;
+    }
+
+    function setExtendedRefund(uint256 poolId, ExtendedRefund memory eRefund) public onlyRole(ADMIN_ROLE) {
+        extendedRefund[poolId].refundToken = eRefund.refundToken;
+        extendedRefund[poolId].totalFees = eRefund.totalFees;
+        extendedRefund[poolId].totalRefunded = eRefund.totalRefunded;
+        extendedRefund[poolId].totalToRefund = eRefund.totalToRefund;
+    }
+
+    function upgradeExistingRefunds(string[] memory txHashes, uint256[] memory poolIds) public onlyRole(ADMIN_ROLE) {
+        require(txHashes.length == poolIds.length, "txHashes length must match poolIds length");
+        require(txHashes.length > 0, "Empty input");
+        for (uint256 i = 0; i < txHashes.length; i++) {
+            txHashPoolId[txHashes[i]] = poolIds[i];
+        }
+    }
+
+    function getExtendedRefund(uint256 poolId) public view onlyRole(ADMIN_ROLE) returns (ExtendedRefund memory){
+        return extendedRefund[poolId];
     }
 }
