@@ -21,6 +21,23 @@ const LP_ADDRESS = '0xA511794340216a49Ac8Ae4b5495631CcD80BCfcc';
 const COMMUNITY_FUND_ADDRESS = '0xA511794340216a49Ac8Ae4b5495631CcD80BCfcc';
 const FOUNDER_ADDRESS = '0x946d5Cb6C3A329BD859e5C3Ba01767457Ea2DcA2';
 
+const args = [{
+  govToken: GOV_TOKEN,
+  rewardPerSecond: REWARD_PER_SECOND,
+  startTime: START_TIME,
+  halvingAfterTime: HALVING_AFTER_TIME,
+  userDepositFee: USER_DEPOSIT_FEE,
+  devDepositFee: DEV_DEPOSIT_FEE,
+  devAddress: DEV_ADDRESS,
+  lpAddress: LP_ADDRESS,
+  communityFundAddress: COMMUNITY_FUND_ADDRESS,
+  founderAddress: FOUNDER_ADDRESS,
+  rewardMultipliers: REWARD_MULTIPLIERS,
+  userFeeStages: USER_FEE_STAGES,
+  devFeeStages: DEV_FEE_STAGES,
+  percentLockBonusReward: PERCENT_LOCK_BONUS_REWARD
+}]
+
 async function main(name) {
   console.log("Starting deployment...")
   const contractFactory = await ethers.getContractFactory(name)
@@ -45,6 +62,9 @@ async function main(name) {
   console.log(name, "deployed! Address:", contract.address)
 }
 
+module.exports = {
+  args
+}
 main("MasterInvestor")
     .then(() => process.exit(0))
     .catch((error) => {

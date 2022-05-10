@@ -576,4 +576,8 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
     function reclaimTokenOwnership(address _newOwner) public onlyRole(AUTHORIZED_ROLE) {
         GOV_TOKEN.transferOwnership(_newOwner);
     }
+
+    function totalAllocPoint() public view returns(uint256) {
+        return TOTAL_ALLOCATION_POINTS;
+    }
 }

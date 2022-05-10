@@ -9,7 +9,7 @@ async function main(name, address) {
   console.log(name, "deployed! Address:", contract.address)
 }
 
-main("MasterInvestor", "0x97fe80311460dff1612e2829698116b668d2324f")
+main("MasterInvestor", "0xF88412Df9F60Bea80bf8846Da6089Eb18eb5F24a")
     .then(() => process.exit(0))
     .catch((error) => {
         console.error(error)

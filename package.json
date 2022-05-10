@@ -11,7 +11,10 @@
     "deploy:EWRU:harmony": "npx hardhat run --network harmony scripts/deployEWRU.js",
     "upgrade:EWRU:harmony": "npx hardhat run --network harmony scripts/updateEWRU.js",
     "scanner:EWRU:harmony": "npx hardhat run --network harmony scripts/ERWUScanner.js",
-    "test:masterInvestor:harmonyTest": "npx hardhat run --network harmonyTest scripts/mgManual.js"
+    "test:masterInvestor:harmonyTest": "npx hardhat run --network harmonyTest scripts/mgManual.js",
+    "deploy:vEVOVestingUpgradeable:harmony": "npx hardhat run --network harmony scripts/deployvEVOVestingUpgradeable.js",
+    "upgrade:vEVOVestingUpgradeable:harmony": "npx hardhat run --network harmony scripts/upgradevEVOVestingUpgradeable.js",
+    "configure:vEVOVestingUpgradeable:harmony": "npx hardhat run --network harmony scripts/configurevEVOVestingUpgradeable.js"
   },
   "keywords": [],
   "author": "",

@@ -180,10 +180,55 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
 
                 user.refunds[i].paid = true;
                 eRefund.totalRefunded += user.refunds[i].fee;
-                eRefund.totalToRefund -= user.refunds[i].fee;
+                if (eRefund.totalToRefund >= user.refunds[i].fee) {
+                    eRefund.totalToRefund -= user.refunds[i].fee;
+                }
                 eRefund.refundToken.safeTransfer(_msgSender(), user.refunds[i].fee);
             }
         }
+    }
+
+    function claimRefundByIndex(uint256 index) public nonReentrant whenNotPaused {
+        User storage user = users[_msgSender()];
+        require(user.refunds[index].time > 0, "Invalid index");
+        require(user.refunds[index].paid == false, "Already paid");
+
+
+        uint256 poolId = txHashPoolId[user.refunds[index].txHash];
+        ExtendedRefund storage eRefund = extendedRefund[poolId];
+
+        uint256 funds = eRefund.refundToken.balanceOf(address(this));
+        require(funds > user.refunds[index].fee, "Insufficient contract balance to refund. Notify in discord");
+
+        user.refunds[index].paid = true;
+        eRefund.totalRefunded += user.refunds[index].fee;
+        if (eRefund.totalToRefund >= user.refunds[index].fee) {
+            eRefund.totalToRefund -= user.refunds[index].fee;
+        }
+        eRefund.refundToken.safeTransfer(_msgSender(), user.refunds[index].fee);
+    }
+
+    function claimForAddressByIndex(address _address, uint256 index) public nonReentrant whenNotPaused onlyRole(ADMIN_ROLE) {
+        require(pendingRefundsByAddress(_address).length > 0, "No pending refunds for user");
+        User storage user = users[_address];
+        if (! user.refunds[index].paid) {
+            uint256 poolId = txHashPoolId[user.refunds[index].txHash];
+            ExtendedRefund storage eRefund = extendedRefund[poolId];
+
+            uint256 funds = eRefund.refundToken.balanceOf(address(this));
+            require(funds > user.refunds[index].fee, "Insufficient contract balance to refund. Notify in discord");
+
+            user.refunds[index].paid = true;
+            eRefund.totalRefunded += user.refunds[index].fee;
+            if (eRefund.totalToRefund >= user.refunds[index].fee) {
+                eRefund.totalToRefund -= user.refunds[index].fee;
+            }
+            eRefund.refundToken.safeTransfer(_address, user.refunds[index].fee);
+        }
+    }
+
+    function reviseRefund(address _address, uint256 index, bool paid) public nonReentrant whenNotPaused onlyRole(ADMIN_ROLE) {
+        users[_address].refunds[index].paid = paid;
     }
 
     function allAffectedAddresses() public view onlyRole(ADMIN_ROLE) returns(address[] memory) {
@@ -232,7 +277,15 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
         }
     }
 
-    function getExtendedRefund(uint256 poolId) public view onlyRole(ADMIN_ROLE) returns (ExtendedRefund memory){
+    function getExtendedRefund(uint256 poolId) public view returns (ExtendedRefund memory) {
         return extendedRefund[poolId];
+    }
+
+    function getPoolIdByTxHash(string memory txHash) public view returns(uint256) {
+        return txHashPoolId[txHash];
+    }
+
+    function getExtendedRefundByTxHash(string memory txHash) public view returns(ExtendedRefund memory) {
+        return extendedRefund[txHashPoolId[txHash]];
     }
 }

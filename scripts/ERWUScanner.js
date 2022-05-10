@@ -1,7 +1,8 @@
 const { ethers } = require("hardhat")
 const fs = require('fs')
 require("dotenv").config()
-
+const originalGenesisBlock = 25481041
+const accurateGenesisBlock = 25448630
 async function setup() {
   const accounts = await ethers.getSigners()
 
@@ -15,8 +16,8 @@ async function setup() {
 
 async function scan() {
   const {contract, masterInvestor, emergencyWithdrawFilter} = await setup()
-  const currentBlock = await ethers.provider.getBlockNumber()
-  const lastSnapshotBlock = 26062388//(await contract.LAST_SNAPSHOT_BLOCK()).toNumber()
+  const currentBlock = originalGenesisBlock + 1025//await ethers.provider.getBlockNumber()
+  const lastSnapshotBlock = accurateGenesisBlock // (await contract.LAST_SNAPSHOT_BLOCK()).toNumber()
   let totalDelta = currentBlock - lastSnapshotBlock
   let blockDelta = totalDelta
   let refundList = []
