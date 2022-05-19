@@ -2,5 +2,5 @@ node_modules/
 cache/
 artifacts/@openzeppelin/
 artifacts/build-info/
-
+*.dbg.json
 .env
