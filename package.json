@@ -5,30 +5,30 @@
   "main": "index.js",
   "scripts": {
     "compile": "npx hardhat compile",
-    "deploy:testToken:harmony": "npx hardhat run --network harmony scripts/deployTestToken.js",
-    "deploy:masterInvestor:harmony": "npx hardhat run --network harmony scripts/deployMasterInvestor.js",
-    "upgrade:masterInvestor:harmony": "npx hardhat run --network harmony scripts/updateMasterInvestor.js",
-    "deploy:EWRU:harmony": "npx hardhat run --network harmony scripts/deployEWRU.js",
-    "upgrade:EWRU:harmony": "npx hardhat run --network harmony scripts/updateEWRU.js",
+    "deploy": "npx hardhat --network harmony deployUpgradeable",
+    "upgrade": "npx hardhat --network harmony upgrade",
     "scanner:EWRU:harmony": "npx hardhat run --network harmony scripts/ERWUScanner.js",
     "test:masterInvestor:harmonyTest": "npx hardhat run --network harmonyTest scripts/mgManual.js",
-    "deploy:vEVOVestingUpgradeable:harmony": "npx hardhat run --network harmony scripts/deployvEVOVestingUpgradeable.js",
-    "upgrade:vEVOVestingUpgradeable:harmony": "npx hardhat run --network harmony scripts/upgradevEVOVestingUpgradeable.js",
-    "configure:vEVOVestingUpgradeable:harmony": "npx hardhat run --network harmony scripts/configurevEVOVestingUpgradeable.js"
+    "deploy:erwu": "npm run deploy -- --name EmergencyWithdrawalReimbursementUpgradeable",
+    "upgrade:erwu": "npm run upgrade -- --name EmergencyWithdrawalReimbursementUpgradeable --address 0x306D0783119c61E033FCa12AC78943213Df8dE39",
+    "deploy:cEVO": "npm run deploy -- --name cEVO"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@nomiclabs/hardhat-etherscan": "^3.0.3",
-    "@openzeppelin/contracts": "^4.6.0",
-    "dotenv": "^16.0.0",
-    "hardhat": "^2.9.3"
+    "@nomiclabs/hardhat-etherscan": "3.0.3",
+    "@openzeppelin/contracts": "4.6.0",
+    "@openzeppelin/upgrades-core": "1.14.2",
+    "dotenv": "16.0.1",
+    "hardhat": "2.9.5",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "2.0.5",
     "@nomiclabs/hardhat-waffle": "2.0.3",
-    "@openzeppelin/contracts-upgradeable": "4.6.0",
+    "@openzeppelin/contracts-upgradeable": "4.5.2",
     "@openzeppelin/hardhat-upgrades": "1.17.0",
     "ethers": "^5.6.1"
   }
