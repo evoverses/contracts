@@ -19,10 +19,10 @@ contract vEVOVestingUpgradeable is Initializable, AccessControlUpgradeable, Reen
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
 
     uint256 public constant GENESIS_TIMESTAMP = 1649190600;
-    uint256 public constant VESTING_PERIOD_SECONDS = 213 days;
-    uint256 public constant OMEGA_TIMESTAMP = GENESIS_TIMESTAMP + VESTING_PERIOD_SECONDS;
+    uint256 private constant _ORIG_VPS = 213 days;
+    uint256 private constant _ORIG_OT = GENESIS_TIMESTAMP + _ORIG_VPS;
 
-    IEvoToken public constant EVO = IEvoToken(0xD6e76742962379e234E9Fd4E73768cEF779f38B5);
+    IEvoToken private constant _ORIG_EVO = IEvoToken(0xD6e76742962379e234E9Fd4E73768cEF779f38B5);
     IEvoToken public constant vEVO = IEvoToken(0xEb76Ef5d121f31c2cb59e50A4fa5475042C84e34);
 
     address private constant _BURN_ADDRESS = payable(0x0000000000000000000000000000000000000001);
@@ -39,6 +39,12 @@ contract vEVOVestingUpgradeable is Initializable, AccessControlUpgradeable, Reen
 
     EnumerableSetUpgradeable.AddressSet private _wallets;
 
+    uint256 public VESTING_PERIOD_SECONDS;
+    uint256 public OMEGA_TIMESTAMP;
+
+    IEvoToken public EVO;
+
+    event Claimed(address indexed from, uint256 amount);
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() initializer {}
@@ -88,7 +94,9 @@ contract vEVOVestingUpgradeable is Initializable, AccessControlUpgradeable, Reen
     }
 
     function getWalletData(address _address) public view returns (uint256 total, uint256 claimed, uint256 pending) {
-        require(_wallets.contains(_address), "Wallet does not exist");
+        if (!_wallets.contains(_address)) {
+            return (0, 0, 0);
+        }
         total = users[_address].total;
         claimed = users[_address].claimed;
         pending = _calculatePending(_address);
@@ -119,6 +127,7 @@ contract vEVOVestingUpgradeable is Initializable, AccessControlUpgradeable, Reen
 
         vEVO.transferFrom(_msgSender(), _BURN_ADDRESS, pending);
         EVO.mint(_msgSender(), pending);
+        emit Claimed(_msgSender(), pending);
     }
 
     function totalPending() public view returns(uint256) {
@@ -130,5 +139,13 @@ contract vEVOVestingUpgradeable is Initializable, AccessControlUpgradeable, Reen
         uint256 elapsed = compareTime - GENESIS_TIMESTAMP;
         uint256 totalVested = ratePerSecond * elapsed;
         return totalVested - _claimed;
+    }
+
+    function setVestingPeriod(uint256 _days) public onlyRole(ADMIN_ROLE) {
+        VESTING_PERIOD_SECONDS = 1 days * _days;
+        OMEGA_TIMESTAMP = GENESIS_TIMESTAMP + VESTING_PERIOD_SECONDS;
+    }
+    function setEvo() public onlyRole(ADMIN_ROLE) {
+        EVO = IEvoToken(0x5b747e23a9E4c509dd06fbd2c0e3cB8B846e398F);
     }
 }

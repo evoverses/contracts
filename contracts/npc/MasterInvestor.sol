@@ -489,11 +489,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
 
     function getNewRewardPerSecond(uint256 pid1) public view returns (uint256) {
         uint256 multiplier = getMultiplier(block.timestamp - 1, block.timestamp);
-        if (pid1 == 0) {
-            return multiplier * REWARD_PER_SECOND;
-        } else {
-            return (((multiplier * REWARD_PER_SECOND) * poolInfo[pid1 - 1].allocPoint) / TOTAL_ALLOCATION_POINTS);
-        }
+        return (((multiplier * REWARD_PER_SECOND) * poolInfo[pid1].allocPoint) / TOTAL_ALLOCATION_POINTS);
     }
 
     function userDelta(uint256 _pid) public view returns (uint256) {
