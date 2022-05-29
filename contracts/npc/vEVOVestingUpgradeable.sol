@@ -119,7 +119,14 @@ contract vEVOVestingUpgradeable is Initializable, AccessControlUpgradeable, Reen
         if (OMEGA_TIMESTAMP <= block.timestamp) {
             pending = users[_msgSender()].total - users[_msgSender()].claimed;
         }
-        require(vEVO.balanceOf(_msgSender()) >= pending, "Insufficient vEVO balance");
+
+        // Check balance of user to allow claiming less than total amount of claimable
+        uint256 balance = vEVO.balanceOf(_msgSender());
+        require(balance >= 0, "No vEVO in wallet");
+        if (balance < pending) {
+            pending = balance;
+        }
+
         require(vEVO.allowance(_msgSender(), address(this)) >= pending, "Pending balance exceeds approved amount");
 
         users[_msgSender()].claimed += pending;
