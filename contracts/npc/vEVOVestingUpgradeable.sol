@@ -9,6 +9,10 @@ import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "../ERC20/IEvoToken.sol";
 
+interface IMasterInvestor {
+    function withdrawForClaim(uint256 _pid, uint256 _amount, address _address) external;
+}
+
 /**
 * @title vEVO Vesting v1.2.1
 * @author @DirtyCajunRice
@@ -43,6 +47,8 @@ contract vEVOVestingUpgradeable is Initializable, AccessControlUpgradeable, Reen
     uint256 public OMEGA_TIMESTAMP;
 
     IEvoToken public EVO;
+
+    address public MasterInvestor;
 
     event Claimed(address indexed from, uint256 amount);
 
@@ -137,6 +143,25 @@ contract vEVOVestingUpgradeable is Initializable, AccessControlUpgradeable, Reen
         emit Claimed(_msgSender(), pending);
     }
 
+    function claimVestedFromInvestor() public whenNotPaused nonReentrant {
+        require(_wallets.contains(_msgSender()), "Wallet does not exist");
+        uint256 pending = _calculatePending(_msgSender());
+        if (OMEGA_TIMESTAMP <= block.timestamp) {
+            pending = users[_msgSender()].total - users[_msgSender()].claimed;
+        }
+        require(vEVO.allowance(_msgSender(), address(this)) >= pending, "Pending balance exceeds approved amount");
+
+        IMasterInvestor mi = IMasterInvestor(MasterInvestor);
+        mi.withdrawForClaim(1, pending, _msgSender());
+
+        users[_msgSender()].claimed += pending;
+        _claimed += pending;
+
+        vEVO.transferFrom(_msgSender(), _BURN_ADDRESS, pending);
+        EVO.mint(_msgSender(), pending);
+        emit Claimed(_msgSender(), pending);
+    }
+
     function totalPending() public view returns(uint256) {
         uint256 ratePerSecond = _total / VESTING_PERIOD_SECONDS;
         uint256 compareTime = block.timestamp;
@@ -154,5 +179,8 @@ contract vEVOVestingUpgradeable is Initializable, AccessControlUpgradeable, Reen
     }
     function setEvo() public onlyRole(ADMIN_ROLE) {
         EVO = IEvoToken(0x5b747e23a9E4c509dd06fbd2c0e3cB8B846e398F);
+    }
+    function setMasterInvestor(address _address) public onlyRole(ADMIN_ROLE) {
+        MasterInvestor = _address;
     }
 }

@@ -331,8 +331,13 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
 
     // lock a % of reward if it comes from bonus time.
     function _harvest(uint256 _pid) internal {
+        _harvestFor(_pid, _msgSender());
+    }
+
+    // lock a % of reward if it comes from bonus time.
+    function _harvestFor(uint256 _pid, address _address) internal {
         PoolInfo storage pool = poolInfo[_pid];
-        UserInfo storage user = userInfo[_pid][_msgSender()];
+        UserInfo storage user = userInfo[_pid][_address];
 
         // Only harvest if the user amount is greater than 0.
         if (user.amount > 0) {
@@ -350,7 +355,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
             if (pending > 0) {
                 // If the user has a positive pending balance of tokens, transfer
                 // those tokens from MasterInvestor to their wallet.
-                GOV_TOKEN.transfer(_msgSender(), pending);
+                GOV_TOKEN.transfer(_address, pending);
                 uint256 lockAmount = 0;
                 if (user.rewardDebtAtTime <= FINISH_BONUS_AT_TIME) {
                     // If we are before the FINISH_BONUS_AT_TIME, we need
@@ -358,12 +363,12 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
                     // percentage of their tokens they just received.
                     uint256 lockPercentage = getLockPercentage(block.timestamp - 1, block.timestamp);
                     lockAmount = ((pending * lockPercentage) / 100);
-                    GOV_TOKEN.lock(_msgSender(), lockAmount);
+                    GOV_TOKEN.lock(_address, lockAmount);
                 }
                 // Reset the rewardDebtAtTime to the current time for the user.
                 user.rewardDebtAtTime = block.timestamp;
 
-                emit SendGovernanceTokenReward(_msgSender(), _pid, pending, lockAmount);
+                emit SendGovernanceTokenReward(_address, _pid, pending, lockAmount);
             }
             // Recalculate the rewardDebt for the user.
             user.rewardDebt = (user.amount * pool.accGovTokenPerShare) / 1e12;
@@ -457,6 +462,23 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
             emit Withdraw(_msgSender(), _pid, _amount);
 
             user.lastWithdrawTime = block.timestamp;
+        }
+    }
+
+    // Withdraw LP tokens from MasterInvestor.
+    function withdrawForClaim(uint256 _pid, uint256 _amount, address _address)
+    public nonReentrant onlyRole(AUTHORIZED_ROLE) {
+        PoolInfo storage pool = poolInfo[_pid];
+        UserInfo storage user = userInfo[_pid][_address];
+        require(user.amount >= _amount, "MasterInvestor::withdraw: not good");
+        updatePool(_pid);
+        _harvestFor(_pid, _address);
+
+        if (_amount > 0) {
+            user.amount -= _amount;
+            pool.lpToken.safeTransfer(_address, _amount);
+            user.rewardDebt = (user.amount * pool.accGovTokenPerShare) / 1e12;
+            emit Withdraw(_address, _pid, _amount);
         }
     }
 
