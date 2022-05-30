@@ -7874,7 +7874,7 @@
             "slot": "0",
             "type": "t_bool",
             "contract": "Initializable",
-            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:39"
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
           },
           {
             "label": "_initializing",
@@ -7882,7 +7882,7 @@
             "slot": "0",
             "type": "t_bool",
             "contract": "Initializable",
-            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:44"
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
           },
           {
             "label": "__gap",
@@ -7890,7 +7890,7 @@
             "slot": "1",
             "type": "t_array(t_uint256)50_storage",
             "contract": "ContextUpgradeable",
-            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:36"
           },
           {
             "label": "__gap",
@@ -7898,7 +7898,7 @@
             "slot": "51",
             "type": "t_array(t_uint256)50_storage",
             "contract": "ERC165Upgradeable",
-            "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:41"
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:41"
           },
           {
             "label": "_roles",
@@ -7906,7 +7906,7 @@
             "slot": "101",
             "type": "t_mapping(t_bytes32,t_struct(RoleData)34_storage)",
             "contract": "AccessControlUpgradeable",
-            "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:61"
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:61"
           },
           {
             "label": "__gap",
@@ -7914,7 +7914,7 @@
             "slot": "102",
             "type": "t_array(t_uint256)49_storage",
             "contract": "AccessControlUpgradeable",
-            "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:235"
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:235"
           },
           {
             "label": "_status",
@@ -7922,7 +7922,7 @@
             "slot": "151",
             "type": "t_uint256",
             "contract": "ReentrancyGuardUpgradeable",
-            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:38"
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:38"
           },
           {
             "label": "__gap",
@@ -7930,15 +7930,15 @@
             "slot": "152",
             "type": "t_array(t_uint256)49_storage",
             "contract": "ReentrancyGuardUpgradeable",
-            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:74"
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:74"
           },
           {
             "label": "GOV_TOKEN",
             "offset": 0,
             "slot": "201",
-            "type": "t_contract(EvoToken)5443",
+            "type": "t_contract(EvoToken)3743",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:55"
+            "src": "contracts\\npc\\MasterInvestor.sol:55"
           },
           {
             "label": "USD_ORACLE",
@@ -7946,7 +7946,7 @@
             "slot": "202",
             "type": "t_address",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:57"
+            "src": "contracts\\npc\\MasterInvestor.sol:57"
           },
           {
             "label": "DEV_ADDRESS",
@@ -7954,7 +7954,7 @@
             "slot": "203",
             "type": "t_address",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:59"
+            "src": "contracts\\npc\\MasterInvestor.sol:59"
           },
           {
             "label": "LP_ADDRESS",
@@ -7962,7 +7962,7 @@
             "slot": "204",
             "type": "t_address",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:61"
+            "src": "contracts\\npc\\MasterInvestor.sol:61"
           },
           {
             "label": "COMMUNITY_FUND_ADDRESS",
@@ -7970,7 +7970,7 @@
             "slot": "205",
             "type": "t_address",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:63"
+            "src": "contracts\\npc\\MasterInvestor.sol:63"
           },
           {
             "label": "FOUNDER_ADDRESS",
@@ -7978,7 +7978,7 @@
             "slot": "206",
             "type": "t_address",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:65"
+            "src": "contracts\\npc\\MasterInvestor.sol:65"
           },
           {
             "label": "REWARD_PER_SECOND",
@@ -7986,7 +7986,7 @@
             "slot": "207",
             "type": "t_uint256",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:67"
+            "src": "contracts\\npc\\MasterInvestor.sol:67"
           },
           {
             "label": "REWARD_MULTIPLIERS",
@@ -7994,7 +7994,7 @@
             "slot": "208",
             "type": "t_array(t_uint256)dyn_storage",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:69"
+            "src": "contracts\\npc\\MasterInvestor.sol:69"
           },
           {
             "label": "HALVING_AT_TIMES",
@@ -8002,7 +8002,7 @@
             "slot": "209",
             "type": "t_array(t_uint256)dyn_storage",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:70"
+            "src": "contracts\\npc\\MasterInvestor.sol:70"
           },
           {
             "label": "USER_FEE_STAGES",
@@ -8010,7 +8010,7 @@
             "slot": "210",
             "type": "t_array(t_uint256)dyn_storage",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:71"
+            "src": "contracts\\npc\\MasterInvestor.sol:71"
           },
           {
             "label": "DEV_FEE_STAGES",
@@ -8018,7 +8018,7 @@
             "slot": "211",
             "type": "t_array(t_uint256)dyn_storage",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:72"
+            "src": "contracts\\npc\\MasterInvestor.sol:72"
           },
           {
             "label": "FINISH_BONUS_AT_TIME",
@@ -8026,7 +8026,7 @@
             "slot": "212",
             "type": "t_uint256",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:73"
+            "src": "contracts\\npc\\MasterInvestor.sol:73"
           },
           {
             "label": "USER_DEP_FEE",
@@ -8034,7 +8034,7 @@
             "slot": "213",
             "type": "t_uint256",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:74"
+            "src": "contracts\\npc\\MasterInvestor.sol:74"
           },
           {
             "label": "DEV_DEP_FEE",
@@ -8042,7 +8042,7 @@
             "slot": "214",
             "type": "t_uint256",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:75"
+            "src": "contracts\\npc\\MasterInvestor.sol:75"
           },
           {
             "label": "START_TIME",
@@ -8050,7 +8050,7 @@
             "slot": "215",
             "type": "t_uint256",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:78"
+            "src": "contracts\\npc\\MasterInvestor.sol:78"
           },
           {
             "label": "TOTAL_ALLOCATION_POINTS",
@@ -8058,7 +8058,7 @@
             "slot": "216",
             "type": "t_uint256",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:80"
+            "src": "contracts\\npc\\MasterInvestor.sol:80"
           },
           {
             "label": "PERCENT_LOCK_BONUS_REWARD",
@@ -8066,7 +8066,7 @@
             "slot": "217",
             "type": "t_array(t_uint256)dyn_storage",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:82"
+            "src": "contracts\\npc\\MasterInvestor.sol:82"
           },
           {
             "label": "PERCENT_FOR_DEV",
@@ -8074,7 +8074,7 @@
             "slot": "218",
             "type": "t_uint256",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:83"
+            "src": "contracts\\npc\\MasterInvestor.sol:83"
           },
           {
             "label": "PERCENT_FOR_LP",
@@ -8082,7 +8082,7 @@
             "slot": "219",
             "type": "t_uint256",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:84"
+            "src": "contracts\\npc\\MasterInvestor.sol:84"
           },
           {
             "label": "PERCENT_FOR_COM",
@@ -8090,7 +8090,7 @@
             "slot": "220",
             "type": "t_uint256",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:85"
+            "src": "contracts\\npc\\MasterInvestor.sol:85"
           },
           {
             "label": "PERCENT_FOR_FOUNDERS",
@@ -8098,15 +8098,15 @@
             "slot": "221",
             "type": "t_uint256",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:86"
+            "src": "contracts\\npc\\MasterInvestor.sol:86"
           },
           {
             "label": "poolInfo",
             "offset": 0,
             "slot": "222",
-            "type": "t_array(t_struct(PoolInfo)10699_storage)dyn_storage",
+            "type": "t_array(t_struct(PoolInfo)4107_storage)dyn_storage",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:89"
+            "src": "contracts\\npc\\MasterInvestor.sol:89"
           },
           {
             "label": "poolId",
@@ -8114,15 +8114,15 @@
             "slot": "223",
             "type": "t_mapping(t_address,t_uint256)",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:90"
+            "src": "contracts\\npc\\MasterInvestor.sol:90"
           },
           {
             "label": "userInfo",
             "offset": 0,
             "slot": "224",
-            "type": "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)10689_storage))",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)4097_storage))",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:92"
+            "src": "contracts\\npc\\MasterInvestor.sol:92"
           },
           {
             "label": "userGlobalInfo",
@@ -8130,15 +8130,15 @@
             "slot": "225",
             "type": "t_mapping(t_address,t_uint256)",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:93"
+            "src": "contracts\\npc\\MasterInvestor.sol:93"
           },
           {
             "label": "poolExistence",
             "offset": 0,
             "slot": "226",
-            "type": "t_mapping(t_contract(IERC20Upgradeable)1458,t_bool)",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)612,t_bool)",
             "contract": "MasterInvestor",
-            "src": "contracts/npc/MasterInvestor.sol:94"
+            "src": "contracts\\npc\\MasterInvestor.sol:94"
           }
         ],
         "types": {
@@ -8146,7 +8146,7 @@
             "label": "address",
             "numberOfBytes": "20"
           },
-          "t_array(t_struct(PoolInfo)10699_storage)dyn_storage": {
+          "t_array(t_struct(PoolInfo)4107_storage)dyn_storage": {
             "label": "struct MasterInvestor.PoolInfo[]",
             "numberOfBytes": "32"
           },
@@ -8170,11 +8170,11 @@
             "label": "bytes32",
             "numberOfBytes": "32"
           },
-          "t_contract(EvoToken)5443": {
+          "t_contract(EvoToken)3743": {
             "label": "contract EvoToken",
             "numberOfBytes": "20"
           },
-          "t_contract(IERC20Upgradeable)1458": {
+          "t_contract(IERC20Upgradeable)612": {
             "label": "contract IERC20Upgradeable",
             "numberOfBytes": "20"
           },
@@ -8182,7 +8182,7 @@
             "label": "mapping(address => bool)",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_address,t_struct(UserInfo)10689_storage)": {
+          "t_mapping(t_address,t_struct(UserInfo)4097_storage)": {
             "label": "mapping(address => struct MasterInvestor.UserInfo)",
             "numberOfBytes": "32"
           },
@@ -8194,20 +8194,20 @@
             "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_contract(IERC20Upgradeable)1458,t_bool)": {
+          "t_mapping(t_contract(IERC20Upgradeable)612,t_bool)": {
             "label": "mapping(contract IERC20Upgradeable => bool)",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)10689_storage))": {
+          "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)4097_storage))": {
             "label": "mapping(uint256 => mapping(address => struct MasterInvestor.UserInfo))",
             "numberOfBytes": "32"
           },
-          "t_struct(PoolInfo)10699_storage": {
+          "t_struct(PoolInfo)4107_storage": {
             "label": "struct MasterInvestor.PoolInfo",
             "members": [
               {
                 "label": "lpToken",
-                "type": "t_contract(IERC20Upgradeable)1458",
+                "type": "t_contract(IERC20Upgradeable)612",
                 "offset": 0,
                 "slot": "0"
               },
@@ -8250,7 +8250,7 @@
             ],
             "numberOfBytes": "64"
           },
-          "t_struct(UserInfo)10689_storage": {
+          "t_struct(UserInfo)4097_storage": {
             "label": "struct MasterInvestor.UserInfo",
             "members": [
               {
@@ -9805,6 +9805,890 @@
               }
             ],
             "numberOfBytes": "64"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    },
+    "93253d7d7fffe6958970900933e21ca80782575018f1ed4ffe02a5544729aa09": {
+      "address": "0x26709C004bBc31DD37A1D8524ebb5e2f15676754",
+      "txHash": "0xa27b036c10af244a158d09643f532df9891dbd78ca20067a5c580b738cae0f8f",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ERC165Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:41"
+          },
+          {
+            "label": "_roles",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_mapping(t_bytes32,t_struct(RoleData)34_storage)",
+            "contract": "AccessControlUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:61"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "AccessControlUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:235"
+          },
+          {
+            "label": "_status",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_uint256",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:38"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "152",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:74"
+          },
+          {
+            "label": "GOV_TOKEN",
+            "offset": 0,
+            "slot": "201",
+            "type": "t_contract(EvoToken)3743",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:55"
+          },
+          {
+            "label": "USD_ORACLE",
+            "offset": 0,
+            "slot": "202",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:57"
+          },
+          {
+            "label": "DEV_ADDRESS",
+            "offset": 0,
+            "slot": "203",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:59"
+          },
+          {
+            "label": "LP_ADDRESS",
+            "offset": 0,
+            "slot": "204",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:61"
+          },
+          {
+            "label": "COMMUNITY_FUND_ADDRESS",
+            "offset": 0,
+            "slot": "205",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:63"
+          },
+          {
+            "label": "FOUNDER_ADDRESS",
+            "offset": 0,
+            "slot": "206",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:65"
+          },
+          {
+            "label": "REWARD_PER_SECOND",
+            "offset": 0,
+            "slot": "207",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:67"
+          },
+          {
+            "label": "REWARD_MULTIPLIERS",
+            "offset": 0,
+            "slot": "208",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:69"
+          },
+          {
+            "label": "HALVING_AT_TIMES",
+            "offset": 0,
+            "slot": "209",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:70"
+          },
+          {
+            "label": "USER_FEE_STAGES",
+            "offset": 0,
+            "slot": "210",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:71"
+          },
+          {
+            "label": "DEV_FEE_STAGES",
+            "offset": 0,
+            "slot": "211",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:72"
+          },
+          {
+            "label": "FINISH_BONUS_AT_TIME",
+            "offset": 0,
+            "slot": "212",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:73"
+          },
+          {
+            "label": "USER_DEP_FEE",
+            "offset": 0,
+            "slot": "213",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:74"
+          },
+          {
+            "label": "DEV_DEP_FEE",
+            "offset": 0,
+            "slot": "214",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:75"
+          },
+          {
+            "label": "START_TIME",
+            "offset": 0,
+            "slot": "215",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:78"
+          },
+          {
+            "label": "TOTAL_ALLOCATION_POINTS",
+            "offset": 0,
+            "slot": "216",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:80"
+          },
+          {
+            "label": "PERCENT_LOCK_BONUS_REWARD",
+            "offset": 0,
+            "slot": "217",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:82"
+          },
+          {
+            "label": "PERCENT_FOR_DEV",
+            "offset": 0,
+            "slot": "218",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:83"
+          },
+          {
+            "label": "PERCENT_FOR_LP",
+            "offset": 0,
+            "slot": "219",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:84"
+          },
+          {
+            "label": "PERCENT_FOR_COM",
+            "offset": 0,
+            "slot": "220",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:85"
+          },
+          {
+            "label": "PERCENT_FOR_FOUNDERS",
+            "offset": 0,
+            "slot": "221",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:86"
+          },
+          {
+            "label": "poolInfo",
+            "offset": 0,
+            "slot": "222",
+            "type": "t_array(t_struct(PoolInfo)4107_storage)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:89"
+          },
+          {
+            "label": "poolId",
+            "offset": 0,
+            "slot": "223",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:90"
+          },
+          {
+            "label": "userInfo",
+            "offset": 0,
+            "slot": "224",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)4097_storage))",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:92"
+          },
+          {
+            "label": "userGlobalInfo",
+            "offset": 0,
+            "slot": "225",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:93"
+          },
+          {
+            "label": "poolExistence",
+            "offset": 0,
+            "slot": "226",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)612,t_bool)",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:94"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_struct(PoolInfo)4107_storage)dyn_storage": {
+            "label": "struct MasterInvestor.PoolInfo[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_contract(EvoToken)3743": {
+            "label": "contract EvoToken",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IERC20Upgradeable)612": {
+            "label": "contract IERC20Upgradeable",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_struct(UserInfo)4097_storage)": {
+            "label": "mapping(address => struct MasterInvestor.UserInfo)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_struct(RoleData)34_storage)": {
+            "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_contract(IERC20Upgradeable)612,t_bool)": {
+            "label": "mapping(contract IERC20Upgradeable => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)4097_storage))": {
+            "label": "mapping(uint256 => mapping(address => struct MasterInvestor.UserInfo))",
+            "numberOfBytes": "32"
+          },
+          "t_struct(PoolInfo)4107_storage": {
+            "label": "struct MasterInvestor.PoolInfo",
+            "members": [
+              {
+                "label": "lpToken",
+                "type": "t_contract(IERC20Upgradeable)612",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "allocPoint",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "lastRewardTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "accGovTokenPerShare",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(RoleData)34_storage": {
+            "label": "struct AccessControlUpgradeable.RoleData",
+            "members": [
+              {
+                "label": "members",
+                "type": "t_mapping(t_address,t_bool)",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "adminRole",
+                "type": "t_bytes32",
+                "offset": 0,
+                "slot": "1"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_struct(UserInfo)4097_storage": {
+            "label": "struct MasterInvestor.UserInfo",
+            "members": [
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "rewardDebt",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "rewardDebtAtTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "lastWithdrawTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "firstDepositTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "timeDelta",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "lastDepositTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "6"
+              }
+            ],
+            "numberOfBytes": "224"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    },
+    "9bb205cad7e2ba507fed7fe5c94f0d44d9cb54cc5c600ec25ad465f9d8553484": {
+      "address": "0x4D87D753284087B585fc0C8B23FFDa8A7a666cf8",
+      "txHash": "0x97dec18f2da830788fa03851d14598282939cd0dca7cdab1be662905a990168b",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ERC165Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:41"
+          },
+          {
+            "label": "_roles",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_mapping(t_bytes32,t_struct(RoleData)34_storage)",
+            "contract": "AccessControlUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:61"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "AccessControlUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:235"
+          },
+          {
+            "label": "_status",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_uint256",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:38"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "152",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:74"
+          },
+          {
+            "label": "GOV_TOKEN",
+            "offset": 0,
+            "slot": "201",
+            "type": "t_contract(EvoToken)5443",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:55"
+          },
+          {
+            "label": "USD_ORACLE",
+            "offset": 0,
+            "slot": "202",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:57"
+          },
+          {
+            "label": "DEV_ADDRESS",
+            "offset": 0,
+            "slot": "203",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:59"
+          },
+          {
+            "label": "LP_ADDRESS",
+            "offset": 0,
+            "slot": "204",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:61"
+          },
+          {
+            "label": "COMMUNITY_FUND_ADDRESS",
+            "offset": 0,
+            "slot": "205",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:63"
+          },
+          {
+            "label": "FOUNDER_ADDRESS",
+            "offset": 0,
+            "slot": "206",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:65"
+          },
+          {
+            "label": "REWARD_PER_SECOND",
+            "offset": 0,
+            "slot": "207",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:67"
+          },
+          {
+            "label": "REWARD_MULTIPLIERS",
+            "offset": 0,
+            "slot": "208",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:69"
+          },
+          {
+            "label": "HALVING_AT_TIMES",
+            "offset": 0,
+            "slot": "209",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:70"
+          },
+          {
+            "label": "USER_FEE_STAGES",
+            "offset": 0,
+            "slot": "210",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:71"
+          },
+          {
+            "label": "DEV_FEE_STAGES",
+            "offset": 0,
+            "slot": "211",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:72"
+          },
+          {
+            "label": "FINISH_BONUS_AT_TIME",
+            "offset": 0,
+            "slot": "212",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:73"
+          },
+          {
+            "label": "USER_DEP_FEE",
+            "offset": 0,
+            "slot": "213",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:74"
+          },
+          {
+            "label": "DEV_DEP_FEE",
+            "offset": 0,
+            "slot": "214",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:75"
+          },
+          {
+            "label": "START_TIME",
+            "offset": 0,
+            "slot": "215",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:78"
+          },
+          {
+            "label": "TOTAL_ALLOCATION_POINTS",
+            "offset": 0,
+            "slot": "216",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:80"
+          },
+          {
+            "label": "PERCENT_LOCK_BONUS_REWARD",
+            "offset": 0,
+            "slot": "217",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:82"
+          },
+          {
+            "label": "PERCENT_FOR_DEV",
+            "offset": 0,
+            "slot": "218",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:83"
+          },
+          {
+            "label": "PERCENT_FOR_LP",
+            "offset": 0,
+            "slot": "219",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:84"
+          },
+          {
+            "label": "PERCENT_FOR_COM",
+            "offset": 0,
+            "slot": "220",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:85"
+          },
+          {
+            "label": "PERCENT_FOR_FOUNDERS",
+            "offset": 0,
+            "slot": "221",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:86"
+          },
+          {
+            "label": "poolInfo",
+            "offset": 0,
+            "slot": "222",
+            "type": "t_array(t_struct(PoolInfo)10699_storage)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:89"
+          },
+          {
+            "label": "poolId",
+            "offset": 0,
+            "slot": "223",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:90"
+          },
+          {
+            "label": "userInfo",
+            "offset": 0,
+            "slot": "224",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)10689_storage))",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:92"
+          },
+          {
+            "label": "userGlobalInfo",
+            "offset": 0,
+            "slot": "225",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:93"
+          },
+          {
+            "label": "poolExistence",
+            "offset": 0,
+            "slot": "226",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)1458,t_bool)",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:94"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_struct(PoolInfo)10699_storage)dyn_storage": {
+            "label": "struct MasterInvestor.PoolInfo[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_contract(EvoToken)5443": {
+            "label": "contract EvoToken",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IERC20Upgradeable)1458": {
+            "label": "contract IERC20Upgradeable",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_struct(UserInfo)10689_storage)": {
+            "label": "mapping(address => struct MasterInvestor.UserInfo)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_struct(RoleData)34_storage)": {
+            "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_contract(IERC20Upgradeable)1458,t_bool)": {
+            "label": "mapping(contract IERC20Upgradeable => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)10689_storage))": {
+            "label": "mapping(uint256 => mapping(address => struct MasterInvestor.UserInfo))",
+            "numberOfBytes": "32"
+          },
+          "t_struct(PoolInfo)10699_storage": {
+            "label": "struct MasterInvestor.PoolInfo",
+            "members": [
+              {
+                "label": "lpToken",
+                "type": "t_contract(IERC20Upgradeable)1458",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "allocPoint",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "lastRewardTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "accGovTokenPerShare",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(RoleData)34_storage": {
+            "label": "struct AccessControlUpgradeable.RoleData",
+            "members": [
+              {
+                "label": "members",
+                "type": "t_mapping(t_address,t_bool)",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "adminRole",
+                "type": "t_bytes32",
+                "offset": 0,
+                "slot": "1"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_struct(UserInfo)10689_storage": {
+            "label": "struct MasterInvestor.UserInfo",
+            "members": [
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "rewardDebt",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "rewardDebtAtTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "lastWithdrawTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "firstDepositTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "timeDelta",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "lastDepositTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "6"
+              }
+            ],
+            "numberOfBytes": "224"
           },
           "t_uint256": {
             "label": "uint256",

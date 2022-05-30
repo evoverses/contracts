@@ -500,6 +500,14 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
         return block.timestamp - user.firstDepositTime;
     }
 
+    function userDeltaOf(uint256 _pid, address _address) public view returns (uint256) {
+        UserInfo storage user = userInfo[_pid][_address];
+        if (user.lastWithdrawTime > 0) {
+            return block.timestamp - user.lastWithdrawTime;
+        }
+        return block.timestamp - user.firstDepositTime;
+    }
+
     // Update Finish Bonus Time
     function updateLastRewardTime(uint256 time) public onlyRole(AUTHORIZED_ROLE) {
         FINISH_BONUS_AT_TIME = time;
