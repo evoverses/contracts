@@ -6,6 +6,7 @@ import { setTimeout } from 'timers/promises';
 task("deployUpgradeable", "Deploy an upgradeable contract with a transparent proxy")
   .addParam("name")
   .setAction(async ({ name }, hre) => {
+    await hre.run("compile")
     const contractFactory = await hre.ethers.getContractFactory(name)
     console.log("Deploying", name)
     const contract = await hre.upgrades.deployProxy(contractFactory)
@@ -24,6 +25,6 @@ task("deployUpgradeable", "Deploy an upgradeable contract with a transparent pro
     console.log("Verifying proxy contract...")
     await hre.run("verify:verify", {
       address: contract.address,
-      constructorArgs: [admin, impl, ""]
+      constructorArguments: [admin, impl, ""]
     })
   });
