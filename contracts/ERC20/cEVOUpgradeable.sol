@@ -37,7 +37,7 @@ contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessCon
 
     modifier onlyWhitelist(address from, address to) {
         require(
-            _globalWhitelist.contains(to) || _whitelist[from].contains(to),
+            _globalWhitelist.contains(to) || _whitelist[from].contains(to) || from == address(0),
             "cEVO is non-transferable"
         );
         _;
@@ -79,10 +79,15 @@ contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessCon
         _mint(to, amount);
     }
 
-    function batchMint(address[] memory to, uint256[] memory amount) public onlyRole(MINTER_ROLE) {
+    function batchMint(
+        address[] memory to,
+        uint256[] memory amount,
+        uint256 startTime,
+        uint256 duration
+    ) public onlyRole(MINTER_ROLE) {
         require(to.length == amount.length, "to and amount arrays must match");
         for (uint256 i = 0; i < to.length; i++) {
-            mint(to[i], block.timestamp, DEFAULT_VESTING_PERIOD, amount[i]);
+            mint(to[i], startTime, duration, amount[i]);
         }
     }
 
@@ -99,6 +104,16 @@ contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessCon
             return;
         }
         EVO.mint(_msgSender(), totalPending);
+    }
+
+    function pendingOf(address _address) public view returns(uint256) {
+        uint256 totalPending = 0;
+        for (uint256 i = 0; i < disbursements[_address].length; i++) {
+            Disbursement storage d = disbursements[_address][i];
+            uint256 pending = (d.amount / d.duration) - (d.amount - d.balance);
+            totalPending += pending;
+        }
+        return totalPending;
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount)
