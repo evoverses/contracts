@@ -6,6 +6,8 @@ import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableMapUpgradeable.sol";
+
 import "./IEvoToken.sol";
 
 /**
@@ -35,9 +37,14 @@ contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessCon
 
     mapping (address => Disbursement[]) public disbursements;
 
+    mapping (address => uint256) public lockedOf;
+
     modifier onlyWhitelist(address from, address to) {
         require(
-            _globalWhitelist.contains(to) || _whitelist[from].contains(to) || from == address(0),
+            _globalWhitelist.contains(to)
+            || _whitelist[from].contains(to)
+            || from == address(0)
+            || to == address(0),
             "cEVO is non-transferable"
         );
         _;
@@ -95,10 +102,18 @@ contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessCon
         uint256 totalPending = 0;
         for (uint256 i = 0; i < disbursements[_msgSender()].length; i++) {
             Disbursement storage d = disbursements[_msgSender()][i];
-            uint256 pending = (d.amount / d.duration) - (d.amount - d.balance);
-            d.balance -= pending;
-            totalPending += pending;
+            uint256 claimed = d.amount - d.balance;
+            uint256 pendingPerSecond = d.amount / d.duration;
+            uint256 pending = ((block.timestamp - d.startTime) * pendingPerSecond);
+            if ((pending - claimed) > 0) {
+                d.balance -= pending;
+                totalPending += totalPending;
+            }
         }
+        if (totalPending == 0) {
+            return;
+        }
+        _burn(_msgSender(), totalPending);
         if (EVO.balanceOf(address(this)) > totalPending) {
             EVO.transfer(_msgSender(), totalPending);
             return;
@@ -110,10 +125,46 @@ contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessCon
         uint256 totalPending = 0;
         for (uint256 i = 0; i < disbursements[_address].length; i++) {
             Disbursement storage d = disbursements[_address][i];
-            uint256 pending = (d.amount / d.duration) - (d.amount - d.balance);
-            totalPending += pending;
+            uint256 claimed = d.amount - d.balance;
+            uint256 pendingPerSecond = d.amount / d.duration;
+            uint256 pending = ((block.timestamp - d.startTime) * pendingPerSecond);
+            if ((pending - claimed) > 0) {
+                totalPending += (pending - claimed);
+            }
+
         }
         return totalPending;
+    }
+
+    function removeDisbursement(address _address, uint256 index) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        uint256 bal = disbursements[_address][index].balance;
+        delete disbursements[_address][index];
+        _burn(_address, bal);
+    }
+
+    function resetDisbursement(address _address, uint256 index, uint256 amount) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        uint256 bal = disbursements[_address][index].balance;
+        disbursements[_address][index].balance = amount;
+        disbursements[_address][index].amount = amount;
+        if (bal >= amount) {
+            _burn(_address, bal - amount);
+        }
+    }
+
+    function addGlobalWhitelist(address to) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        _globalWhitelist.add(to);
+    }
+
+    function addWhitelist(address from, address to) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        _whitelist[from].add(to);
+    }
+
+    function convertLocked() public onlyRole(MINTER_ROLE) {
+        uint256 amount = EVO.lockOf(_msgSender());
+        EVO.unlockForUser(_msgSender(), amount);
+        EVO.transferFrom(_msgSender(), address(this), amount);
+        lockedOf[_msgSender()] += amount;
+        _mint(_msgSender(), amount);
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount)
