@@ -159,18 +159,23 @@ contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessCon
         _whitelist[from].add(to);
     }
 
-    function convertLocked() public onlyRole(MINTER_ROLE) {
+    function convertLocked() public {
         uint256 amount = EVO.lockOf(_msgSender());
 
         EVO.unlockForUser(_msgSender(), amount);
         EVO.transferFrom(_msgSender(), address(this), amount);
 
-        mintLocked(_msgSender(), amount);
+        lockedOf[_msgSender()] += amount;
+        _mint(_msgSender(), amount);
     }
 
     function mintLocked(address _address, uint256 amount) public onlyRole(MINTER_ROLE) {
         lockedOf[_address] += amount;
         _mint(_address, amount);
+    }
+
+    function disbursementsOf(address _address) public view returns(Disbursement[] memory) {
+        return disbursements[_address];
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount)
