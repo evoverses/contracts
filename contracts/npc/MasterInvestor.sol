@@ -7,6 +7,7 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "../ERC20/EvoToken.sol";
+import "../ERC20/IcEVOUpgradeable.sol";
 
 // MasterInvestor is the master investor of whatever investments are available.
 contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGuardUpgradeable {
@@ -205,34 +206,54 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
         GOV_TOKEN.mint(address(this), GovTokenForFarmer);
         pool.accGovTokenPerShare += (GovTokenForFarmer * 1e12) / lpSupply;
         pool.lastRewardTime = block.timestamp;
+
+        IcEVOUpgradeable cEVO = IcEVOUpgradeable(0x465d89df3e9B1AFB6957B58Be6137feeBB8e9f61);
         if (GovTokenForDev > 0) {
-            GOV_TOKEN.mint(address(DEV_ADDRESS), GovTokenForDev);
-            // Dev fund has xx% locked during the starting bonus period. After which locked funds drip
-            // out linearly each second over 3 years.
-            if (block.timestamp <= FINISH_BONUS_AT_TIME) {
-                GOV_TOKEN.lock(address(DEV_ADDRESS), ((GovTokenForDev * 75) / 100));
+            uint256 cEVOForDev = (block.timestamp <= FINISH_BONUS_AT_TIME)
+            ? ((GovTokenForDev * 75) / 100)
+            : 0;
+            uint256 govTokenForDev = block.timestamp <= FINISH_BONUS_AT_TIME
+            ? ((GovTokenForDev * 25) / 100)
+            : GovTokenForDev;
+            GOV_TOKEN.mint(address(DEV_ADDRESS), govTokenForDev);
+            if (cEVOForDev > 0) {
+                cEVO.mintLocked(address(DEV_ADDRESS), cEVOForDev);
             }
         }
         if (GovTokenForLP > 0) {
-            GOV_TOKEN.mint(LP_ADDRESS, GovTokenForLP);
-            // LP + Partnership fund has only xx% locked over time as most of it is needed early on for
-            // incentives and listings. The locked amount will drip out linearly each second after the bonus period.
-            if (block.timestamp <= FINISH_BONUS_AT_TIME) {
-                GOV_TOKEN.lock(address(LP_ADDRESS), ((GovTokenForLP * 45) / 100));
+            uint256 cEVOForLP = (block.timestamp <= FINISH_BONUS_AT_TIME)
+            ? ((GovTokenForLP * 45) / 100)
+            : 0;
+            uint256 govTokenForLP = block.timestamp <= FINISH_BONUS_AT_TIME
+            ? ((GovTokenForLP * 55) / 100)
+            : GovTokenForLP;
+            GOV_TOKEN.mint(address(LP_ADDRESS), govTokenForLP);
+            if (cEVOForLP > 0) {
+                cEVO.mintLocked(address(LP_ADDRESS), cEVOForLP);
             }
         }
         if (GovTokenForCom > 0) {
-            GOV_TOKEN.mint(COMMUNITY_FUND_ADDRESS, GovTokenForCom);
-            //Community Fund has xx% locked during bonus period and then drips out linearly.
-            if (block.timestamp <= FINISH_BONUS_AT_TIME) {
-                GOV_TOKEN.lock(address(COMMUNITY_FUND_ADDRESS), ((GovTokenForCom * 85) / 100));
+            uint256 cEVOForCom = (block.timestamp <= FINISH_BONUS_AT_TIME)
+            ? ((GovTokenForCom * 85) / 100)
+            : 0;
+            uint256 govTokenForCom = block.timestamp <= FINISH_BONUS_AT_TIME
+            ? ((GovTokenForCom * 15) / 100)
+            : GovTokenForCom;
+            GOV_TOKEN.mint(address(COMMUNITY_FUND_ADDRESS), govTokenForCom);
+            if (cEVOForCom > 0) {
+                cEVO.mintLocked(address(COMMUNITY_FUND_ADDRESS), cEVOForCom);
             }
         }
         if (GovTokenForFounders > 0) {
-            GOV_TOKEN.mint(FOUNDER_ADDRESS, GovTokenForFounders);
-            //The Founders reward has xx% of their funds locked during the bonus period which then drip out linearly.
-            if (block.timestamp <= FINISH_BONUS_AT_TIME) {
-                GOV_TOKEN.lock(address(FOUNDER_ADDRESS), ((GovTokenForFounders * 95) / 100));
+            uint256 cEVOForFounders = (block.timestamp <= FINISH_BONUS_AT_TIME)
+            ? ((GovTokenForFounders * 95) / 100)
+            : 0;
+            uint256 govTokenForFounders = block.timestamp <= FINISH_BONUS_AT_TIME
+            ? ((GovTokenForFounders * 5) / 100)
+            : GovTokenForFounders;
+            GOV_TOKEN.mint(address(FOUNDER_ADDRESS), govTokenForFounders);
+            if (cEVOForFounders > 0) {
+                cEVO.mintLocked(address(FOUNDER_ADDRESS), cEVOForFounders);
             }
         }
     }
@@ -353,17 +374,18 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
             }
 
             if (pending > 0) {
-                // If the user has a positive pending balance of tokens, transfer
-                // those tokens from MasterInvestor to their wallet.
-                GOV_TOKEN.transfer(_address, pending);
+
+
                 uint256 lockAmount = 0;
                 if (user.rewardDebtAtTime <= FINISH_BONUS_AT_TIME) {
-                    // If we are before the FINISH_BONUS_AT_TIME, we need
-                    // to lock some of those tokens, based on the current lock
-                    // percentage of their tokens they just received.
                     uint256 lockPercentage = getLockPercentage(block.timestamp - 1, block.timestamp);
                     lockAmount = ((pending * lockPercentage) / 100);
-                    GOV_TOKEN.lock(_address, lockAmount);
+
+                }
+                GOV_TOKEN.transfer(_address, pending - lockAmount);
+                if (lockAmount > 0) {
+                    IcEVOUpgradeable cEVO = IcEVOUpgradeable(0x465d89df3e9B1AFB6957B58Be6137feeBB8e9f61);
+                    cEVO.mintLocked(_address, lockAmount);
                 }
                 // Reset the rewardDebtAtTime to the current time for the user.
                 user.rewardDebtAtTime = block.timestamp;

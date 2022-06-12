@@ -10775,7 +10775,7 @@
             "label": "GOV_TOKEN",
             "offset": 0,
             "slot": "201",
-            "type": "t_contract(EvoToken)5443",
+            "type": "t_contract(EvoToken)3743",
             "contract": "MasterInvestor",
             "src": "contracts\\npc\\MasterInvestor.sol:55"
           },
@@ -10943,7 +10943,7 @@
             "label": "poolInfo",
             "offset": 0,
             "slot": "222",
-            "type": "t_array(t_struct(PoolInfo)10699_storage)dyn_storage",
+            "type": "t_array(t_struct(PoolInfo)4107_storage)dyn_storage",
             "contract": "MasterInvestor",
             "src": "contracts\\npc\\MasterInvestor.sol:89"
           },
@@ -10959,7 +10959,7 @@
             "label": "userInfo",
             "offset": 0,
             "slot": "224",
-            "type": "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)10689_storage))",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)4097_storage))",
             "contract": "MasterInvestor",
             "src": "contracts\\npc\\MasterInvestor.sol:92"
           },
@@ -10975,7 +10975,7 @@
             "label": "poolExistence",
             "offset": 0,
             "slot": "226",
-            "type": "t_mapping(t_contract(IERC20Upgradeable)1458,t_bool)",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)612,t_bool)",
             "contract": "MasterInvestor",
             "src": "contracts\\npc\\MasterInvestor.sol:94"
           }
@@ -10985,7 +10985,7 @@
             "label": "address",
             "numberOfBytes": "20"
           },
-          "t_array(t_struct(PoolInfo)10699_storage)dyn_storage": {
+          "t_array(t_struct(PoolInfo)4107_storage)dyn_storage": {
             "label": "struct MasterInvestor.PoolInfo[]",
             "numberOfBytes": "32"
           },
@@ -11009,11 +11009,11 @@
             "label": "bytes32",
             "numberOfBytes": "32"
           },
-          "t_contract(EvoToken)5443": {
+          "t_contract(EvoToken)3743": {
             "label": "contract EvoToken",
             "numberOfBytes": "20"
           },
-          "t_contract(IERC20Upgradeable)1458": {
+          "t_contract(IERC20Upgradeable)612": {
             "label": "contract IERC20Upgradeable",
             "numberOfBytes": "20"
           },
@@ -11021,7 +11021,7 @@
             "label": "mapping(address => bool)",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_address,t_struct(UserInfo)10689_storage)": {
+          "t_mapping(t_address,t_struct(UserInfo)4097_storage)": {
             "label": "mapping(address => struct MasterInvestor.UserInfo)",
             "numberOfBytes": "32"
           },
@@ -11033,20 +11033,20 @@
             "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_contract(IERC20Upgradeable)1458,t_bool)": {
+          "t_mapping(t_contract(IERC20Upgradeable)612,t_bool)": {
             "label": "mapping(contract IERC20Upgradeable => bool)",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)10689_storage))": {
+          "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)4097_storage))": {
             "label": "mapping(uint256 => mapping(address => struct MasterInvestor.UserInfo))",
             "numberOfBytes": "32"
           },
-          "t_struct(PoolInfo)10699_storage": {
+          "t_struct(PoolInfo)4107_storage": {
             "label": "struct MasterInvestor.PoolInfo",
             "members": [
               {
                 "label": "lpToken",
-                "type": "t_contract(IERC20Upgradeable)1458",
+                "type": "t_contract(IERC20Upgradeable)612",
                 "offset": 0,
                 "slot": "0"
               },
@@ -11089,7 +11089,7 @@
             ],
             "numberOfBytes": "64"
           },
-          "t_struct(UserInfo)10689_storage": {
+          "t_struct(UserInfo)4097_storage": {
             "label": "struct MasterInvestor.UserInfo",
             "members": [
               {
@@ -15545,7 +15545,7 @@
             "label": "_globalWhitelist",
             "offset": 0,
             "slot": "251",
-            "type": "t_struct(AddressSet)4655_storage",
+            "type": "t_struct(AddressSet)2638_storage",
             "contract": "cEVO",
             "src": "contracts\\ERC20\\cEVOUpgradeable.sol:34"
           },
@@ -15553,7 +15553,7 @@
             "label": "_whitelist",
             "offset": 0,
             "slot": "253",
-            "type": "t_mapping(t_address,t_struct(AddressSet)4655_storage)",
+            "type": "t_mapping(t_address,t_struct(AddressSet)2638_storage)",
             "contract": "cEVO",
             "src": "contracts\\ERC20\\cEVOUpgradeable.sol:36"
           },
@@ -15561,7 +15561,7 @@
             "label": "disbursements",
             "offset": 0,
             "slot": "254",
-            "type": "t_mapping(t_address,t_array(t_struct(Disbursement)7718_storage)dyn_storage)",
+            "type": "t_mapping(t_address,t_array(t_struct(Disbursement)3298_storage)dyn_storage)",
             "contract": "cEVO",
             "src": "contracts\\ERC20\\cEVOUpgradeable.sol:38"
           },
@@ -15583,7 +15583,7 @@
             "label": "bytes32[]",
             "numberOfBytes": "32"
           },
-          "t_array(t_struct(Disbursement)7718_storage)dyn_storage": {
+          "t_array(t_struct(Disbursement)3298_storage)dyn_storage": {
             "label": "struct cEVO.Disbursement[]",
             "numberOfBytes": "32"
           },
@@ -15607,7 +15607,749 @@
             "label": "bytes32",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_address,t_array(t_struct(Disbursement)7718_storage)dyn_storage)": {
+          "t_mapping(t_address,t_array(t_struct(Disbursement)3298_storage)dyn_storage)": {
+            "label": "mapping(address => struct cEVO.Disbursement[])",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(address => mapping(address => uint256))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_struct(AddressSet)2638_storage)": {
+            "label": "mapping(address => struct EnumerableSetUpgradeable.AddressSet)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_struct(RoleData)34_storage)": {
+            "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_uint256)": {
+            "label": "mapping(bytes32 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(AddressSet)2638_storage": {
+            "label": "struct EnumerableSetUpgradeable.AddressSet",
+            "members": [
+              {
+                "label": "_inner",
+                "type": "t_struct(Set)2337_storage",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_struct(Disbursement)3298_storage": {
+            "label": "struct cEVO.Disbursement",
+            "members": [
+              {
+                "label": "startTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "duration",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "balance",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(RoleData)34_storage": {
+            "label": "struct AccessControlUpgradeable.RoleData",
+            "members": [
+              {
+                "label": "members",
+                "type": "t_mapping(t_address,t_bool)",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "adminRole",
+                "type": "t_bytes32",
+                "offset": 0,
+                "slot": "1"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_struct(Set)2337_storage": {
+            "label": "struct EnumerableSetUpgradeable.Set",
+            "members": [
+              {
+                "label": "_values",
+                "type": "t_array(t_bytes32)dyn_storage",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_indexes",
+                "type": "t_mapping(t_bytes32,t_uint256)",
+                "offset": 0,
+                "slot": "1"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    },
+    "39491580f71895fec0750aedbc786f0ef55ff3abdf2fae4bf9fe15dd7e295612": {
+      "address": "0x149E483FCeC585A92B5Fe88800f22B5be33cD417",
+      "txHash": "0x13971f47554433b105fdb601e6faab706de7fb11bdd59a5660c9e5830271db37",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ERC165Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:41"
+          },
+          {
+            "label": "_roles",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_mapping(t_bytes32,t_struct(RoleData)34_storage)",
+            "contract": "AccessControlUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:61"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "AccessControlUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:235"
+          },
+          {
+            "label": "_status",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_uint256",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:38"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "152",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:74"
+          },
+          {
+            "label": "GOV_TOKEN",
+            "offset": 0,
+            "slot": "201",
+            "type": "t_contract(EvoToken)7345",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:56"
+          },
+          {
+            "label": "USD_ORACLE",
+            "offset": 0,
+            "slot": "202",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:58"
+          },
+          {
+            "label": "DEV_ADDRESS",
+            "offset": 0,
+            "slot": "203",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:60"
+          },
+          {
+            "label": "LP_ADDRESS",
+            "offset": 0,
+            "slot": "204",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:62"
+          },
+          {
+            "label": "COMMUNITY_FUND_ADDRESS",
+            "offset": 0,
+            "slot": "205",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:64"
+          },
+          {
+            "label": "FOUNDER_ADDRESS",
+            "offset": 0,
+            "slot": "206",
+            "type": "t_address",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:66"
+          },
+          {
+            "label": "REWARD_PER_SECOND",
+            "offset": 0,
+            "slot": "207",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:68"
+          },
+          {
+            "label": "REWARD_MULTIPLIERS",
+            "offset": 0,
+            "slot": "208",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:70"
+          },
+          {
+            "label": "HALVING_AT_TIMES",
+            "offset": 0,
+            "slot": "209",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:71"
+          },
+          {
+            "label": "USER_FEE_STAGES",
+            "offset": 0,
+            "slot": "210",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:72"
+          },
+          {
+            "label": "DEV_FEE_STAGES",
+            "offset": 0,
+            "slot": "211",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:73"
+          },
+          {
+            "label": "FINISH_BONUS_AT_TIME",
+            "offset": 0,
+            "slot": "212",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:74"
+          },
+          {
+            "label": "USER_DEP_FEE",
+            "offset": 0,
+            "slot": "213",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:75"
+          },
+          {
+            "label": "DEV_DEP_FEE",
+            "offset": 0,
+            "slot": "214",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:76"
+          },
+          {
+            "label": "START_TIME",
+            "offset": 0,
+            "slot": "215",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:79"
+          },
+          {
+            "label": "TOTAL_ALLOCATION_POINTS",
+            "offset": 0,
+            "slot": "216",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:81"
+          },
+          {
+            "label": "PERCENT_LOCK_BONUS_REWARD",
+            "offset": 0,
+            "slot": "217",
+            "type": "t_array(t_uint256)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:83"
+          },
+          {
+            "label": "PERCENT_FOR_DEV",
+            "offset": 0,
+            "slot": "218",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:84"
+          },
+          {
+            "label": "PERCENT_FOR_LP",
+            "offset": 0,
+            "slot": "219",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:85"
+          },
+          {
+            "label": "PERCENT_FOR_COM",
+            "offset": 0,
+            "slot": "220",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:86"
+          },
+          {
+            "label": "PERCENT_FOR_FOUNDERS",
+            "offset": 0,
+            "slot": "221",
+            "type": "t_uint256",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:87"
+          },
+          {
+            "label": "poolInfo",
+            "offset": 0,
+            "slot": "222",
+            "type": "t_array(t_struct(PoolInfo)13764_storage)dyn_storage",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:90"
+          },
+          {
+            "label": "poolId",
+            "offset": 0,
+            "slot": "223",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:91"
+          },
+          {
+            "label": "userInfo",
+            "offset": 0,
+            "slot": "224",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)13754_storage))",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:93"
+          },
+          {
+            "label": "userGlobalInfo",
+            "offset": 0,
+            "slot": "225",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:94"
+          },
+          {
+            "label": "poolExistence",
+            "offset": 0,
+            "slot": "226",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)1458,t_bool)",
+            "contract": "MasterInvestor",
+            "src": "contracts\\npc\\MasterInvestor.sol:95"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_struct(PoolInfo)13764_storage)dyn_storage": {
+            "label": "struct MasterInvestor.PoolInfo[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_contract(EvoToken)7345": {
+            "label": "contract EvoToken",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IERC20Upgradeable)1458": {
+            "label": "contract IERC20Upgradeable",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_struct(UserInfo)13754_storage)": {
+            "label": "mapping(address => struct MasterInvestor.UserInfo)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_struct(RoleData)34_storage)": {
+            "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_contract(IERC20Upgradeable)1458,t_bool)": {
+            "label": "mapping(contract IERC20Upgradeable => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_struct(UserInfo)13754_storage))": {
+            "label": "mapping(uint256 => mapping(address => struct MasterInvestor.UserInfo))",
+            "numberOfBytes": "32"
+          },
+          "t_struct(PoolInfo)13764_storage": {
+            "label": "struct MasterInvestor.PoolInfo",
+            "members": [
+              {
+                "label": "lpToken",
+                "type": "t_contract(IERC20Upgradeable)1458",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "allocPoint",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "lastRewardTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "accGovTokenPerShare",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_struct(RoleData)34_storage": {
+            "label": "struct AccessControlUpgradeable.RoleData",
+            "members": [
+              {
+                "label": "members",
+                "type": "t_mapping(t_address,t_bool)",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "adminRole",
+                "type": "t_bytes32",
+                "offset": 0,
+                "slot": "1"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_struct(UserInfo)13754_storage": {
+            "label": "struct MasterInvestor.UserInfo",
+            "members": [
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "rewardDebt",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "rewardDebtAtTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "lastWithdrawTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "firstDepositTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "timeDelta",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "lastDepositTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "6"
+              }
+            ],
+            "numberOfBytes": "224"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    },
+    "7372d02d11314f37e42062ee7d4b2d360b3a6aafbe9f151f8167898030ee22d4": {
+      "address": "0x2F454f70DA5B5D61Aa2457595Fe1dE5f02A08bd4",
+      "txHash": "0xcd8ad6a057f6e04f499a20d55ee1edee7438a3150fe53b4021e5e00680a72157",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_balances",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:37"
+          },
+          {
+            "label": "_allowances",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:39"
+          },
+          {
+            "label": "_totalSupply",
+            "offset": 0,
+            "slot": "53",
+            "type": "t_uint256",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:41"
+          },
+          {
+            "label": "_name",
+            "offset": 0,
+            "slot": "54",
+            "type": "t_string_storage",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:43"
+          },
+          {
+            "label": "_symbol",
+            "offset": 0,
+            "slot": "55",
+            "type": "t_string_storage",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:44"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "56",
+            "type": "t_array(t_uint256)45_storage",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:394"
+          },
+          {
+            "label": "_paused",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_bool",
+            "contract": "PausableUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:29"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "PausableUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\PausableUpgradeable.sol:102"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ERC165Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:41"
+          },
+          {
+            "label": "_roles",
+            "offset": 0,
+            "slot": "201",
+            "type": "t_mapping(t_bytes32,t_struct(RoleData)34_storage)",
+            "contract": "AccessControlUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:61"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "202",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "AccessControlUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:235"
+          },
+          {
+            "label": "_globalWhitelist",
+            "offset": 0,
+            "slot": "251",
+            "type": "t_struct(AddressSet)4655_storage",
+            "contract": "cEVO",
+            "src": "contracts\\ERC20\\cEVOUpgradeable.sol:34"
+          },
+          {
+            "label": "_whitelist",
+            "offset": 0,
+            "slot": "253",
+            "type": "t_mapping(t_address,t_struct(AddressSet)4655_storage)",
+            "contract": "cEVO",
+            "src": "contracts\\ERC20\\cEVOUpgradeable.sol:36"
+          },
+          {
+            "label": "disbursements",
+            "offset": 0,
+            "slot": "254",
+            "type": "t_mapping(t_address,t_array(t_struct(Disbursement)7728_storage)dyn_storage)",
+            "contract": "cEVO",
+            "src": "contracts\\ERC20\\cEVOUpgradeable.sol:38"
+          },
+          {
+            "label": "lockedOf",
+            "offset": 0,
+            "slot": "255",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "cEVO",
+            "src": "contracts\\ERC20\\cEVOUpgradeable.sol:40"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_bytes32)dyn_storage": {
+            "label": "bytes32[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_struct(Disbursement)7728_storage)dyn_storage": {
+            "label": "struct cEVO.Disbursement[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)45_storage": {
+            "label": "uint256[45]",
+            "numberOfBytes": "1440"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_array(t_struct(Disbursement)7728_storage)dyn_storage)": {
             "label": "mapping(address => struct cEVO.Disbursement[])",
             "numberOfBytes": "32"
           },
@@ -15651,7 +16393,7 @@
             ],
             "numberOfBytes": "64"
           },
-          "t_struct(Disbursement)7718_storage": {
+          "t_struct(Disbursement)7728_storage": {
             "label": "struct cEVO.Disbursement",
             "members": [
               {
