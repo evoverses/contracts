@@ -49,6 +49,7 @@ contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessCon
         );
         _;
     }
+    event ClaimedDisbursement(address indexed from, uint256 amount);
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() initializer {}
 
@@ -105,9 +106,9 @@ contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessCon
             uint256 claimed = d.amount - d.balance;
             uint256 pendingPerSecond = d.amount / d.duration;
             uint256 pending = ((block.timestamp - d.startTime) * pendingPerSecond);
-            if ((pending - claimed) > 0) {
-                d.balance -= pending;
-                totalPending += totalPending;
+            if (claimed < pending) {
+                d.balance -= (pending - claimed);
+                totalPending += (pending - claimed);
             }
         }
         if (totalPending == 0) {
@@ -128,10 +129,9 @@ contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessCon
             uint256 claimed = d.amount - d.balance;
             uint256 pendingPerSecond = d.amount / d.duration;
             uint256 pending = ((block.timestamp - d.startTime) * pendingPerSecond);
-            if ((pending - claimed) > 0) {
+            if (claimed < pending) {
                 totalPending += (pending - claimed);
             }
-
         }
         return totalPending;
     }
