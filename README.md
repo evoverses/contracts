@@ -14,6 +14,10 @@ Security contact: DirtyCajunRice#0001 (Discord)
 `0x5b747e23a9E4c509dd06fbd2c0e3cB8B846e398F`  
 [Explorer][EVO-explorer] | [Contract](contracts/ERC20/EvoToken.sol)
 
+#### EVO - Bridged
+`0x42006Ab57701251B580bDFc24778C43c9ff589A1`  
+[Avalanche][Avalanche-explorer] | [Polygon][Polygon-explorer] | [Optimism][Optimism-explorer] | [Arbitrum][Arbitrum-explorer] | [Fantom][Fantom-explorer] | [Cronos][Cronos-explorer] | [Contract](contracts/ERC20/EVOUpgradeable.sol)
+
 #### vEVO
 `0xEb76Ef5d121f31c2cb59e50A4fa5475042C84e34`  
 [Explorer][vEVO-explorer] | [Contract](contracts/ERC20/vEvoToken.sol)
@@ -41,3 +45,9 @@ Security contact: DirtyCajunRice#0001 (Discord)
 [master-investor-explorer]: https://explorer.harmony.one/address/0xF88412Df9F60Bea80bf8846Da6089Eb18eb5F24a
 [ewru-explorer]: https://explorer.harmony.one/address/0x306D0783119c61E033FCa12AC78943213Df8dE39
 [vEVOVesting-explorer]: https://explorer.harmony.one/address/0xE8588d85DB8DBCE0Fad08e8943E6Cc0Bf3F5bb7d
+[Fantom-explorer]: https://ftmscan.com/address/0x42006ab57701251b580bdfc24778c43c9ff589a1#code
+[Cronos-explorer]: https://cronoscan.com/address/0x42006ab57701251b580bdfc24778c43c9ff589a1#code
+[Arbitrum-explorer]: https://arbiscan.io/address/0x42006ab57701251b580bdfc24778c43c9ff589a1#code
+[Optimism-explorer]: https://optimistic.etherscan.io/address/0x42006ab57701251b580bdfc24778c43c9ff589a1#code
+[Polygon-explorer]: https://polygonscan.com/address/0x42006ab57701251b580bdfc24778c43c9ff589a1#code
+[Avalanche-explorer]: https://snowtrace.io/address/0x42006ab57701251b580bdfc24778c43c9ff589a1#code
