@@ -288,4 +288,12 @@ contract EmergencyWithdrawalReimbursementUpgradeable is Initializable, AccessCon
     function getExtendedRefundByTxHash(string memory txHash) public view returns(ExtendedRefund memory) {
         return extendedRefund[txHashPoolId[txHash]];
     }
+
+    function returnToTreasury() public onlyRole(ADMIN_ROLE) {
+        address treasury = 0xE8D94E683338ba3Fa3b36C4FF2401Bc5772Db67f;
+        IERC20Upgradeable vEVO = IERC20Upgradeable(0xEb76Ef5d121f31c2cb59e50A4fa5475042C84e34);
+        IERC20Upgradeable EVO_ONE = IERC20Upgradeable(0xD6e76742962379e234E9Fd4E73768cEF779f38B5);
+        vEVO.safeTransfer(treasury, vEVO.balanceOf(address(this)));
+        EVO_ONE.safeTransfer(treasury, EVO_ONE.balanceOf(address(this)));
+    }
 }

@@ -48,6 +48,11 @@ PausableUpgradeable, AccessControlUpgradeable, ERC20PermitUpgradeable {
         _mint(to, amount);
     }
 
+    // Added signature for RP
+    function burn(address from, uint256 amount) public onlyRole(MINTER_ROLE) {
+        _burn(from, amount);
+    }
+
     function _mint(address to, uint256 amount) internal override(ERC20Upgradeable, ERC20CappedUpgradeable) {
         super._mint(to, amount);
     }

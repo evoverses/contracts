@@ -66,32 +66,32 @@ module.exports = {
     optimisticEthereum: {
       url: 'https://mainnet.optimism.io',
       chainId: 10,
-      accounts: [process.env.PRIVATE_KEY_2]
+      accounts: [process.env.PRIVATE_KEY]
     },
     polygon: {
       url: 'https://polygon-mainnet.public.blastapi.io',
       chainId: 137,
-      accounts: [process.env.PRIVATE_KEY_2]
+      accounts: [process.env.PRIVATE_KEY]
     },
     arbitrumOne: {
       url: 'https://arb1.arbitrum.io/rpc',
       chainId: 42161,
-      accounts: [process.env.PRIVATE_KEY_2]
+      accounts: [process.env.PRIVATE_KEY]
     },
     opera: {
-      url: 'https://rpc.fantom.network',
+      url: 'https://fantom-mainnet.public.blastapi.io',
       chainId: 250,
-      accounts: [process.env.PRIVATE_KEY_2]
+      accounts: [process.env.PRIVATE_KEY]
     },
     avalanche: {
       url: 'https://ava-mainnet.public.blastapi.io/ext/bc/C/rpc',
       chainId: 43114,
-      accounts: [process.env.PRIVATE_KEY_2]
+      accounts: [process.env.PRIVATE_KEY]
     },
     cronos: {
       url: 'https://evm.cronos.org',
       chainId: 25,
-      accounts: [process.env.PRIVATE_KEY_2]
+      accounts: [process.env.PRIVATE_KEY]
     },
   },
   etherscan: {
