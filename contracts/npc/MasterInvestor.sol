@@ -105,6 +105,10 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
         _;
     }
 
+    modifier isDisabled() {
+        require(false, "MasterInvestor::Deposits disabled. Please check discord. https://evoverses.com/discord");
+        _;
+    }
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() initializer {}
 
@@ -398,7 +402,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
     }
 
     // Deposit LP tokens to MasterInvestor for EVO allocation.
-    function deposit(uint256 _pid, uint256 _amount) public nonReentrant {
+    function deposit(uint256 _pid, uint256 _amount) public nonReentrant isDisabled {
         require(_amount > 0, "MasterInvestor::deposit: amount must be greater than 0");
 
         PoolInfo storage pool = poolInfo[_pid];
@@ -439,39 +443,39 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
             } else {
                 user.timeDelta = block.timestamp - user.firstDepositTime;
             }
-            uint256 userAmount = 0;
+            uint256 userAmount = _amount;
             uint256 devAmount = 0;
             if (block.timestamp == user.lastDepositTime) {
                 // 25% fee for withdrawals of LP tokens in the same second. This is to prevent abuse from flash loans
-                userAmount = (_amount * USER_FEE_STAGES[0]) / 100;
+                // userAmount = (_amount * USER_FEE_STAGES[0]) / 100;
                 devAmount = (_amount * DEV_FEE_STAGES[0]) / 100;
             } else if (user.timeDelta >= 1 && user.timeDelta < 60 minutes) {
                 // 8% fee if a user deposits and withdraws in between same second and 60 minutes.
-                userAmount = (_amount * USER_FEE_STAGES[1]) / 100;
+                // userAmount = (_amount * USER_FEE_STAGES[1]) / 100;
                 devAmount = (_amount * DEV_FEE_STAGES[1]) / 100;
             } else if (user.timeDelta >= 60 minutes && user.timeDelta < 1 days) {
                 // 4% fee if a user deposits and withdraws after 1 hour but before 1 day.
-                userAmount = (_amount * USER_FEE_STAGES[2]) / 100;
+                // userAmount = (_amount * USER_FEE_STAGES[2]) / 100;
                 devAmount = (_amount * DEV_FEE_STAGES[2]) / 100;
             } else if (user.timeDelta >= 1 days && user.timeDelta < 3 days) {
                 // 2% fee if a user deposits and withdraws between after 1 day but before 3 days.
-                userAmount = (_amount * USER_FEE_STAGES[3]) / 100;
+                // userAmount = (_amount * USER_FEE_STAGES[3]) / 100;
                 devAmount = (_amount * DEV_FEE_STAGES[3]) / 100;
             } else if (user.timeDelta >= 3 days && user.timeDelta < 5 days) {
                 // 1% fee if a user deposits and withdraws after 3 days but before 5 days.
-                userAmount = (_amount * USER_FEE_STAGES[4]) / 100;
+                // userAmount = (_amount * USER_FEE_STAGES[4]) / 100;
                 devAmount = (_amount * DEV_FEE_STAGES[4]) / 100;
             } else if (user.timeDelta >= 5 days && user.timeDelta < 2 weeks) {
                 //0.5% fee if a user deposits and withdraws if the user withdraws after 5 days but before 2 weeks.
-                userAmount = (_amount * USER_FEE_STAGES[5]) / 1000;
+                // userAmount = (_amount * USER_FEE_STAGES[5]) / 1000;
                 devAmount = (_amount * DEV_FEE_STAGES[5]) / 1000;
             } else if (user.timeDelta >= 2 weeks && user.timeDelta < 4 weeks) {
                 //0.25% fee if a user deposits and withdraws after 2 weeks.
-                userAmount = (_amount * USER_FEE_STAGES[6]) / 10000;
+                // userAmount = (_amount * USER_FEE_STAGES[6]) / 10000;
                 devAmount = (_amount * DEV_FEE_STAGES[6]) / 10000;
             } else if (user.timeDelta >= 4 weeks) {
                 //0.1% fee if a user deposits and withdraws after 4 weeks
-                userAmount = (_amount * USER_FEE_STAGES[7]) / 10000;
+                // userAmount = (_amount * USER_FEE_STAGES[7]) / 10000;
                 devAmount = (_amount * DEV_FEE_STAGES[7]) / 10000;
             } else {
                 revert("Something is very broken");
