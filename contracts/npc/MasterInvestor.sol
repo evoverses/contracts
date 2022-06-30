@@ -6,8 +6,8 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeab
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "../ERC20/EvoToken.sol";
-import "../ERC20/IcEVOUpgradeable.sol";
+import "../deprecated/EvoToken.sol";
+import "../deprecated/IcEVOUpgradeable.sol";
 
 // MasterInvestor is the master investor of whatever investments are available.
 contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGuardUpgradeable {
@@ -211,7 +211,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
         pool.accGovTokenPerShare += (GovTokenForFarmer * 1e12) / lpSupply;
         pool.lastRewardTime = block.timestamp;
 
-        IcEVOUpgradeable cEVO = IcEVOUpgradeable(0x465d89df3e9B1AFB6957B58Be6137feeBB8e9f61);
+        IcEVOUpgradeable2 cEVO = IcEVOUpgradeable2(0x465d89df3e9B1AFB6957B58Be6137feeBB8e9f61);
         if (GovTokenForDev > 0) {
             uint256 cEVOForDev = (block.timestamp <= FINISH_BONUS_AT_TIME)
             ? ((GovTokenForDev * 75) / 100)
@@ -388,7 +388,7 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
                 }
                 GOV_TOKEN.transfer(_address, pending - lockAmount);
                 if (lockAmount > 0) {
-                    IcEVOUpgradeable cEVO = IcEVOUpgradeable(0x465d89df3e9B1AFB6957B58Be6137feeBB8e9f61);
+                    IcEVOUpgradeable2 cEVO = IcEVOUpgradeable2(0x465d89df3e9B1AFB6957B58Be6137feeBB8e9f61);
                     cEVO.mintLocked(_address, lockAmount);
                 }
                 // Reset the rewardDebtAtTime to the current time for the user.
@@ -621,6 +621,12 @@ contract MasterInvestor is Initializable, AccessControlUpgradeable, ReentrancyGu
     function reviseDeposit(uint256 _pid, address _user, uint256 _time) public onlyRole(AUTHORIZED_ROLE) {
         UserInfo storage user = userInfo[_pid][_user];
         user.firstDepositTime = _time;
+    }
+
+    function correctWithdrawal(uint256 _pid, address _user, uint256 _amount) public onlyRole(AUTHORIZED_ROLE) {
+        PoolInfo storage pool = poolInfo[_pid];
+        pool.lpToken.safeTransfer(_user, _amount);
+        updatePool(_pid);
     }
 
     function reclaimTokenOwnership(address _newOwner) public onlyRole(AUTHORIZED_ROLE) {

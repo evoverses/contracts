@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
@@ -9,21 +8,21 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableMapUpgradeable.sol";
 
-import "./extensions/ERC20BurnableUpgradeable.sol";
-import "../utils/TokenConstants.sol";
-import "./interfaces/IMintable.sol";
+import "./IEvoToken.sol";
 
 /**
-* @title Compensation EVO v2.0.0
+* @title Compensation EVO v1.0.0
 * @author @DirtyCajunRice
 */
-contract cEVOUpgradeable is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessControlUpgradeable,
-ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
+contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessControlUpgradeable {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
 
-    address private EVO;
+    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    uint256 public DEFAULT_VESTING_PERIOD;
+    IEvoToken public constant EVO = IEvoToken(0x5b747e23a9E4c509dd06fbd2c0e3cB8B846e398F);
+
+    uint256 public constant DEFAULT_VESTING_PERIOD = 273 days; // ~9 months
 
     struct Disbursement {
         uint256 startTime;
@@ -52,45 +51,27 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
     }
     event ClaimedDisbursement(address indexed from, uint256 amount);
     /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() {
-        _disableInitializers();
-    }
+    constructor() initializer {}
 
-    function initialize() public initializer {
+    function initialize() initializer public {
         __ERC20_init("cEVO", "cEVO");
         __Pausable_init();
         __AccessControl_init();
-        __ERC20Permit_init("cEVO");
-        __ERC20Burnable_init();
 
-        _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
-        _grantRole(ADMIN_ROLE, _msgSender());
-        _grantRole(MINTER_ROLE, _msgSender());
-
-        EVO = 0x42006Ab57701251B580bDFc24778C43c9ff589A1;
-        DEFAULT_VESTING_PERIOD = 365 days;
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(PAUSER_ROLE, msg.sender);
+        _grantRole(MINTER_ROLE, msg.sender);
     }
 
-    function pause() public onlyRole(ADMIN_ROLE) {
+    function pause() public onlyRole(PAUSER_ROLE) {
         _pause();
     }
 
-    function unpause() public onlyRole(ADMIN_ROLE) {
+    function unpause() public onlyRole(PAUSER_ROLE) {
         _unpause();
     }
 
-    function mint(address _address, uint256 amount) public onlyRole(MINTER_ROLE) {
-        lockedOf[_address] += amount;
-        IMintable(EVO).mint(address(this), amount);
-        _mint(_address, amount);
-    }
-
-    function mintDisbursement(
-        address to,
-        uint256 startTime,
-        uint256 duration,
-        uint256 amount
-    ) public onlyRole(MINTER_ROLE) {
+    function mint(address to, uint256 startTime, uint256 duration, uint256 amount) public onlyRole(MINTER_ROLE) {
         uint256 _startTime = startTime > 0 ? startTime : block.timestamp;
         uint256 _duration = duration > 0 ? duration : DEFAULT_VESTING_PERIOD;
         disbursements[to].push(
@@ -103,34 +84,10 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
             }
           )
         );
-        IMintable(EVO).mint(address(this), amount);
         _mint(to, amount);
     }
 
-    function bridgeMintDisbursement(
-        address to,
-        uint256 startTime,
-        uint256 duration,
-        uint256 amount,
-        uint256 balance
-    ) public onlyRole(MINTER_ROLE) {
-        uint256 _startTime = startTime > 0 ? startTime : block.timestamp;
-        uint256 _duration = duration > 0 ? duration : DEFAULT_VESTING_PERIOD;
-        disbursements[to].push(
-            Disbursement(
-            {
-            startTime: _startTime,
-            duration: _duration,
-            amount: amount,
-            balance: balance
-            }
-            )
-        );
-        IMintable(EVO).mint(address(this), balance);
-        _mint(to, balance);
-    }
-
-    function batchMintDisbursement(
+    function batchMint(
         address[] memory to,
         uint256[] memory amount,
         uint256 startTime,
@@ -138,18 +95,8 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
     ) public onlyRole(MINTER_ROLE) {
         require(to.length == amount.length, "to and amount arrays must match");
         for (uint256 i = 0; i < to.length; i++) {
-            mintDisbursement(to[i], startTime, duration, amount[i]);
+            mint(to[i], startTime, duration, amount[i]);
         }
-    }
-
-    function burn(uint256 amount) public virtual override(ERC20BurnableUpgradeable) {
-        super.burn(amount);
-        IMintable(EVO).burn(address(this), amount);
-    }
-
-    function burnFrom(address account, uint256 amount) public virtual override(ERC20BurnableUpgradeable) {
-        super.burnFrom(account, amount);
-        IMintable(EVO).burn(address(this), amount);
     }
 
     function claimPending() public whenNotPaused {
@@ -168,11 +115,11 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
             return;
         }
         _burn(_msgSender(), totalPending);
-        if (ERC20Upgradeable(EVO).balanceOf(address(this)) > totalPending) {
-            ERC20Upgradeable(EVO).transfer(_msgSender(), totalPending);
+        if (EVO.balanceOf(address(this)) > totalPending) {
+            EVO.transfer(_msgSender(), totalPending);
             return;
         }
-        IMintable(EVO).mint(_msgSender(), totalPending);
+        EVO.mint(_msgSender(), totalPending);
     }
 
     function pendingOf(address _address) public view returns(uint256) {
@@ -189,6 +136,21 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
         return totalPending;
     }
 
+    function removeDisbursement(address _address, uint256 index) public onlyRole(MINTER_ROLE) {
+        uint256 bal = disbursements[_address][index].balance;
+        delete disbursements[_address][index];
+        _burn(_address, bal);
+    }
+
+    function resetDisbursement(address _address, uint256 index, uint256 amount) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        uint256 bal = disbursements[_address][index].balance;
+        disbursements[_address][index].balance = amount;
+        disbursements[_address][index].amount = amount;
+        if (bal >= amount) {
+            _burn(_address, bal - amount);
+        }
+    }
+
     function addGlobalWhitelist(address to) public onlyRole(DEFAULT_ADMIN_ROLE) {
         _globalWhitelist.add(to);
     }
@@ -197,8 +159,41 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
         _whitelist[from].add(to);
     }
 
+    function convertLocked() public {
+        uint256 amount = EVO.lockOf(_msgSender());
+
+        EVO.unlockForUser(_msgSender(), amount);
+        EVO.transferFrom(_msgSender(), address(this), amount);
+
+        lockedOf[_msgSender()] += amount;
+        _mint(_msgSender(), amount);
+    }
+
+    function mintLocked(address _address, uint256 amount) public onlyRole(MINTER_ROLE) {
+        lockedOf[_address] += amount;
+        _mint(_address, amount);
+    }
+
+    function burn(address _address, uint256 amount) public onlyRole(MINTER_ROLE) {
+        lockedOf[_address] -= amount;
+        _burn(_address, amount);
+    }
+
     function disbursementsOf(address _address) public view returns(Disbursement[] memory) {
         return disbursements[_address];
+    }
+
+    function disbursementOf(address _address) public view
+    returns(
+        uint256 startTime,
+        uint256 duration,
+        uint256 amount,
+        uint256 balance
+    ) {
+        startTime = disbursements[_address][0].startTime;
+        duration = disbursements[_address][0].duration;
+        amount = disbursements[_address][0].amount;
+        balance = disbursements[_address][0].balance;
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount)

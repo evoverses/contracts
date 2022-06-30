@@ -7,7 +7,7 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "../ERC20/IEvoToken.sol";
+import "../deprecated/IEvoToken.sol";
 
 interface IMasterInvestor {
     function withdrawForClaim(uint256 _pid, uint256 _amount, address _address) external;

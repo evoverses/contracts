@@ -18,6 +18,8 @@ PausableUpgradeable, AccessControlUpgradeable, ERC20PermitUpgradeable {
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
+    uint256 private _totalBurned;
+
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
@@ -48,12 +50,23 @@ PausableUpgradeable, AccessControlUpgradeable, ERC20PermitUpgradeable {
         _mint(to, amount);
     }
 
-    // Added signature for RP
-    function burn(address from, uint256 amount) public onlyRole(MINTER_ROLE) {
-        _burn(from, amount);
+    function totalBurned() public view virtual returns (uint256) {
+        return _totalBurned;
+    }
+
+    function burn(uint256 amount) public virtual override(ERC20BurnableUpgradeable) {
+        _totalBurned += amount;
+        _burn(_msgSender(), amount);
+    }
+
+    function burnFrom(address account, uint256 amount) public virtual override(ERC20BurnableUpgradeable) {
+        _spendAllowance(account, _msgSender(), amount);
+        _totalBurned += amount;
+        _burn(account, amount);
     }
 
     function _mint(address to, uint256 amount) internal override(ERC20Upgradeable, ERC20CappedUpgradeable) {
+        require(super.totalSupply() + totalBurned() + amount <= cap(), "ERC20Capped: cap exceeded");
         super._mint(to, amount);
     }
 
