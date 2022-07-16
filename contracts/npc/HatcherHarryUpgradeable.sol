@@ -84,10 +84,10 @@ AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConsta
         PendingHatch storage ph = _pendingHatches[_msgSender()];
         _egg.hatch(_msgSender(), tokenIds);
 
-        pending.requestId = requestRandomWords(uint32(tokenIds.length));
-        pending.ids = tokenIds;
+        ph.requestId = requestRandomWords(uint32(tokenIds.length));
+        ph.ids = tokenIds;
 
-        _requestIdToAddress[pending.requestId] = _msgSender();
+        _requestIdToAddress[ph.requestId] = _msgSender();
         _pendingHatchAddresses.add(_msgSender());
     }
 
@@ -206,6 +206,22 @@ AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConsta
             ph = _evo.getPendingHatchFor(_address);
             migrated = true;
         }
+    }
+
+    function adminReIncubate(address _address, uint256[] memory tokenIds) public {
+        require(tokenIds.length <= 5, "Maximum 5 per hatch");
+
+        PendingHatch memory pending;
+        (pending,) = getPendingHatch(_address);
+        require(pending.requestId == 0, "Existing hatch in progress");
+
+        PendingHatch storage ph = _pendingHatches[_address];
+
+        ph.requestId = requestRandomWords(uint32(tokenIds.length));
+        ph.ids = tokenIds;
+
+        _requestIdToAddress[ph.requestId] = _address;
+        _pendingHatchAddresses.add(_address);
     }
 
     function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal override {

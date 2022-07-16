@@ -117,7 +117,7 @@ AccessControlEnumerableUpgradeable, OldTokenConstants, ERC721BlacklistUpgradeabl
     function safeMint(address to) internal {
         uint256 tokenId = _tokenIdCounter.current();
         require(startTime <= block.timestamp, "Mint has not started yet");
-        require(tokenId < cap, "Sold out");
+        require(tokenId <= cap, "Sold out");
 
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
