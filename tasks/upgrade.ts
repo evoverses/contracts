@@ -10,7 +10,9 @@ task("upgrade", "Upgrade a transparent proxy contract")
     await hre.run("compile")
     const Contract = await hre.ethers.getContractFactory(name)
     console.log("Upgrading", name)
-    const contract = await hre.upgrades.upgradeProxy(address, Contract)
+    const contract = await hre.upgrades.upgradeProxy(address, Contract, {
+        unsafeAllowRenames: true
+    })
     console.log(name, "upgraded!")
     const impl = await hre.upgrades.erc1967.getImplementationAddress(contract.address)
     const admin = await hre.upgrades.erc1967.getAdminAddress(contract.address)

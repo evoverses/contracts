@@ -14,7 +14,7 @@ abstract contract MarketplaceCounterUpgradable {
         return saleId;
     }
 
-    function currentSaleId() external returns (uint256) {
+    function currentSaleId() external view returns (uint256) {
         return _saleIdCounter.current();
     }
 

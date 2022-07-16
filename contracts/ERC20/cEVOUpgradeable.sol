@@ -10,7 +10,7 @@ import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeab
 import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableMapUpgradeable.sol";
 
 import "./extensions/ERC20BurnableUpgradeable.sol";
-import "../utils/TokenConstants.sol";
+import "../deprecated/OldTokenConstants.sol";
 import "./interfaces/IMintable.sol";
 
 /**
@@ -18,7 +18,7 @@ import "./interfaces/IMintable.sol";
 * @author @DirtyCajunRice
 */
 contract cEVOUpgradeable is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessControlUpgradeable,
-ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
+ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
 
     address private EVO;
@@ -40,6 +40,8 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
 
     mapping (address => uint256) public lockedOf;
 
+    mapping (address => uint256) public transferTime;
+
     modifier onlyWhitelist(address from, address to) {
         require(
             _globalWhitelist.contains(to)
@@ -50,6 +52,7 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
         );
         _;
     }
+
     event ClaimedDisbursement(address indexed from, uint256 amount);
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -149,7 +152,22 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
 
     function burnFrom(address account, uint256 amount) public virtual override(ERC20BurnableUpgradeable) {
         super.burnFrom(account, amount);
-        IMintable(EVO).burn(address(this), amount);
+        IMintable(EVO).burnFrom(address(this), amount);
+    }
+
+    function useLocked(address account, uint256 amount) public onlyRole(MINTER_ROLE) {
+        require(lockedOf[account] >= amount, "Insufficient locked balance");
+        lockedOf[account] -= amount;
+        _totalBurned += amount;
+        _burn(account, amount);
+        IMintable(EVO).burnFrom(address(this), amount);
+    }
+
+    function burnLocked() public onlyRole(MINTER_ROLE) {
+        uint256 amount = balanceOf(address(this));
+        _totalBurned += amount;
+        _burn(address(this), amount);
+        IMintable(EVO).burnFrom(address(this), amount);
     }
 
     function claimPending() public whenNotPaused {
@@ -187,6 +205,25 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
             }
         }
         return totalPending;
+    }
+
+    function moveLocked(address to) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        uint256 lockedFrom = lockedOf[_msgSender()];
+        require(lockedFrom > 0, "No balance");
+        if (!_globalWhitelist.contains(_msgSender()) || !_globalWhitelist.contains(to)) {
+            require(
+                transferTime[_msgSender()] < block.timestamp
+                && transferTime[to] < block.timestamp,
+                "Cooldown period has not elapsed"
+            );
+            transferTime[_msgSender()] = block.timestamp + 90 days;
+            transferTime[to] = block.timestamp + 90 days;
+        }
+        lockedOf[_msgSender()] = 0;
+        lockedOf[to] += lockedFrom;
+        _whitelist[_msgSender()].add(to);
+        _transfer(_msgSender(), to, lockedFrom);
+        _whitelist[_msgSender()].remove(to);
     }
 
     function addGlobalWhitelist(address to) public onlyRole(DEFAULT_ADMIN_ROLE) {

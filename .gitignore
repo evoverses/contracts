@@ -5,3 +5,4 @@ artifacts/build-info/
 *.dbg.json
 .env
 reference
+/artifacts/@chainlink/

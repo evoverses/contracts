@@ -12,6 +12,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 import "../../ERC20/interfaces/IcEVOUpgradeable.sol";
 import "../../ERC20/interfaces/IMintable.sol";
+import "./LockedTokenEscrow.sol";
 
 /**
 * @title Migration Mike Egress v1.1.0
@@ -31,11 +32,14 @@ ReentrancyGuardUpgradeable, PausableUpgradeable {
 
     EnumerableSetUpgradeable.AddressSet private burnable;
 
+    mapping (address => LockedTokenEscrow) public lockedEscrow;
+
     event BridgedToken(address indexed from, address indexed token, uint256 amount);
     event BridgedTokens(address indexed from, address[] indexed tokens, uint256[] amounts);
     event BridgedNFT(address indexed from, address indexed nft, uint256 id);
-    event BridgedNFTs(address indexed from, address[] indexed nfts, uint256[] ids);
+    event BridgedNFTs(address indexed from, address indexed nft, uint256[] ids);
     event BridgedDisbursement(address indexed from, uint256 startTime, uint256 duration, uint256 amount, uint256 balance);
+    event BridgedTokenWithLocked(address indexed from, address indexed token, uint256 unlocked, uint256 locked);
 
     modifier whenNotInMaintenance() {
         require(!maintenanceMode || hasRole(ADMIN_ROLE, _msgSender()), "Maintenance Mode");
@@ -91,18 +95,14 @@ ReentrancyGuardUpgradeable, PausableUpgradeable {
         emit BridgedNFT(_msgSender(), _nft, _id);
     }
 
-    function batchBridgeNFT(address[] memory _nfts, uint256[] memory _ids) public
+    function batchBridgeNFT(address _nft, uint256[] memory _ids) public
     whenNotPaused nonReentrant whenNotInMaintenance {
-        require(_nfts.length > 0, "Missing NFTs");
-        require(_nfts.length == _ids.length, "NFTs and ids must match");
-
-        for (uint256 i = 0; i < _nfts.length; i++) {
-            require(bridgeable[_nfts[i]], "Invalid NFT");
-            IERC721Upgradeable nft = IERC721Upgradeable(_nfts[i]);
-            nft.safeTransferFrom(_msgSender(), _BURN_ADDRESS, _ids[i]);
+        require(bridgeable[_nft], "Invalid NFT");
+        require(_ids.length > 0, "Missing Ids");
+        for (uint256 i = 0; i < _ids.length; i++) {
+            IERC721Upgradeable(_nft).safeTransferFrom(_msgSender(), _BURN_ADDRESS, _ids[i]);
         }
-
-        emit BridgedNFTs(_msgSender(), _nfts, _ids);
+        emit BridgedNFTs(_msgSender(), _nft, _ids);
     }
 
     function bridgeCEVODisbursement() public {
@@ -114,7 +114,22 @@ ReentrancyGuardUpgradeable, PausableUpgradeable {
         (startTime, duration, amount, balance) = cEVO.disbursementOf(_msgSender());
         cEVO.removeDisbursement(_msgSender(), 0);
         emit BridgedDisbursement(_msgSender(), startTime, duration, amount, balance);
+    }
 
+    function bridgeAllTokenWithLocked(address _token) public whenNotPaused nonReentrant whenNotInMaintenance {
+        require(bridgeable[_token], "Invalid token");
+        if (address(lockedEscrow[_msgSender()]) == address(0)) {
+            lockedEscrow[_msgSender()] = new LockedTokenEscrow(_msgSender(), _token);
+            return;
+        }
+        lockedEscrow[_msgSender()].setBalances();
+        uint256 unlocked;
+        uint256 locked;
+        (unlocked, locked) = lockedEscrow[_msgSender()].getBalances();
+        require(unlocked > 0 || locked > 0, "No locked tokens sent to contract");
+        lockedEscrow[_msgSender()].finalize();
+        lockedEscrow[_msgSender()] = LockedTokenEscrow(address(0));
+        emit BridgedTokenWithLocked(_msgSender(), _token, unlocked, locked);
     }
 
     function enableAsset(address _address) public onlyRole(ADMIN_ROLE) {

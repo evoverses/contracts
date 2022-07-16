@@ -25,8 +25,9 @@ contract MigrationMikeIngressUpgradeable is Initializable, AccessControlUpgradea
     event BridgedToken(address indexed from, address indexed token, uint256 amount);
     event BridgedTokens(address indexed from, address[] indexed tokens, uint256[] amounts);
     event BridgedNFT(address indexed from, address indexed nft, uint256 id);
-    event BridgedNFTs(address indexed from, address[] indexed nfts, uint256[] ids);
+    event BridgedNFTs(address indexed from, address indexed nft, uint256[] ids);
     event BridgedDisbursement(address indexed from, uint256 startTime, uint256 duration, uint256 amount, uint256 balance);
+    event BridgedTokenWithLocked(address indexed from, address indexed token, uint256 unlocked, uint256 locked);
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -63,20 +64,14 @@ contract MigrationMikeIngressUpgradeable is Initializable, AccessControlUpgradea
 
     function bridgeNFT(address to, address _nft, uint256 _id) public whenNotPaused onlyRole(RELAYER_ROLE) {
         require(bridgeable[_nft], "Invalid asset");
-        IMintable(_nft).bridgeMint(to, _id);
+        IMintable(_nft).mint(to, _id);
         emit BridgedNFT(to, _nft, _id);
     }
 
-    function batchBridgeNFT(address to, address[] memory _nfts, uint256[] memory _ids) public whenNotPaused onlyRole(RELAYER_ROLE) {
-        require(_nfts.length > 0, "Missing NFTs");
-        require(_nfts.length == _ids.length, "NFTs and ids must match");
-
-        for (uint256 i = 0; i < _nfts.length; i++) {
-            require(bridgeable[_nfts[i]], "Invalid NFT");
-            IMintable(_nfts[i]).bridgeMint(to, _ids[i]);
-        }
-
-        emit BridgedNFTs(to, _nfts, _ids);
+    function batchBridgeNFT(address to, address _nft, uint256[] memory _ids) public whenNotPaused onlyRole(RELAYER_ROLE) {
+        require(bridgeable[_nft], "Invalid NFT");
+        IMintable(_nft).batchMint(to, _ids);
+        emit BridgedNFTs(to, _nft, _ids);
     }
 
     function bridgeCEVODisbursement(address to, uint256 startTime, uint256 duration, uint256 amount, uint256 balance) public whenNotPaused onlyRole(RELAYER_ROLE) {

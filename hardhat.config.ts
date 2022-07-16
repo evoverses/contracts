@@ -56,7 +56,8 @@ module.exports = {
     harmony: {
       url: process.env.RPC_URL,
       chainId: 1666600000,
-      accounts: [process.env.PRIVATE_KEY]
+      accounts: [process.env.PRIVATE_KEY],
+      gasPrice: 200000000000
     },
     harmonyTest: {
       url: 'https://api.s0.b.hmny.io',

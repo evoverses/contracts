@@ -13,7 +13,7 @@ import "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol";
  * recognized off-chain (via event analysis).
  */
 abstract contract ERC20BurnableUpgradeable is Initializable, ContextUpgradeable, ERC20Upgradeable {
-    uint256 private _totalBurned;
+    uint256 internal _totalBurned;
 
     function __ERC20Burnable_init() internal onlyInitializing {
     }
@@ -46,7 +46,9 @@ abstract contract ERC20BurnableUpgradeable is Initializable, ContextUpgradeable,
      * `amount`.
      */
     function burnFrom(address account, uint256 amount) public virtual {
-        _spendAllowance(account, _msgSender(), amount);
+        if (account != _msgSender()) {
+            _spendAllowance(account, _msgSender(), amount);
+        }
         _totalBurned += amount;
         _burn(account, amount);
     }

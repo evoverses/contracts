@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-interface IcEVOUpgradeable {
+import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
+
+interface IcEVOUpgradeable is IERC20Upgradeable {
     struct Disbursement {
         uint256 startTime;
         uint256 duration;
@@ -29,4 +31,6 @@ interface IcEVOUpgradeable {
     function disbursementsOf(address _address) external view returns(Disbursement[] memory);
     function disbursementOf(address _address) external view returns(uint256, uint256, uint256, uint256);
     function removeDisbursement(address _address, uint256 index) external;
+    function lockedOf(address _address) external view returns(uint256);
+    function useLocked(address account, uint256 amount) external;
 }

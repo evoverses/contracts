@@ -29,31 +29,32 @@ contract xEVOUpgradeable is Initializable, PausableUpgradeable, AccessControlUpg
         _grantRole(PAUSER_ROLE, _msgSender());
         _grantRole(CONTRACT_ROLE, _msgSender());
 
-        EVO = ERC20Upgradeable(0x5b747e23a9E4c509dd06fbd2c0e3cB8B846e398F);
+        EVO = ERC20Upgradeable(0x42006Ab57701251B580bDFc24778C43c9ff589A1);
     }
 
     function deposit(uint256 amount) public whenNotPaused {
-        uint256 balance = EVO.balanceOf(address(this));
+        uint256 totalGovernanceToken = EVO.balanceOf(address(this));
 
-        uint256 total = totalSupply();
+        uint256 totalShares = totalSupply();
+
+        if (totalShares == 0 || totalGovernanceToken == 0) {
+            _mint(_msgSender(), amount);
+        } else {
+            uint256 what = amount * totalShares / totalGovernanceToken;
+            _mint(_msgSender(), what);
+        }
 
         EVO.transferFrom(_msgSender(), address(this), amount);
-
-        uint256 due = (total == 0 || balance == 0) ? amount : amount * total / balance;
-
-        _mint(_msgSender(), due);
     }
 
-    function withdraw(uint256 amount) public {
-        uint256 balance = EVO.balanceOf(address(this));
+    function withdraw(uint256 amount) public whenNotPaused {
+        uint256 totalShares = totalSupply();
 
-        uint256 total = totalSupply();
+        uint256 what = amount * EVO.balanceOf(address(this)) / totalShares;
 
-        uint256 due = amount * balance / total;
+        _burn(_msgSender(), amount);
 
-        _burn(_msgSender(), due);
-
-        EVO.transfer(_msgSender(), due);
+        EVO.transfer(_msgSender(), what);
     }
 
     function pause() public onlyRole(PAUSER_ROLE) {
@@ -62,5 +63,9 @@ contract xEVOUpgradeable is Initializable, PausableUpgradeable, AccessControlUpg
 
     function unpause() public onlyRole(PAUSER_ROLE) {
         _unpause();
+    }
+
+    function setBaseToken(address _address) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        EVO = ERC20Upgradeable(_address);
     }
 }

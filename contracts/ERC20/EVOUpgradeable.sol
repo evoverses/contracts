@@ -60,7 +60,9 @@ PausableUpgradeable, AccessControlUpgradeable, ERC20PermitUpgradeable {
     }
 
     function burnFrom(address account, uint256 amount) public virtual override(ERC20BurnableUpgradeable) {
-        _spendAllowance(account, _msgSender(), amount);
+        if (account != _msgSender()) {
+            _spendAllowance(account, _msgSender(), amount);
+        }
         _totalBurned += amount;
         _burn(account, amount);
     }

@@ -9,15 +9,19 @@ import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 import "./extensions/ERC20BurnableUpgradeable.sol";
-import "../utils/TokenConstants.sol";
+import "../deprecated/OldTokenConstants.sol";
 import "./interfaces/IMintable.sol";
+
+interface IMasterInvestor {
+    function withdraw(uint256 _pid, uint256 _amount, address _address) external;
+}
 
 /**
 * @title Vesting EVO v1.0.0
 * @author @DirtyCajunRice
 */
 contract vEVOUpgradeable is Initializable, ERC20Upgradeable, PausableUpgradeable, ERC20PermitUpgradeable,
-AccessControlUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
+AccessControlUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
 
     uint256 public GENESIS_TIMESTAMP;
@@ -39,10 +43,11 @@ AccessControlUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
     modifier onlyWhitelist(address from, address to) {
         require(
             _globalWhitelist.contains(to)
+            || _globalWhitelist.contains(from)
             || _whitelist[from].contains(to)
             || from == address(0)
             || to == address(0),
-            "cEVO is non-transferable"
+            "vEVO is non-transferable"
         );
         _;
     }
@@ -141,8 +146,20 @@ AccessControlUpgradeable, ERC20BurnableUpgradeable, TokenConstants {
 
         _claimedBalances[_msgSender()] += pending;
         _burn(_msgSender(), pending);
-        ERC20Upgradeable(EVO).transferFrom(address(this), _msgSender(), pending);
+        ERC20Upgradeable(EVO).transfer(_msgSender(), pending);
 
+        emit Claimed(_msgSender(), pending);
+    }
+
+    function claimPendingFromInvestor() public whenNotPaused {
+        uint256 pending = _calculatePending(_msgSender());
+        if (OMEGA_TIMESTAMP <= block.timestamp) {
+            pending = _initialBalances[_msgSender()] - _claimedBalances[_msgSender()];
+        }
+        IMasterInvestor(0xD782Cf9F04E24CAe4953679EBF45ba34509F105C).withdraw(1, pending, _msgSender());
+        _burn(_msgSender(), pending);
+        _claimedBalances[_msgSender()] += pending;
+        ERC20Upgradeable(EVO).transfer(_msgSender(), pending);
         emit Claimed(_msgSender(), pending);
     }
 

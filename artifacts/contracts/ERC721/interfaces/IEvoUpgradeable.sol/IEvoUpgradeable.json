@@ -1,0 +1,312 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IEvoUpgradeable",
+  "sourceName": "contracts/ERC721/interfaces/IEvoUpgradeable.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "species",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "generation",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "experience",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "gender",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "rarity",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "primaryType",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "secondaryType",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "nature",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct IEvoStructsUpgradeable.Stats",
+              "name": "stats",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "health",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "attack",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "defense",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "special",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "resistance",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "speed",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct IEvoStructsUpgradeable.BattleStats",
+              "name": "battle",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "total",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "remaining",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct IEvoStructsUpgradeable.Summons",
+              "name": "summons",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct IEvoStructsUpgradeable.Evo[]",
+          "name": "evos",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "batchMint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "clearPendingHatch",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "getPendingHatchFor",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256[]",
+              "name": "ids",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "requestId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "words",
+              "type": "uint256[]"
+            }
+          ],
+          "internalType": "struct IEvoStructsUpgradeable.PendingHatch",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "species",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "generation",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "experience",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "gender",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "rarity",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "primaryType",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "secondaryType",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "nature",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct IEvoStructsUpgradeable.Stats",
+              "name": "stats",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "health",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "attack",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "defense",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "special",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "resistance",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "speed",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct IEvoStructsUpgradeable.BattleStats",
+              "name": "battle",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "total",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "remaining",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct IEvoStructsUpgradeable.Summons",
+              "name": "summons",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct IEvoStructsUpgradeable.Evo",
+          "name": "evo",
+          "type": "tuple"
+        }
+      ],
+      "name": "mint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

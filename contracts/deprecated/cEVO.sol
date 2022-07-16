@@ -196,6 +196,12 @@ contract cEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessCon
         balance = disbursements[_address][0].balance;
     }
 
+    function moveLocked(address from, address to) public onlyRole(MINTER_ROLE) {
+        uint256 lockedFrom = lockedOf[from];
+        lockedOf[from] = 0;
+        lockedOf[to] += lockedFrom;
+    }
+
     function _beforeTokenTransfer(address from, address to, uint256 amount)
     internal whenNotPaused override onlyWhitelist(from, to) {
         super._beforeTokenTransfer(from, to, amount);
