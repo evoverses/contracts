@@ -75,10 +75,13 @@ AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConsta
     }
 
     function incubate(uint256[] memory tokenIds) public {
-        PendingHatch storage pending = _pendingHatches[_msgSender()];
-        require(pending.requestId == 0, "Existing hatch in progress");
         require(tokenIds.length <= 5, "Maximum 5 per hatch");
 
+        PendingHatch memory pending;
+        (pending,) = getPendingHatch(_msgSender());
+        require(pending.requestId == 0, "Existing hatch in progress");
+
+        PendingHatch storage ph = _pendingHatches[_msgSender()];
         _egg.hatch(_msgSender(), tokenIds);
 
         pending.requestId = requestRandomWords(uint32(tokenIds.length));
@@ -89,15 +92,15 @@ AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConsta
     }
 
     function hatch() external {
-        PendingHatch memory ph = _pendingHatches[_msgSender()];
-        bool migrated = false;
-        if (ph.requestId == 0) {
-            ph = _evo.getPendingHatchFor(_msgSender());
-            migrated = true;
-        }
+        PendingHatch memory ph;
+        bool migrated;
+        (ph, migrated)= getPendingHatch(_msgSender());
+
         require(ph.requestId > 0, "No pending hatch in progress");
         require(ph.words.length > 0, "Results still pending");
-        _evo.batchMint(_msgSender(), _hatch(ph));
+
+        Evo[] memory evo = _hatch(ph);
+        _evo.batchMint(_msgSender(), evo);
 
         if (migrated) {
             _evo.clearPendingHatch(_msgSender());
@@ -119,17 +122,15 @@ AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConsta
 
         for (uint256 i = 0; i < ph.ids.length; i++) {
             uint256 tokenId = ph.ids[i];
-            uint256[] memory randomChunks = chunkWord(ph.words[i], 10_000);
+            uint256[] memory randomChunks = chunkWord(ph.words[i], 10_000, 14);
             uint256 speciesId = speciesRoll(randomChunks[0], minRarity, speciesIds, totalRarity);
             evo[i] = geneRoll(tokenId, treated[i], speciesId, randomChunks);
         }
     }
 
     function simulateHatch(address _address) public view onlyRole(ADMIN_ROLE) returns(Evo[] memory) {
-        PendingHatch memory ph = _pendingHatches[_address];
-        if (ph.requestId == 0) {
-            ph = _evo.getPendingHatchFor(_address);
-        }
+        PendingHatch memory ph;
+        (ph,) = getPendingHatch(_address);
         return _hatch(ph);
     }
 
@@ -196,6 +197,15 @@ AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConsta
             ph = _evo.getPendingHatchFor(_msgSender());
         }
         return (ph.requestId != 0, ph.words.length > 0, ph.ids);
+    }
+
+    function getPendingHatch(address _address) public view returns(PendingHatch memory ph, bool migrated) {
+        ph = _pendingHatches[_address];
+        migrated = false;
+        if (ph.requestId == 0) {
+            ph = _evo.getPendingHatchFor(_address);
+            migrated = true;
+        }
     }
 
     function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal override {

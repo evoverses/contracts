@@ -45,15 +45,13 @@ abstract contract ChainlinkVRFConsumerUpgradeableV2 is Initializable, VRFConsume
 
     function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal virtual override;
 
-    function chunkWord(uint256 word, uint256 modulus) internal pure returns(uint256[] memory) {
-        uint256[] memory chunks;
-        uint256 chunkId = 0;
+    function chunkWord(uint256 word, uint256 modulus, uint256 chunkCount) internal pure returns(uint256[] memory) {
+        uint256[] memory chunks = new uint256[](chunkCount);
         uint256 number = word;
-        while (number > 0) {
+        for (uint256 i = 0; i < chunkCount; i++) {
             uint256 chunk = uint256(number % modulus);
             number = number / modulus;
-            chunks[chunkId] = chunk;
-            chunkId++;
+            chunks[i] = chunk;
         }
         return chunks;
     }
