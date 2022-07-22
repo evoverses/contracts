@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 
 import "./MarketplaceConstantsUpgradeable.sol";
 
-abstract contract MarketplaceBidTokensUpgradeable is Initializable, AccessControlUpgradeable, MarketplaceConstantsUpgradeable {
+abstract contract MarketplaceBidTokensUpgradeable is
+Initializable, AccessControlEnumerableUpgradeable, MarketplaceConstantsUpgradeable {
     using AddressUpgradeable for address;
 
     mapping(address => address) internal bidToken;
@@ -15,7 +16,7 @@ abstract contract MarketplaceBidTokensUpgradeable is Initializable, AccessContro
     event MarketplaceBidTokenConfigured(address indexed contractAddress, address indexed bidTokenAddress);
 
     function __MarketplaceBidTokens_init() internal onlyInitializing {
-        __AccessControl_init();
+        __AccessControlEnumerable_init();
     }
 
     function setMarketplaceBidToken(address contractAddress, address bidTokenAddress) external onlyRole(UPDATER_ROLE) {

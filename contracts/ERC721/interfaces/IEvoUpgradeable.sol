@@ -8,4 +8,6 @@ interface IEvoUpgradeable is IEvoStructsUpgradeable {
     function batchMint(address _address, Evo[] memory evos) external;
     function getPendingHatchFor(address _address) external view returns(PendingHatch memory);
     function clearPendingHatch(address _address) external;
+    function batchSetAttribute(uint256 tokenId, uint256[] memory attributeIds, uint256[] memory values) external;
+    function batchAddToAttribute(uint256 tokenId, uint256[] memory attributeIds, uint256[] memory values) external;
 }

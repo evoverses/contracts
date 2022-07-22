@@ -207,7 +207,7 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
         return totalPending;
     }
 
-    function moveLocked(address to) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    function transferAllDisbursements(address to) public {
         uint256 lockedFrom = lockedOf[_msgSender()];
         require(lockedFrom > 0, "No balance");
         if (!_globalWhitelist.contains(_msgSender()) || !_globalWhitelist.contains(to)) {
@@ -221,8 +221,13 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
         }
         lockedOf[_msgSender()] = 0;
         lockedOf[to] += lockedFrom;
+
+        for (uint256 i = 0; i < disbursements[_msgSender()].length; i++) {
+            disbursements[to].push(disbursements[_msgSender()][i]);
+        }
+        delete disbursements[_msgSender()];
         _whitelist[_msgSender()].add(to);
-        _transfer(_msgSender(), to, lockedFrom);
+        _transfer(_msgSender(), to, balanceOf(_msgSender()));
         _whitelist[_msgSender()].remove(to);
     }
 
@@ -232,6 +237,10 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
 
     function addWhitelist(address from, address to) public onlyRole(DEFAULT_ADMIN_ROLE) {
         _whitelist[from].add(to);
+    }
+
+    function resetTransferTimeOf(address _address) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        transferTime[_address] = 0;
     }
 
     function disbursementsOf(address _address) public view returns(Disbursement[] memory) {

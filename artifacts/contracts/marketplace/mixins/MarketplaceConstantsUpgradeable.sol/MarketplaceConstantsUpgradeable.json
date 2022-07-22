@@ -5,7 +5,7 @@
   "abi": [
     {
       "inputs": [],
-      "name": "PAUSER_ROLE",
+      "name": "ADMIN_ROLE",
       "outputs": [
         {
           "internalType": "bytes32",

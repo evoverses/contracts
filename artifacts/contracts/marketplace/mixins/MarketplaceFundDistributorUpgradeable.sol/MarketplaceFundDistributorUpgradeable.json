@@ -22,6 +22,32 @@
         {
           "indexed": true,
           "internalType": "uint256",
+          "name": "feeBurned",
+          "type": "uint256"
+        }
+      ],
+      "name": "MarketplaceFeeBurnedUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "feeReflected",
+          "type": "uint256"
+        }
+      ],
+      "name": "MarketplaceFeeReflectedUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
           "name": "fee",
           "type": "uint256"
         }
@@ -119,7 +145,7 @@
     },
     {
       "inputs": [],
-      "name": "DEFAULT_ADMIN_ROLE",
+      "name": "ADMIN_ROLE",
       "outputs": [
         {
           "internalType": "bytes32",
@@ -132,7 +158,7 @@
     },
     {
       "inputs": [],
-      "name": "PAUSER_ROLE",
+      "name": "DEFAULT_ADMIN_ROLE",
       "outputs": [
         {
           "internalType": "bytes32",
@@ -184,6 +210,55 @@
     },
     {
       "inputs": [],
+      "name": "getMarketplaceFeeBurned",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMarketplaceFeeReflected",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMarketplaceFees",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "getMarketplaceRoyaltyPercent",
       "outputs": [
         {
@@ -222,6 +297,49 @@
           "internalType": "bytes32",
           "name": "",
           "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getRoleMember",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRoleMemberCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -327,6 +445,32 @@
         }
       ],
       "name": "setMarketplaceFee",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "feeBurned",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMarketplaceFeeBurned",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "feeReflected",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMarketplaceFeeReflected",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

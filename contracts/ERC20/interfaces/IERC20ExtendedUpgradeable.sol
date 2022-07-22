@@ -9,5 +9,6 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 interface IERC20ExtendedUpgradeable is IERC20Upgradeable {
     function cap() external view returns (uint256);
     function mint(address to, uint256 amount) external;
+    function burn(uint256 amount) external;
     function burn(address account, uint256 amount) external;
 }

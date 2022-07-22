@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
+import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 
 import "./MarketplaceConstantsUpgradeable.sol";
 
-abstract contract MarketplaceRoyaltiesUpgradeable is Initializable, AccessControlUpgradeable, MarketplaceConstantsUpgradeable {
+abstract contract MarketplaceRoyaltiesUpgradeable is Initializable, AccessControlEnumerableUpgradeable, MarketplaceConstantsUpgradeable {
 
     struct Recipient {
         address _address;
@@ -24,7 +24,7 @@ abstract contract MarketplaceRoyaltiesUpgradeable is Initializable, AccessContro
     function __MarketplaceRoyalties_init(uint256 maxRoyaltyPercent) internal onlyInitializing {
         require(maxRoyaltyPercent <= MAX_FEE, "MarketplaceRoyaltiesUpgradeable: Royalty > 10%");
         _maxRoyaltyPercent = maxRoyaltyPercent;
-        __AccessControl_init();
+        __AccessControlEnumerable_init();
     }
 
     function getMarketplaceRoyaltyPercent() external view returns (uint256) {

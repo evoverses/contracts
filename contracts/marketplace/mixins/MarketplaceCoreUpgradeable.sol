@@ -1,30 +1,30 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/IERC721Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol";
-
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
-
-import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/IERC721Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 
-import "./MarketplaceCounterUpgradable.sol";
-import "./MarketplaceBidTokensUpgradeable.sol";
+import "../../ERC20/interfaces/IERC20ExtendedUpgradeable.sol";
 import "./MarketplaceFundDistributorUpgradeable.sol";
 import "./MarketplaceAuctionConfigUpgradeable.sol";
-
+import "./MarketplaceBidTokensUpgradeable.sol";
+import "./MarketplaceCounterUpgradable.sol";
 import "../libraries/ArraysUpgradeable.sol";
 
 abstract contract MarketplaceCoreUpgradeable is
-Initializable, AccessControlUpgradeable, ReentrancyGuardUpgradeable, MarketplaceCounterUpgradable,
+Initializable, AccessControlEnumerableUpgradeable, ReentrancyGuardUpgradeable, MarketplaceCounterUpgradable,
 MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, MarketplaceAuctionConfigUpgradeable {
+    using EnumerableSetUpgradeable for EnumerableSetUpgradeable.UintSet;
+    using SafeERC20Upgradeable for IERC20ExtendedUpgradeable;
     using ArraysUpgradeable for uint256[];
     using AddressUpgradeable for address;
-    using SafeERC20Upgradeable for IERC20Upgradeable;
 
     enum SaleType {
         AUCTION,
@@ -54,6 +54,7 @@ MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, Marketpl
     }
 
     mapping(uint256 => Sale) internal _sales;
+    EnumerableSetUpgradeable.UintSet private _saleIds;
 
     event SaleCreated(
         uint256 indexed saleId,
@@ -110,16 +111,30 @@ MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, Marketpl
     );
 
     function __MarketplaceCore_init(
-        uint256 maxRoyaltyPercent,
-        uint256 fee,
+        uint256 maxRoyaltyBps,
+        uint256 marketFeeBps,
+        uint256 marketFeeBurnedBps,
+        uint256 marketFeeReflectedBps,
         address treasury,
-        uint256 nexBidPercent
+        address bank,
+        uint256 nexBidPercentBps
     ) internal onlyInitializing {
-        __AccessControl_init();
+        __AccessControlEnumerable_init();
         __ReentrancyGuard_init();
         __MarketplaceBidTokens_init();
-        __MarketplaceFundDistributor_init(maxRoyaltyPercent, fee, treasury);
-        __MarketplaceAuctionConfig_init(nexBidPercent);
+        __MarketplaceFundDistributor_init(
+            maxRoyaltyBps,
+            marketFeeBps,
+            marketFeeBurnedBps,
+            marketFeeReflectedBps,
+            treasury,
+            bank
+        );
+        __MarketplaceAuctionConfig_init(nexBidPercentBps);
+
+        _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
+        _grantRole(ADMIN_ROLE, _msgSender());
+        _grantRole(UPDATER_ROLE, _msgSender());
     }
 
     function _transferAssets(
@@ -213,7 +228,7 @@ MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, Marketpl
 
         _transferAssets(sale.tokenType, sale.contractAddress, address(this), sale.seller, sale.tokenIds, sale.values);
         if (sale.bidder != address(0)) {
-            IERC20Upgradeable(sale.bidToken).safeTransfer(sale.bidder, sale.bidAmount);
+            IERC20ExtendedUpgradeable(sale.bidToken).safeTransfer(sale.bidder, sale.bidAmount);
         }
 
         emit SaleCanceled(saleId, reason);
@@ -230,7 +245,7 @@ MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, Marketpl
 
         _transferAssets(sale.tokenType, sale.contractAddress, address(this), sale.seller, sale.tokenIds, sale.values);
         if (sale.bidder != address(0)) {
-            IERC20Upgradeable(sale.bidToken).safeTransfer(sale.bidder, sale.bidAmount);
+            IERC20ExtendedUpgradeable(sale.bidToken).safeTransfer(sale.bidder, sale.bidAmount);
         }
 
         emit SaleCanceled(saleId, reason);
@@ -269,7 +284,7 @@ MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, Marketpl
             sale.endTime = block.timestamp + sale.extensionDuration;
         }
 
-        IERC20Upgradeable bidToken = IERC20Upgradeable(sale.bidToken);
+        IERC20ExtendedUpgradeable bidToken = IERC20ExtendedUpgradeable(sale.bidToken);
         bidToken.safeTransferFrom(_msgSender(), address(this), bidAmount);
         if (prevBidder != address(0)){
             bidToken.safeTransfer(prevBidder, prevBidAmount);
@@ -308,7 +323,7 @@ MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, Marketpl
 
         address from = _msgSender();
 
-        IERC20Upgradeable(sale.bidToken).safeTransferFrom(_msgSender(), address(this), sale.bidAmount);
+        IERC20ExtendedUpgradeable(sale.bidToken).safeTransferFrom(_msgSender(), address(this), sale.bidAmount);
         _transferAssets(sale.tokenType, sale.contractAddress, address(this), from, sale.tokenIds, sale.values);
 
         (uint256 royalty, uint256 marketFee, uint256 sellerRev) = _distributeFunds(
@@ -361,7 +376,7 @@ MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, Marketpl
         uint256 saleId = _getSaleId();
         _sales[saleId] = sale;
 
-        IERC20Upgradeable IbidToken = IERC20Upgradeable(sale.bidToken);
+        IERC20ExtendedUpgradeable IbidToken = IERC20ExtendedUpgradeable(sale.bidToken);
         IbidToken.safeTransferFrom(_msgSender(), address(this), sale.bidAmount);
 
         emit SaleCreated(
@@ -388,7 +403,7 @@ MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, Marketpl
 
         delete _sales[saleId];
 
-        IERC20Upgradeable(sale.bidToken).safeTransfer(sale.bidder, sale.bidAmount);
+        IERC20ExtendedUpgradeable(sale.bidToken).safeTransfer(sale.bidder, sale.bidAmount);
 
         emit SaleCanceled(saleId, "");
     }
@@ -408,6 +423,19 @@ MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, Marketpl
         );
 
         emit OfferFinalized(saleId, sale.seller, sale.bidder, royalty, marketFee, sellerRev);
+    }
+
+    function activeSaleIds() public view returns (uint256[] memory) {
+        return _saleIds.values();
+    }
+
+    function activeSales() public view returns (Sale[] memory) {
+        uint256[] memory saleIds = _saleIds.values();
+        Sale[] memory sales = new Sale[](saleIds.length);
+        for (uint256 i = 0; i < saleIds.length; i++) {
+            sales[i] = _sales[saleIds[i]];
+        }
+        return sales;
     }
 
     uint256[49] private __gap;

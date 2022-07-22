@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 import "./MarketplaceConstantsUpgradeable.sol";
 
-abstract contract MarketplaceAuctionConfigUpgradeable is Initializable, AccessControlUpgradeable, MarketplaceConstantsUpgradeable {
+abstract contract MarketplaceAuctionConfigUpgradeable is
+Initializable, AccessControlEnumerableUpgradeable, MarketplaceConstantsUpgradeable {
     uint256 internal extensionSeconds;
     uint256 internal _nexBidPercent;
 
@@ -16,7 +17,7 @@ abstract contract MarketplaceAuctionConfigUpgradeable is Initializable, AccessCo
     );
 
     function __MarketplaceAuctionConfig_init(uint256 nexBidPercent) internal onlyInitializing {
-        __AccessControl_init();
+        __AccessControlEnumerable_init();
         _nexBidPercent = nexBidPercent;
     }
 

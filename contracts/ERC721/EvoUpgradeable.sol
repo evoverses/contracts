@@ -109,9 +109,24 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
         _attributes[tokenId].set(attributeId, value);
     }
 
-    function batchSetAttribute(uint256 tokenId, uint256[] memory attributeIds, uint256[] memory values) public onlyRole(MINTER_ROLE) {
+    function batchSetAttribute(
+        uint256 tokenId,
+        uint256[] memory attributeIds,
+        uint256[] memory values
+    ) public onlyRole(MINTER_ROLE) {
         for (uint256 i = 0; i < attributeIds.length; i++) {
             _attributes[tokenId].set(attributeIds[i], values[i]);
+        }
+    }
+
+    function batchAddToAttribute(
+        uint256 tokenId,
+        uint256[] memory attributeIds,
+        uint256[] memory values
+    ) public onlyRole(MINTER_ROLE) {
+        for (uint256 i = 0; i < attributeIds.length; i++) {
+            uint256 value = _attributes[tokenId].get(attributeIds[i]);
+            _attributes[tokenId].set(attributeIds[i], value + values[i]);
         }
     }
 
