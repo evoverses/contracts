@@ -6,7 +6,7 @@ import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-import "../deprecated/OldTokenConstants.sol";
+import "../../deprecated/OldTokenConstants.sol";
 import "./VRFConsumerBaseV2.sol";
 
 abstract contract ChainlinkVRFConsumerUpgradeable is Initializable, VRFConsumerBaseV2Upgradeable,

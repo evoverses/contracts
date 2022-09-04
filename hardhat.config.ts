@@ -87,7 +87,10 @@ module.exports = {
     avalanche: {
       url: 'https://ava-mainnet.public.blastapi.io/ext/bc/C/rpc',
       chainId: 43114,
-      accounts: [process.env.PRIVATE_KEY]
+      accounts: [
+        process.env.PRIVATE_KEY,
+        process.env.PROXY_WALLET
+      ]
     },
     cronos: {
       url: 'https://evm.cronos.org',

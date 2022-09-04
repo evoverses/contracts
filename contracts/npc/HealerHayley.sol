@@ -7,7 +7,7 @@ import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 import "../ERC721/interfaces/IEvoStructsUpgradeable.sol";
-import "../utils/ChainlinkVRFConsumerUpgradeableV2.sol";
+import "../utils/chainlink/ChainlinkVRFConsumerUpgradeableV2.sol";
 import "../ERC721/interfaces/IEvoUpgradeable.sol";
 import "../utils/constants/NpcConstants.sol";
 

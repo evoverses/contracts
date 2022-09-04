@@ -241,6 +241,17 @@ AccessControlEnumerableUpgradeable, OldTokenConstants, ERC721BlacklistUpgradeabl
         }
     }
 
+    function transferTeamEgg(address from, address to, uint256 tokenId) public onlyRole(ADMIN_ROLE) {
+        require(tokenId <= 50);
+        _transfer(from, to, tokenId);
+    }
+
+    function transferTeamEggs(address from, address to, uint256[] memory tokenIds) public onlyRole(ADMIN_ROLE) {
+        for (uint256 i = 0; i < tokenIds.length; i++) {
+            require(tokenIds[i] <= 50);
+            _transfer(from, to, tokenIds[i]);
+        }
+    }
     /**
     * @notice Pause token upgrades and transfers
     *

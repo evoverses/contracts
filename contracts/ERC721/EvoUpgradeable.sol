@@ -12,7 +12,7 @@ import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/Base64Upgradeable.sol";
 
 import "./extensions/ERC721EnumerableExtendedUpgradeable.sol";
-import "../utils/ChainlinkVRFConsumerUpgradeable.sol";
+import "../utils/chainlink/ChainlinkVRFConsumerUpgradeable.sol";
 import "./extensions/ERC721BlacklistUpgradeable.sol";
 import "./extensions/ERC721BurnableUpgradeable.sol";
 import "./interfaces/IEvoEggUpgradeable.sol";
@@ -161,10 +161,10 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
         uint256 generation = _attributes[tokenId].get(3);
 
         return string(abi.encodePacked(
-                '{"trait_type": "Species", "value": "',  species, '"},',
-                '{"trait_type": "Rarity", "value": "',  rarity, '"},',
-                '{"trait_type": "Gender", "value": "',  gender, '"},',
-                '{"trait_type": "Generation", "value": ',  generation.toString(), '},'
+                '{"trait_type":"Species","value":"',  species, '"},',
+                '{"trait_type":"Rarity","value":"',  rarity, '"},',
+                '{"trait_type":"Gender","value":"',  gender, '"},',
+                '{"trait_type":"Generation","value":',  generation.toString(), '},'
             ));
     }
 
@@ -174,11 +174,11 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
         uint256 breedCount = _attributes[tokenId].get(6);
         uint256 experience = _attributes[tokenId].get(7);
         return string(abi.encodePacked(
-                '{"trait_type": "Primary Type", "value": "',  primaryType, '"},',
-                '{"trait_type": "Secondary Type", "value": "',  secondaryType, '"},',
-                '{"trait_type": "Breed Count", "value": ',  '0', '},',
-                '{"trait_type": "Available Breeds", "value": ',  '-1', '},',
-                '{"trait_type": "Experience", "value": ',  experience.toString(), '},'
+                '{"trait_type":"Primary Type","value":"',  primaryType, '"},',
+                '{"trait_type":"Secondary Type","value":"',  secondaryType, '"},',
+                '{"trait_type":"Breed Count","value":',  '0', '},',
+                '{"trait_type":"Available Breeds","value":',  '-1', '},',
+                '{"trait_type":"Experience","value":',  experience.toString(), '},'
             ));
     }
 
@@ -190,14 +190,14 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
         uint256 specialDefense = _attributes[tokenId].get(12);
         uint256 speed = _attributes[tokenId].get(13);
         bytes memory attributesA = abi.encodePacked(
-            '{"trait_type": "Nature", "value": "',  nature, '"},',
-            '{"trait_type": "Attack", "value": ',  attack.toString(), '},',
-            '{"trait_type": "Defense", "value": ',  defense.toString(), '},'
+            '{"trait_type":"Nature","value":"',  nature, '"},',
+            '{"trait_type":"Attack","value":',  attack.toString(), '},',
+            '{"trait_type":"Defense","value":',  defense.toString(), '},'
         );
         bytes memory attributesB = abi.encodePacked(
-            '{"trait_type": "Special", "value": ',  special.toString(), '},',
-            '{"trait_type": "Special Defense", "value": ',  specialDefense.toString(), '},',
-            '{"trait_type": "Speed", "value": ',  speed.toString(), '}'
+            '{"trait_type":"Special","value":',  special.toString(), '},',
+            '{"trait_type":"Special Defense","value":',  specialDefense.toString(), '},',
+            '{"trait_type":"Speed","value":',  speed.toString(), '}'
         );
         return string(abi.encodePacked(attributesA, attributesB));
     }
@@ -218,10 +218,10 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
         string memory animationURI = string(abi.encodePacked(animationBaseURI, tokenId.toString()));
 
         string memory dataURIGeneral = string(abi.encodePacked(
-                '"name": "', species, ' #', tokenId.toString(), '",',
-                '"description": "EvoVerses Evo",',
-                '"image": "', imageURI, '.png",',
-                '"animation_url": "', animationURI, '",'
+                '"name":"', species, ' #', tokenId.toString(), '",',
+                '"description":"EvoVerses Evo",',
+                '"image":"', imageURI, '.png",',
+                '"animation_url":"', animationURI, '",'
             ));
         string memory attributesURI = getAttributesURI(tokenId);
         bytes memory dataURI = abi.encodePacked('{', dataURIGeneral, attributesURI, '}');
@@ -232,6 +232,30 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
         string[] memory uris = new string[](tokenIds.length);
         for (uint256 i = 0; i < tokenIds.length; i++) {
             uris[i] = tokenURI(tokenIds[i]);
+        }
+        return uris;
+    }
+
+    function tokenURIRaw(uint256 tokenId) internal view virtual returns (string memory) {
+        uint256 speciesId = _attributes[tokenId].get(0);
+        string memory species = _attributeStrings[0][speciesId];
+        string memory imageURI = string(abi.encodePacked(imageBaseURI, speciesId.toString()));
+        string memory animationURI = string(abi.encodePacked(animationBaseURI, tokenId.toString()));
+
+        string memory dataURIGeneral = string(abi.encodePacked(
+                '"name":"', species, ' #', tokenId.toString(), '",',
+                '"description":"EvoVerses Evo",',
+                '"image":"', imageURI, '.png",',
+                '"animation_url":"', animationURI, '",'
+            ));
+        string memory attributesURI = getAttributesURI(tokenId);
+        return string(abi.encodePacked('{', dataURIGeneral, attributesURI, '}'));
+    }
+
+    function batchTokenUriJson(uint256[] memory tokenIds) public view returns(string[] memory) {
+        string[] memory uris = new string[](tokenIds.length);
+        for (uint256 i = 0; i < tokenIds.length; i++) {
+            uris[i] = tokenURIRaw(tokenIds[i]);
         }
         return uris;
     }
@@ -271,6 +295,11 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
     }
 
     // The following functions are overrides required by Solidity.
+
+    function tokensOfOwner(address owner) public view virtual
+    override(ERC721EnumerableExtendedUpgradeable, IEvoUpgradeable) returns(uint256[] memory) {
+        return super.tokensOfOwner(owner);
+    }
 
     function _beforeTokenTransfer(address from, address to, uint256 tokenId)
     internal

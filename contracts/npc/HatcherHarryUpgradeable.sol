@@ -11,7 +11,7 @@ import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/Base64Upgradeable.sol";
 
 import "../ERC721/interfaces/IEvoStructsUpgradeable.sol";
-import "../utils/ChainlinkVRFConsumerUpgradeableV2.sol";
+import "../utils/chainlink/ChainlinkVRFConsumerUpgradeableV2.sol";
 import "../ERC721/interfaces/IEvoEggUpgradeable.sol";
 import "../ERC721/interfaces/IEvoUpgradeable.sol";
 import "../utils/constants/NpcConstants.sol";
@@ -190,11 +190,14 @@ AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConsta
         }
         return (speciesIds, minRarity, totalRarity);
     }
-
     function pendingHatch() public view returns(bool exists, bool ready, uint256[] memory ids) {
-        PendingHatch memory ph = _pendingHatches[_msgSender()];
+        return pendingHatchOf(_msgSender());
+    }
+
+    function pendingHatchOf(address _address) public view returns(bool exists, bool ready, uint256[] memory ids) {
+        PendingHatch memory ph = _pendingHatches[_address];
         if (ph.requestId == 0) {
-            ph = _evo.getPendingHatchFor(_msgSender());
+            ph = _evo.getPendingHatchFor(_address);
         }
         return (ph.requestId != 0, ph.words.length > 0, ph.ids);
     }

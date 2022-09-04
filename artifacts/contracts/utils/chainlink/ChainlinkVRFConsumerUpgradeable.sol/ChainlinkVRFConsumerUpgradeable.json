@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "ChainlinkVRFConsumerUpgradeable",
-  "sourceName": "contracts/utils/ChainlinkVRFConsumerUpgradeable.sol",
+  "sourceName": "contracts/utils/chainlink/ChainlinkVRFConsumerUpgradeable.sol",
   "abi": [
     {
       "inputs": [
