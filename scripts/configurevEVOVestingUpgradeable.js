@@ -5,7 +5,7 @@ const wallets = [{"amount":28334,"address":"0x784ca853277fe20b17c06C63958ADd91b0
 async function update() {
   const accounts = await ethers.getSigners()
 
-  const contract = await ethers.getContractAt("vEVOVestingUpgradeable", "0xE8588d85DB8DBCE0Fad08e8943E6Cc0Bf3F5bb7d", accounts[0])
+  const contract = await ethers.getContractAt("vEVOUpgradeable", "0x53f0E805bDFa8418213aC7e306e1C0B6c9e44714", accounts[0])
 
   const addresses = [];
   const amounts = [];
@@ -13,7 +13,7 @@ async function update() {
     addresses.push(wallet.address);
     amounts.push(ethers.utils.parseEther(wallet.amount.toString() + ".0"));
   }
-  const tx = await contract.bulkAddWallets(addresses, amounts);
+  const tx = await contract.batchAddInitialBalance(addresses, amounts);
   tx.wait(1);
 }
 

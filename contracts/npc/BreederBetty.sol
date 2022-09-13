@@ -164,7 +164,12 @@ AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConsta
         uint256[] memory battle = new uint256[](5);
 
         for (uint256 i = 0; i < battle.length; i++) {
-            battle[i] = randomChunks[i + 4] % 51;
+            uint256 rand = randomChunks[i + 4];
+            uint256 parentRand = rand % 4;
+            if (parentRand <= 1) {
+                //battle[i] = parentRand == 0 ? parent1.battlestat : parent2.battlestat;
+            }
+            battle[i] = rand % 51;
         }
         evo = Evo({
             tokenId: tokenId,

@@ -1,37 +1,39 @@
 const { ethers, upgrades } = require("hardhat")
 require("dotenv").config()
 
-const GOV_TOKEN = '0x5b747e23a9E4c509dd06fbd2c0e3cB8B846e398F'
+const EVO = '0x42006Ab57701251B580bDFc24778C43c9ff589A1'
+const cEVO = '0x7B5501109c2605834F7A4153A75850DB7521c37E'
 const REWARD_PER_SECOND = ethers.utils.parseEther("0.5");
-const START_TIME = Date.parse('Tue May 04 2022 4:00:00 GMT') / 1000;
+const START_TIME = 1656880080; // Sunday, July 3, 2022 20:28:00 GMT
 const HALVING_AFTER_TIME = 7 * 24 * 60 * 60; // 1 epoch (1 week | 604800)
 
-const REWARD_MULTIPLIERS = [ 128, 64, 48, 32, 28, 24, 20, 16, 14, 12, 10, 9, 8, 7, 6, 5 ]
-  .concat(Array(8).fill(4), Array(28).fill(2))
+const REWARD_MULTIPLIERS = [16, 12, 12, 8, 8, 6, 6, 4, 4]
+  .concat(Array(33).fill(2))
 
-const PERCENT_LOCK_BONUS_REWARD = [...Array(48).keys()].map((_, i) => i * 2 + 1 ).reverse()
+const PERCENT_LOCK_BONUS_REWARD = [...Array(40).keys()].map((_, i) => i * 2 + 1 ).reverse()
 
 const DEV_FEE_STAGES = [25, 8, 4, 2, 1, 5, 25, 1];
 const USER_FEE_STAGES = [75, 92, 96, 98, 99, 995, 9975, 9999];
 const USER_DEPOSIT_FEE = 1;
 const DEV_DEPOSIT_FEE = 1;
 
-const DEV_ADDRESS = '0x946d5Cb6C3A329BD859e5C3Ba01767457Ea2DcA2';
-const LP_ADDRESS = '0xA511794340216a49Ac8Ae4b5495631CcD80BCfcc';
-const COMMUNITY_FUND_ADDRESS = '0xA511794340216a49Ac8Ae4b5495631CcD80BCfcc';
-const FOUNDER_ADDRESS = '0x946d5Cb6C3A329BD859e5C3Ba01767457Ea2DcA2';
+const DEV_ADDRESS = '0x94Cff3951Bb178c26E890058CD7C9a3B1AB98E99';
+const LP_ADDRESS = '0xAc8642F6F55a9fd5f717B03Be2f9d29B70e434DF';
+const COMMUNITY_FUND_ADDRESS = '0xa765a40b37becFCEa0Bcf84A48032eE9BC6127Dc';
+const FOUNDER_ADDRESS = '0x7F8Ac7d0D886CA6881C795c7AF547487A029104A';
 
 const args = [{
-  govToken: GOV_TOKEN,
+  govToken: EVO,
+  rewardToken: cEVO,
   rewardPerSecond: REWARD_PER_SECOND,
   startTime: START_TIME,
   halvingAfterTime: HALVING_AFTER_TIME,
   userDepositFee: USER_DEPOSIT_FEE,
   devDepositFee: DEV_DEPOSIT_FEE,
-  devAddress: DEV_ADDRESS,
-  lpAddress: LP_ADDRESS,
-  communityFundAddress: COMMUNITY_FUND_ADDRESS,
-  founderAddress: FOUNDER_ADDRESS,
+  devFundAddress: DEV_ADDRESS,
+  feeShareFundAddress: LP_ADDRESS,
+  marketingFundAddress: COMMUNITY_FUND_ADDRESS,
+  foundersFundAddress: FOUNDER_ADDRESS,
   rewardMultipliers: REWARD_MULTIPLIERS,
   userFeeStages: USER_FEE_STAGES,
   devFeeStages: DEV_FEE_STAGES,
@@ -42,22 +44,6 @@ async function main(name) {
   console.log("Starting deployment...")
   const contractFactory = await ethers.getContractFactory(name)
   console.log("Deploying", name)
-  const args = [{
-    govToken: GOV_TOKEN,
-    rewardPerSecond: REWARD_PER_SECOND,
-    startTime: START_TIME,
-    halvingAfterTime: HALVING_AFTER_TIME,
-    userDepositFee: USER_DEPOSIT_FEE,
-    devDepositFee: DEV_DEPOSIT_FEE,
-    devAddress: DEV_ADDRESS,
-    lpAddress: LP_ADDRESS,
-    communityFundAddress: COMMUNITY_FUND_ADDRESS,
-    founderAddress: FOUNDER_ADDRESS,
-    rewardMultipliers: REWARD_MULTIPLIERS,
-    userFeeStages: USER_FEE_STAGES,
-    devFeeStages: DEV_FEE_STAGES,
-    percentLockBonusReward: PERCENT_LOCK_BONUS_REWARD
-  }]
   const contract = await upgrades.deployProxy(contractFactory, args)
   console.log(name, "deployed! Address:", contract.address)
 }
@@ -65,6 +51,7 @@ async function main(name) {
 module.exports = {
   args
 }
+
 main("MasterInvestor")
     .then(() => process.exit(0))
     .catch((error) => {

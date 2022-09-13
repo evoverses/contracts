@@ -2,6 +2,13 @@
 pragma solidity 0.8.9;
 
 interface IEvoStructsUpgradeable {
+    struct Moves {
+        uint256 move0;
+        uint256 move1;
+        uint256 move2;
+        uint256 move3;
+    }
+
     struct Summons {
         uint256 total;
         uint256 remaining;
@@ -22,6 +29,7 @@ interface IEvoStructsUpgradeable {
         uint256 primaryType;
         uint256 secondaryType;
         uint256 nature;
+        uint256 size;
     }
 
     struct Evo {
@@ -32,6 +40,7 @@ interface IEvoStructsUpgradeable {
         Stats stats;
         BattleStats battle;
         Summons summons;
+        Moves moves;
     }
 
     struct PendingHatch {

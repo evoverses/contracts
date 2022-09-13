@@ -31,6 +31,14 @@ abstract contract ERC721BurnableUpgradeable is Initializable, ContextUpgradeable
         return _burnedIds.values();
     }
 
+    function _addBurnedId(uint256 tokenId) internal virtual {
+        _burnedIds.add(tokenId);
+    }
+
+    function _removeBurnedId(uint256 tokenId) internal virtual {
+        _burnedIds.remove(tokenId);
+    }
+
     /**
      * @dev Burns `tokenId`. See {ERC721-_burn}.
      *

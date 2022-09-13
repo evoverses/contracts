@@ -265,26 +265,29 @@ contract MasterInvestorHarmony is Initializable, AccessControlUpgradeable, Reent
     // |--------------------------------------|
     // [20, 30, 40, 50, 60, 70, 80, 99999999]
     // Return reward multiplier over the given _from to _to time.
-    function getMultiplier(uint256 _from, uint256 _to) public view returns (uint256) {
-        return 0;
+    function getMultiplier(
+        uint256, // _from,
+        uint256 // _to
+    ) public pure returns (uint256) {
         uint256 result = 0;
-        if (_from < START_TIME) return 0;
 
-        for (uint256 i = 0; i < HALVING_AT_TIMES.length; i++) {
-            uint256 endTime = HALVING_AT_TIMES[i];
-            if (i > REWARD_MULTIPLIERS.length - 1) return 0;
-
-            if (_to <= endTime) {
-                uint256 m = ((_to - _from) * REWARD_MULTIPLIERS[i]);
-                return result + m;
-            }
-
-            if (_from < endTime) {
-                uint256 m = ((endTime - _from) * REWARD_MULTIPLIERS[i]);
-                _from = endTime;
-                result += m;
-            }
-        }
+        //if (_from < START_TIME) return 0;
+        //
+        //for (uint256 i = 0; i < HALVING_AT_TIMES.length; i++) {
+        //    uint256 endTime = HALVING_AT_TIMES[i];
+        //    if (i > REWARD_MULTIPLIERS.length - 1) return 0;
+        //
+        //    if (_to <= endTime) {
+        //        uint256 m = ((_to - _from) * REWARD_MULTIPLIERS[i]);
+        //        return result + m;
+        //    }
+        //
+        //    if (_from < endTime) {
+        //        uint256 m = ((endTime - _from) * REWARD_MULTIPLIERS[i]);
+        //        _from = endTime;
+        //        result += m;
+        //    }
+        //}
 
         return result;
     }
@@ -536,10 +539,12 @@ contract MasterInvestorHarmony is Initializable, AccessControlUpgradeable, Reent
         require(transferSuccess, "MasterInvestor::safeGovTokenTransfer: transfer failed");
     }
 
-    function getNewRewardPerSecond(uint256 pid1) public view returns (uint256) {
+    function getNewRewardPerSecond(
+        uint256 //pid1
+    ) public pure returns (uint256) {
         return 0;
-        uint256 multiplier = getMultiplier(block.timestamp - 1, block.timestamp);
-        return (((multiplier * REWARD_PER_SECOND) * poolInfo[pid1].allocPoint) / TOTAL_ALLOCATION_POINTS);
+        //uint256 multiplier = getMultiplier(block.timestamp - 1, block.timestamp);
+        //return (((multiplier * REWARD_PER_SECOND) * poolInfo[pid1].allocPoint) / TOTAL_ALLOCATION_POINTS);
     }
 
     function userDelta(uint256 _pid) public view returns (uint256) {

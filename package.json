@@ -10,11 +10,14 @@
 
     "deploy:harmony": "npx hardhat --network harmony deployUpgradeable",
     "deploy:avalanche": "npx hardhat --network avalanche deployUpgradeable",
+    "deploy:boba": "npx hardhat --network boba deployUpgradeable",
 
     "upgrade:harmony": "npx hardhat --network harmony upgrade",
     "upgrade:avalanche": "npx hardhat --network avalanche upgrade",
+    "upgrade:boba": "npx hardhat --network boba upgrade",
 
     "verify:avalanche": "npx hardhat --network avalanche verify",
+    "verify:boba": "npx hardhat --network boba verify",
 
     "scanner:EWRU:harmony": "npx hardhat run --network harmony scripts/ERWUScanner.js",
 
@@ -68,9 +71,17 @@
     "EvoEgg:avalanche:upgrade": "npm run upgrade:avalanche -- --name EvoEggUpgradeable --address 0x75dDd2b19E6f7BEd3Bfe9D2D21dd226C38C0CbC4",
     "EvoEgg:avalanche:verify": "npm run verify:avalanche -- 0x75dDd2b19E6f7BEd3Bfe9D2D21dd226C38C0CbC4",
 
-    "Evo:avalanche:deploy": "npm run deploy:avalanche -- --name EvoUpgradeable",
-    "Evo:avalanche:upgrade": "npm run upgrade:avalanche -- --name EvoUpgradeable --address 0x454a0E479ac78e508a95880216C06F50bf3C321C",
+    "Evo:avalanche:deploy": "npm run deploy:avalanche -- --name Evo",
+    "Evo:avalanche:upgrade": "npm run upgrade:avalanche -- --name Evo --address 0x454a0E479ac78e508a95880216C06F50bf3C321C",
     "Evo:avalanche:verify": "npm run verify:avalanche -- 0x454a0E479ac78e508a95880216C06F50bf3C321C",
+
+    "EvoL2:boba:deploy": "npm run deploy:boba -- --name EvoL2",
+    "EvoL2:boba:upgrade": "npm run upgrade:boba -- --name EvoL2 --address 0x3e9694a37846C864C67253af6F5d1F534ff3BF46",
+    "EvoL2:boba:verify": "npm run verify:boba -- 0x3e9694a37846C864C67253af6F5d1F534ff3BF46",
+
+    "EVOL2:boba:deploy": "npm run deploy:boba -- --name EVOL2",
+    "EVOL2:boba:upgrade": "npm run upgrade:boba -- --name EVOL2 --address 0xc8849f32138de93F6097199C5721a9EfD91ceE01",
+    "EVOL2:boba:verify": "npm run verify:boba -- 0xc8849f32138de93F6097199C5721a9EfD91ceE01",
 
     "marketplace:avalanche:deploy": "npm run deploy:avalanche -- --name MarketplaceUpgradeable",
     "marketplace:avalanche:upgrade": "npm run upgrade:avalanche -- --name MarketplaceUpgradeable --address 0xDb0BF8870195260fDb9A0eb7071E3374C19c9748",
@@ -102,7 +113,6 @@
     "@openzeppelin/hardhat-upgrades": "1.20.0",
     "builtin-modules": "^3.3.0",
     "ethers": "5.7.0",
-    "@chainlink/contracts": "0.4.1",
-    "ethers-multicall": "0.2.3"
+    "@chainlink/contracts": "0.4.1"
   }
 }
