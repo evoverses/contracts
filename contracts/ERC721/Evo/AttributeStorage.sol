@@ -6,14 +6,14 @@ import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableMapUpgradeab
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-import "../interfaces/IEvoStructsUpgradeable.sol";
 import "../../utils/constants/TokenConstants.sol";
+import "../interfaces/EvoStructs.sol";
 
 /**
 * @title Attribute Storage v1.0.0
 * @author @DirtyCajunRice
 */
-abstract contract AttributeStorage is Initializable, AccessControlEnumerableUpgradeable, TokenConstants {
+abstract contract AttributeStorage is Initializable, AccessControlEnumerableUpgradeable, TokenConstants, EvoStructs {
     using EnumerableMapUpgradeable for EnumerableMapUpgradeable.UintToUintMap;
 
     bytes32 public constant CONTRACT_ROLE = keccak256("CONTRACT_ROLE");
@@ -54,6 +54,13 @@ abstract contract AttributeStorage is Initializable, AccessControlEnumerableUpgr
         emit EvoAttributesUpdated(tokenId, attributeIds, values);
     }
 
+    function addToAttribute(uint256 tokenId, uint256 attributeId, uint256 value) public onlyRole(CONTRACT_ROLE) {
+        uint256 currentValue = _attributes[tokenId].get(attributeId);
+        uint256 updatedValue = currentValue + value;
+        _attributes[tokenId].set(attributeId, updatedValue);
+        emit EvoAttributeUpdated(tokenId, attributeId, updatedValue);
+    }
+
     function batchAddToAttribute(
         uint256 tokenId,
         uint256[] memory attributeIds,
@@ -83,26 +90,27 @@ abstract contract AttributeStorage is Initializable, AccessControlEnumerableUpgr
         }
     }
 
-    function _setEvoAttributes(IEvoStructsUpgradeable.Evo memory evo) internal onlyRole(MINTER_ROLE) {
+    function _setEvoAttributes(Evo memory evo) internal onlyRole(MINTER_ROLE) {
         _attributes[evo.tokenId].set(0, evo.species);
-        _attributes[evo.tokenId].set(1, evo.stats.rarity);
-        _attributes[evo.tokenId].set(2, evo.stats.gender);
+        _attributes[evo.tokenId].set(1, evo.attributes.rarity);
+        _attributes[evo.tokenId].set(2, evo.attributes.gender);
         _attributes[evo.tokenId].set(3, evo.generation);
-        _attributes[evo.tokenId].set(4, evo.stats.primaryType);
-        _attributes[evo.tokenId].set(5, evo.stats.secondaryType);
-        _attributes[evo.tokenId].set(6, evo.summons.total);
+        _attributes[evo.tokenId].set(4, evo.attributes.primaryType);
+        _attributes[evo.tokenId].set(5, evo.attributes.secondaryType);
+        _attributes[evo.tokenId].set(6, evo.breeds.total);
         _attributes[evo.tokenId].set(7, evo.experience);
-        _attributes[evo.tokenId].set(8, evo.stats.nature);
-        _attributes[evo.tokenId].set(9, evo.battle.attack);
-        _attributes[evo.tokenId].set(10, evo.battle.defense);
-        _attributes[evo.tokenId].set(11, evo.battle.special);
-        _attributes[evo.tokenId].set(12, evo.battle.resistance);
-        _attributes[evo.tokenId].set(13, evo.battle.speed);
+        _attributes[evo.tokenId].set(8, evo.attributes.nature);
+        _attributes[evo.tokenId].set(9, evo.stats.attack);
+        _attributes[evo.tokenId].set(10, evo.stats.defense);
+        _attributes[evo.tokenId].set(11, evo.stats.special);
+        _attributes[evo.tokenId].set(12, evo.stats.resistance);
+        _attributes[evo.tokenId].set(13, evo.stats.speed);
+        _attributes[evo.tokenId].set(14, evo.attributes.size);
+        _attributes[evo.tokenId].set(15, evo.breeds.lastBreedTime);
     }
 
-    function getEvoAttributes(uint256 tokenId) internal view onlyRole(MINTER_ROLE)
-    returns(IEvoStructsUpgradeable.Evo memory) {
-        IEvoStructsUpgradeable.Moves memory moves = IEvoStructsUpgradeable.Moves(
+    function getEvoAttributes(uint256 tokenId) internal view onlyRole(MINTER_ROLE) returns(Evo memory) {
+        Moves memory moves = Moves(
             {
                 move0: 0,
                 move1: 0,
@@ -110,17 +118,17 @@ abstract contract AttributeStorage is Initializable, AccessControlEnumerableUpgr
                 move3: 0
             }
         );
-        IEvoStructsUpgradeable.Stats memory stats = IEvoStructsUpgradeable.Stats(
+        Attributes memory attributes = Attributes(
             {
                 gender: _attributes[tokenId].get(2),
                 rarity: _attributes[tokenId].get(1),
                 primaryType: _attributes[tokenId].get(4),
                 secondaryType: _attributes[tokenId].get(5),
                 nature: _attributes[tokenId].get(8),
-                size: 10
+                size: _attributes[tokenId].get(14)
             }
         );
-        IEvoStructsUpgradeable.BattleStats memory battle = IEvoStructsUpgradeable.BattleStats(
+        Stats memory stats = Stats(
             {
                 health: 50,
                 attack: _attributes[tokenId].get(9),
@@ -130,21 +138,22 @@ abstract contract AttributeStorage is Initializable, AccessControlEnumerableUpgr
                 speed: _attributes[tokenId].get(13)
             }
         );
-        IEvoStructsUpgradeable.Summons memory summons = IEvoStructsUpgradeable.Summons(
+        Breeds memory breeds = Breeds(
             {
                 total: _attributes[tokenId].get(6),
-                remaining: getRemainingSummons(tokenId)
+                remaining: getRemainingSummons(tokenId),
+                lastBreedTime: _attributes[tokenId].get(15)
             }
         );
-        IEvoStructsUpgradeable.Evo memory evo = IEvoStructsUpgradeable.Evo(
+        Evo memory evo = Evo(
             {
                 tokenId: tokenId,
                 species: _attributes[tokenId].get(0),
                 generation: _attributes[tokenId].get(3),
                 experience: _attributes[tokenId].get(7),
+                attributes: attributes,
                 stats: stats,
-                battle: battle,
-                summons: summons,
+                breeds: breeds,
                 moves: moves
             }
         );

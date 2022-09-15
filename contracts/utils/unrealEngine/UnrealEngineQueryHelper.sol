@@ -5,8 +5,8 @@ import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgrad
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-import "../../ERC721/interfaces/IEvoEggUpgradeable.sol";
-import "../../ERC721/interfaces/IEvoUpgradeable.sol";
+import "../../ERC721/EvoEgg/IEvoEgg.sol";
+import "../../ERC721/interfaces/IEvo.sol";
 import "../constants/NpcConstants.sol";
 /**
 * @title Unreal Engine Query Helper v1.0.0
@@ -15,7 +15,7 @@ import "../constants/NpcConstants.sol";
 contract UnrealEngineQueryHelper is Initializable, AccessControlEnumerableUpgradeable {
     IERC20Upgradeable private EVO;
     IERC20Upgradeable private cEVO;
-    IEvoUpgradeable private Evo;
+    IEvo private Evo;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -27,7 +27,7 @@ contract UnrealEngineQueryHelper is Initializable, AccessControlEnumerableUpgrad
 
         _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
 
-        Evo = IEvoUpgradeable(0x454a0E479ac78e508a95880216C06F50bf3C321C);
+        Evo = IEvo(0x454a0E479ac78e508a95880216C06F50bf3C321C);
         EVO = IERC20Upgradeable(0x42006Ab57701251B580bDFc24778C43c9ff589A1);
         cEVO = IERC20Upgradeable(0x7B5501109c2605834F7A4153A75850DB7521c37E);
     }

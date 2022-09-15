@@ -15,15 +15,15 @@ import "../extensions/ERC721EnumerableExtendedUpgradeable.sol";
 import "../../utils/chainlink/ChainlinkVRFConsumerUpgradeable.sol";
 import "../extensions/ERC721BlacklistUpgradeable.sol";
 import "../extensions/ERC721BurnableUpgradeable.sol";
-import "../interfaces/IEvoEggUpgradeable.sol";
 import "../../deprecated/OldTokenConstants.sol";
-import "../interfaces/IEvoUpgradeable.sol";
+import "../interfaces/EvoStructs.sol";
+import "../EvoEgg/IEvoEgg.sol";
 
 /**
 * @title Evo v1.0.0
 * @author @DirtyCajunRice
 */
-contract Evo is Initializable, IEvoUpgradeable, ERC721Upgradeable, ERC721EnumerableExtendedUpgradeable,
+contract Evo is Initializable, EvoStructs, ERC721Upgradeable, ERC721EnumerableExtendedUpgradeable,
 PausableUpgradeable, AccessControlEnumerableUpgradeable, ERC721BurnableUpgradeable, OldTokenConstants,
 ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
@@ -31,7 +31,7 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
     using EnumerableMapUpgradeable for EnumerableMapUpgradeable.UintToUintMap;
     using StringsUpgradeable for uint256;
 
-    IEvoEggUpgradeable private EGG;
+    IEvoEgg private EGG;
 
     // Hatch storage
     mapping (address => PendingHatch) private _pendingHatches;
@@ -94,7 +94,7 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
         _grantRole(MINTER_ROLE, _msgSender());
 
         imageBaseURI = "https://github.com/EvoVerses/public-assets/raw/main/nfts/Evo/";
-        EGG = IEvoEggUpgradeable(0x75dDd2b19E6f7BEd3Bfe9D2D21dd226C38C0CbC4);
+        EGG = IEvoEgg(0x75dDd2b19E6f7BEd3Bfe9D2D21dd226C38C0CbC4);
     }
 
     function pause() public onlyRole(ADMIN_ROLE) {
@@ -130,25 +130,25 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
         }
     }
 
-    function mint(address _address, Evo memory evo) public onlyRole(MINTER_ROLE) {
+    function mint(address _address, EvoStructs.Evo memory evo) public onlyRole(MINTER_ROLE) {
         _attributes[evo.tokenId].set(0, evo.species);
-        _attributes[evo.tokenId].set(1, evo.stats.rarity);
-        _attributes[evo.tokenId].set(2, evo.stats.gender);
+        _attributes[evo.tokenId].set(1, evo.attributes.rarity);
+        _attributes[evo.tokenId].set(2, evo.attributes.gender);
         _attributes[evo.tokenId].set(3, evo.generation);
-        _attributes[evo.tokenId].set(4, evo.stats.primaryType);
-        _attributes[evo.tokenId].set(5, evo.stats.secondaryType);
-        _attributes[evo.tokenId].set(6, evo.summons.total);
+        _attributes[evo.tokenId].set(4, evo.attributes.primaryType);
+        _attributes[evo.tokenId].set(5, evo.attributes.secondaryType);
+        _attributes[evo.tokenId].set(6, evo.breeds.total);
         _attributes[evo.tokenId].set(7, evo.experience);
-        _attributes[evo.tokenId].set(8, evo.stats.nature);
-        _attributes[evo.tokenId].set(9, evo.battle.attack);
-        _attributes[evo.tokenId].set(10, evo.battle.defense);
-        _attributes[evo.tokenId].set(11, evo.battle.special);
-        _attributes[evo.tokenId].set(12, evo.battle.resistance);
-        _attributes[evo.tokenId].set(13, evo.battle.speed);
+        _attributes[evo.tokenId].set(8, evo.attributes.nature);
+        _attributes[evo.tokenId].set(9, evo.stats.attack);
+        _attributes[evo.tokenId].set(10, evo.stats.defense);
+        _attributes[evo.tokenId].set(11, evo.stats.special);
+        _attributes[evo.tokenId].set(12, evo.stats.resistance);
+        _attributes[evo.tokenId].set(13, evo.stats.speed);
         _safeMint(_address, evo.tokenId);
     }
 
-    function batchMint(address _address, Evo[] memory evos) public onlyRole(MINTER_ROLE) {
+    function batchMint(address _address, EvoStructs.Evo[] memory evos) public onlyRole(MINTER_ROLE) {
         for (uint256 i = 0; i < evos.length; i++) {
             mint(_address, evos[i]);
         }
@@ -297,7 +297,7 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
     // The following functions are overrides required by Solidity.
 
     function tokensOfOwner(address owner) public view virtual
-    override(ERC721EnumerableExtendedUpgradeable, IEvoUpgradeable) returns(uint256[] memory) {
+    override(ERC721EnumerableExtendedUpgradeable) returns(uint256[] memory) {
         return super.tokensOfOwner(owner);
     }
 

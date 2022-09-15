@@ -6,21 +6,21 @@ import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeab
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-import "../ERC721/interfaces/IEvoStructsUpgradeable.sol";
+import "../ERC721/interfaces/EvoStructs.sol";
 import "../utils/chainlink/ChainlinkVRFConsumerUpgradeableV2.sol";
-import "../ERC721/interfaces/IEvoUpgradeable.sol";
+import "../ERC721/interfaces/IEvo.sol";
 import "../utils/constants/NpcConstants.sol";
 
 /**
 * @title Healer Hayley v1.0.0
 * @author @DirtyCajunRice
 */
-contract HealerHayley is Initializable, IEvoStructsUpgradeable, PausableUpgradeable,
+contract HealerHayley is Initializable, EvoStructs, PausableUpgradeable,
 AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConstants {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.UintSet;
 
-    IEvoUpgradeable private _evo;
+    IEvo private _evo;
 
 
     mapping (address => PendingHatch) private _pendingHeals;
@@ -54,7 +54,7 @@ AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConsta
         _grantRole(ADMIN_ROLE, _msgSender());
         _grantRole(CONTRACT_ROLE, _msgSender());
 
-        _evo = IEvoUpgradeable(0x454a0E479ac78e508a95880216C06F50bf3C321C);
+        _evo = IEvo(0x454a0E479ac78e508a95880216C06F50bf3C321C);
     }
 
     function pause() public onlyRole(ADMIN_ROLE) {

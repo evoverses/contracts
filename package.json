@@ -59,8 +59,8 @@
     "deploy:masterInvestor": "npm run runScript -- ./scripts/deployMasterInvestor.js",
     "upgrade:avalanche:masterInvestor": "npm run upgrade:avalanche -- --name MasterInvestor --address 0xD782Cf9F04E24CAe4953679EBF45ba34509F105C",
 
-    "hatcherHarry:avalanche:deploy": "npm run deploy:avalanche -- --name HatcherHarryUpgradeable",
-    "hatcherHarry:avalanche:upgrade": "npm run upgrade:avalanche -- --name HatcherHarryUpgradeable --address 0x75aC43933483c60eB72A87EbBB8BAa51181c4a7E",
+    "hatcherHarry:avalanche:deploy": "npm run deploy:avalanche -- --name HatcherHarryAvalanche",
+    "hatcherHarry:avalanche:upgrade": "npm run upgrade:avalanche -- --name HatcherHarryAvalanche --address 0x75aC43933483c60eB72A87EbBB8BAa51181c4a7E",
     "hatcherHarry:avalanche:verify": "npm run verify:avalanche -- 0x75aC43933483c60eB72A87EbBB8BAa51181c4a7E",
 
     "healerHayley:avalanche:deploy": "npm run deploy:avalanche -- --name HealerHayley",
@@ -75,6 +75,14 @@
     "Evo:avalanche:upgrade": "npm run upgrade:avalanche -- --name Evo --address 0x454a0E479ac78e508a95880216C06F50bf3C321C",
     "Evo:avalanche:verify": "npm run verify:avalanche -- 0x454a0E479ac78e508a95880216C06F50bf3C321C",
 
+    "marketplace:avalanche:deploy": "npm run deploy:avalanche -- --name MarketplaceUpgradeable",
+    "marketplace:avalanche:upgrade": "npm run upgrade:avalanche -- --name MarketplaceUpgradeable --address 0xDb0BF8870195260fDb9A0eb7071E3374C19c9748",
+    "marketplace:avalanche:verify": "npm run verify:avalanche -- 0xDb0BF8870195260fDb9A0eb7071E3374C19c9748",
+
+    "unrealEngineQueryHelper:avalanche:deploy": "npm run deploy:avalanche -- --name UnrealEngineQueryHelper",
+    "unrealEngineQueryHelper:avalanche:upgrade": "npm run upgrade:avalanche -- --name UnrealEngineQueryHelper --address 0xd8Aa6eD0BC5b619c693800cC2E1F5A2Ac3e6F4A3",
+    "unrealEngineQueryHelper:avalanche:verify": "npm run verify:avalanche -- 0xd8Aa6eD0BC5b619c693800cC2E1F5A2Ac3e6F4A3",
+
     "EvoL2:boba:deploy": "npm run deploy:boba -- --name EvoL2",
     "EvoL2:boba:upgrade": "npm run upgrade:boba -- --name EvoL2 --address 0x3e9694a37846C864C67253af6F5d1F534ff3BF46",
     "EvoL2:boba:verify": "npm run verify:boba -- 0x3e9694a37846C864C67253af6F5d1F534ff3BF46",
@@ -83,17 +91,30 @@
     "EVOL2:boba:upgrade": "npm run upgrade:boba -- --name EVOL2 --address 0xc8849f32138de93F6097199C5721a9EfD91ceE01",
     "EVOL2:boba:verify": "npm run verify:boba -- 0xc8849f32138de93F6097199C5721a9EfD91ceE01",
 
-    "marketplace:avalanche:deploy": "npm run deploy:avalanche -- --name MarketplaceUpgradeable",
-    "marketplace:avalanche:upgrade": "npm run upgrade:avalanche -- --name MarketplaceUpgradeable --address 0xDb0BF8870195260fDb9A0eb7071E3374C19c9748",
-    "marketplace:avalanche:verify": "npm run verify:avalanche -- 0xDb0BF8870195260fDb9A0eb7071E3374C19c9748",
+    "marketplace:boba:deploy": "npm run deploy:boba -- --name Marketplace",
+    "marketplace:boba:upgrade": "npm run upgrade:boba -- --name Marketplace --address ",
+    "marketplace:boba:verify": "npm run verify:boba -- ",
 
-    "unrealEngineQueryHelper:avalanche:deploy": "npm run deploy:avalanche -- --name UnrealEngineQueryHelper",
-    "unrealEngineQueryHelper:avalanche:upgrade": "npm run upgrade:avalanche -- --name UnrealEngineQueryHelper --address 0xd8Aa6eD0BC5b619c693800cC2E1F5A2Ac3e6F4A3",
-    "unrealEngineQueryHelper:avalanche:verify": "npm run verify:avalanche -- 0xd8Aa6eD0BC5b619c693800cC2E1F5A2Ac3e6F4A3"
+    "turingHelper:boba:deploy": "npm run deploy:boba -- --name TuringHelper",
+    "turingHelper:boba:upgrade": "npm run upgrade:boba -- --name TuringHelper --address 0x680e176b2bbdB2336063d0C82961BDB7a52CF13c",
+    "turingHelper:boba:verify": "npm run verify:boba -- 0x680e176b2bbdB2336063d0C82961BDB7a52CF13c",
+
+    "EvoEgg:boba:deploy": "npm run deploy:boba -- --name EvoEgg",
+    "EvoEgg:boba:upgrade": "npm run upgrade:boba -- --name EvoEgg --address 0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF",
+    "EvoEgg:boba:verify": "npm run verify:boba -- 0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF",
+
+    "hatcherHarry:boba:deploy": "npm run deploy:boba -- --name HatcherHarry",
+    "hatcherHarry:boba:upgrade": "npm run upgrade:boba -- --name HatcherHarry --address 0x918eA0E87ef08a5931aD3777b8c0EB69e2Ce37Dd",
+    "hatcherHarry:boba:verify": "npm run verify:boba -- 0x918eA0E87ef08a5931aD3777b8c0EB69e2Ce37Dd",
+
+    "breederBetty:boba:deploy": "npm run deploy:boba -- --name BreederBetty",
+    "breederBetty:boba:upgrade": "npm run upgrade:boba -- --name BreederBetty --address 0xe48C74833ce6f18A8e54f73f1D02B8E9f9Ff8Caa",
+    "breederBetty:boba:verify": "npm run verify:boba -- 0xe48C74833ce6f18A8e54f73f1D02B8E9f9Ff8Caa"
+
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@nomiclabs/hardhat-etherscan": "3.1.0",
     "@openzeppelin/contracts": "4.7.3",

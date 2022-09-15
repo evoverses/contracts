@@ -14,7 +14,7 @@ import "@openzeppelin/contracts-upgradeable/utils/Base64Upgradeable.sol";
 import "../extensions/ERC721EnumerableExtendedUpgradeable.sol";
 import "../extensions/ERC721BurnableUpgradeable.sol";
 import "../extensions/ERC721URITokenJSON.sol";
-import "../interfaces/IEvoUpgradeable.sol";
+import "../interfaces/IEvo.sol";
 import "../extensions/ERC721Blacklist.sol";
 import "../extensions/ERC721L2.sol";
 import "./AttributeStorage.sol";
@@ -62,13 +62,13 @@ ERC721Blacklist, ERC721URITokenJSON, AttributeStorage, ERC721L2 {
         _unpause();
     }
 
-    function mint(address _address, IEvoStructsUpgradeable.Evo memory evo) public onlyRole(MINTER_ROLE) {
+    function mint(address _address, EvoStructs.Evo memory evo) public onlyRole(MINTER_ROLE) {
         _setEvoAttributes(evo);
         _safeMint(_address, evo.tokenId);
         _removeBurnedId(evo.tokenId);
     }
 
-    function batchMint(address _address, IEvoStructsUpgradeable.Evo[] memory evos) public onlyRole(MINTER_ROLE) {
+    function batchMint(address _address, EvoStructs.Evo[] memory evos) public onlyRole(MINTER_ROLE) {
         for (uint256 i = 0; i < evos.length; i++) {
             _setEvoAttributes(evos[i]);
             _safeMint(_address, evos[i].tokenId);
@@ -78,7 +78,7 @@ ERC721Blacklist, ERC721URITokenJSON, AttributeStorage, ERC721L2 {
 
     // ERC721L2
     function mint(address to, uint256 tokenId, bytes memory _data) public override(ERC721L2) onlyRole(BRIDGE_ROLE) {
-        (IEvoStructsUpgradeable.Evo memory evo) = abi.decode(_data, (IEvoStructsUpgradeable.Evo));
+        (EvoStructs.Evo memory evo) = abi.decode(_data, (EvoStructs.Evo));
         _setEvoAttributes(evo);
         _safeMint(to, tokenId);
         _removeBurnedId(tokenId);
@@ -92,8 +92,12 @@ ERC721Blacklist, ERC721URITokenJSON, AttributeStorage, ERC721L2 {
     }
 
     function bridgeExtraData(uint256 tokenId) public view override(ERC721L2) returns(bytes memory) {
-        IEvoStructsUpgradeable.Evo memory evo = getEvoAttributes(tokenId);
+        EvoStructs.Evo memory evo = getEvoAttributes(tokenId);
         return abi.encode(evo);
+    }
+
+    function getEvo(uint256 tokenId) public view returns(EvoStructs.Evo memory) {
+        return getEvoAttributes(tokenId);
     }
 
     function tokenURI(uint256 tokenId) public view virtual override(ERC721URITokenJSON, ERC721Upgradeable) returns(string memory) {
