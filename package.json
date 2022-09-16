@@ -134,6 +134,12 @@
     "@openzeppelin/hardhat-upgrades": "1.20.0",
     "builtin-modules": "^3.3.0",
     "ethers": "5.7.0",
-    "@chainlink/contracts": "0.4.1"
+    "@chainlink/contracts": "0.4.1",
+    "ethers-multicall": "0.2.3"
+  },
+  "resolutions": {
+    "@openzeppelin/contracts": "4.7.3",
+    "@openzeppelin/contracts-upgradeable": "4.7.3",
+    "undici": "^5.8.2"
   }
 }
