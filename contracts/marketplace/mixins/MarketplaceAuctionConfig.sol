@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.9;
+pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-import "./MarketplaceConstantsUpgradeable.sol";
+import "./MarketplaceConstants.sol";
 
-abstract contract MarketplaceAuctionConfigUpgradeable is
-Initializable, AccessControlEnumerableUpgradeable, MarketplaceConstantsUpgradeable {
+abstract contract MarketplaceAuctionConfig is
+Initializable, AccessControlEnumerableUpgradeable, MarketplaceConstants {
     uint256 internal extensionSeconds;
     uint256 internal _nexBidPercent;
 
@@ -16,9 +16,9 @@ Initializable, AccessControlEnumerableUpgradeable, MarketplaceConstantsUpgradeab
         uint256 extensionDuration
     );
 
-    function __MarketplaceAuctionConfig_init(uint256 nexBidPercent) internal onlyInitializing {
+    function __MarketplaceAuctionConfig_init() internal onlyInitializing {
         __AccessControlEnumerable_init();
-        _nexBidPercent = nexBidPercent;
+        _nexBidPercent = 1000;
     }
 
     function getMarketplaceAuctionConfig() external view returns (uint256, uint256) {

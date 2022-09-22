@@ -1,38 +1,22 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.9;
+pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-import "./mixins/MarketplaceCoreUpgradeable.sol";
+import "./mixins/MarketplaceCore.sol";
 
-contract Marketplace is Initializable, AccessControlEnumerableUpgradeable, MarketplaceCoreUpgradeable {
+contract Marketplace is Initializable, AccessControlEnumerableUpgradeable, MarketplaceCore {
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
     }
 
-    function initialize(
-        uint256 maxRoyaltyBps,
-        uint256 marketFeeBps,
-        uint256 marketFeeBurnedBps,
-        uint256 marketFeeReflectedBps,
-        address treasury,
-        address bank,
-        uint256 nexBidPercentBps
-    ) external initializer {
+    function initialize() external initializer {
         __AccessControlEnumerable_init();
-        __MarketplaceCore_init(
-            maxRoyaltyBps,
-            marketFeeBps,
-            marketFeeBurnedBps,
-            marketFeeReflectedBps,
-            treasury,
-            bank,
-            nexBidPercentBps
-        );
+        __MarketplaceCore_init();
     }
 
     function createERC721Auction(

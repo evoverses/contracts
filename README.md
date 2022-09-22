@@ -31,7 +31,7 @@ Security contact: DirtyCajunRice#0001 (Discord)
 |      EVO      | `0xc8849f32138de93F6097199C5721a9EfD91ceE01` | [Boba](https://blockexplorer.avax.boba.network/address/0xc8849f32138de93F6097199C5721a9EfD91ceE01) |
 |      Evo      | `0x3e9694a37846C864C67253af6F5d1F534ff3BF46` | [Boba](https://blockexplorer.avax.boba.network/address/0x3e9694a37846C864C67253af6F5d1F534ff3BF46) |
 |    Evo Egg    | `0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF` | [Boba](https://blockexplorer.avax.boba.network/address/0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF) |
-|  Marketplace  |                `Not Deployed`                |                      [Boba](https://blockexplorer.avax.boba.network/address/)                      |
+|  Marketplace  | `0x72b51E07Cb370292B3863FF391f2472B26Ce3ca9` | [Boba](https://blockexplorer.avax.boba.network/address/0x72b51E07Cb370292B3863FF391f2472B26Ce3ca9) |
 | TuringHelper  | `0x680e176b2bbdB2336063d0C82961BDB7a52CF13c` | [Boba](https://blockexplorer.avax.boba.network/address/0x680e176b2bbdB2336063d0C82961BDB7a52CF13c) |
 | Breeder Betty | `0xe48C74833ce6f18A8e54f73f1D02B8E9f9Ff8Caa` | [Boba](https://blockexplorer.avax.boba.network/address/0xe48C74833ce6f18A8e54f73f1D02B8E9f9Ff8Caa) |
 | Hatcher Harry | `0x918eA0E87ef08a5931aD3777b8c0EB69e2Ce37Dd` | [Boba](https://blockexplorer.avax.boba.network/address/0x918eA0E87ef08a5931aD3777b8c0EB69e2Ce37Dd) |

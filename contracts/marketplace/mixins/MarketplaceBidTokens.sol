@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.9;
+pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 
-import "./MarketplaceConstantsUpgradeable.sol";
+import "./MarketplaceConstants.sol";
 
-abstract contract MarketplaceBidTokensUpgradeable is
-Initializable, AccessControlEnumerableUpgradeable, MarketplaceConstantsUpgradeable {
+abstract contract MarketplaceBidTokens is
+Initializable, AccessControlEnumerableUpgradeable, MarketplaceConstants {
     using AddressUpgradeable for address;
 
     mapping(address => address) internal bidToken;

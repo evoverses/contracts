@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.9;
+pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeable.sol";
@@ -12,15 +12,14 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 
 import "../../ERC20/interfaces/IERC20ExtendedUpgradeable.sol";
-import "./MarketplaceFundDistributorUpgradeable.sol";
-import "./MarketplaceAuctionConfigUpgradeable.sol";
-import "./MarketplaceBidTokensUpgradeable.sol";
-import "./MarketplaceCounterUpgradable.sol";
 import "../libraries/ArraysUpgradeable.sol";
+import "./MarketplaceFundDistributor.sol";
+import "./MarketplaceAuctionConfig.sol";
+import "./MarketplaceBidTokens.sol";
+import "./MarketplaceCounter.sol";
 
-abstract contract MarketplaceCoreUpgradeable is
-Initializable, AccessControlEnumerableUpgradeable, ReentrancyGuardUpgradeable, MarketplaceCounterUpgradable,
-MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, MarketplaceAuctionConfigUpgradeable {
+abstract contract MarketplaceCore is Initializable, AccessControlEnumerableUpgradeable, ReentrancyGuardUpgradeable,
+MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, MarketplaceAuctionConfig {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.UintSet;
     using SafeERC20Upgradeable for IERC20ExtendedUpgradeable;
     using ArraysUpgradeable for uint256[];
@@ -110,27 +109,12 @@ MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, Marketpl
         uint256 revenue
     );
 
-    function __MarketplaceCore_init(
-        uint256 maxRoyaltyBps,
-        uint256 marketFeeBps,
-        uint256 marketFeeBurnedBps,
-        uint256 marketFeeReflectedBps,
-        address treasury,
-        address bank,
-        uint256 nexBidPercentBps
-    ) internal onlyInitializing {
+    function __MarketplaceCore_init() internal onlyInitializing {
         __AccessControlEnumerable_init();
         __ReentrancyGuard_init();
         __MarketplaceBidTokens_init();
-        __MarketplaceFundDistributor_init(
-            maxRoyaltyBps,
-            marketFeeBps,
-            marketFeeBurnedBps,
-            marketFeeReflectedBps,
-            treasury,
-            bank
-        );
-        __MarketplaceAuctionConfig_init(nexBidPercentBps);
+        __MarketplaceFundDistributor_init();
+        __MarketplaceAuctionConfig_init();
 
         _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
         _grantRole(ADMIN_ROLE, _msgSender());
@@ -438,5 +422,5 @@ MarketplaceBidTokensUpgradeable, MarketplaceFundDistributorUpgradeable, Marketpl
         return sales;
     }
 
-    uint256[49] private __gap;
+    uint256[48] private __gap;
 }

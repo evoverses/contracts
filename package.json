@@ -75,10 +75,6 @@
     "Evo:avalanche:upgrade": "npm run upgrade:avalanche -- --name Evo --address 0x454a0E479ac78e508a95880216C06F50bf3C321C",
     "Evo:avalanche:verify": "npm run verify:avalanche -- 0x454a0E479ac78e508a95880216C06F50bf3C321C",
 
-    "marketplace:avalanche:deploy": "npm run deploy:avalanche -- --name MarketplaceUpgradeable",
-    "marketplace:avalanche:upgrade": "npm run upgrade:avalanche -- --name MarketplaceUpgradeable --address 0xDb0BF8870195260fDb9A0eb7071E3374C19c9748",
-    "marketplace:avalanche:verify": "npm run verify:avalanche -- 0xDb0BF8870195260fDb9A0eb7071E3374C19c9748",
-
     "unrealEngineQueryHelper:avalanche:deploy": "npm run deploy:avalanche -- --name UnrealEngineQueryHelper",
     "unrealEngineQueryHelper:avalanche:upgrade": "npm run upgrade:avalanche -- --name UnrealEngineQueryHelper --address 0xd8Aa6eD0BC5b619c693800cC2E1F5A2Ac3e6F4A3",
     "unrealEngineQueryHelper:avalanche:verify": "npm run verify:avalanche -- 0xd8Aa6eD0BC5b619c693800cC2E1F5A2Ac3e6F4A3",
@@ -92,8 +88,8 @@
     "EVOL2:boba:verify": "npm run verify:boba -- 0xc8849f32138de93F6097199C5721a9EfD91ceE01",
 
     "marketplace:boba:deploy": "npm run deploy:boba -- --name Marketplace",
-    "marketplace:boba:upgrade": "npm run upgrade:boba -- --name Marketplace --address ",
-    "marketplace:boba:verify": "npm run verify:boba -- ",
+    "marketplace:boba:upgrade": "npm run upgrade:boba -- --name Marketplace --address 0x72b51E07Cb370292B3863FF391f2472B26Ce3ca9",
+    "marketplace:boba:verify": "npm run verify:boba -- 0x72b51E07Cb370292B3863FF391f2472B26Ce3ca9",
 
     "turingHelper:boba:deploy": "npm run deploy:boba -- --name TuringHelper",
     "turingHelper:boba:upgrade": "npm run upgrade:boba -- --name TuringHelper --address 0x680e176b2bbdB2336063d0C82961BDB7a52CF13c",
@@ -118,10 +114,10 @@
   "dependencies": {
     "@nomiclabs/hardhat-etherscan": "3.1.0",
     "@openzeppelin/contracts": "4.7.3",
-    "@openzeppelin/upgrades-core": "1.18.0",
+    "@openzeppelin/upgrades-core": "1.19.1",
     "@routerprotocol/router-crosstalk": "0.1.4",
     "dotenv": "16.0.1",
-    "hardhat": "2.11.0",
+    "hardhat": "2.11.2",
     "ts-node": "10.9.1",
     "typescript": "4.8.2"
   },
@@ -133,9 +129,8 @@
     "@openzeppelin/contracts-upgradeable": "4.7.3",
     "@openzeppelin/hardhat-upgrades": "1.20.0",
     "builtin-modules": "^3.3.0",
-    "ethers": "5.7.0",
-    "@chainlink/contracts": "0.4.1",
-    "ethers-multicall": "0.2.3"
+    "ethers": "5.7.1",
+    "@chainlink/contracts": "0.4.1"
   },
   "resolutions": {
     "@openzeppelin/contracts": "4.7.3",
