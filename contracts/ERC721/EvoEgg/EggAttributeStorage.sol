@@ -92,6 +92,7 @@ abstract contract EggAttributeStorage is Initializable, AccessControlEnumerableU
         _attributes[egg.tokenId].set(2, egg.parent1);
         _attributes[egg.tokenId].set(3, egg.parent2);
         _attributes[egg.tokenId].set(4, egg.treated);
+        _attributes[egg.tokenId].set(5, egg.createdAt);
     }
 
     function _getEggAttributes(uint256 tokenId) internal view returns (Egg memory) {
@@ -101,7 +102,8 @@ abstract contract EggAttributeStorage is Initializable, AccessControlEnumerableU
             generation: _attributes[tokenId].get(1),
             parent1: _attributes[tokenId].get(2),
             parent2: _attributes[tokenId].get(3),
-            treated: _attributes[tokenId].get(4)
+            treated: _attributes[tokenId].get(4),
+            createdAt: _attributes[tokenId].get(5)
         });
     }
 

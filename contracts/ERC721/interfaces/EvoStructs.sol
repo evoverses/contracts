@@ -57,5 +57,6 @@ interface EvoStructs {
         uint256 parent1;
         uint256 parent2;
         uint256 treated;
+        uint256 createdAt;
     }
 }

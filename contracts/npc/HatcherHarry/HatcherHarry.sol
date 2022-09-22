@@ -77,7 +77,9 @@ NpcConstants {
 
     function hatch(uint256 tokenId) public {
         require(IERC721Upgradeable(address(_EvoEgg)).ownerOf(tokenId) == _msgSender(), "Not owner");
+
         Egg memory egg = _EvoEgg.getEgg(tokenId);
+        require(block.timestamp + 3 days <= egg.createdAt, "Egg still incubating");
 
         uint256[] memory speciesIds;
         uint256[] memory minRarity;

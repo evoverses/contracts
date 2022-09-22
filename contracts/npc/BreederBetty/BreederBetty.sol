@@ -101,7 +101,7 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
         } else {
             speciesId = _hatcherHarry.speciesRoll(rand);
         }
-        return Egg(0, speciesId, getChildGeneration(evos), evos[0].tokenId, evos[1].tokenId, 0);
+        return Egg(0, speciesId, getChildGeneration(evos), evos[0].tokenId, evos[1].tokenId, 0, block.timestamp);
     }
 
 
