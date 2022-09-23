@@ -2,21 +2,17 @@
 pragma solidity 0.8.9;
 
 import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableMapUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/Base64Upgradeable.sol";
 
 import "../extensions/ERC721EnumerableExtendedUpgradeable.sol";
 import "../extensions/ERC721BurnableUpgradeable.sol";
 import "../extensions/ERC721URITokenJSON.sol";
-import "../interfaces/IEvo.sol";
 import "../extensions/ERC721Blacklist.sol";
 import "../extensions/ERC721L2.sol";
+import "../interfaces/IEvo.sol";
 import "./AttributeStorage.sol";
 
 /**
@@ -28,6 +24,18 @@ PausableUpgradeable, AccessControlEnumerableUpgradeable, ERC721BurnableUpgradeab
 ERC721Blacklist, ERC721URITokenJSON, AttributeStorage, ERC721L2 {
     using StringsUpgradeable for uint256;
 
+    modifier teamTransferCheck(address from, address to, uint256 tokenId) {
+        address bridge = 0x1A0245f23056132fEcC7098bB011C5C303aE0625;
+        require(
+            tokenId > 50
+            || from == address(0)
+            || to == address(0)
+            || from == bridge
+            || to == bridge
+        ,"Team Evo are non-transferable"
+        );
+        _;
+    }
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
@@ -125,6 +133,7 @@ ERC721Blacklist, ERC721URITokenJSON, AttributeStorage, ERC721L2 {
     whenNotPaused
     notBlacklisted(from)
     notBlacklisted(to)
+    teamTransferCheck(from, to, tokenId)
     override(ERC721Upgradeable, ERC721EnumerableExtendedUpgradeable, ERC721Blacklist)
     {
         super._beforeTokenTransfer(from, to, tokenId);

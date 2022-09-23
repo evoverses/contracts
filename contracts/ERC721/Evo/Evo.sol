@@ -18,6 +18,7 @@ import "../extensions/ERC721BurnableUpgradeable.sol";
 import "../../deprecated/OldTokenConstants.sol";
 import "../interfaces/EvoStructs.sol";
 import "../EvoEgg/IEvoEgg.sol";
+import "../interfaces/IERC721L1.sol";
 
 /**
 * @title Evo v1.0.0
@@ -25,7 +26,7 @@ import "../EvoEgg/IEvoEgg.sol";
 */
 contract Evo is Initializable, EvoStructs, ERC721Upgradeable, ERC721EnumerableExtendedUpgradeable,
 PausableUpgradeable, AccessControlEnumerableUpgradeable, ERC721BurnableUpgradeable, OldTokenConstants,
-ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
+ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable, IERC721L1 {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.UintSet;
     using EnumerableMapUpgradeable for EnumerableMapUpgradeable.UintToUintMap;
@@ -54,9 +55,14 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
 
     uint256[] private _unused;
 
+    bytes32 public constant BRIDGE_ROLE = keccak256("BRIDGE_ROLE");
+
+    address public l2Contract;
+
     modifier teamTransferCheck(address from, address to, uint256 tokenId) {
         address teamProxyWallet = 0x2F52Abfca2074b99759b58345Bb984419D304243;
         address treasury = 0x39Af60141b91F7941Eb13AedA2124a61a953b7C0;
+        address bridge = 0x328eb74673Eaa1D2d90A48E8137b015F1B6Ed35d;
         require(
             tokenId > 50
             || from == address(0)
@@ -65,6 +71,8 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
             || to == teamProxyWallet
             || from == treasury
             || to == treasury
+            || from == bridge
+            || to == bridge
             ,"Team Evo are non-transferable"
         );
         _;
@@ -294,6 +302,40 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
         return _pendingHatchAddresses.values();
     }
 
+    function setL2Contract(address _address) public onlyRole(ADMIN_ROLE) {
+        l2Contract = _address;
+    }
+
+    function bridgeExtraData(uint256 tokenId) external view returns(bytes memory) {
+        Attributes memory attributes = Attributes({
+            gender: _attributes[tokenId].get(2),
+            rarity: _attributes[tokenId].get(1),
+            primaryType: _attributes[tokenId].get(4),
+            secondaryType: _attributes[tokenId].get(5),
+            nature: _attributes[tokenId].get(8),
+            size: 0 // _attributes[tokenId].get(14)
+        });
+        Stats memory stats = Stats({
+            health: 50,
+            attack: _attributes[tokenId].get(9),
+            defense: _attributes[tokenId].get(10),
+            special: _attributes[tokenId].get(11),
+            resistance: _attributes[tokenId].get(12),
+            speed: 0
+        });
+        Evo memory evo = Evo({
+            tokenId: tokenId,
+            species: _attributes[tokenId].get(0),
+            generation: _attributes[tokenId].get(3),
+            experience: _attributes[tokenId].get(7),
+            attributes: attributes,
+            stats: stats,
+            breeds: Breeds(_attributes[tokenId].get(6), 0, 0),
+            moves: Moves(0, 0, 0, 0)
+        });
+        return abi.encode(evo);
+    }
+
     // The following functions are overrides required by Solidity.
 
     function tokensOfOwner(address owner) public view virtual
@@ -315,11 +357,11 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
         return super._exists(tokenId);
     }
 
-    function approve(address to, uint256 tokenId) public virtual override notBlacklisted(to) {
+    function approve(address to, uint256 tokenId) public virtual override(ERC721Upgradeable, IERC721Upgradeable) notBlacklisted(to) {
         super.approve(to, tokenId);
     }
 
-    function setApprovalForAll(address operator, bool approved) public virtual override notBlacklisted(operator) {
+    function setApprovalForAll(address operator, bool approved) public virtual override(ERC721Upgradeable, IERC721Upgradeable) notBlacklisted(operator) {
         super.setApprovalForAll(operator, approved);
     }
 
@@ -327,12 +369,13 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable {
     public
     view
     override(
+        IERC165Upgradeable,
         ERC721Upgradeable,
         ERC721EnumerableExtendedUpgradeable,
         AccessControlEnumerableUpgradeable,
         ERC721BlacklistUpgradeable
     )
     returns (bool) {
-        return super.supportsInterface(interfaceId);
+        return interfaceId == 0x9b9284f9 || super.supportsInterface(interfaceId);
     }
 }

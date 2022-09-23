@@ -90,7 +90,7 @@ abstract contract AttributeStorage is Initializable, AccessControlEnumerableUpgr
         }
     }
 
-    function _setEvoAttributes(Evo memory evo) internal onlyRole(MINTER_ROLE) {
+    function _setEvoAttributes(Evo memory evo) internal {
         _attributes[evo.tokenId].set(0, evo.species);
         _attributes[evo.tokenId].set(1, evo.attributes.rarity);
         _attributes[evo.tokenId].set(2, evo.attributes.gender);
@@ -109,7 +109,7 @@ abstract contract AttributeStorage is Initializable, AccessControlEnumerableUpgr
         _attributes[evo.tokenId].set(15, evo.breeds.lastBreedTime);
     }
 
-    function getEvoAttributes(uint256 tokenId) internal view onlyRole(MINTER_ROLE) returns(Evo memory) {
+    function getEvoAttributes(uint256 tokenId) internal view returns(Evo memory) {
         Moves memory moves = Moves(
             {
                 move0: 0,

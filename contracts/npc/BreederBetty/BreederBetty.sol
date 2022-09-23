@@ -14,9 +14,9 @@ import "../../ERC721/interfaces/EvoStructs.sol";
 import "../../utils/constants/NpcConstants.sol";
 import "../../utils/boba/ITuringHelper.sol";
 import "../../ERC721/interfaces/IEvo.sol";
-import "./BBFeeDistributor.sol";
 import "../HatcherHarry/IHatcherHarry.sol";
 import "../../ERC721/EvoEgg/IEvoEgg.sol";
+import "./BBFeeDistributor.sol";
 
 /**
 * @title Evo v1.0.0
@@ -32,6 +32,7 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
     IEvoEgg private _EvoEgg;
     IHatcherHarry private _hatcherHarry;
 
+    event EvoBred(address indexed from, uint256 cost, uint256 parent1, uint256 parent2, Egg evoEgg);
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
@@ -81,6 +82,7 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
 
         Egg memory egg = _breed(evos);
         _EvoEgg.incubate(_msgSender(), egg);
+        emit EvoBred(msg.sender, totalFee, tokenIds[0], tokenIds[1], egg);
     }
 
     function _breed(Evo[] memory evos) internal returns(Egg memory) {
@@ -147,13 +149,12 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
     }
 
     function breedCostOf(Evo memory evo) internal pure returns(uint256) {
-        uint256 baseCost = 500 ether;
+        uint256 baseCost = 250 ether;
         uint256 generationBaseCost = baseCost * (2**evo.generation);
         uint256 totalBreeds = evo.breeds.total;
         if (evo.generation == 0 && totalBreeds > 4) {
             totalBreeds = 4;
         }
-        uint256 breedCost = generationBaseCost + (generationBaseCost * totalBreeds);
-        return breedCost;
+        return generationBaseCost + (generationBaseCost * totalBreeds);
     }
 }

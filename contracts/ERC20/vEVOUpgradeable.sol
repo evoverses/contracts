@@ -116,6 +116,9 @@ AccessControlUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
         }
         uint256 elapsed = compareTime - GENESIS_TIMESTAMP;
         uint256 totalVested = userRatePerSecond * elapsed;
+        if (_claimedBalances[_address] > totalVested) {
+            return 0;
+        }
         return totalVested - _claimedBalances[_address];
     }
 
@@ -182,6 +185,13 @@ AccessControlUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
 
     function addWhitelist(address from, address to) public onlyRole(DEFAULT_ADMIN_ROLE) {
         _whitelist[from].add(to);
+    }
+
+    function fixDoubleBridge(address wallet, uint256 first, uint256 second) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        uint256 bridged = first + second;
+        uint256 initial = _initialBalances[wallet];
+        require(initial >= bridged, "Error: Bridge balance greater than initial balance");
+        _claimedBalances[wallet] = initial - bridged;
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount)

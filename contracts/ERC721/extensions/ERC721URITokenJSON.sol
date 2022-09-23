@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
+import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/Base64Upgradeable.sol";
@@ -8,7 +9,7 @@ import "@openzeppelin/contracts-upgradeable/utils/Base64Upgradeable.sol";
 /**
  * @dev ERC721 token with storage based token URI management.
  */
-abstract contract ERC721URITokenJSON is Initializable {
+abstract contract ERC721URITokenJSON is Initializable, ERC721Upgradeable {
     using StringsUpgradeable for uint256;
 
     struct Attribute {
@@ -25,18 +26,13 @@ abstract contract ERC721URITokenJSON is Initializable {
         string memory _imageBaseURI,
         string memory _animationBaseURI
     ) internal onlyInitializing {
-        __ERC721URITokenJSON_init_unchained(_imageBaseURI, _animationBaseURI);
-    }
-
-    function __ERC721URITokenJSON_init_unchained(
-        string memory _imageBaseURI,
-        string memory _animationBaseURI
-    ) internal onlyInitializing {
         imageBaseURI = _imageBaseURI;
         animationBaseURI = _animationBaseURI;
     }
 
-    function tokenURI(uint256 tokenId) public view virtual returns(string memory);
+    function tokenURI(uint256 tokenId) public view virtual override(ERC721Upgradeable) returns(string memory) {
+        return super.tokenURI(tokenId);
+    }
 
     function batchTokenURI(uint256[] memory tokenIds) public view virtual returns(string[] memory) {
         string[] memory uris = new string[](tokenIds.length);
@@ -68,11 +64,13 @@ abstract contract ERC721URITokenJSON is Initializable {
     ) internal view returns(string memory) {
         string memory imageURI = string(abi.encodePacked(imageBaseURI, tokenId.toString()));
         string memory animationURI = string(abi.encodePacked(animationBaseURI, tokenId.toString()));
+        string memory owner = string(abi.encodePacked(ownerOf(tokenId)));
         return string(abi.encodePacked(
                 '"name":"', name, ' #', tokenId.toString(), '",',
                 '"description":"', description, '",',
                 '"image":"', imageURI, '",',
-                '"animation_url":"', animationURI, '",'
+                '"animation_url":"', animationURI, '",',
+                '"owner":"', owner, '",'
             ));
     }
 

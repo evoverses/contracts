@@ -98,6 +98,8 @@ module.exports = {
       chainId: 43114,
       accounts: [
         process.env.PRIVATE_KEY,
+        process.env.PRIVATE_KEY_2,
+        process.env.PRIVATE_KEY_3,
         process.env.PROXY_WALLET
       ]
     },
@@ -109,7 +111,12 @@ module.exports = {
     boba: {
       url: 'https://avax.boba.network',
       chainId: 43288,
-      accounts: [process.env.PRIVATE_KEY]
+      accounts: [
+        process.env.PRIVATE_KEY,
+        process.env.PRIVATE_KEY_2,
+        process.env.PRIVATE_KEY_3,
+        process.env.PROXY_WALLET
+      ]
     }
   },
   etherscan: {

@@ -208,6 +208,7 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
     }
 
     function transferAllDisbursements(address to) public {
+        _transferAllDisbursements(msg.sender, to);
         uint256 lockedFrom = lockedOf[_msgSender()];
         require(lockedFrom > 0, "No balance");
         if (!_globalWhitelist.contains(_msgSender()) || !_globalWhitelist.contains(to)) {
@@ -229,6 +230,30 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
         _whitelist[_msgSender()].add(to);
         _transfer(_msgSender(), to, balanceOf(_msgSender()));
         _whitelist[_msgSender()].remove(to);
+    }
+
+    function _transferAllDisbursements(address from, address to) internal {
+        uint256 lockedFrom = lockedOf[from];
+        require(lockedFrom > 0, "No balance");
+        if (!_globalWhitelist.contains(from) || !_globalWhitelist.contains(to)) {
+            require(
+                transferTime[from] < block.timestamp
+                && transferTime[to] < block.timestamp,
+                "Cooldown period has not elapsed"
+            );
+            transferTime[from] = block.timestamp + 90 days;
+            transferTime[to] = block.timestamp + 90 days;
+        }
+        lockedOf[from] = 0;
+        lockedOf[to] += lockedFrom;
+
+        for (uint256 i = 0; i < disbursements[from].length; i++) {
+            disbursements[to].push(disbursements[from][i]);
+        }
+        delete disbursements[from];
+        _whitelist[from].add(to);
+        _transfer(from, to, balanceOf(from));
+        _whitelist[from].remove(to);
     }
 
     function addGlobalWhitelist(address to) public onlyRole(DEFAULT_ADMIN_ROLE) {
