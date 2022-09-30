@@ -182,6 +182,7 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
 
         uint256 saleId = _getSaleId();
         _sales[saleId] = sale;
+        _saleIds.add(saleId);
 
         _transferAssets(sale.tokenType, sale.contractAddress, _msgSender(), address(this), sale.tokenIds, sale.values);
 
@@ -209,6 +210,7 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
         require(sale.seller == _msgSender(), "MarketplaceCoreUpgradeable: Not your sale");
 
         delete _sales[saleId];
+        _saleIds.remove(saleId);
 
         _transferAssets(sale.tokenType, sale.contractAddress, address(this), sale.seller, sale.tokenIds, sale.values);
         if (sale.bidder != address(0)) {
@@ -226,6 +228,7 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
         require(sale.endTime > 0, "MarketplaceCoreUpgradeable: Sale not found");
 
         delete _sales[saleId];
+        _saleIds.remove(saleId);
 
         _transferAssets(sale.tokenType, sale.contractAddress, address(this), sale.seller, sale.tokenIds, sale.values);
         if (sale.bidder != address(0)) {
@@ -284,6 +287,7 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
         require(sale.endTime < block.timestamp, "MarketplaceCoreUpgradeable: Auction still in progress");
 
         delete _sales[saleId];
+        _saleIds.remove(saleId);
 
         _transferAssets(sale.tokenType, sale.contractAddress, address(this), sale.bidder, sale.tokenIds, sale.values);
 
@@ -304,6 +308,7 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
         require(sale.seller != _msgSender(), "MarketplaceCoreUpgradeable: Self buy");
 
         delete _sales[saleId];
+        _saleIds.remove(saleId);
 
         address from = _msgSender();
 
@@ -359,6 +364,7 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
     ) internal {
         uint256 saleId = _getSaleId();
         _sales[saleId] = sale;
+        _saleIds.add(saleId);
 
         IERC20ExtendedUpgradeable IbidToken = IERC20ExtendedUpgradeable(sale.bidToken);
         IbidToken.safeTransferFrom(_msgSender(), address(this), sale.bidAmount);
@@ -386,6 +392,7 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
         require(sale.bidder == _msgSender(), "MarketplaceCoreUpgradeable: Not your offer");
 
         delete _sales[saleId];
+        _saleIds.remove(saleId);
 
         IERC20ExtendedUpgradeable(sale.bidToken).safeTransfer(sale.bidder, sale.bidAmount);
 
@@ -399,6 +406,7 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
         require(sale.endTime <= block.timestamp, "MarketplaceCoreUpgradeable: Offer is over");
 
         delete _sales[saleId];
+        _saleIds.remove(saleId);
 
         _transferAssets(sale.tokenType, sale.contractAddress, _msgSender(), sale.bidder, sale.tokenIds, sale.values);
 

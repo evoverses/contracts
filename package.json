@@ -8,6 +8,8 @@
 
     "runScript": "yarn hardhat --network avalanche run",
 
+    "deployStatic:boba": "yarn hardhat --network boba deploy",
+
     "deploy:harmony": "yarn hardhat --network harmony deployUpgradeable",
     "deploy:avalanche": "yarn hardhat --network avalanche deployUpgradeable",
     "deploy:boba": "yarn hardhat --network boba deployUpgradeable",

@@ -11,6 +11,7 @@ import "@openzeppelin/contracts-upgradeable/utils/Base64Upgradeable.sol";
  */
 abstract contract ERC721URITokenJSON is Initializable, ERC721Upgradeable {
     using StringsUpgradeable for uint256;
+    using StringsUpgradeable for address;
 
     struct Attribute {
         string name;
@@ -64,7 +65,7 @@ abstract contract ERC721URITokenJSON is Initializable, ERC721Upgradeable {
     ) internal view returns(string memory) {
         string memory imageURI = string(abi.encodePacked(imageBaseURI, tokenId.toString()));
         string memory animationURI = string(abi.encodePacked(animationBaseURI, tokenId.toString()));
-        string memory owner = string(abi.encodePacked(ownerOf(tokenId)));
+        string memory owner = ownerOf(tokenId).toHexString();
         return string(abi.encodePacked(
                 '"name":"', name, ' #', tokenId.toString(), '",',
                 '"description":"', description, '",',

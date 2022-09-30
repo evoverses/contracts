@@ -111,11 +111,11 @@ ERC721Blacklist, ERC721URITokenJSON, AttributeStorage, ERC721L2 {
     function tokenURI(uint256 tokenId) public view virtual override(ERC721URITokenJSON, ERC721Upgradeable) returns(string memory) {
         uint256 speciesId = getAttribute(tokenId, 0);
         string memory name = getAttributeString(0, speciesId);
-        uint256 attributeCount = 14;
+        uint256 attributeCount = 16;
         Attribute[] memory attributes = new Attribute[](attributeCount);
 
         for (uint256 i = 0; i < attributeCount; i++) {
-            attributes[i] = Attribute(getAttributeString(0, i), '', getAttribute(tokenId, i).toString(), true);
+            attributes[i] = Attribute(getAttributeString(999, i), '', getAttribute(tokenId, i).toString(), true);
         }
 
         return _makeJSON(tokenId, name, 'EvoVerses Evo', attributes);

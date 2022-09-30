@@ -5,6 +5,7 @@ import "@nomiclabs/hardhat-etherscan";
 
 import "dotenv/config";
 
+import "./tasks/deploy";
 import "./tasks/deployUpgradeable";
 import "./tasks/upgrade";
 import "./tasks/getUpgradeDetails";
@@ -48,18 +49,7 @@ module.exports = {
           }
         }
       }
-    ],
-    overrides: {
-      "contracts/proxy/AdminUpgradeabilityProxy.sol": {
-        version: "0.8.2",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 200
-          }
-        }
-      }
-    }
+    ]
   },
   networks: {
     harmony: {
