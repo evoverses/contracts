@@ -17,6 +17,7 @@ import "../../ERC721/interfaces/IEvo.sol";
 import "../HatcherHarry/IHatcherHarry.sol";
 import "../../ERC721/EvoEgg/IEvoEgg.sol";
 import "./BBFeeDistributor.sol";
+import "../../utils/boba/IBobaTuringCredit.sol";
 
 /**
 * @title Evo v1.0.0
@@ -27,10 +28,11 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
 
     using StringsUpgradeable for uint256;
 
-    ITuringHelper private _turing;
+    ITuringHelper private TuringHelper;
     IEvo private _Evo;
     IEvoEgg private _EvoEgg;
     IHatcherHarry private _hatcherHarry;
+    IBobaTuringCredit private TuringCredit;
 
     event EvoBred(address indexed from, uint256 cost, uint256 parent1, uint256 parent2, Egg evoEgg);
     /// @custom:oz-upgrades-unsafe-allow constructor
@@ -49,10 +51,11 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
         _grantRole(ADMIN_ROLE, _msgSender());
         _grantRole(CONTRACT_ROLE, _msgSender());
 
-        _turing = ITuringHelper(0x680e176b2bbdB2336063d0C82961BDB7a52CF13c);
+        TuringHelper = ITuringHelper(0x680e176b2bbdB2336063d0C82961BDB7a52CF13c);
         _Evo = IEvo(0x3e9694a37846C864C67253af6F5d1F534ff3BF46);
         _EvoEgg = IEvoEgg(0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF);
         _hatcherHarry = IHatcherHarry(0x918eA0E87ef08a5931aD3777b8c0EB69e2Ce37Dd);
+        TuringCredit = IBobaTuringCredit(0x4200000000000000000000000000000000000020);
     }
 
     function pause() public onlyRole(ADMIN_ROLE) {
@@ -63,7 +66,7 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
         _unpause();
     }
 
-    function breed(uint256[] memory tokenIds) external {
+    function breed(uint256[] memory tokenIds) external payable {
         require(tokenIds.length == 2, "Invalid tokenId count");
         require(tokenIds[0] != tokenIds[1], "Cant breed with self");
         uint256 totalFee = 0;
@@ -86,10 +89,13 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
     }
 
     function _breed(Evo[] memory evos) internal returns(Egg memory) {
-        _Evo.addToAttribute(evos[0].tokenId, 6, 1);
-        _Evo.addToAttribute(evos[1].tokenId, 6, 1);
+        for (uint256 i = 0; i < evos.length; i++) {
+            _Evo.addToAttribute(evos[i].tokenId, 6, 1);
+            _Evo.setAttribute(evos[i].tokenId, 15, block.timestamp);
+        }
 
-        uint256 rand = _turing.Random();
+        _payTuringFee();
+        uint256 rand = TuringHelper.Random();
         uint256 weightedOutcome = rand % 1000;
         uint256 speciesId = 0;
         // 50% chance if matching parent species
@@ -156,5 +162,15 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
             totalBreeds = 4;
         }
         return generationBaseCost + (generationBaseCost * totalBreeds);
+    }
+
+    function _payTuringFee() internal virtual {
+        uint256 fee = TuringCredit.turingPrice();
+        require(msg.value == fee, "Insufficient Turing Fee");
+        TuringCredit.addBalanceTo{value: fee}(fee, address(TuringHelper));
+    }
+
+    function setTuringCredit() external onlyRole(ADMIN_ROLE) {
+        TuringCredit = IBobaTuringCredit(0x4200000000000000000000000000000000000020);
     }
 }

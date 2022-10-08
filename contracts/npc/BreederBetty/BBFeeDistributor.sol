@@ -65,5 +65,15 @@ abstract contract BBFeeDistributor is Initializable, AccessControlEnumerableUpgr
         }
     }
 
+    function getFeeShares() public view returns (address[] memory destinations, uint256[] memory shares, uint256 total) {
+        total = _totalShares;
+        uint256 count = _shareDistribution.length();
+        destinations = new address[](count);
+        shares = new uint256[](count);
+        for (uint256 i = 0; i < count; i++) {
+            (destinations[i], shares[i]) = _shareDistribution.at(i);
+        }
+    }
+
     uint256[47] private __gap;
 }

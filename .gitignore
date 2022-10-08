@@ -6,3 +6,4 @@ artifacts/build-info/
 .env
 reference
 /artifacts/@chainlink/
+/scripts/ad-hoc.js
