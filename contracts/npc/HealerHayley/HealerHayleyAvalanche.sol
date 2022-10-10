@@ -6,16 +6,16 @@ import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeab
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-import "../ERC721/interfaces/EvoStructs.sol";
-import "../utils/chainlink/ChainlinkVRFConsumerUpgradeableV2.sol";
-import "../ERC721/interfaces/IEvo.sol";
-import "../utils/constants/NpcConstants.sol";
+import "../../utils/chainlink/ChainlinkVRFConsumerUpgradeableV2.sol";
+import "../../ERC721/interfaces/EvoStructs.sol";
+import "../../utils/constants/NpcConstants.sol";
+import "../../ERC721/interfaces/IEvo.sol";
 
 /**
 * @title Healer Hayley v1.0.0
 * @author @DirtyCajunRice
 */
-contract HealerHayley is Initializable, EvoStructs, PausableUpgradeable,
+contract HealerHayleyAvalanche is Initializable, EvoStructs, PausableUpgradeable,
 AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConstants {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.UintSet;
@@ -148,6 +148,10 @@ AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConsta
                 _affected.add(affected[i]);
             }
         }
+    }
+
+    function remainingAffected() public view returns (uint256[] memory, uint256[] memory) {
+        return (_affected.values(), _healed.values());
     }
 
     function clearHealRequestOf(address _address) public onlyRole(ADMIN_ROLE) {

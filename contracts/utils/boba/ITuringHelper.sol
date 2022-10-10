@@ -1,7 +1,8 @@
-//SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.9;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.9;
 
 interface ITuringHelper {
+    function TuringTx(string memory _url, bytes memory _payload) external returns (bytes memory);
     function APICall(string memory _url, bytes memory _payload) external returns (bytes memory);
     function Random() external returns (uint256);
 

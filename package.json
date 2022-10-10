@@ -6,7 +6,10 @@
   "scripts": {
     "compile": "yarn hardhat compile",
 
-    "runScript": "yarn hardhat --network avalanche run",
+    "-----------------------": "",
+    "script:ad-hoc:boba": "yarn hardhat --network boba run scripts/ad-hoc.js",
+    "script:ad-hoc:avalanche": "yarn hardhat --network avalanche run scripts/ad-hoc.js",
+    "-----------------------": "",
 
     "deployStatic:boba": "yarn hardhat --network boba deploy",
 
@@ -22,7 +25,6 @@
     "verify:boba": "yarn hardhat --network boba verify",
 
     "scanner:EWRU:harmony": "yarn hardhat --network harmony run scripts/ERWUScanner.js",
-
     "upgrade:masterInvestor": "yarn upgrade:harmony --name MasterInvestor --address 0xF88412Df9F60Bea80bf8846Da6089Eb18eb5F24a",
 
     "deploy:erwu": "yarn deploy:harmony --name EmergencyWithdrawalReimbursementUpgradeable",
@@ -55,8 +57,8 @@
     "EVO:avalanche:upgrade": "yarn upgrade:avalanche --name EVOUpgradeable --address 0x42006Ab57701251B580bDFc24778C43c9ff589A1",
     "EVO:avalanche:verify": "yarn verify:avalanche 0x42006Ab57701251B580bDFc24778C43c9ff589A1",
 
-    "xEVO:avalanche:deploy": "yarn deploy:avalanche --name xEVOUpgradeable",
-    "xEVO:avalanche:upgrade": "yarn upgrade:avalanche --name xEVOUpgradeable --address 0x9c6291b4a30C6662aA9723e7345137e71975b20f",
+    "xEVO:avalanche:deploy": "yarn deploy:avalanche --name xEVOAvalanche",
+    "xEVO:avalanche:upgrade": "yarn upgrade:avalanche --name xEVOAvalanche --address 0x9c6291b4a30C6662aA9723e7345137e71975b20f",
     "xEVO:avalanche:verify": "yarn verify:avalanche 0x9c6291b4a30C6662aA9723e7345137e71975b20f",
 
     "deploy:masterInvestor": "yarn runScript ./scripts/deployMasterInvestor.js",
@@ -66,12 +68,12 @@
     "hatcherHarry:avalanche:upgrade": "yarn upgrade:avalanche --name HatcherHarryAvalanche --address 0x75aC43933483c60eB72A87EbBB8BAa51181c4a7E",
     "hatcherHarry:avalanche:verify": "yarn verify:avalanche 0x75aC43933483c60eB72A87EbBB8BAa51181c4a7E",
 
-    "healerHayley:avalanche:deploy": "yarn deploy:avalanche --name HealerHayley",
-    "healerHayley:avalanche:upgrade": "yarn upgrade:avalanche --name HealerHayley --address 0x56b5D7a82b475B969E09fc9352350c1921361a39",
+    "healerHayley:avalanche:deploy": "yarn deploy:avalanche --name HealerHayleyAvalanche",
+    "healerHayley:avalanche:upgrade": "yarn upgrade:avalanche --name HealerHayleyAvalanche --address 0x56b5D7a82b475B969E09fc9352350c1921361a39",
     "healerHayley:avalanche:verify": "yarn verify:avalanche 0x56b5D7a82b475B969E09fc9352350c1921361a39",
 
-    "EvoEgg:avalanche:deploy": "yarn deploy:avalanche --name EvoEggUpgradeable",
-    "EvoEgg:avalanche:upgrade": "yarn upgrade:avalanche --name EvoEggUpgradeable --address 0x75dDd2b19E6f7BEd3Bfe9D2D21dd226C38C0CbC4",
+    "EvoEgg:avalanche:deploy": "yarn deploy:avalanche --name EvoEggGen0",
+    "EvoEgg:avalanche:upgrade": "yarn upgrade:avalanche --name EvoEggGen0 --address 0x75dDd2b19E6f7BEd3Bfe9D2D21dd226C38C0CbC4",
     "EvoEgg:avalanche:verify": "yarn verify:avalanche 0x75dDd2b19E6f7BEd3Bfe9D2D21dd226C38C0CbC4",
 
     "Evo:avalanche:deploy": "yarn deploy:avalanche --name Evo",
@@ -89,6 +91,10 @@
     "EVOL2:boba:deploy": "yarn deploy:boba --name EVOL2",
     "EVOL2:boba:upgrade": "yarn upgrade:boba --name EVOL2 --address 0xc8849f32138de93F6097199C5721a9EfD91ceE01",
     "EVOL2:boba:verify": "yarn verify:boba 0xc8849f32138de93F6097199C5721a9EfD91ceE01",
+
+    "xEVO:boba:deploy": "yarn deploy:boba --name xEVO",
+    "xEVO:boba:upgrade": "yarn upgrade:boba --name xEVO --address 0x9649786490349c990CD91D417db6228292f51D92",
+    "xEVO:boba:verify": "yarn verify:boba 0x9649786490349c990CD91D417db6228292f51D92",
 
     "marketplace:boba:deploy": "yarn deploy:boba --name Marketplace",
     "marketplace:boba:upgrade": "yarn upgrade:boba --name Marketplace --address 0x72b51E07Cb370292B3863FF391f2472B26Ce3ca9",
@@ -108,7 +114,15 @@
 
     "breederBetty:boba:deploy": "yarn deploy:boba --name BreederBetty",
     "breederBetty:boba:upgrade": "yarn upgrade:boba --name BreederBetty --address 0xe48C74833ce6f18A8e54f73f1D02B8E9f9Ff8Caa",
-    "breederBetty:boba:verify": "yarn verify:boba 0xe48C74833ce6f18A8e54f73f1D02B8E9f9Ff8Caa"
+    "breederBetty:boba:verify": "yarn verify:boba 0xe48C74833ce6f18A8e54f73f1D02B8E9f9Ff8Caa",
+
+    "healerHayley:boba:deploy": "yarn deploy:boba --name HealerHayley",
+    "healerHayley:boba:upgrade": "yarn upgrade:boba --name HealerHayley --address 0xB8a20e62dfc40a4719BC1658369e7606E935103f",
+    "healerHayley:boba:verify": "yarn verify:boba 0xB8a20e62dfc40a4719BC1658369e7606E935103f",
+
+    "bobaFaucet:boba:deploy": "yarn deploy:boba --name BobaFaucet",
+    "bobaFaucet:boba:upgrade": "yarn upgrade:boba --name BobaFaucet --address 0x105495d9252Ff06aA1C84B27491D461b8e0FD540",
+    "bobaFaucet:boba:verify": "yarn verify:boba 0x105495d9252Ff06aA1C84B27491D461b8e0FD540"
 
   },
   "keywords": [],

@@ -13,7 +13,7 @@ async function main() {
 
   const turingToken = await contract.turingToken();
   console.log("Turing Token:", turingToken);
-
+  return;
   const tokenContract = await ethers.getContractAt("ERC20", turingToken, account);
   const accountBalance = await tokenContract.balanceOf(account.address);
   console.log("Account Balance:", ethers.utils.formatEther(accountBalance));

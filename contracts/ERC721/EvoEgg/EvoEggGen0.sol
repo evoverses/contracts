@@ -25,6 +25,7 @@ AccessControlEnumerableUpgradeable, OldTokenConstants, ERC721BlacklistUpgradeabl
     using CountersUpgradeable for CountersUpgradeable.Counter;
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.UintSet;
     using StringsUpgradeable for uint256;
+    using StringsUpgradeable for address;
 
     CountersUpgradeable.Counter private _tokenIdCounter;
 
@@ -142,12 +143,14 @@ AccessControlEnumerableUpgradeable, OldTokenConstants, ERC721BlacklistUpgradeabl
     function tokenURI(uint256 tokenId) public view virtual override(ERC721Upgradeable) returns (string memory) {
         string memory imageURI = string(abi.encodePacked(imageBaseURI, (tokenId % 4).toString(), '.png'));
         string memory animationURI = string(abi.encodePacked(imageBaseURI, (tokenId % 4).toString(), '.webm'));
+        string memory owner = ownerOf(tokenId).toHexString();
         bytes memory dataURIGeneral = abi.encodePacked(
             '"name": "Evo Egg #', tokenId.toString(), '", ',
             '"description": "EvoVerses Gen0 Egg", ',
             '"image": "', imageURI, '", ',
             '"animation_url": "', animationURI, '", ',
-            '"animation_type": "webm/mp4", '
+            '"animation_type": "webm/mp4", ',
+            '"owner":"', owner, '",'
         );
 
         string memory staffAttribute = string(abi.encodePacked(tokenId <= 50 ? '{"value": "staff"},' : ''));

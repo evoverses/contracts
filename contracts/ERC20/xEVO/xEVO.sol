@@ -1,35 +1,35 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.9;
+pragma solidity ^0.8.16;
 
-import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
+import "../../utils/constants/TokenConstants.sol";
+
 /**
-* @title xEVO v1.0.0
+* @title xEVO v2.0.0
 * @author @DirtyCajunRice
 */
-contract xEVOUpgradeable is Initializable, PausableUpgradeable, AccessControlUpgradeable, ERC20Upgradeable {
-    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
-    bytes32 public constant CONTRACT_ROLE = keccak256("CONTRACT_ROLE");
+contract xEVO is Initializable, ERC20Upgradeable, PausableUpgradeable, AccessControlEnumerableUpgradeable, TokenConstants {
 
-    ERC20Upgradeable private EVO;
+    ERC20Upgradeable private constant EVO = ERC20Upgradeable(0xc8849f32138de93F6097199C5721a9EfD91ceE01);
 
     /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() initializer {}
+    constructor() {
+        _disableInitializers();
+    }
 
     function initialize() initializer public {
         __ERC20_init("xEVO", "xEVO");
         __Pausable_init();
-        __AccessControl_init();
+        __AccessControlEnumerable_init();
 
         _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
-        _grantRole(PAUSER_ROLE, _msgSender());
-        _grantRole(CONTRACT_ROLE, _msgSender());
-
-        EVO = ERC20Upgradeable(0x42006Ab57701251B580bDFc24778C43c9ff589A1);
+        _grantRole(ADMIN_ROLE, _msgSender());
+        _grantRole(MINTER_ROLE, _msgSender());
     }
 
     function deposit(uint256 amount) public whenNotPaused {
@@ -57,15 +57,23 @@ contract xEVOUpgradeable is Initializable, PausableUpgradeable, AccessControlUpg
         EVO.transfer(_msgSender(), what);
     }
 
-    function pause() public onlyRole(PAUSER_ROLE) {
+    function batchMint(address[] memory to, uint256[] memory amount) public onlyRole(ADMIN_ROLE) {
+        for (uint256 i = 0; i < to.length; i++) {
+            _mint(to[i], amount[i]);
+        }
+    }
+
+    function batchBurn(address[] memory to, uint256[] memory amount) public onlyRole(ADMIN_ROLE) {
+        for (uint256 i = 0; i < to.length; i++) {
+            _burn(to[i], amount[i]);
+        }
+    }
+
+    function pause() public onlyRole(ADMIN_ROLE) {
         _pause();
     }
 
-    function unpause() public onlyRole(PAUSER_ROLE) {
+    function unpause() public onlyRole(ADMIN_ROLE) {
         _unpause();
-    }
-
-    function setBaseToken(address _address) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        EVO = ERC20Upgradeable(_address);
     }
 }

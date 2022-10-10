@@ -4,7 +4,7 @@ require("dotenv").config()
 async function update() {
   const accounts = await ethers.getSigners()
 
-  const contract = await ethers.getContractAt("EvoL2", "0x3e9694a37846C864C67253af6F5d1F534ff3BF46", accounts[0]);
+  const contract = await ethers.getContractAt("EvoEgg", "0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF", accounts[0]);
   //const begin = 30
   //const end = 70
   const evoIds = [1,2,3,4,5,6,7,9,10,11,12,13,15,16,19,20,22,25,26,28,30,33,34,35,37,39,40,42,43,45,46,48,50,51,53,54,55,56,59,61,63,64,66,68,69,70,75,77,78,81,83,84,85,86,89,91,93,96,97,100,102,103,106,109,117,120,122,125]
@@ -60,32 +60,36 @@ async function update() {
 //         _attributes[evo.tokenId].set(15, evo.breeds.lastBreedTime);
 const setEvoL2AttributeStrings = async () => {
   const accounts = await ethers.getSigners()
-  const contract = await ethers.getContractAt("EvoL2", "0x3e9694a37846C864C67253af6F5d1F534ff3BF46", accounts[0]);
+  //const contract = await ethers.getContractAt("EvoL2", "0x3e9694a37846C864C67253af6F5d1F534ff3BF46", accounts[0]);
+  const contract = await ethers.getContractAt("EvoEgg", "0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF", accounts[0]);
   const attributeId = 999;
-  const indicies = Array.from(Array(16)).map((u, i) => i);
-  const values = [
-    'species',
-    'rarity',
-    'gender',
-    'generation',
-    'primaryType',
-    'secondaryType',
-    'total',
-    'experience',
-    'nature',
-    'attack',
-    'defense',
-    'special',
-    'resistance',
-    'speed',
-    'size',
-    'lastBreedTime'
-  ];
+  const indicies = Array.from(Array(6)).map((u, i) => i);
+  const values = ['species', 'generation', 'parent1', 'parent2', 'treated', 'createdAt']
+
+  //const indicies = Array.from(Array(16)).map((u, i) => i);
+  //const values = [
+  //  'species',
+  //  'rarity',
+  //  'gender',
+  //  'generation',
+  //  'primaryType',
+  //  'secondaryType',
+  //  'total',
+  //  'experience',
+  //  'nature',
+  //  'attack',
+  //  'defense',
+  //  'special',
+  //  'resistance',
+  //  'speed',
+  //  'size',
+  //  'lastBreedTime'
+  //];
   const tx = await contract.batchSetAttributeStrings(attributeId, indicies, values)
   await tx.wait();
 }
 
-update()
+setEvoL2AttributeStrings()
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error)

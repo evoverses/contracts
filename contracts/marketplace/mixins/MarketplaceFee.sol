@@ -18,11 +18,11 @@ Initializable, AccessControlEnumerableUpgradeable, MarketplaceConstants {
     function __MarketplaceFee_init() internal onlyInitializing {
         __AccessControlEnumerable_init();
         _fee = 100;
-        _feeWeights[FeeType.Burned] = 2500;
-        _feeWeights[FeeType.Shared] = 2500;
+        _feeWeights[FeeType.Burned] = 1000;
+        _feeWeights[FeeType.Shared] = 1000;
         _feeWeights[FeeType.Founders] = 1000;
         _feeWeights[FeeType.Marketing] = 1000;
-        _feeWeights[FeeType.Dev] = 500;
+        _feeWeights[FeeType.Dev] = 1000;
     }
 
     function getMarketplaceFee() external view returns (uint256) {
@@ -54,7 +54,7 @@ Initializable, AccessControlEnumerableUpgradeable, MarketplaceConstants {
             + _feeWeights[FeeType.Founders]
             + _feeWeights[FeeType.Marketing]
             + _feeWeights[FeeType.Dev];
-        require(total <= 100, "Total Fees exceed 100%");
+        require(total <= 10000, "Total Fees exceed 100%");
 
         emit MarketplaceFeeWeightUpdated(feeWeight, feeType);
     }

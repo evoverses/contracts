@@ -25,14 +25,14 @@ Initializable, AccessControlEnumerableUpgradeable, MarketplaceConstants {
         return (_nexBidPercent, extensionSeconds);
     }
 
-    function updateMarketplaceAuctionConfig(uint256 nexBidPercent) external onlyRole(UPDATER_ROLE) {
+    function updateMarketplaceAuctionConfig(uint256 nexBidPercent, uint256 _extensionSeconds) external onlyRole(UPDATER_ROLE) {
         require(
             0 <= nexBidPercent && nexBidPercent <= FEE_BASIS_POINTS,
             "MarketplaceAuctionConfigUpgradeable: Min increment must be >=0% and <= 100%"
         );
         
         _nexBidPercent = nexBidPercent;
-
+        extensionSeconds = _extensionSeconds;
         emit MarketplaceAuctionConfigUpdated(nexBidPercent, extensionSeconds);
     }
 

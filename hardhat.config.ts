@@ -11,6 +11,7 @@ import "./tasks/upgrade";
 import "./tasks/getUpgradeDetails";
 
 module.exports = {
+  defaultNetwork: 'boba',
   solidity: {
     compilers: [
       {

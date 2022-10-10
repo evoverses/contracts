@@ -17,4 +17,5 @@ interface IEvo is IERC721Upgradeable, EvoStructs {
     function tokensOfOwner(address owner) external view returns(uint256[] memory);
     function batchTokenUriJson(uint256[] memory tokenIds) external view returns(string[] memory);
     function getEvo(uint256 tokenId) external view returns(Evo memory);
+    function getAttribute(uint256 tokenId, uint256 attributeId) external view returns(uint256);
 }

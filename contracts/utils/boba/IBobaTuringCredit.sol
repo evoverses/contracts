@@ -22,7 +22,7 @@ interface IBobaTuringCredit {
      * @param _addBalanceAmount the prepaid amount that the user want to add
      * @param _helperContractAddress the address of the turing helper contract
      */
-    function addBalanceTo(uint256 _addBalanceAmount, address _helperContractAddress) external;
+    function addBalanceTo(uint256 _addBalanceAmount, address _helperContractAddress) external payable;
 
     /**
      * @dev Return the credit of a specific helper contract

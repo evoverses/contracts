@@ -20,7 +20,7 @@ import "../../utils/constants/NpcConstants.sol";
 * @title Hatcher Harry v1.0.0
 * @author @DirtyCajunRice
 */
-contract HatcherHarryUpgradeable is Initializable, EvoStructs, PausableUpgradeable,
+contract HatcherHarryAvalanche is Initializable, EvoStructs, PausableUpgradeable,
 AccessControlEnumerableUpgradeable, ChainlinkVRFConsumerUpgradeableV2, NpcConstants {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.UintSet;

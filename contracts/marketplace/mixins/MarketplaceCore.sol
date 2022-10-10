@@ -150,13 +150,13 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
         uint256 duration,
         uint256 minPrice
     ) internal view returns (Sale memory) {
-        require(tokenIds.length > 0, "MarketplaceCoreUpgradeable: Invalid tokenIds length");
-        require(tokenIds.length == values.length, "MarketplaceCoreUpgradeable: TokenIds length dont match");
-        require(isValidBidToken(contractAddress, bidToken), "MarketplaceCoreUpgradeable: Invalid bid token");
-        require(values.gte(1), "MarketplaceCoreUpgradeable: Invalid value");
-        require(startTime >= block.timestamp, "MarketplaceCoreUpgradeable: Invalid startTime");
-        require(duration > 0, "MarketplaceCoreUpgradeable: Invalid duration");
-        require(minPrice >= 0, "MarketplaceCoreUpgradeable: Invalid minPrice");
+        require(tokenIds.length > 0, "MarketplaceCore: Invalid tokenIds length");
+        require(tokenIds.length == values.length, "MarketplaceCore: TokenIds length dont match");
+        require(isValidBidToken(contractAddress, bidToken), "MarketplaceCore: Invalid bid token");
+        require(values.gte(1), "MarketplaceCore: Invalid value");
+        require(startTime >= block.timestamp, "MarketplaceCore: Invalid startTime");
+        require(duration > 0, "MarketplaceCore: Invalid duration");
+        require(minPrice >= 0, "MarketplaceCore: Invalid minPrice");
 
         return Sale(
             saleType,
@@ -203,11 +203,30 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
     }
 
     function cancelSale(uint256 saleId, string memory reason) external nonReentrant {
-        require(bytes(reason).length > 0, "MarketplaceCoreUpgradeable: Include a reason for this cancellation");
+        require(bytes(reason).length > 0, "MarketplaceCore: Include a reason for this cancellation");
 
         Sale memory sale = _sales[saleId];
+        require(sale.seller == _msgSender(), "MarketplaceCore: Not your sale");
+        require(sale.saleType == SaleType.FIXED, "MarketplaceCore: Not a fixed-price sale");
 
-        require(sale.seller == _msgSender(), "MarketplaceCoreUpgradeable: Not your sale");
+        delete _sales[saleId];
+        _saleIds.remove(saleId);
+
+        _transferAssets(sale.tokenType, sale.contractAddress, address(this), sale.seller, sale.tokenIds, sale.values);
+        if (sale.bidder != address(0)) {
+            IERC20ExtendedUpgradeable(sale.bidToken).safeTransfer(sale.bidder, sale.bidAmount);
+        }
+
+        emit SaleCanceled(saleId, reason);
+    }
+
+    function cancelAuction(uint256 saleId, string memory reason) external nonReentrant {
+        require(bytes(reason).length > 0, "MarketplaceCore: Include a reason for this cancellation");
+
+        Sale memory sale = _sales[saleId];
+        require(sale.seller == _msgSender(), "MarketplaceCore: Not your auction");
+        require(sale.saleType == SaleType.AUCTION, "MarketplaceCore: Not an auction");
+        require(sale.bidder == address(0), "MarketplaceCore: Auction has active bidders");
 
         delete _sales[saleId];
         _saleIds.remove(saleId);
@@ -221,11 +240,11 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
     }
 
     function cancelSaleByAdmin(uint256 saleId, string memory reason) external nonReentrant onlyRole(UPDATER_ROLE) {
-        require(bytes(reason).length > 0, "MarketplaceCoreUpgradeable: Include a reason for this cancellation");
+        require(bytes(reason).length > 0, "MarketplaceCore: Include a reason for this cancellation");
 
         Sale memory sale = _sales[saleId];
 
-        require(sale.endTime > 0, "MarketplaceCoreUpgradeable: Sale not found");
+        require(sale.endTime > 0, "MarketplaceCore: Sale not found");
 
         delete _sales[saleId];
         _saleIds.remove(saleId);
@@ -249,17 +268,17 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
     function bidAuction(uint256 saleId, uint256 bidAmount) external nonReentrant {
         Sale storage sale = _sales[saleId];
 
-        require(sale.saleType == SaleType.AUCTION, "MarketplaceCoreUpgradeable: Not Auction");
-        require(sale.endTime > block.timestamp, "MarketplaceCoreUpgradeable: Sale is over");
-        require(sale.startTime <= block.timestamp, "MarketplaceCoreUpgradeable: Sale not started");
-        require(sale.bidder != _msgSender(), "MarketplaceCoreUpgradeable: You already are current bidder");
-        require(sale.seller != _msgSender(), "MarketplaceCoreUpgradeable: Self bid");
+        require(sale.saleType == SaleType.AUCTION, "MarketplaceCore: Not Auction");
+        require(sale.endTime > block.timestamp, "MarketplaceCore: Sale is over");
+        require(sale.startTime <= block.timestamp, "MarketplaceCore: Sale not started");
+        require(sale.bidder != _msgSender(), "MarketplaceCore: You already are current bidder");
+        require(sale.seller != _msgSender(), "MarketplaceCore: Self bid");
 
         if (sale.bidder == address(0)) {
-            require(sale.bidAmount <= bidAmount, "MarketplaceCoreUpgradeable: Bid amount too low");
+            require(sale.bidAmount <= bidAmount, "MarketplaceCore: Bid amount too low");
         } else {
             uint256 minAmount = _getNextBidAmount(sale.bidAmount);
-            require(bidAmount >= minAmount, "MarketplaceCoreUpgradeable: Bid amount too low");
+            require(bidAmount >= minAmount, "MarketplaceCore: Bid amount too low");
         }
 
         uint256 prevBidAmount = sale.bidAmount;
@@ -283,9 +302,9 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
     function finalizeAuction(uint256 saleId) external nonReentrant {
         Sale memory sale = _sales[saleId];
 
-        require(sale.endTime > 0, "MarketplaceCoreUpgradeable: Auction not found");
-        require(sale.endTime < block.timestamp, "MarketplaceCoreUpgradeable: Auction still in progress");
-
+        require(sale.endTime > 0, "MarketplaceCore: Auction not found");
+        require(sale.endTime < block.timestamp, "MarketplaceCore: Auction still in progress");
+        require(sale.bidder != address(0), "MarketplaceCore: No bidder");
         delete _sales[saleId];
         _saleIds.remove(saleId);
 
@@ -301,11 +320,11 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
     function buyFixedPrice(uint256 saleId, uint256 buyAmount) external nonReentrant {
         Sale memory sale = _sales[saleId];
 
-        require(sale.saleType == SaleType.FIXED, "MarketplaceCoreUpgradeable: Not Fixed-price");
-        require(sale.endTime >= block.timestamp, "MarketplaceCoreUpgradeable: Sale is over");
-        require(sale.startTime <= block.timestamp, "MarketplaceCoreUpgradeable: Sale not started");
-        require(sale.bidAmount == buyAmount, "MarketplaceCoreUpgradeable: Wrong buy amount");
-        require(sale.seller != _msgSender(), "MarketplaceCoreUpgradeable: Self buy");
+        require(sale.saleType == SaleType.FIXED, "MarketplaceCore: Not Fixed-price");
+        require(sale.endTime >= block.timestamp, "MarketplaceCore: Sale is over");
+        require(sale.startTime <= block.timestamp, "MarketplaceCore: Sale not started");
+        require(sale.bidAmount == buyAmount, "MarketplaceCore: Wrong buy amount");
+        require(sale.seller != _msgSender(), "MarketplaceCore: Self buy");
 
         delete _sales[saleId];
         _saleIds.remove(saleId);
@@ -333,13 +352,13 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
         address contractAddress, TokenType tokenType, uint256[] memory tokenIds, uint256[] memory values, address bidToken,
         uint256 duration, uint256 price
     ) internal view returns (Sale memory) {
-        require(tokenIds.length > 0, "MarketplaceCoreUpgradeable: Invalid tokenIds length");
-        require(tokenIds.length == values.length, "MarketplaceCoreUpgradeable: TokenIds length dont match");
-        require(isValidBidToken(contractAddress, bidToken), "MarketplaceCoreUpgradeable: Invalid bid token");
-        require(values.gte(1), "MarketplaceCoreUpgradeable: Invalid value");
-        require(duration > 0, "MarketplaceCoreUpgradeable: Invalid duration");
-        require(price >= 0, "MarketplaceCoreUpgradeable: Invalid price");
-        require(_checkSelfOffer(contractAddress, tokenIds), "MarketplaceCoreUpgradeable: Self offer");
+        require(tokenIds.length > 0, "MarketplaceCore: Invalid tokenIds length");
+        require(tokenIds.length == values.length, "MarketplaceCore: TokenIds length dont match");
+        require(isValidBidToken(contractAddress, bidToken), "MarketplaceCore: Invalid bid token");
+        require(values.gte(1), "MarketplaceCore: Invalid value");
+        require(duration > 0, "MarketplaceCore: Invalid duration");
+        require(price >= 0, "MarketplaceCore: Invalid price");
+        require(_checkSelfOffer(contractAddress, tokenIds), "MarketplaceCore: Self offer");
 
         uint256 startTime = block.timestamp;
         return Sale(
@@ -388,8 +407,8 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
     function cancelOffer(uint256 saleId) external nonReentrant {
         Sale memory sale = _sales[saleId];
 
-        require(sale.saleType == SaleType.OFFER, "MarketplaceCoreUpgradeable: Not offer");
-        require(sale.bidder == _msgSender(), "MarketplaceCoreUpgradeable: Not your offer");
+        require(sale.saleType == SaleType.OFFER, "MarketplaceCore: Not offer");
+        require(sale.bidder == _msgSender(), "MarketplaceCore: Not your offer");
 
         delete _sales[saleId];
         _saleIds.remove(saleId);
@@ -402,8 +421,8 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
     function acceptOffer(uint256 saleId) external nonReentrant {
         Sale memory sale = _sales[saleId];
 
-        require(sale.saleType == SaleType.OFFER, "MarketplaceCoreUpgradeable: Not offer");
-        require(sale.endTime <= block.timestamp, "MarketplaceCoreUpgradeable: Offer is over");
+        require(sale.saleType == SaleType.OFFER, "MarketplaceCore: Not offer");
+        require(sale.endTime <= block.timestamp, "MarketplaceCore: Offer is over");
 
         delete _sales[saleId];
         _saleIds.remove(saleId);

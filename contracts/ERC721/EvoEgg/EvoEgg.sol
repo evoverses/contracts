@@ -20,7 +20,7 @@ import "./IEvoEgg.sol";
 * @author @DirtyCajunRice
 */
 contract EvoEgg is Initializable, ERC721Upgradeable, ERC721EnumerableExtendedUpgradeable, PausableUpgradeable,
-AccessControlEnumerableUpgradeable, TokenConstants, ERC721Blacklist, IEvoEgg, EggAttributeStorage, ERC721URITokenJSON {
+AccessControlEnumerableUpgradeable, TokenConstants, ERC721Blacklist, EggAttributeStorage, ERC721URITokenJSON {
     using CountersUpgradeable for CountersUpgradeable.Counter;
     using StringsUpgradeable for uint256;
 
@@ -62,12 +62,11 @@ AccessControlEnumerableUpgradeable, TokenConstants, ERC721Blacklist, IEvoEgg, Eg
     function tokenURI(uint256 tokenId) public view virtual override(ERC721URITokenJSON, ERC721Upgradeable) returns(string memory) {
         uint256 speciesId = getAttribute(tokenId, 0);
         string memory name = getAttributeString(0, speciesId);
-        uint256 attributeCount = 5;
+        uint256 attributeCount = 6;
         Attribute[] memory attributes = new Attribute[](attributeCount);
         for (uint256 i = 0; i < attributeCount; i++) {
-            attributes[i] = Attribute(getAttributeString(0, i), '', getAttribute(tokenId, i).toString(), true);
+            attributes[i] = Attribute(getAttributeString(999, i), '', getAttribute(tokenId, i).toString(), true);
         }
-
         return _makeJSON(tokenId, name, 'EvoVerses Egg', attributes);
     }
     function setImageBaseURI(string memory _imageBaseURI) public onlyRole(ADMIN_ROLE) {

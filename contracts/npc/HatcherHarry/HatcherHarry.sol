@@ -65,7 +65,7 @@ NpcConstants {
 
         treasury = 0x2F52Abfca2074b99759b58345Bb984419D304243;
 
-        treatCost = 50 ether;
+        treatCost = 250 ether;
     }
 
     function treat(uint256 tokenId) public {
@@ -152,7 +152,7 @@ NpcConstants {
         if (outcome == 0) {
             return (p1Size + p2Size) / 2;
         }
-        return rand % 20;
+        return rand % 21;
     }
 
     function statsRoll(
@@ -188,7 +188,7 @@ NpcConstants {
         }
     }
 
-    function rarityConfig() internal view returns (uint256[] memory, uint256[] memory, uint256) {
+    function rarityConfig() public view returns (uint256[] memory, uint256[] memory, uint256) {
         uint256[] memory speciesIds = _speciesIds.values();
         uint256[] memory minRarity = new uint256[](speciesIds.length);
         uint256 totalRarity = 0;
@@ -225,6 +225,14 @@ NpcConstants {
                 _speciesBase[speciesIds[i]].set(j, _baseAttributes[i][j]);
             }
         }
+    }
+
+    function setTreatCost(uint256 cost) external onlyRole(ADMIN_ROLE) {
+        treatCost = cost;
+    }
+
+    function setTreasury(address newTreasury) external onlyRole(ADMIN_ROLE) {
+        treasury = newTreasury;
     }
 
     function pause() public onlyRole(ADMIN_ROLE) {

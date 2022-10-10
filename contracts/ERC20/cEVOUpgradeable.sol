@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.9;
+pragma solidity ^0.8.16;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
@@ -209,32 +209,15 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
 
     function transferAllDisbursements(address to) public {
         _transferAllDisbursements(msg.sender, to);
-        uint256 lockedFrom = lockedOf[_msgSender()];
-        require(lockedFrom > 0, "No balance");
-        if (!_globalWhitelist.contains(_msgSender()) || !_globalWhitelist.contains(to)) {
-            require(
-                transferTime[_msgSender()] < block.timestamp
-                && transferTime[to] < block.timestamp,
-                "Cooldown period has not elapsed"
-            );
-            transferTime[_msgSender()] = block.timestamp + 90 days;
-            transferTime[to] = block.timestamp + 90 days;
-        }
-        lockedOf[_msgSender()] = 0;
-        lockedOf[to] += lockedFrom;
+    }
 
-        for (uint256 i = 0; i < disbursements[_msgSender()].length; i++) {
-            disbursements[to].push(disbursements[_msgSender()][i]);
-        }
-        delete disbursements[_msgSender()];
-        _whitelist[_msgSender()].add(to);
-        _transfer(_msgSender(), to, balanceOf(_msgSender()));
-        _whitelist[_msgSender()].remove(to);
+    function adminTransferAllDisbursements(address from, address to) external onlyRole(ADMIN_ROLE) {
+        _transferAllDisbursements(from, to);
     }
 
     function _transferAllDisbursements(address from, address to) internal {
         uint256 lockedFrom = lockedOf[from];
-        require(lockedFrom > 0, "No balance");
+        require(lockedFrom > 0 || disbursements[from].length > 0, "No balance");
         if (!_globalWhitelist.contains(from) || !_globalWhitelist.contains(to)) {
             require(
                 transferTime[from] < block.timestamp
@@ -250,6 +233,7 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
         for (uint256 i = 0; i < disbursements[from].length; i++) {
             disbursements[to].push(disbursements[from][i]);
         }
+
         delete disbursements[from];
         _whitelist[from].add(to);
         _transfer(from, to, balanceOf(from));

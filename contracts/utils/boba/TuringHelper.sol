@@ -75,13 +75,21 @@ contract TuringHelper is ITuringHelper, Initializable, PausableUpgradeable, Acce
     */
     function GetResponse(uint32 rType, string memory _url, bytes memory _payload) public onlySelf onlyR2(rType) returns(bytes memory) {
         require (_payload.length > 0, "Turing:GetResponse:no payload");
+        require (rType == 2, string(GetErrorCode(rType)));
         return _payload;
     }
 
     function GetRandom(uint32 rType, uint256 _random) public onlySelf onlyR2(rType) returns(uint256) {
+        require (rType == 2, string(GetErrorCode(rType)));
         return _random;
     }
 
+    function TuringTx(string memory _url, bytes memory _payload) public onlySelf returns (bytes memory) {
+        require (_payload.length > 0, "Turing:TuringTx: no payload");
+        bytes memory response = Self.GetResponse(1, _url, _payload);
+        emit OffchainResponse(1, response);
+        return response;
+    }
     /* Called from the external contract. It takes an api endpoint URL
        and an abi-encoded request payload. The URL and the list of allowed
        methods are supplied when the contract is created. In the future
@@ -117,6 +125,6 @@ contract TuringHelper is ITuringHelper, Initializable, PausableUpgradeable, Acce
 
     // ERC165 check interface
     function supportsInterface(bytes4 interfaceId) public view override(AccessControlEnumerableUpgradeable) returns (bool) {
-        return interfaceId == ITuringHelper.APICall.selector || super.supportsInterface(interfaceId);
+        return interfaceId == ITuringHelper.TuringTx.selector || super.supportsInterface(interfaceId);
     }
 }

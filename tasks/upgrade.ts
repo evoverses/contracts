@@ -9,9 +9,11 @@ task("upgrade", "Upgrade a transparent proxy contract")
   .setAction(async ({ name, address }, hre) => {
     await hre.run("compile")
     const Contract = await hre.ethers.getContractFactory(name)
+
+    // hre.upgrades.forceImport("0x680e176b2bbdB2336063d0C82961BDB7a52CF13c", Contract, { kind: 'transparent' })
     console.log("Upgrading", name)
     const contract = await hre.upgrades.upgradeProxy(address, Contract, {
-        unsafeAllowRenames: true
+      unsafeAllowRenames: true
     })
     console.log(name, "upgraded!")
     const impl = await hre.upgrades.erc1967.getImplementationAddress(contract.address)

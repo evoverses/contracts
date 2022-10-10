@@ -79,7 +79,7 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
             evos[i] = evo;
             totalFee += breedCostOf(evo);
         }
-        require(checkCompatibility(evos), "Evo are not compatible");
+        checkCompatibility(evos);
 
         _distributeFee(totalFee);
 
@@ -100,12 +100,12 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
         uint256 speciesId = 0;
         // 50% chance if matching parent species
         if (evos[0].species == evos[1].species && weightedOutcome <= 500) {
-            speciesId == evos[0].species;
+            speciesId = evos[0].species;
         // 12.5% chance otherwise for each parent
         } else if (weightedOutcome < 125) {
-            speciesId == evos[0].species;
+            speciesId = evos[0].species;
         } else if (weightedOutcome < 250) {
-            speciesId == evos[1].species;
+            speciesId = evos[1].species;
         } else {
             speciesId = _hatcherHarry.speciesRoll(rand);
         }
@@ -139,19 +139,31 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
         return block.timestamp >= nextBreedTime;
     }
 
-    function checkCompatibility(Evo[] memory evos) internal pure returns(bool) {
+    function checkCompatibility(Evo[] memory evos) internal pure {
         Attributes memory a = evos[0].attributes;
         Attributes memory b = evos[1].attributes;
+
+        require(a.gender != b.gender, "BreederBetty::Evos are the same gender");
+
+        // find atleast one matching type:
+        bool matches = false;
+        // Primary -> Primary
         if (a.primaryType == b.primaryType) {
-            return true;
+            matches = true;
+        } else
+        // Secondary -> Primary
+        if (a.secondaryType > 0 && (a.secondaryType == b.primaryType)) {
+            matches = true;
+        } else
+        // Primary -> Secondary
+        if (b.secondaryType > 0 && (b.secondaryType == a.primaryType)) {
+            matches = true;
+        } else
+        // Secondary -> Secondary
+        if ((a.secondaryType > 0 && b.secondaryType > 0) && (a.secondaryType == b.secondaryType)) {
+            matches = true;
         }
-        if (a.secondaryType > 0 && a.secondaryType == b.primaryType) {
-            return true;
-        }
-        if (b.secondaryType > 0 && b.secondaryType == a.primaryType) {
-            return true;
-        }
-        return false;
+        require(matches, "BreederBetty::Evos are incompatible");
     }
 
     function breedCostOf(Evo memory evo) internal pure returns(uint256) {
@@ -168,9 +180,5 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
         uint256 fee = TuringCredit.turingPrice();
         require(msg.value == fee, "Insufficient Turing Fee");
         TuringCredit.addBalanceTo{value: fee}(fee, address(TuringHelper));
-    }
-
-    function setTuringCredit() external onlyRole(ADMIN_ROLE) {
-        TuringCredit = IBobaTuringCredit(0x4200000000000000000000000000000000000020);
     }
 }

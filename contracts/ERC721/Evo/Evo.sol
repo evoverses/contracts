@@ -113,6 +113,11 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable, IERC721L1 {
         _unpause();
     }
 
+    function getAttribute(uint256 tokenId, uint256 attributeId) public view onlyRole(MINTER_ROLE) returns(uint256) {
+        (,uint256 v) = _attributes[tokenId].tryGet(attributeId);
+        return v;
+    }
+
     function setAttribute(uint256 tokenId, uint256 attributeId, uint256 value) public onlyRole(MINTER_ROLE) {
         _attributes[tokenId].set(attributeId, value);
     }
@@ -321,7 +326,7 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable, IERC721L1 {
             defense: _attributes[tokenId].get(10),
             special: _attributes[tokenId].get(11),
             resistance: _attributes[tokenId].get(12),
-            speed: 0
+            speed: _attributes[tokenId].get(13)
         });
         Evo memory evo = Evo({
             tokenId: tokenId,
