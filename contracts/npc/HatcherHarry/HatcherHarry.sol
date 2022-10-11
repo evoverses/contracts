@@ -9,6 +9,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 import "../../ERC721/interfaces/EvoStructs.sol";
 import "../../utils/constants/NpcConstants.sol";
+import "../../utils/boba/IBobaTuringCredit.sol";
 import "../../utils/boba/ITuringHelper.sol";
 import "../../ERC721/interfaces/IEvo.sol";
 import "../../ERC20/interfaces/IcEVO.sol";
@@ -26,7 +27,7 @@ NpcConstants {
     using EnumerableMapUpgradeable for EnumerableMapUpgradeable.UintToUintMap;
     using Numbers for uint256;
 
-    ITuringHelper private _TuringHelper;
+    ITuringHelper private TuringHelper;
     IEvoEgg private _EvoEgg;
     IEvo private _Evo;
     IEVO private _EVO;
@@ -42,6 +43,7 @@ NpcConstants {
     // set of configured species
     EnumerableSetUpgradeable.UintSet private _speciesIds;
 
+    IBobaTuringCredit private TuringCredit;
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
@@ -61,8 +63,8 @@ NpcConstants {
         _EvoEgg = IEvoEgg(0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF);
         _Evo = IEvo(0x3e9694a37846C864C67253af6F5d1F534ff3BF46);
 
-        _TuringHelper = ITuringHelper(0x680e176b2bbdB2336063d0C82961BDB7a52CF13c);
-
+        TuringHelper = ITuringHelper(0x680e176b2bbdB2336063d0C82961BDB7a52CF13c);
+        TuringCredit = IBobaTuringCredit(0x4200000000000000000000000000000000000020);
         treasury = 0x2F52Abfca2074b99759b58345Bb984419D304243;
 
         treatCost = 250 ether;
@@ -75,11 +77,11 @@ NpcConstants {
         IEggAttributeStorage(address(_EvoEgg)).setAttribute(tokenId, 4, 1);
     }
 
-    function hatch(uint256 tokenId) public {
+    function hatch(uint256 tokenId) public payable {
         require(IERC721Upgradeable(address(_EvoEgg)).ownerOf(tokenId) == _msgSender(), "Not owner");
 
         Egg memory egg = _EvoEgg.getEgg(tokenId);
-        require(block.timestamp + 3 days <= egg.createdAt, "Egg still incubating");
+        require(egg.createdAt + 3 days <= block.timestamp, "Egg still incubating");
 
         uint256[] memory speciesIds;
         uint256[] memory minRarity;
@@ -87,8 +89,10 @@ NpcConstants {
 
         (speciesIds, minRarity, totalRarity) = rarityConfig();
 
-        uint256 random = _TuringHelper.Random();
+        _payTuringFee();
+        uint256 random = TuringHelper.Random();
         uint256[] memory randomChunks = random.chunkUintX(10_000, 15);
+
         Evo memory evo = geneRoll(egg, randomChunks);
         _EvoEgg.hatch(tokenId);
         _Evo.mint(_msgSender(), evo);
@@ -227,12 +231,22 @@ NpcConstants {
         }
     }
 
+    function _payTuringFee() internal virtual {
+        uint256 fee = TuringCredit.turingPrice();
+        require(msg.value == fee, "Insufficient Turing Fee");
+        TuringCredit.addBalanceTo{value: fee}(fee, address(TuringHelper));
+    }
+
     function setTreatCost(uint256 cost) external onlyRole(ADMIN_ROLE) {
         treatCost = cost;
     }
 
     function setTreasury(address newTreasury) external onlyRole(ADMIN_ROLE) {
         treasury = newTreasury;
+    }
+
+    function setTuringCredit() external onlyRole(ADMIN_ROLE) {
+        TuringCredit = IBobaTuringCredit(0x4200000000000000000000000000000000000020);
     }
 
     function pause() public onlyRole(ADMIN_ROLE) {

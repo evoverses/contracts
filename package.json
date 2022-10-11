@@ -122,7 +122,7 @@
 
     "bobaFaucet:boba:deploy": "yarn deploy:boba --name BobaFaucet",
     "bobaFaucet:boba:upgrade": "yarn upgrade:boba --name BobaFaucet --address 0x105495d9252Ff06aA1C84B27491D461b8e0FD540",
-    "bobaFaucet:boba:verify": "yarn verify:boba 0x105495d9252Ff06aA1C84B27491D461b8e0FD540"
+    "bobaFaucet:boba:verify": "yarn verify:boba 0x105495d9252Ff06aA1C84B27491D461b8e0FD540",
 
   },
   "keywords": [],
