@@ -31,6 +31,7 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable, IERC721L1 {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.UintSet;
     using EnumerableMapUpgradeable for EnumerableMapUpgradeable.UintToUintMap;
     using StringsUpgradeable for uint256;
+    using StringsUpgradeable for address;
 
     IEvoEgg private EGG;
 
@@ -174,10 +175,10 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable, IERC721L1 {
         uint256 generation = _attributes[tokenId].get(3);
 
         return string(abi.encodePacked(
-                '{"trait_type":"Species","value":"',  species, '"},',
-                '{"trait_type":"Rarity","value":"',  rarity, '"},',
-                '{"trait_type":"Gender","value":"',  gender, '"},',
-                '{"trait_type":"Generation","value":',  generation.toString(), '},'
+                '{"trait_type":"species","value":"',  species, '"},',
+                '{"trait_type":"rarity","value":"',  rarity, '"},',
+                '{"trait_type":"gender","value":"',  gender, '"},',
+                '{"trait_type":"generation","value":',  generation.toString(), '},'
             ));
     }
 
@@ -187,11 +188,11 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable, IERC721L1 {
         uint256 breedCount = _attributes[tokenId].get(6);
         uint256 experience = _attributes[tokenId].get(7);
         return string(abi.encodePacked(
-                '{"trait_type":"Primary Type","value":"',  primaryType, '"},',
-                '{"trait_type":"Secondary Type","value":"',  secondaryType, '"},',
-                '{"trait_type":"Breed Count","value":', breedCount.toString(), '},',
-                '{"trait_type":"Available Breeds","value":',  '-1', '},',
-                '{"trait_type":"Experience","value":',  experience.toString(), '},'
+                '{"trait_type":"primaryType","value":"',  primaryType, '"},',
+                '{"trait_type":"SecondaryType","value":"',  secondaryType, '"},',
+                '{"trait_type":"breedCount","value":', breedCount.toString(), '},',
+                '{"trait_type":"availableBreeds","value":',  '-1', '},',
+                '{"trait_type":"experience","value":',  experience.toString(), '},'
             ));
     }
 
@@ -203,14 +204,14 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable, IERC721L1 {
         uint256 specialDefense = _attributes[tokenId].get(12);
         uint256 speed = _attributes[tokenId].get(13);
         bytes memory attributesA = abi.encodePacked(
-            '{"trait_type":"Nature","value":"',  nature, '"},',
-            '{"trait_type":"Attack","value":',  attack.toString(), '},',
-            '{"trait_type":"Defense","value":',  defense.toString(), '},'
+            '{"trait_type":"nature","value":"',  nature, '"},',
+            '{"trait_type":"attack","value":',  attack.toString(), '},',
+            '{"trait_type":"defense","value":',  defense.toString(), '},'
         );
         bytes memory attributesB = abi.encodePacked(
-            '{"trait_type":"Special","value":',  special.toString(), '},',
-            '{"trait_type":"Special Defense","value":',  specialDefense.toString(), '},',
-            '{"trait_type":"Speed","value":',  speed.toString(), '}'
+            '{"trait_type":"special","value":',  special.toString(), '},',
+            '{"trait_type":"resistance","value":',  specialDefense.toString(), '},',
+            '{"trait_type":"speed","value":',  speed.toString(), '}'
         );
         return string(abi.encodePacked(attributesA, attributesB));
     }
@@ -227,14 +228,15 @@ ERC721BlacklistUpgradeable, ChainlinkVRFConsumerUpgradeable, IERC721L1 {
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         uint256 speciesId = _attributes[tokenId].get(0);
         string memory species = _attributeStrings[0][speciesId];
-        string memory imageURI = string(abi.encodePacked(imageBaseURI, speciesId.toString()));
-        string memory animationURI = string(abi.encodePacked(animationBaseURI, tokenId.toString()));
-
+        string memory rarity = _attributeStrings[1][_attributes[tokenId].get(1)];
+        string memory imageURI = string(abi.encodePacked(imageBaseURI, species, "/", rarity));
+        string memory owner = ownerOf(tokenId).toHexString();
         string memory dataURIGeneral = string(abi.encodePacked(
                 '"name":"', species, ' #', tokenId.toString(), '",',
                 '"description":"EvoVerses Evo",',
-                '"image":"', imageURI, '.png",',
-                '"animation_url":"', animationURI, '",'
+                '"image":"', imageURI, '",',
+                '"owner":"', owner, '",',
+                '"tokenId":', tokenId.toString(), ','
             ));
         string memory attributesURI = getAttributesURI(tokenId);
         bytes memory dataURI = abi.encodePacked('{', dataURIGeneral, attributesURI, '}');

@@ -64,14 +64,13 @@ abstract contract ERC721URITokenJSON is Initializable, ERC721Upgradeable {
         string memory description
     ) internal view returns(string memory) {
         string memory imageURI = string(abi.encodePacked(imageBaseURI, tokenId.toString()));
-        string memory animationURI = string(abi.encodePacked(animationBaseURI, tokenId.toString()));
         string memory owner = ownerOf(tokenId).toHexString();
         return string(abi.encodePacked(
                 '"name":"', name, ' #', tokenId.toString(), '",',
                 '"description":"', description, '",',
                 '"image":"', imageURI, '",',
-                '"animation_url":"', animationURI, '",',
-                '"owner":"', owner, '",'
+                '"owner":"', owner, '",',
+                '"tokenId":', tokenId.toString(), ','
             ));
     }
 
