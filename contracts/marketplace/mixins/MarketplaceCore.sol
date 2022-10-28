@@ -422,7 +422,7 @@ MarketplaceCounter, MarketplaceBidTokens, MarketplaceFundDistributor, Marketplac
         Sale memory sale = _sales[saleId];
 
         require(sale.saleType == SaleType.OFFER, "MarketplaceCore: Not offer");
-        require(sale.endTime <= block.timestamp, "MarketplaceCore: Offer is over");
+        require(sale.endTime >= block.timestamp, "MarketplaceCore: Offer is over");
 
         delete _sales[saleId];
         _saleIds.remove(saleId);
