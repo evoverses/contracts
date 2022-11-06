@@ -9,7 +9,8 @@
     "-----------------------": "",
     "script:ad-hoc:boba": "yarn hardhat --network boba run scripts/ad-hoc.js",
     "script:ad-hoc:avalanche": "yarn hardhat --network avalanche run scripts/ad-hoc.js",
-    "-----------------------": "",
+
+    "==========HELPERS==========": "",
 
     "deployStatic:boba": "yarn hardhat --network boba deploy",
 
@@ -21,29 +22,14 @@
     "upgrade:avalanche": "yarn hardhat --network avalanche upgrade",
     "upgrade:boba": "yarn hardhat --network boba upgrade",
 
+    "verify:harmony": "yarn hardhat --network harmony verify",
     "verify:avalanche": "yarn hardhat --network avalanche verify",
     "verify:boba": "yarn hardhat --network boba verify",
 
-    "scanner:EWRU:harmony": "yarn hardhat --network harmony run scripts/ERWUScanner.js",
-    "upgrade:masterInvestor": "yarn upgrade:harmony --name MasterInvestor --address 0xF88412Df9F60Bea80bf8846Da6089Eb18eb5F24a",
-
-    "deploy:erwu": "yarn deploy:harmony --name EmergencyWithdrawalReimbursementUpgradeable",
-    "upgrade:erwu": "yarn upgrade:harmony --name EmergencyWithdrawalReimbursementUpgradeable --address 0x306D0783119c61E033FCa12AC78943213Df8dE39",
-
-    "deploy:cEVO": "yarn deploy:harmony --name cEVO",
-    "upgrade:cEVO": "yarn upgrade:harmony --name cEVO --address 0x465d89df3e9B1AFB6957B58Be6137feeBB8e9f61",
-
-    "upgrade:vEVOVesting": "yarn upgrade:harmony --name vEVOVestingUpgradeable --address 0xE8588d85DB8DBCE0Fad08e8943E6Cc0Bf3F5bb7d",
-
-    "deploy:xEVO": "yarn deploy:harmony --name xEVOUpgradeable",
-    "upgrade:xEVO": "yarn upgrade:harmony --name xEVOUpgradeable --address 0x0d613f28Ab63f5e4101BcD483B61E4985Ad934a8",
-
-    "deploy:migrationMikeEgress": "yarn deploy:harmony --name MigrationMikeEgressUpgradeable",
-    "upgrade:migrationMikeEgress": "yarn upgrade:harmony --name MigrationMikeEgressUpgradeable --address 0xba9564732102222bdbf54b931D783AFCe52053C5",
+    "==========AVALANCHE==========": "",
 
     "deploy:migrationMikeIngress": "yarn deploy:avalanche --name MigrationMikeIngressUpgradeable",
     "upgrade:migrationMikeIngress": "yarn upgrade:avalanche --name MigrationMikeIngressUpgradeable --address 0x5f332f313E873E6D1d51F7853f4a6AD0446D0907",
-
 
     "vEVO:avalanche:deploy": "yarn deploy:avalanche --name vEVOUpgradeable",
     "vEVO:avalanche:upgrade": "yarn upgrade:avalanche --name vEVOUpgradeable --address 0x53f0E805bDFa8418213aC7e306e1C0B6c9e44714",
@@ -84,6 +70,12 @@
     "unrealEngineQueryHelper:avalanche:upgrade": "yarn upgrade:avalanche --name UnrealEngineQueryHelper --address 0xd8Aa6eD0BC5b619c693800cC2E1F5A2Ac3e6F4A3",
     "unrealEngineQueryHelper:avalanche:verify": "yarn verify:avalanche 0xd8Aa6eD0BC5b619c693800cC2E1F5A2Ac3e6F4A3",
 
+    "L1NFTBridge:avalanche:deploy": "yarn deploy:avalanche --name L1NFTBridge",
+    "L1NFTBridge:avalanche:upgrade": "yarn upgrade:avalanche --name L1NFTBridge --address 0x18505CeC943EcB79999262c2dEb5127157c104CC",
+    "L1NFTBridge:avalanche:verify": "yarn verify:avalanche 0x18505CeC943EcB79999262c2dEb5127157c104CC",
+
+    "==========BOBA==========": "",
+
     "EvoL2:boba:deploy": "yarn deploy:boba --name EvoL2",
     "EvoL2:boba:upgrade": "yarn upgrade:boba --name EvoL2 --address 0x3e9694a37846C864C67253af6F5d1F534ff3BF46",
     "EvoL2:boba:verify": "yarn verify:boba 0x3e9694a37846C864C67253af6F5d1F534ff3BF46",
@@ -122,8 +114,34 @@
 
     "bobaFaucet:boba:deploy": "yarn deploy:boba --name BobaFaucet",
     "bobaFaucet:boba:upgrade": "yarn upgrade:boba --name BobaFaucet --address 0x105495d9252Ff06aA1C84B27491D461b8e0FD540",
-    "bobaFaucet:boba:verify": "yarn verify:boba 0x105495d9252Ff06aA1C84B27491D461b8e0FD540"
+    "bobaFaucet:boba:verify": "yarn verify:boba 0x105495d9252Ff06aA1C84B27491D461b8e0FD540",
 
+    "bobaL2BillingContract:boba:deploy": "yarn deploy:boba --name L2BillingContract",
+    "bobaL2BillingContract:boba:upgrade": "yarn upgrade:boba --name L2BillingContract --address 0xc71411f3FDE3a34cDe5668cC4156841629321904",
+    "bobaL2BillingContract:boba:verify": "yarn verify:boba 0xc71411f3FDE3a34cDe5668cC4156841629321904",
+
+    "L2NFTBridge:boba:deploy": "yarn deploy:boba --name L2NFTBridge",
+    "L2NFTBridge:boba:upgrade": "yarn upgrade:boba --name L2NFTBridge --address 0x0E1455D86920b399369a7C871be8d26F585af440",
+    "L2NFTBridge:boba:verify": "yarn verify:boba 0x0E1455D86920b399369a7C871be8d26F585af440",
+
+    "==========HARMONY==========": "",
+
+    "scanner:EWRU:harmony": "yarn hardhat --network harmony run scripts/ERWUScanner.js",
+    "upgrade:masterInvestor": "yarn upgrade:harmony --name MasterInvestor --address 0xF88412Df9F60Bea80bf8846Da6089Eb18eb5F24a",
+
+    "deploy:erwu": "yarn deploy:harmony --name EmergencyWithdrawalReimbursementUpgradeable",
+    "upgrade:erwu": "yarn upgrade:harmony --name EmergencyWithdrawalReimbursementUpgradeable --address 0x306D0783119c61E033FCa12AC78943213Df8dE39",
+
+    "deploy:cEVO": "yarn deploy:harmony --name cEVO",
+    "upgrade:cEVO": "yarn upgrade:harmony --name cEVO --address 0x465d89df3e9B1AFB6957B58Be6137feeBB8e9f61",
+
+    "upgrade:vEVOVesting": "yarn upgrade:harmony --name vEVOVestingUpgradeable --address 0xE8588d85DB8DBCE0Fad08e8943E6Cc0Bf3F5bb7d",
+
+    "deploy:xEVO": "yarn deploy:harmony --name xEVOUpgradeable",
+    "upgrade:xEVO": "yarn upgrade:harmony --name xEVOUpgradeable --address 0x0d613f28Ab63f5e4101BcD483B61E4985Ad934a8",
+
+    "deploy:migrationMikeEgress": "yarn deploy:harmony --name MigrationMikeEgressUpgradeable",
+    "upgrade:migrationMikeEgress": "yarn upgrade:harmony --name MigrationMikeEgressUpgradeable --address 0xba9564732102222bdbf54b931D783AFCe52053C5"
   },
   "keywords": [],
   "author": "",

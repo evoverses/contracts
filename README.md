@@ -16,25 +16,30 @@ Security contact: DirtyCajunRice#0001 (Discord)
 |            vEVO            | `0x53f0E805bDFa8418213aC7e306e1C0B6c9e44714` | [Snowtrace](https://snowtrace.io/address/0x53f0E805bDFa8418213aC7e306e1C0B6c9e44714) |
 |            cEVO            | `0x7B5501109c2605834F7A4153A75850DB7521c37E` | [Snowtrace](https://snowtrace.io/address/0x7B5501109c2605834F7A4153A75850DB7521c37E) |
 |            xEVO            | `0x9c6291b4a30C6662aA9723e7345137e71975b20f` | [Snowtrace](https://snowtrace.io/address/0x9c6291b4a30C6662aA9723e7345137e71975b20f) |
+| EVO-WAVAX-LP<sup>(1)<sup>  | `0xb99A92B6d5a7CA3a2215A63d43D5E8ad43ABC4e9` | [Snowtrace](https://snowtrace.io/address/0xb99A92B6d5a7CA3a2215A63d43D5E8ad43ABC4e9) |
 |        Evo Egg Gen0        | `0x75dDd2b19E6f7BEd3Bfe9D2D21dd226C38C0CbC4` | [Snowtrace](https://snowtrace.io/address/0x75dDd2b19E6f7BEd3Bfe9D2D21dd226C38C0CbC4) |
 |            Evo             | `0x454a0E479ac78e508a95880216C06F50bf3C321C` | [Snowtrace](https://snowtrace.io/address/0x454a0E479ac78e508a95880216C06F50bf3C321C) |
-|      Master Investor       | `0xF88412Df9F60Bea80bf8846Da6089Eb18eb5F24a` | [Snowtrace](https://snowtrace.io/address/0xF88412Df9F60Bea80bf8846Da6089Eb18eb5F24a) |
+|      Master Investor       | `0xD782Cf9F04E24CAe4953679EBF45ba34509F105C` | [Snowtrace](https://snowtrace.io/address/0xD782Cf9F04E24CAe4953679EBF45ba34509F105C) |
 |       Hatcher Harry        | `0x75aC43933483c60eB72A87EbBB8BAa51181c4a7E` | [Snowtrace](https://snowtrace.io/address/0x75aC43933483c60eB72A87EbBB8BAa51181c4a7E) |
 |       Healer Hayley        | `0x56b5D7a82b475B969E09fc9352350c1921361a39` | [Snowtrace](https://snowtrace.io/address/0x56b5D7a82b475B969E09fc9352350c1921361a39) |
 |   Migration Mike Ingress   | `0x5f332f313E873E6D1d51F7853f4a6AD0446D0907` | [Snowtrace](https://snowtrace.io/address/0x5f332f313E873E6D1d51F7853f4a6AD0446D0907) |
 | Unreal Engine Query Helper | `0xd8Aa6eD0BC5b619c693800cC2E1F5A2Ac3e6F4A3` | [Snowtrace](https://snowtrace.io/address/0xd8Aa6eD0BC5b619c693800cC2E1F5A2Ac3e6F4A3) |
+|     Boba L1 NFT Bridge     | `0x18505CeC943EcB79999262c2dEb5127157c104CC` | [Snowtrace](https://snowtrace.io/address/0x18505CeC943EcB79999262c2dEb5127157c104CC) |
 
 ### Boba Contracts
 
-|   Contract    |                   Address                    |                                           Explorer Link                                            |
-|:-------------:|:--------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
-|      EVO      | `0xc8849f32138de93F6097199C5721a9EfD91ceE01` | [Boba](https://blockexplorer.avax.boba.network/address/0xc8849f32138de93F6097199C5721a9EfD91ceE01) |
-|      Evo      | `0x3e9694a37846C864C67253af6F5d1F534ff3BF46` | [Boba](https://blockexplorer.avax.boba.network/address/0x3e9694a37846C864C67253af6F5d1F534ff3BF46) |
-|    Evo Egg    | `0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF` | [Boba](https://blockexplorer.avax.boba.network/address/0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF) |
-|  Marketplace  | `0x72b51E07Cb370292B3863FF391f2472B26Ce3ca9` | [Boba](https://blockexplorer.avax.boba.network/address/0x72b51E07Cb370292B3863FF391f2472B26Ce3ca9) |
-| TuringHelper  | `0x680e176b2bbdB2336063d0C82961BDB7a52CF13c` | [Boba](https://blockexplorer.avax.boba.network/address/0x680e176b2bbdB2336063d0C82961BDB7a52CF13c) |
-| Breeder Betty | `0xe48C74833ce6f18A8e54f73f1D02B8E9f9Ff8Caa` | [Boba](https://blockexplorer.avax.boba.network/address/0xe48C74833ce6f18A8e54f73f1D02B8E9f9Ff8Caa) |
-| Hatcher Harry | `0x918eA0E87ef08a5931aD3777b8c0EB69e2Ce37Dd` | [Boba](https://blockexplorer.avax.boba.network/address/0x918eA0E87ef08a5931aD3777b8c0EB69e2Ce37Dd) |
+|       Contract        |                   Address                    |                                           Explorer Link                                            |
+|:---------------------:|:--------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
+|          EVO          | `0xc8849f32138de93F6097199C5721a9EfD91ceE01` | [Boba](https://blockexplorer.avax.boba.network/address/0xc8849f32138de93F6097199C5721a9EfD91ceE01) |
+|         xEVO          | `0x9649786490349c990CD91D417db6228292f51D92` | [Boba](https://blockexplorer.avax.boba.network/address/0x9649786490349c990CD91D417db6228292f51D92) |
+|          Evo          | `0x3e9694a37846C864C67253af6F5d1F534ff3BF46` | [Boba](https://blockexplorer.avax.boba.network/address/0x3e9694a37846C864C67253af6F5d1F534ff3BF46) |
+|        Evo Egg        | `0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF` | [Boba](https://blockexplorer.avax.boba.network/address/0xa3b63C50F0518aAaCf5cF4720B773e1371D10eBF) |
+|      Marketplace      | `0x72b51E07Cb370292B3863FF391f2472B26Ce3ca9` | [Boba](https://blockexplorer.avax.boba.network/address/0x72b51E07Cb370292B3863FF391f2472B26Ce3ca9) |
+|     TuringHelper      | `0x680e176b2bbdB2336063d0C82961BDB7a52CF13c` | [Boba](https://blockexplorer.avax.boba.network/address/0x680e176b2bbdB2336063d0C82961BDB7a52CF13c) |
+|     Breeder Betty     | `0xe48C74833ce6f18A8e54f73f1D02B8E9f9Ff8Caa` | [Boba](https://blockexplorer.avax.boba.network/address/0xe48C74833ce6f18A8e54f73f1D02B8E9f9Ff8Caa) |
+|     Hatcher Harry     | `0x918eA0E87ef08a5931aD3777b8c0EB69e2Ce37Dd` | [Boba](https://blockexplorer.avax.boba.network/address/0x918eA0E87ef08a5931aD3777b8c0EB69e2Ce37Dd) |
+|     L2 NFT Bridge     | `0x0E1455D86920b399369a7C871be8d26F585af440` | [Boba](https://blockexplorer.avax.boba.network/address/0x0E1455D86920b399369a7C871be8d26F585af440) |
+| L2 NFT Bridge Billing | `0xc71411f3FDE3a34cDe5668cC4156841629321904` | [Boba](https://blockexplorer.avax.boba.network/address/0xc71411f3FDE3a34cDe5668cC4156841629321904) |
 
 ### Multi-Chain Contracts
 
@@ -52,9 +57,10 @@ Security contact: DirtyCajunRice#0001 (Discord)
 |           MasterInvestor           | `0xF88412Df9F60Bea80bf8846Da6089Eb18eb5F24a` | [Harmony](https://explorer.harmony.one/address/0xF88412Df9F60Bea80bf8846Da6089Eb18eb5F24a) |
 | Emergency Withdrawal Reimbursement | `0x306D0783119c61E033FCa12AC78943213Df8dE39` | [Harmony](https://explorer.harmony.one/address/0x306D0783119c61E033FCa12AC78943213Df8dE39) |
 |            vEVOVesting             | `0xE8588d85DB8DBCE0Fad08e8943E6Cc0Bf3F5bb7d` | [Harmony](https://explorer.harmony.one/address/0xE8588d85DB8DBCE0Fad08e8943E6Cc0Bf3F5bb7d) |
-| Migration Mike Egress<sup>(1)<sup> | `0xba9564732102222bdbf54b931D783AFCe52053C5` | [Harmony](https://explorer.harmony.one/address/0xba9564732102222bdbf54b931D783AFCe52053C5) |
+| Migration Mike Egress<sup>(2)<sup> | `0xba9564732102222bdbf54b931D783AFCe52053C5` | [Harmony](https://explorer.harmony.one/address/0xba9564732102222bdbf54b931D783AFCe52053C5) |
 
-1. Migration Mike Egress will continue to function for the foreseeable future until all users have
+1. EVO-WAVAX-LP is generated from Trader Joe liquidity pools and the EvoVerses team has no control over the contract
+2. Migration Mike Egress will continue to function for the foreseeable future until all users have
 had a chance to escape the Harmony Blockchain
 
 [Fantom-explorer]: https://ftmscan.com/address/0x42006ab57701251b580bdfc24778c43c9ff589a1
