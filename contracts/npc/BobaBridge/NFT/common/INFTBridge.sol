@@ -6,7 +6,7 @@ pragma solidity ^0.8.0;
  */
 interface INFTBridge {
 
-    enum NFTType { ERC1155, ERC721 }
+    enum NFTType { ERC1155, ERC721, ERC20 }
 
     // Info of each NFT
     struct PairNFTInfo {
@@ -49,7 +49,15 @@ interface INFTBridge {
         bytes data
     );
 
-    function bridge(address nft, address to, uint256 tokenId, uint256 amount, NFTType nftType, uint32 gas) external;
+    function bridge(
+        address nft,
+        address to,
+        uint256 tokenId,
+        uint256 amount,
+        NFTType nftType,
+        uint32 gas
+    ) external payable;
+
     function finalize(
         address l1Nft,
         address l2Nft,

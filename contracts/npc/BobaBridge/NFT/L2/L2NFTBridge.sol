@@ -9,11 +9,11 @@ import "../../../../utils/boba/CrossDomain/CrossDomainEnabled.sol";
 import "../../../../utils/access/StandardAccessControl.sol";
 
 /* Interface Imports */
+import "../common/IStandardERC20.sol";
 import "../common/IStandardERC1155.sol";
 import "../common/IStandardERC721.sol";
 import "./IL2BillingContract.sol";
 import "../common/INFTBridge.sol";
-import "./IL2StandardNFT.sol";
 
 /* Library Imports */
 import "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165CheckerUpgradeable.sol";
@@ -65,12 +65,14 @@ PausableUpgradeable, StandardAccessControl {
         uint256 amount,
         NFTType nftType,
         uint32 gas
-    ) external override nonReentrant whenNotPaused {
+    ) external payable override nonReentrant whenNotPaused {
         bytes memory extraData;
         if (nftType == NFTType.ERC1155) {
             extraData = IStandardERC1155(nft).bridgeExtraData(tokenId, amount);
-        } else {
+        } else if (nftType == NFTType.ERC721) {
             extraData = IStandardERC721(nft).bridgeExtraData(tokenId);
+        } else {
+            extraData = "";
         }
         _initiateBridge(nft, msg.sender, to, tokenId, amount, gas, nftType, extraData);
     }
@@ -108,14 +110,16 @@ PausableUpgradeable, StandardAccessControl {
         PairNFTInfo storage pairNFT = pairNFTInfo[nft];
         require(pairNFT.l1Nft != address(0), "NFTBridge::NFT is not configured for bridging");
         require(
-            pairNFT.l1Nft == IL2StandardNFT(nft).l1Contract(),
+            pairNFT.l1Nft == IStandardERC721(nft).bridgeContract(),
             "NFTBridge::L1 NFT contract address mismatch"
         );
         // When a withdrawal is initiated, we burn the NFT to prevent subsequent usage
         if (nftType == NFTType.ERC1155) {
             IStandardERC1155(nft).burn(msg.sender, tokenId, amount);
-        } else {
+        } else if (nftType == NFTType.ERC721) {
             IStandardERC721(nft).burn(tokenId);
+        } else {
+            IStandardERC20(nft).burn(msg.sender, amount);
         }
 
         //  Construct calldata for NFTBridge.finalize and Send message up to L1 bridge
@@ -162,8 +166,10 @@ PausableUpgradeable, StandardAccessControl {
             // tokens.
             if (nftType == NFTType.ERC721) {
                 IStandardERC721(l2Nft).mint(to, tokenId, data);
-            } else {
+            } else if (nftType == NFTType.ERC1155) {
                 IStandardERC1155(l2Nft).mint(to, tokenId, amount, data);
+            } else {
+                IStandardERC20(l2Nft).mint(to, amount, data);
             }
             emit BridgeFinalized(l1Nft, l2Nft, from, to, tokenId, amount, nftType, data);
         } else {
@@ -214,13 +220,12 @@ PausableUpgradeable, StandardAccessControl {
     }
 
     function isBridgeCompliant(address nft, NFTType nftType) public view returns (bool) {
-        if (!ERC165CheckerUpgradeable.supportsInterface(nft, type(IL2StandardNFT).interfaceId)) {
-            return false;
-        }
         if (nftType == NFTType.ERC721) {
             return ERC165CheckerUpgradeable.supportsInterface(nft, type(IStandardERC721).interfaceId);
-        } else {
+        } else if (nftType == NFTType.ERC1155) {
             return ERC165CheckerUpgradeable.supportsInterface(nft, type(IStandardERC1155).interfaceId);
+        } else {
+            return ERC165CheckerUpgradeable.supportsInterface(nft, type(IStandardERC20).interfaceId);
         }
     }
 

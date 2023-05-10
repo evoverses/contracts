@@ -105,7 +105,7 @@ ReentrancyGuardUpgradeable, PausableUpgradeable {
         emit BridgedNFTs(_msgSender(), _nft, _ids);
     }
 
-    function bridgeCEVODisbursement() public {
+    function bridgeCEVODisbursement() public whenNotPaused nonReentrant whenNotInMaintenance {
         IcEVOUpgradeable cEVO = IcEVOUpgradeable(0x465d89df3e9B1AFB6957B58Be6137feeBB8e9f61);
         uint256 startTime;
         uint256 duration;

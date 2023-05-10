@@ -17,7 +17,7 @@ async function update() {
     contract.filters.BridgedTokenWithLocked().topics
   ];
   const events = [];
-  const block = 28593936;
+  const block = 29966872;
   for (const topic of topics) {
     const e = await contract.queryFilter({
       address: contract.address,
@@ -36,6 +36,7 @@ async function update() {
     const r = {
       blockNumber: e.blockNumber,
       event: e.event,
+      signature: e.signature,
       args: [
         e.args[0],
         e.args[1],

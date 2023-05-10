@@ -203,7 +203,7 @@
       ],
       "name": "bridge",
       "outputs": [],
-      "stateMutability": "nonpayable",
+      "stateMutability": "payable",
       "type": "function"
     },
     {

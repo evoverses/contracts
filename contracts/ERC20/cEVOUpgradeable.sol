@@ -38,9 +38,11 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
 
     mapping (address => Disbursement[]) public disbursements;
 
-    mapping (address => uint256) public lockedOf;
+    mapping (address => uint256) private _lockedOf;
 
     mapping (address => uint256) public transferTime;
+
+    mapping (address => Disbursement) public selfDisbursement;
 
     modifier onlyWhitelist(address from, address to) {
         require(
@@ -83,7 +85,15 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
     }
 
     function mint(address _address, uint256 amount) public onlyRole(MINTER_ROLE) {
-        lockedOf[_address] += amount;
+        uint256 locked = _lockedOf[_address];
+        _lockedOf[_address] = 0;
+        if (selfDisbursement[_address].duration == 0) {
+            selfDisbursement[_address].startTime = 1681860918;
+            selfDisbursement[_address].duration = 365 days;
+        }
+        selfDisbursement[_address].balance += locked + amount;
+        selfDisbursement[_address].amount += locked + amount;
+
         IMintable(EVO).mint(address(this), amount);
         _mint(_address, amount);
     }
@@ -156,8 +166,8 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
     }
 
     function useLocked(address account, uint256 amount) public onlyRole(MINTER_ROLE) {
-        require(lockedOf[account] >= amount, "Insufficient locked balance");
-        lockedOf[account] -= amount;
+        require(_lockedOf[account] >= amount, "Insufficient locked balance");
+        _lockedOf[account] -= amount;
         _totalBurned += amount;
         _burn(account, amount);
         IMintable(EVO).burnFrom(address(this), amount);
@@ -172,39 +182,97 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
 
     function claimPending() public whenNotPaused {
         uint256 totalPending = 0;
-        for (uint256 i = 0; i < disbursements[_msgSender()].length; i++) {
-            Disbursement storage d = disbursements[_msgSender()][i];
+        // pending disbursements;
+        for (uint256 i = 0; i < disbursements[msg.sender].length; i++) {
+            Disbursement storage d = disbursements[msg.sender][i];
             uint256 claimed = d.amount - d.balance;
             uint256 pendingPerSecond = d.amount / d.duration;
-            uint256 pending = ((block.timestamp - d.startTime) * pendingPerSecond);
+            uint256 pending = (d.startTime + d.duration) > block.timestamp
+              ? ((block.timestamp - d.startTime) * pendingPerSecond)
+              : d.amount;
             if (claimed < pending) {
                 d.balance -= (pending - claimed);
                 totalPending += (pending - claimed);
             }
         }
+        Disbursement storage s = selfDisbursement[msg.sender];
+
+        // pending original locked cEVO should be migrated
+        uint256 locked = _lockedOf[msg.sender];
+        if (locked > 0) {
+            _lockedOf[msg.sender] = 0;
+            if (s.duration == 0) {
+                s.startTime = 1681860918;
+                s.duration = DEFAULT_VESTING_PERIOD;
+            }
+            s.balance += locked;
+            s.amount += locked;
+
+        }
+        // pending migrated locked cEVO;
+        if (s.balance > 0) {
+            uint256 claimed = s.amount - s.balance;
+            uint256 pendingPerSecond = s.amount / s.duration;
+            uint256 pending = s.startTime + s.duration > block.timestamp
+              ? (block.timestamp - s.startTime) * pendingPerSecond
+              : s.amount;
+            if (claimed < pending) {
+                s.balance -= (pending - claimed);
+                totalPending += (pending - claimed);
+            }
+        }
+
         if (totalPending == 0) {
             return;
         }
-        _burn(_msgSender(), totalPending);
-        if (ERC20Upgradeable(EVO).balanceOf(address(this)) > totalPending) {
-            ERC20Upgradeable(EVO).transfer(_msgSender(), totalPending);
+        _burn(msg.sender, totalPending);
+        if (ERC20Upgradeable(EVO).balanceOf(address(this)) >= totalPending) {
+            ERC20Upgradeable(EVO).transfer(msg.sender, totalPending);
             return;
         }
-        IMintable(EVO).mint(_msgSender(), totalPending);
+        IMintable(EVO).mint(msg.sender, totalPending);
     }
 
     function pendingOf(address _address) public view returns(uint256) {
         uint256 totalPending = 0;
+        // pending disbursements;
         for (uint256 i = 0; i < disbursements[_address].length; i++) {
             Disbursement storage d = disbursements[_address][i];
             uint256 claimed = d.amount - d.balance;
             uint256 pendingPerSecond = d.amount / d.duration;
-            uint256 pending = ((block.timestamp - d.startTime) * pendingPerSecond);
+            uint256 pending = (d.startTime + d.duration) > block.timestamp
+              ? ((block.timestamp - d.startTime) * pendingPerSecond)
+              : d.amount;
             if (claimed < pending) {
                 totalPending += (pending - claimed);
             }
         }
+        // pending original locked cEVO
+        uint256 locked = _lockedOf[_address];
+        if (locked > 0) {
+            uint256 pendingPerSecond = locked / DEFAULT_VESTING_PERIOD;
+            uint256 pending = 1681860918 + DEFAULT_VESTING_PERIOD > block.timestamp
+              ? (block.timestamp - 1681860918) * pendingPerSecond
+              : locked;
+            totalPending += pending;
+        }
+        // pending migrated locked cEVO;
+        Disbursement storage s = selfDisbursement[_address];
+        if (s.balance > 0) {
+            uint256 claimed = s.amount - s.balance;
+            uint256 pendingPerSecond = s.amount / DEFAULT_VESTING_PERIOD;
+            uint256 pending = 1681860918 + DEFAULT_VESTING_PERIOD > block.timestamp
+              ? (block.timestamp - 1681860918) * pendingPerSecond
+              : s.amount;
+            if (claimed < pending) {
+                totalPending += pending - claimed;
+            }
+        }
         return totalPending;
+    }
+
+    function lockedOf(address _address) public view returns(uint256) {
+        return _lockedOf[_address] + selfDisbursement[_address].balance;
     }
 
     function transferAllDisbursements(address to) public {
@@ -216,7 +284,8 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
     }
 
     function _transferAllDisbursements(address from, address to) internal {
-        uint256 lockedFrom = lockedOf[from];
+        uint256 lockedFrom = _lockedOf[from];
+        Disbursement memory d = selfDisbursement[from];
         require(lockedFrom > 0 || disbursements[from].length > 0, "No balance");
         if (!_globalWhitelist.contains(from) || !_globalWhitelist.contains(to)) {
             require(
@@ -227,9 +296,15 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
             transferTime[from] = block.timestamp + 90 days;
             transferTime[to] = block.timestamp + 90 days;
         }
-        lockedOf[from] = 0;
-        lockedOf[to] += lockedFrom;
-
+        _lockedOf[from] = 0;
+        selfDisbursement[from] = Disbursement(0, 0, 0, 0);
+        if (selfDisbursement[to].duration == 0) {
+            selfDisbursement[to].startTime = 1681860918;
+            selfDisbursement[to].duration = 365 days;
+        }
+        selfDisbursement[to].amount += d.amount + lockedFrom + _lockedOf[to];
+        selfDisbursement[to].balance += d.balance + lockedFrom + _lockedOf[to];
+        _lockedOf[to] = 0;
         for (uint256 i = 0; i < disbursements[from].length; i++) {
             disbursements[to].push(disbursements[from][i]);
         }
