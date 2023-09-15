@@ -36,6 +36,9 @@ ERC721Blacklist, ERC721URITokenJSON, AttributeStorage, ERC721L2 {
         );
         _;
     }
+
+    event EvoMigrated(address indexed from, uint256 indexed tokenId, EvoStructs.Evo evo);
+
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
@@ -97,6 +100,19 @@ ERC721Blacklist, ERC721URITokenJSON, AttributeStorage, ERC721L2 {
         require(allowed, "ERC721: caller is not token owner nor approved");
         _addBurnedId(tokenId);
         super._burn(tokenId);
+    }
+
+    function adminMigrate(uint256[] calldata tokenIds) external onlyRole(ADMIN_ROLE) {
+        for (uint256 i; i < tokenIds.length; i++) {
+            uint256 tokenId = tokenIds[i];
+            address owner = ownerOf(tokenId);
+            if (owner != address(0)) {
+                EvoStructs.Evo memory evo = getEvoAttributes(tokenId);
+                _addBurnedId(tokenId);
+                super._burn(tokenId);
+                emit EvoMigrated(owner, tokenId, evo);
+            }
+        }
     }
 
     function bridgeExtraData(uint256 tokenId) public view override(ERC721L2) returns(bytes memory) {

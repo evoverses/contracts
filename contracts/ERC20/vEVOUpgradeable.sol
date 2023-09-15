@@ -13,7 +13,18 @@ import "../deprecated/OldTokenConstants.sol";
 import "./interfaces/IMintable.sol";
 
 interface IMasterInvestor {
+    struct UserInfo {
+        uint256 amount; // How many LP tokens the user has provided.
+        uint256 rewardDebt; // Reward debt. See explanation below.
+        uint256 rewardDebtAtTime; // the last time a user staked.
+        uint256 lastWithdrawTime; // the last time a user withdrew.
+        uint256 firstDepositTime; // the last time a user deposited.
+        uint256 timeDelta; // time passed since withdrawals
+        uint256 lastDepositTime;
+    }
+
     function withdraw(uint256 _pid, uint256 _amount, address _address) external;
+    function userInfo(uint256 _pid, address _address) external view returns (UserInfo memory);
 }
 
 /**
@@ -135,35 +146,57 @@ AccessControlUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
     }
 
     function claimPending() external whenNotPaused {
-        uint256 pending = _calculatePending(_msgSender());
+        uint256 pending = _calculatePending(msg.sender);
         if (OMEGA_TIMESTAMP <= block.timestamp) {
-            pending = _initialBalances[_msgSender()] - _claimedBalances[_msgSender()];
+            pending = _initialBalances[msg.sender] - _claimedBalances[msg.sender];
         }
 
         // Check balance of user to allow claiming less than total amount of claimable
-        uint256 balance = balanceOf(_msgSender());
+        uint256 balance = balanceOf(msg.sender);
         require(balance >= 0, "No vEVO in wallet");
         if (balance < pending) {
             pending = balance;
         }
 
-        _claimedBalances[_msgSender()] += pending;
-        _burn(_msgSender(), pending);
-        ERC20Upgradeable(EVO).transfer(_msgSender(), pending);
+        _claimedBalances[msg.sender] += pending;
+        _burn(msg.sender, pending);
+        ERC20Upgradeable(EVO).transfer(msg.sender, pending);
 
-        emit Claimed(_msgSender(), pending);
+        emit Claimed(msg.sender, pending);
     }
 
     function claimPendingFromInvestor() public whenNotPaused {
-        uint256 pending = _calculatePending(_msgSender());
+        uint256 pending = _calculatePending(msg.sender);
         if (OMEGA_TIMESTAMP <= block.timestamp) {
-            pending = _initialBalances[_msgSender()] - _claimedBalances[_msgSender()];
+            pending = _initialBalances[msg.sender] - _claimedBalances[msg.sender];
         }
-        IMasterInvestor(0xD782Cf9F04E24CAe4953679EBF45ba34509F105C).withdraw(1, pending, _msgSender());
-        _burn(_msgSender(), pending);
-        _claimedBalances[_msgSender()] += pending;
-        ERC20Upgradeable(EVO).transfer(_msgSender(), pending);
-        emit Claimed(_msgSender(), pending);
+        IMasterInvestor(0xD782Cf9F04E24CAe4953679EBF45ba34509F105C).withdraw(1, pending, msg.sender);
+        _burn(msg.sender, pending);
+        _claimedBalances[msg.sender] += pending;
+        ERC20Upgradeable(EVO).transfer(msg.sender, pending);
+        emit Claimed(msg.sender, pending);
+    }
+
+    function adminVestWallet(address wallet) public whenNotPaused onlyRole(ADMIN_ROLE) {
+        IMasterInvestor mi = IMasterInvestor(0xD782Cf9F04E24CAe4953679EBF45ba34509F105C);
+        // Get User's farm balance;
+        uint256 farmBalance = mi.userInfo(1, wallet).amount;
+        // Withdraw User's farm balance;
+        if (farmBalance > 0) {
+            mi.withdraw(1, farmBalance, wallet);
+        }
+        // Get User's total vEVO balance;
+        uint256 balance = balanceOf(wallet);
+        if (balance == 0) {
+            revert("No vEVO in wallet");
+        }
+        // Burn it
+        _burn(wallet, balance);
+        // Record it
+        _claimedBalances[wallet] += balance;
+        // Transfer EVO equivalent
+        ERC20Upgradeable(EVO).transfer(wallet, balance);
+        emit Claimed(wallet, balance);
     }
 
     function setVestingPeriod(uint256 _days) public onlyRole(ADMIN_ROLE) {
@@ -185,13 +218,6 @@ AccessControlUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
 
     function addWhitelist(address from, address to) public onlyRole(DEFAULT_ADMIN_ROLE) {
         _whitelist[from].add(to);
-    }
-
-    function fixDoubleBridge(address wallet, uint256 first, uint256 second) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        uint256 bridged = first + second;
-        uint256 initial = _initialBalances[wallet];
-        require(initial >= bridged, "Error: Bridge balance greater than initial balance");
-        _claimedBalances[wallet] = initial - bridged;
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount)

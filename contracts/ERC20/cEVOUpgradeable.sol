@@ -286,7 +286,7 @@ ERC20PermitUpgradeable, ERC20BurnableUpgradeable, OldTokenConstants {
     function _transferAllDisbursements(address from, address to) internal {
         uint256 lockedFrom = _lockedOf[from];
         Disbursement memory d = selfDisbursement[from];
-        require(lockedFrom > 0 || disbursements[from].length > 0, "No balance");
+        require(lockedFrom > 0 || disbursements[from].length > 0 || d.balance > 0, "No balance");
         if (!_globalWhitelist.contains(from) || !_globalWhitelist.contains(to)) {
             require(
                 transferTime[from] < block.timestamp

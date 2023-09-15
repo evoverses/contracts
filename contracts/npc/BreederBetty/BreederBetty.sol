@@ -66,7 +66,7 @@ AccessControlEnumerableUpgradeable, BBFeeDistributor, NpcConstants {
         _unpause();
     }
 
-    function breed(uint256[] memory tokenIds) external payable {
+    function breed(uint256[] memory tokenIds) external payable whenNotPaused {
         require(tokenIds.length == 2, "Invalid tokenId count");
         require(tokenIds[0] != tokenIds[1], "Cant breed with self");
         uint256 totalFee = 0;

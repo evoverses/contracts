@@ -50,7 +50,6 @@ contract L2BillingContract is Initializable, IL2BillingContract, StandardAccessC
     }
 
     function updateExitFee(uint256 _exitFee) external onlyAdmin {
-        require(_exitFee > 0, "BillingContract::Exit fee cannot be zero");
         exitFee = _exitFee;
         emit UpdateExitFee(_exitFee);
     }
