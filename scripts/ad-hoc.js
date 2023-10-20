@@ -73,10 +73,37 @@ const run = async () => {
 
 }
 
+const storeMetadata = async () => {
 
-const temp = async () => {}
+  const contract = await ethers.getContractAt("EvoL2", "0x454a0e479ac78e508a95880216c06f50bf3c321c")
+  const evoIds = await contract.getAllTokenIds();
+  console.log("evoIds:", evoIds.length);
+  for (let i = 0; i < evoIds.length; i++) {
+    const evoId = evoIds[i];
+    const bridged = await contract.ownerOf(evoId) === "0x328eb74673Eaa1D2d90A48E8137b015F1B6Ed35d";
+    if (bridged) {
+      console.log(`Skipping Bridged Evo #${evoId} (${i+1}/${evoIds.length})`);
+      continue;
+    }
+    const evo = await contract.tokenURI(evoId);
+    const metadata = JSON.stringify(JSON.parse(atob(evo.split(',')[1])), null, 2);
+    const resp = await fetch(`https://api.evoverses.com/metadata/evo/${evoId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.EVOVERSES_API_KEY
+      },
+      body: metadata,
+    })
+    if (resp.ok) {
+      console.log(`Stored Evo #${evoId} (${i+1}/${evoIds.length})`);
+    } else {
+      console.log(`Failed to store Evo #${evoId} (${i+1}/${evoIds.length})`);
+    }
+  }
+}
 
-run()
+storeMetadata()
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error)
