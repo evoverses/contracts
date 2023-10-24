@@ -1,0 +1,19 @@
+{
+  "43114": {
+    "0x204fc7955F816352afDe77D84e4e8719D2C28A0A": {
+      "name": "SecurityGuardSamuel",
+      "type": "uups",
+      "impl": "0x8045A338A5f8365d5E10254A0404872390BF8589"
+    },
+    "0x4151b8afa10653d304FdAc9a781AFccd45EC164c": {
+      "name": "Evo",
+      "type": "uups",
+      "impl": "0x5f7EBA5Ac156bdEefDeB13b5385F26E23B851A59"
+    },
+    "0x693E07bf86367adF8051926F66321fa9E8eBfFb4": {
+      "name": "xEVO",
+      "type": "uups",
+      "impl": "0x1ae08448e78b7Bcbe675aBCFb60e17fFFe34bfaC"
+    }
+  }
+}

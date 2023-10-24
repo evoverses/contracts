@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c724bbd5-d893-4f17-b3a1-4a98c22fed8a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.hardhat-tasks/contracts.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.openzeppelin/avalanche.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts/ERC20/xEVO.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contracts/NPCs/SecurityGuardSamuel.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tasks/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/EvoVerses Contracts.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/EvoVerses Contracts.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.openzeppelin/unknown-10.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.openzeppelin/unknown-137.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.openzeppelin/unknown-1666600000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.openzeppelin/unknown-25.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.openzeppelin/unknown-250.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.openzeppelin/unknown-42161.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.openzeppelin/unknown-43114.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.openzeppelin/unknown-43288.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/EVO.sol/EVO.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/EVOL2.sol/EVOL2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/cEVOUpgradeable.sol/cEVOUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/extensions/ERC20BurnableUpgradeable.sol/ERC20BurnableUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/extensions/ERC20L2.sol/ERC20L2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/interfaces/IERC20ExtendedUpgradeable.sol/IERC20ExtendedUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/interfaces/IERC20L2.sol/IERC20L2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/interfaces/IEVO.sol/IEVO.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/interfaces/IMintable.sol/IMintable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/interfaces/IcEVO.sol/IcEVO.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/interfaces/IcEVOUpgradeable.sol/IcEVOUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/vEVOUpgradeable.sol/IMasterInvestor.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/vEVOUpgradeable.sol/vEVOUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/xEVO/xEVO.sol/xEVO.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC20/xEVO/xEVOAvalanche.sol/xEVOAvalanche.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/Evo/AttributeStorage.sol/AttributeStorage.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/Evo/Evo.sol/Evo.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/Evo/EvoL2.sol/EvoL2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/EvoEgg/EggAttributeStorage.sol/EggAttributeStorage.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/EvoEgg/EvoEgg.sol/EvoEgg.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/EvoEgg/EvoEggGen0.sol/EvoEggGen0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/EvoEgg/IEggAttributeStorage.sol/IEggAttributeStorage.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/EvoEgg/IEvoEgg.sol/IEvoEgg.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/EvoEgg/IEvoEggGen0.sol/IEvoEggGen0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/extensions/ERC721Blacklist.sol/ERC721Blacklist.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/extensions/ERC721BlacklistUpgradeable.sol/ERC721BlacklistUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/extensions/ERC721BurnableUpgradeable.sol/ERC721BurnableUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/extensions/ERC721EnumerableExtendedUpgradeable.sol/ERC721EnumerableExtendedUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/extensions/ERC721L2.sol/ERC721L2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/extensions/ERC721URIStorageExtendedUpgradeable.sol/ERC721URIStorageExtendedUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/extensions/ERC721URITokenJSON.sol/ERC721URITokenJSON.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/interfaces/EvoStructs.sol/EvoStructs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/interfaces/IERC721L1.sol/IERC721L1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/interfaces/IERC721L2.sol/IERC721L2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/ERC721/interfaces/IEvo.sol/IEvo.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/deprecated/EvoToken.sol/EvoToken.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/deprecated/IEvoToken.sol/IEvoToken.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/deprecated/IcEVOUpgradeable.sol/IcEVOUpgradeable2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/deprecated/MasterInvestorHarmony.sol/MasterInvestorHarmony.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/deprecated/OldTokenConstants.sol/OldTokenConstants.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/deprecated/cEVO.sol/cEVO.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/deprecated/vEvoToken.sol/vEvoToken.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/libraries/Authorizable.sol/Authorizable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/libraries/IProfiles.sol/IProfiles.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/libraries/Numbers.sol/Numbers.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/marketplace/Marketplace.sol/Marketplace.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/marketplace/libraries/ArraysUpgradeable.sol/ArraysUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/marketplace/mixins/MarketplaceAuctionConfig.sol/MarketplaceAuctionConfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/marketplace/mixins/MarketplaceBidTokens.sol/MarketplaceBidTokens.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/marketplace/mixins/MarketplaceConstants.sol/MarketplaceConstants.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/marketplace/mixins/MarketplaceCore.sol/MarketplaceCore.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/marketplace/mixins/MarketplaceCounter.sol/MarketplaceCounter.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/marketplace/mixins/MarketplaceFee.sol/MarketplaceFee.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/marketplace/mixins/MarketplaceFundDestinations.sol/MarketplaceFundDestinations.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/marketplace/mixins/MarketplaceFundDistributor.sol/MarketplaceFundDistributor.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/marketplace/mixins/MarketplaceRoyalties.sol/MarketplaceRoyalties.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/AccountantAurora/AccountantAurora.sol/AccountantAurora.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/BobaBridge/NFT/L1/L1NFTBridge.sol/L1NFTBridge.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/BobaBridge/NFT/L2/IL2BillingContract.sol/IL2BillingContract.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/BobaBridge/NFT/L2/L2BillingContract.sol/L2BillingContract.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/BobaBridge/NFT/L2/L2NFTBridge.sol/L2NFTBridge.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/BobaBridge/NFT/common/INFTBridge.sol/INFTBridge.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/BobaBridge/NFT/common/IStandardERC1155.sol/IStandardERC1155.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/BobaBridge/NFT/common/IStandardERC20.sol/IStandardERC20.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/BobaBridge/NFT/common/IStandardERC721.sol/IStandardERC721.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/BreederBetty/BBFeeDistributor.sol/BBFeeDistributor.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/BreederBetty/BreederBetty.sol/BreederBetty.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/EmergencyWithdrawalReimbursementUpgradeable.sol/EmergencyWithdrawalReimbursementUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/HatcherHarry/HatcherHarry.sol/HatcherHarry.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/HatcherHarry/HatcherHarryAvalanche.sol/HatcherHarryAvalanche.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/HatcherHarry/IHatcherHarry.sol/IHatcherHarry.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/HealerHayley/HealerHayley.sol/HealerHayley.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/HealerHayley/HealerHayleyAvalanche.sol/HealerHayleyAvalanche.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/MasterInvestor.sol/MasterInvestor.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/MigrationMike/LockedTokenEscrow.sol/LockedTokenEscrow.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/MigrationMike/MigrationMikeEgressUpgradeable.sol/MigrationMikeEgressUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/MigrationMike/MigrationMikeIngressUpgradeable.sol/MigrationMikeIngressUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/vEVOVestingUpgradeable.sol/IMasterInvestor.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/npc/vEVOVestingUpgradeable.sol/vEVOVestingUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/access/StandardAccessControl.sol/StandardAccessControl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/boba/BobaFaucet.sol/BobaFaucet.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/boba/CrossDomain/CrossDomainEnabled.sol/CrossDomainEnabledBobaAvax.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/boba/CrossDomain/ICrossDomainMessenger.sol/ICrossDomainMessenger.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/boba/IBobaTuringCredit.sol/IBobaTuringCredit.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/boba/ITuringHelper.sol/ITuringHelper.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/boba/TuringClient.sol/BobaL2TuringClient.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/boba/TuringHelper.sol/TuringHelper.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/chainlink/ChainlinkVRFConsumerUpgradeable.sol/ChainlinkVRFConsumerUpgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/chainlink/ChainlinkVRFConsumerUpgradeableV2.sol/ChainlinkVRFConsumerUpgradeableV2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/chainlink/VRFConsumerBaseV2.sol/VRFConsumerBaseV2Upgradeable.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/constants/ConstantsBase.sol/BaseConstants.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/constants/NpcConstants.sol/NpcConstants.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/constants/TokenConstants.sol/TokenConstants.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/standard/ETHReceiver.sol/ETHReceiver.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/standard/Multicall.sol/Multicall.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/standard/Multicall2.sol/Multicall2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/artifacts/contracts/utils/unrealEngine/UnrealEngineQueryHelper.sol/UnrealEngineQueryHelper.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/EVO.sol" beforeDir="false" afterPath="$PROJECT_DIR$/contracts/ERC20/EVO.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/EVOL2.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/cEVOUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/extensions/ERC20BurnableUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/extensions/ERC20L2.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/interfaces/IERC20ExtendedUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/interfaces/IERC20L2.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/interfaces/IEVO.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/interfaces/IMintable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/interfaces/IcEVO.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/interfaces/IcEVOUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/vEVOUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/xEVO/xEVO.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC20/xEVO/xEVOAvalanche.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/Evo/AttributeStorage.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/Evo/Evo.sol" beforeDir="false" afterPath="$PROJECT_DIR$/contracts/ERC721/Evo/Evo.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/Evo/EvoL2.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/EvoEgg/EggAttributeStorage.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/EvoEgg/EvoEgg.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/EvoEgg/EvoEggGen0.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/EvoEgg/IEggAttributeStorage.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/EvoEgg/IEvoEgg.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/EvoEgg/IEvoEggGen0.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/extensions/ERC721Blacklist.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/extensions/ERC721BlacklistUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/extensions/ERC721BurnableUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/extensions/ERC721EnumerableExtendedUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/extensions/ERC721L2.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/extensions/ERC721URIStorageExtendedUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/extensions/ERC721URITokenJSON.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/interfaces/EvoStructs.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/interfaces/IERC721L1.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/interfaces/IERC721L2.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/ERC721/interfaces/IEvo.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/deprecated/EvoToken.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/deprecated/IEvoToken.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/deprecated/IcEVOUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/deprecated/MasterInvestorHarmony.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/deprecated/OldTokenConstants.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/deprecated/cEVO.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/deprecated/vEvoToken.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/libraries/Authorizable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/libraries/IProfiles.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/libraries/Numbers.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/marketplace/Marketplace.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/marketplace/libraries/ArraysUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/marketplace/mixins/MarketplaceAuctionConfig.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/marketplace/mixins/MarketplaceBidTokens.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/marketplace/mixins/MarketplaceConstants.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/marketplace/mixins/MarketplaceCore.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/marketplace/mixins/MarketplaceCounter.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/marketplace/mixins/MarketplaceFee.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/marketplace/mixins/MarketplaceFundDestinations.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/marketplace/mixins/MarketplaceFundDistributor.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/marketplace/mixins/MarketplaceRoyalties.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/AccountantAurora/AccountantAurora.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/BobaBridge/NFT/L1/L1NFTBridge.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/BobaBridge/NFT/L2/IL2BillingContract.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/BobaBridge/NFT/L2/L2BillingContract.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/BobaBridge/NFT/L2/L2NFTBridge.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/BobaBridge/NFT/common/INFTBridge.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/BobaBridge/NFT/common/IStandardERC1155.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/BobaBridge/NFT/common/IStandardERC20.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/BobaBridge/NFT/common/IStandardERC721.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/BreederBetty/BBFeeDistributor.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/BreederBetty/BreederBetty.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/EmergencyWithdrawalReimbursementUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/HatcherHarry/HatcherHarry.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/HatcherHarry/HatcherHarryAvalanche.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/HatcherHarry/IHatcherHarry.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/HealerHayley/HealerHayley.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/HealerHayley/HealerHayleyAvalanche.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/MasterInvestor.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/MigrationMike/LockedTokenEscrow.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/MigrationMike/MigrationMikeEgressUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/MigrationMike/MigrationMikeIngressUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/npc/vEVOVestingUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/access/StandardAccessControl.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/boba/BobaFaucet.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/boba/CrossDomain/CrossDomainEnabled.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/boba/CrossDomain/ICrossDomainMessenger.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/boba/IBobaTuringCredit.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/boba/ITuringHelper.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/boba/TuringClient.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/boba/TuringHelper.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/chainlink/ChainlinkVRFConsumerUpgradeable.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/chainlink/ChainlinkVRFConsumerUpgradeableV2.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/chainlink/VRFConsumerBaseV2.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/constants/ConstantsBase.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/constants/NpcConstants.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/constants/TokenConstants.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/standard/ETHReceiver.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/standard/Multicall.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/standard/Multicall2.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contracts/utils/unrealEngine/UnrealEngineQueryHelper.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardhat.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hardhat.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/EWRUScanner.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/LoadTuringHelper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/MasterInvestorEventScanner.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/ad-hoc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/bridgeEvo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/cEVOScanner.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/configureEvo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/configureHatcherHarry.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/configureMassterInvestor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/configurevEVOVestingUpgradeable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/deployMasterInvestor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/migrationMikeEgressReader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mintEggs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/moveTeamEggs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks/deploy.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks/deployUpgradeable.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks/getUpgradeDetails.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks/upgrade.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="NamedScopeManager">
+    <order>
+      <scope name="Generated" />
+    </order>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2XAv3EL6ODyZhukmTCBPHvPl4m7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "v2",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/evoverses/contracts-temp",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.file-colors",
+    "ts.external.directory.path": "E:\\evoverses\\contracts\\node_modules\\typescript\\lib"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Evo:avalanche:upgrade" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="Evo:avalanche:upgrade" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="compile" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="compile" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.Evo:avalanche:upgrade" />
+        <item itemvalue="npm.compile" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c724bbd5-d893-4f17-b3a1-4a98c22fed8a" name="Changes" comment="" />
+      <created>1698084498034</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698084498034</updated>
+      <workItem from="1698084499152" duration="21868000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
