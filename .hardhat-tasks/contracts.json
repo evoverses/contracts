@@ -14,6 +14,11 @@
       "name": "xEVO",
       "type": "uups",
       "impl": "0x1ae08448e78b7Bcbe675aBCFb60e17fFFe34bfaC"
+    },
+    "0xE5861E3B9cDfF040100400B301021708E1de41De": {
+      "name": "BreederBrenda",
+      "type": "uups",
+      "impl": "0x29cAFBf0CbaDC0490ac3eB105CE5c92cD29d0466"
     }
   }
 }

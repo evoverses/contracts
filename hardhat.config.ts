@@ -1,4 +1,4 @@
-import * as tenderly from "@tenderly/hardhat-tenderly";
+//import "@tenderly/hardhat-tenderly";
 import '@nomicfoundation/hardhat-verify';
 
 import "@dirtycajunrice/hardhat-tasks/internal/type-extensions"
@@ -6,10 +6,10 @@ import "@dirtycajunrice/hardhat-tasks";
 import "dotenv/config";
 import "./tasks";
 import '@openzeppelin/hardhat-upgrades';
+import { vars } from "hardhat/config";
 
 import { NetworksUserConfig } from "hardhat/types";
 
-tenderly.setup({ automaticVerifications: false });
 
 const networkData = [
   {
@@ -17,8 +17,8 @@ const networkData = [
     chainId: 43_114,
     urls: {
       rpc: `https://api.avax.network/ext/bc/C/rpc`,
-      api: "https://api.snowtrace.io/api",
-      browser: "https://snowtrace.io",
+      api: "https://api.snowscan.xyz/api",
+      browser: "https://snowscan.xyz",
     },
   }
 ];
@@ -26,7 +26,7 @@ const networkData = [
 module.exports = {
   defaultNetwork: "avalanche",
   solidity: {
-    compilers: [ "8.20" ].map(v => (
+    compilers: [ "8.20", "8.28" ].map(v => (
       {
         version: `0.${v}`,
         settings: {
@@ -41,24 +41,18 @@ module.exports = {
     o[network.name] = {
       url: network.urls.rpc,
       chainId: network.chainId,
-      accounts: [ process.env.PRIVATE_KEY! ]
+      accounts: [ vars.get("PRIVATE_KEY") ]
     }
     return o;
   }, {} as NetworksUserConfig),
   etherscan: {
-    apiKey: {
-      avalanche: process.env.SNOWTRACE_API_KEY,
-    },
-    customChains: networkData.map(network => (
-      {
-        network: network.name,
-        chainId: network.chainId,
-        urls: { apiURL: network.urls.api, browserURL: network.urls.browser },
-      }
-    ))
+    apiKey: vars.get("ETHERSCAN_API_KEY"),
   },
   tenderly: {
     project: 'evoverses',
-    username: 'DirtyCajunRice',
+    username:  vars.get("TENDERLY_USERNAME"),
+  },
+  sourcify: {
+    enabled: true
   }
 };
