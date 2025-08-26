@@ -19,6 +19,11 @@
       "name": "BreederBrenda",
       "type": "uups",
       "impl": "0x29cAFBf0CbaDC0490ac3eB105CE5c92cD29d0466"
+    },
+    "0xA65Cd0F18CBc14915d453Ff3AF74D8328eF8352E": {
+      "name": "BreederBrenda",
+      "type": "uups",
+      "impl": "0xD4f4C6AbECaB8FAAA47e057F4489F637c98A8234"
     }
   }
 }

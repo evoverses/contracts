@@ -10,6 +10,11 @@
     },
     {
       "inputs": [],
+      "name": "InvalidRequestStatus",
+      "type": "error"
+    },
+    {
+      "inputs": [],
       "name": "NotInitializing",
       "type": "error"
     },

@@ -20,6 +20,11 @@
       "address": "0xE5861E3B9cDfF040100400B301021708E1de41De",
       "txHash": "0xd7837c627f3d03d4864a65cc899d19de4ed7892e5b9411bb1ae51a42942da9d4",
       "kind": "uups"
+    },
+    {
+      "address": "0xA65Cd0F18CBc14915d453Ff3AF74D8328eF8352E",
+      "txHash": "0x7e7b1664c6a49a46723980e2ec0310377534b8d129596c1b27882df32b844f17",
+      "kind": "uups"
     }
   ],
   "impls": {
@@ -1590,6 +1595,220 @@
               "src": "contracts\\NPCs\\BreederBrenda\\BreederBrendaStorage.sol:17",
               "offset": 0,
               "slot": "2"
+            }
+          ],
+          "erc7201:openzeppelin.storage.AccessManaged": [
+            {
+              "contract": "AccessManagedUpgradeable",
+              "label": "_authority",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\manager\\AccessManagedUpgradeable.sol:23",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "AccessManagedUpgradeable",
+              "label": "_consumingSchedule",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\manager\\AccessManagedUpgradeable.sol:25",
+              "offset": 20,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Pausable": [
+            {
+              "contract": "PausableUpgradeable",
+              "label": "_paused",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\PausableUpgradeable.sol:21",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "5377cb1d1d5a68395203bd7fde1531bd8b2e69c4d5c85221cd22f46635596142": {
+      "address": "0xD4f4C6AbECaB8FAAA47e057F4489F637c98A8234",
+      "txHash": "0xfaa2cfb6e6af7a9979bb394ccbc0652c0edccaf01bdbe35ef4994d61fcb05e22",
+      "layout": {
+        "solcVersion": "0.8.28",
+        "storage": [],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_enum(RequestStatus)5468": {
+            "label": "enum BreederBrendaStorage.RequestStatus",
+            "members": [
+              "INVALID",
+              "PENDING",
+              "APPROVED",
+              "DENIED"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_uint256,t_enum(RequestStatus)5468)": {
+            "label": "mapping(uint256 => enum BreederBrendaStorage.RequestStatus)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(AccessManagedStorage)163_storage": {
+            "label": "struct AccessManagedUpgradeable.AccessManagedStorage",
+            "members": [
+              {
+                "label": "_authority",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_consumingSchedule",
+                "type": "t_bool",
+                "offset": 20,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(BreederBrendaStorageSlot)5483_storage": {
+            "label": "struct BreederBrendaStorage.BreederBrendaStorageSlot",
+            "members": [
+              {
+                "label": "evoToken",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "evoNft",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "treasury",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "requestId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "requestStatus",
+                "type": "t_mapping(t_uint256,t_enum(RequestStatus)5468)",
+                "offset": 0,
+                "slot": "4"
+              }
+            ],
+            "numberOfBytes": "160"
+          },
+          "t_struct(InitializableStorage)745_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(PausableStorage)2039_storage": {
+            "label": "struct PausableUpgradeable.PausableStorage",
+            "members": [
+              {
+                "label": "_paused",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          }
+        },
+        "namespaces": {
+          "erc7201:evoverses.storage.BreederBrenda": [
+            {
+              "contract": "BreederBrendaStorage",
+              "label": "evoToken",
+              "type": "t_address",
+              "src": "contracts\\NPCs\\BreederBrenda\\BreederBrendaStorage.sol:22",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "BreederBrendaStorage",
+              "label": "evoNft",
+              "type": "t_address",
+              "src": "contracts\\NPCs\\BreederBrenda\\BreederBrendaStorage.sol:24",
+              "offset": 0,
+              "slot": "1"
+            },
+            {
+              "contract": "BreederBrendaStorage",
+              "label": "treasury",
+              "type": "t_address",
+              "src": "contracts\\NPCs\\BreederBrenda\\BreederBrendaStorage.sol:26",
+              "offset": 0,
+              "slot": "2"
+            },
+            {
+              "contract": "BreederBrendaStorage",
+              "label": "requestId",
+              "type": "t_uint256",
+              "src": "contracts\\NPCs\\BreederBrenda\\BreederBrendaStorage.sol:28",
+              "offset": 0,
+              "slot": "3"
+            },
+            {
+              "contract": "BreederBrendaStorage",
+              "label": "requestStatus",
+              "type": "t_mapping(t_uint256,t_enum(RequestStatus)5468)",
+              "src": "contracts\\NPCs\\BreederBrenda\\BreederBrendaStorage.sol:30",
+              "offset": 0,
+              "slot": "4"
             }
           ],
           "erc7201:openzeppelin.storage.AccessManaged": [

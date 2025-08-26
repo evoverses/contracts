@@ -22,7 +22,7 @@ Security contact: DirtyCajunRice (Discord)
 |       Hatcher Harry       | `0x75aC43933483c60eB72A87EbBB8BAa51181c4a7E` | [SnowScan](https://snowscan.xyz/address/0x75aC43933483c60eB72A87EbBB8BAa51181c4a7E) |
 |       Healer Hayley       | `0x56b5D7a82b475B969E09fc9352350c1921361a39` | [SnowScan](https://snowscan.xyz/address/0x56b5D7a82b475B969E09fc9352350c1921361a39) |
 |  Migration Mike Ingress   | `0x5f332f313E873E6D1d51F7853f4a6AD0446D0907` | [SnowScan](https://snowscan.xyz/address/0x5f332f313E873E6D1d51F7853f4a6AD0446D0907) |
-|      Breeder Brenda       | `0xE5861E3B9cDfF040100400B301021708E1de41De` | [SnowScan](https://snowscan.xyz/address/0xE5861E3B9cDfF040100400B301021708E1de41De) |
+|      Breeder Brenda       | `0xA65Cd0F18CBc14915d453Ff3AF74D8328eF8352E` | [SnowScan](https://snowscan.xyz/address/0xA65Cd0F18CBc14915d453Ff3AF74D8328eF8352E) |
 
 1. EVO-WAVAX-LP is generated from Trader Joe liquidity pools and the EvoVerses team has no control over the contract
 

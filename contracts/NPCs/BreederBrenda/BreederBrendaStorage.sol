@@ -7,6 +7,15 @@ import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Ini
  * @title BreederBrendaStorage
  */
 abstract contract BreederBrendaStorage is Initializable {
+  error InvalidRequestStatus();
+
+  enum RequestStatus {
+    INVALID,
+    PENDING,
+    APPROVED,
+    DENIED
+  }
+
   /// @custom:storage-location erc7201:evoverses.storage.BreederBrenda
   struct BreederBrendaStorageSlot {
     /// @notice evo ERC20 token used for breeding payments
@@ -15,6 +24,10 @@ abstract contract BreederBrendaStorage is Initializable {
     address evoNft;
     /// @notice evoverses treasury
     address treasury;
+    /// @notice id of the request
+    uint256 requestId;
+    /// @notice request status map
+    mapping(uint256 requestId => RequestStatus) requestStatus;
   }
 
   // keccak256(abi.encode(uint256(keccak256("evoverses.storage.BreederBrenda")) - 1)) & ~bytes32(uint256(0xff))
@@ -37,6 +50,18 @@ abstract contract BreederBrendaStorage is Initializable {
     }
   }
 
+  function _getEvoToken() internal view returns (address) {
+    return _getBreederBrendaStorage().evoToken;
+  }
+
+  function _getEvoNft() internal view returns (address) {
+    return _getBreederBrendaStorage().evoNft;
+  }
+
+  function _getTreasury() internal view returns (address) {
+    return _getBreederBrendaStorage().treasury;
+  }
+
   function _setEvoToken(address evoToken) internal {
     BreederBrendaStorageSlot storage $ = _getBreederBrendaStorage();
     $.evoToken = evoToken;
@@ -50,5 +75,29 @@ abstract contract BreederBrendaStorage is Initializable {
   function _setTreasury(address treasury) internal {
     BreederBrendaStorageSlot storage $ = _getBreederBrendaStorage();
     $.treasury = treasury;
+  }
+
+  function _getNextRequestId() internal returns (uint256) {
+    BreederBrendaStorageSlot storage $ = _getBreederBrendaStorage();
+    uint256 requestId = $.requestId;
+    $.requestId++;
+    return requestId;
+  }
+
+  function _setRequestStatus(uint256 requestId, RequestStatus status) internal {
+    BreederBrendaStorageSlot storage $ = _getBreederBrendaStorage();
+    RequestStatus rs = $.requestStatus[requestId];
+    if (rs == RequestStatus.APPROVED || rs == RequestStatus.DENIED) {
+      if (status != rs) revert InvalidRequestStatus();
+    } else if (rs == RequestStatus.PENDING) {
+      if (status != RequestStatus.APPROVED && status != RequestStatus.DENIED) {
+        revert InvalidRequestStatus();
+      }
+    } else if (rs == RequestStatus.INVALID) {
+      if (status != RequestStatus.PENDING) {
+        revert InvalidRequestStatus();
+      }
+    }
+    $.requestStatus[requestId] = status;
   }
 }
