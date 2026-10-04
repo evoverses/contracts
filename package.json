@@ -22,7 +22,11 @@
     "Evo:avalanche:verify": "npm run verify:avalanche -- --name Evo",
     "xEVO:avalanche:deploy": "npm run deploy:avalanche -- --name xEVO",
     "xEVO:avalanche:upgrade": "npm run upgrade:avalanche -- --name xEVO",
-    "xEVO:avalanche:verify": "npm run verify:avalanche -- --name xEVO"
+    "xEVO:avalanche:verify": "npm run verify:avalanche -- --name xEVO",
+    "test:breeding": "hardhat test --config hardhat.breeding.config.cjs",
+    "compile:breeding": "hardhat compile --config hardhat.breeding.config.cjs",
+    "plan:breeding": "node scripts/breeding-deployment-plan.cjs",
+    "deploy:breeding:local": "hardhat run --config hardhat.breeding.config.cjs scripts/deploy-breeding-local.cjs"
   },
   "keywords": [],
   "author": "",
@@ -40,5 +44,8 @@
     "ethers": "^6.7.1",
     "hardhat": "2.26.1",
     "ts-node": "10.9.1"
+  },
+  "devDependencies": {
+    "solc-0.8.28": "npm:solc@0.8.28"
   }
 }

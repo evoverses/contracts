@@ -8,3 +8,6 @@ reference
 /artifacts/@chainlink/
 /scripts/ad-hoc.js
 .idea
+
+cache-breeding/
+artifacts-breeding/
