@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
+import {MerkleProof} from "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
+import {GenesisHatchRules} from "../Breeding/GenesisHatchRules.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {IEvoBreedingMint} from "../Breeding/IEvoBreedingMint.sol";
@@ -18,6 +20,8 @@ interface IBerthaWiring {
 contract Hatcher_Hermann is NativeVRFConsumer {
     using SafeERC20 for IERC20;
     enum EggStatus { NONE, INCUBATING, RANDOM_PENDING, HATCHED }
+    enum EggKind { NONE, GENESIS, BRED }
+    struct GenesisImport { uint256 tokenId; bool treated; uint256 createdAt; bytes32[] proof; }
     struct Egg {
         uint256 parent1;
         uint256 parent2;
@@ -31,15 +35,57 @@ contract Hatcher_Hermann is NativeVRFConsumer {
     IEvoBreedingMint public immutable evoNft;
     address public breeder;
     uint256 public constant TREAT_COST = 250 ether;
-    uint256 public constant INCUBATION_TIME = 3 days;
+    /// @notice Production incubation. Test subclasses may override without changing mainnet rules.
+    function INCUBATION_TIME() public pure virtual returns (uint256) { return 3 days; }
     uint256 public speciesVersion;
     mapping(uint256 => Rules.Species[]) private _speciesPools;
-    mapping(uint256 => mapping(uint256 => Rules.Species)) private _species;
-    mapping(uint256 => mapping(uint256 => bool)) private _configured;
+    // Index the immutable pool instead of storing every species twice. This keeps the
+    // full original Genesis configuration comfortably below transaction gas limits.
+    mapping(uint256 => mapping(uint256 => uint256)) private _speciesIndex;
     mapping(uint256 => Rules.Adult) private _adults;
     mapping(uint256 => bool) public known;
     mapping(uint256 => Egg) public eggs;
     mapping(uint256 => uint256) public parentReservation;
+
+    mapping(uint256 => EggKind) public eggKind;
+    mapping(uint256 => uint256) public hatchCompletedAt;
+    bytes32 public genesisSnapshotRoot;
+    uint256 public genesisSpeciesVersion;
+    error InvalidGenesisSnapshot();
+    event GenesisConfigured(bytes32 indexed snapshotRoot, uint256 indexed speciesVersion);
+    event GenesisEggRegistered(uint256 indexed tokenId, bool treated, uint256 createdAt, bytes32 indexed snapshotRoot);
+
+    function registryVersion() external pure returns (uint256) { return 2; }
+
+    /// @notice One immutable eligibility snapshot and species version; restricted batches do not bind ownership.
+    function configureGenesis(bytes32 snapshotRoot, Rules.Species[] calldata pool) external restricted {
+        if (genesisSnapshotRoot != bytes32(0) || snapshotRoot == bytes32(0)) revert InvalidGenesisSnapshot();
+        genesisSnapshotRoot = snapshotRoot;
+        _configureSpecies(pool);
+        genesisSpeciesVersion = speciesVersion;
+        emit GenesisConfigured(snapshotRoot, speciesVersion);
+    }
+
+    function genesisLeaf(uint256 tokenId, bool treated, uint256 createdAt) public view returns (bytes32) {
+        return keccak256(bytes.concat(keccak256(abi.encode(keccak256("EVOVERSES_GENESIS_V1"),
+            block.chainid, address(evoNft), tokenId, treated, createdAt))));
+    }
+
+    function importGenesisEggs(GenesisImport[] calldata entries) external restricted {
+        if (genesisSnapshotRoot == bytes32(0) || entries.length == 0 || entries.length > 32) revert InvalidGenesisSnapshot();
+        for (uint256 i; i < entries.length; ++i) {
+            GenesisImport calldata item = entries[i];
+            if (known[item.tokenId]) revert AlreadyKnown();
+            if (item.createdAt > block.timestamp || !MerkleProof.verifyCalldata(item.proof, genesisSnapshotRoot,
+                genesisLeaf(item.tokenId, item.treated, item.createdAt))) revert InvalidGenesisSnapshot();
+            evoNft.ownerOf(item.tokenId);
+            known[item.tokenId] = true;
+            eggKind[item.tokenId] = EggKind.GENESIS;
+            eggs[item.tokenId] = Egg(0, 0, genesisSpeciesVersion, item.createdAt, item.treated, EggStatus.INCUBATING, 0);
+            emit GenesisEggRegistered(item.tokenId, item.treated, item.createdAt, genesisSnapshotRoot);
+            evoNft.requestMetadataUpdate(item.tokenId);
+        }
+    }
 
     error OnlyBreeder();
     error InvalidAdult();
@@ -80,19 +126,20 @@ contract Hatcher_Hermann is NativeVRFConsumer {
     }
 
     /// @notice Each configuration creates a new immutable version; pending eggs retain the old one.
-    function configureSpecies(Rules.Species[] calldata pool) external restricted {
+    function configureSpecies(Rules.Species[] calldata pool) external restricted { _configureSpecies(pool); }
+
+    function _configureSpecies(Rules.Species[] calldata pool) private {
         if (pool.length == 0 || pool.length > 256) revert InvalidSpeciesPool();
         uint256 version = ++speciesVersion;
         uint256 total;
         for (uint256 i; i < pool.length; ++i) {
             Rules.Species calldata s = pool[i];
-            if (_configured[version][s.id] || s.malePercentage > 100) revert InvalidSpeciesPool();
+            if (_speciesIndex[version][s.id] != 0 || s.malePercentage > 100) revert InvalidSpeciesPool();
             if (s.enabled) {
                 if (s.weight == 0) revert InvalidSpeciesPool();
                 total += s.weight;
             }
-            _configured[version][s.id] = true;
-            _species[version][s.id] = s;
+            _speciesIndex[version][s.id] = _speciesPools[version].length + 1;
             _speciesPools[version].push(s);
         }
         if (total == 0) revert InvalidSpeciesPool();
@@ -107,7 +154,7 @@ contract Hatcher_Hermann is NativeVRFConsumer {
     function importAdult(uint256 tokenId, Rules.Adult calldata adult) external restricted {
         if (known[tokenId]) revert AlreadyKnown();
         if (!Rules.validAdult(adult) || adult.lastBreedTime > block.timestamp ||
-            !_configured[speciesVersion][adult.species]) revert InvalidAdult();
+            _speciesIndex[speciesVersion][adult.species] == 0) revert InvalidAdult();
         evoNft.ownerOf(tokenId); // Cannot import a nonexistent or burned NFT.
         _adults[tokenId] = adult;
         known[tokenId] = true;
@@ -140,7 +187,7 @@ contract Hatcher_Hermann is NativeVRFConsumer {
             block.timestamp < a.lastBreedTime + Rules.cooldown(a.generation) ||
             block.timestamp < b.lastBreedTime + Rules.cooldown(b.generation)) revert ParentUnavailable();
         if (!Rules.compatible(a.attributes, b.attributes)) revert IncompatibleParents();
-        if (!_configured[speciesVersion][a.species] || !_configured[speciesVersion][b.species]) {
+        if (_speciesIndex[speciesVersion][a.species] == 0 || _speciesIndex[speciesVersion][b.species] == 0) {
             revert InvalidSpeciesPool();
         }
     }
@@ -180,6 +227,7 @@ contract Hatcher_Hermann is NativeVRFConsumer {
         _adults[tokenId].species = species;
         _adults[tokenId].generation = generation;
         known[tokenId] = true;
+        eggKind[tokenId] = EggKind.BRED;
         eggs[tokenId] = Egg(parent1, parent2, version, block.timestamp, false, EggStatus.INCUBATING, 0);
         _adults[parent1].totalBreeds++;
         _adults[parent2].totalBreeds++;
@@ -202,7 +250,7 @@ contract Hatcher_Hermann is NativeVRFConsumer {
         Egg storage egg = eggs[tokenId];
         if (evoNft.ownerOf(tokenId) != msg.sender) revert NotOwner();
         if (egg.status != EggStatus.INCUBATING) revert InvalidEggState();
-        if (block.timestamp < egg.createdAt + INCUBATION_TIME) revert StillIncubating();
+        if (eggKind[tokenId] != EggKind.GENESIS && block.timestamp < egg.createdAt + INCUBATION_TIME()) revert StillIncubating();
         egg.status = EggStatus.RANDOM_PENDING; // Treatment is locked BEFORE requesting the rarity roll.
         id = _requestRandomness(msg.sender);
         egg.vrfRequestId = id;
@@ -216,9 +264,15 @@ contract Hatcher_Hermann is NativeVRFConsumer {
         Randomness storage r = randomness[egg.vrfRequestId];
         if (!r.fulfilled) revert RandomnessNotReady();
         Rules.Adult storage adult = _adults[tokenId];
-        (adult.attributes, adult.stats) = Rules.hatch(adultOf(egg.parent1), adultOf(egg.parent2),
-            _species[egg.speciesVersion][adult.species], egg.treated, r.word);
+        if (eggKind[tokenId] == EggKind.GENESIS) {
+            (adult.species, adult.attributes, adult.stats) = GenesisHatchRules.hatch(_speciesPools[egg.speciesVersion], egg.treated, r.word);
+            // Generation and counters remain zero; the existing NFT is never moved or replaced.
+        } else {
+            (adult.attributes, adult.stats) = Rules.hatch(adultOf(egg.parent1), adultOf(egg.parent2),
+                _speciesPools[egg.speciesVersion][_speciesIndex[egg.speciesVersion][adult.species] - 1], egg.treated, r.word);
+        }
         egg.status = EggStatus.HATCHED;
+        hatchCompletedAt[tokenId] = block.timestamp;
         emit EggHatched(tokenId, egg.vrfRequestId, keccak256(abi.encode(adult)));
         evoNft.requestMetadataUpdate(tokenId);
     }

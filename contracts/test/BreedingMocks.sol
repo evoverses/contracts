@@ -106,3 +106,9 @@ contract BreedingRulesHarness {
     function hatch(Rules.Adult calldata a, Rules.Adult calldata b, Rules.Species calldata s, bool treated, uint256 word)
         external pure returns (Rules.Attributes memory, Rules.Stats memory) { return Rules.hatch(a,b,s,treated,word); }
 }
+
+import {GenesisHatchRules} from "../NPCs/Breeding/GenesisHatchRules.sol";
+contract GenesisRulesHarness {
+    function hatch(Rules.Species[] calldata pool, bool treated, uint256 word) external pure
+        returns (uint256, Rules.Attributes memory, Rules.Stats memory) { return GenesisHatchRules.hatch(pool,treated,word); }
+}

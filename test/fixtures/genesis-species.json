@@ -1,0 +1,546 @@
+[
+  {
+    "id": 1,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 20,
+    "primaryType": 12,
+    "secondaryType": 0
+  },
+  {
+    "id": 2,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 11,
+    "secondaryType": 0
+  },
+  {
+    "id": 3,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 8,
+    "secondaryType": 0
+  },
+  {
+    "id": 4,
+    "enabled": true,
+    "weight": 6,
+    "malePercentage": 50,
+    "primaryType": 10,
+    "secondaryType": 0
+  },
+  {
+    "id": 5,
+    "enabled": true,
+    "weight": 8,
+    "malePercentage": 40,
+    "primaryType": 9,
+    "secondaryType": 0
+  },
+  {
+    "id": 6,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 60,
+    "primaryType": 5,
+    "secondaryType": 0
+  },
+  {
+    "id": 7,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 3,
+    "secondaryType": 0
+  },
+  {
+    "id": 9,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 30,
+    "primaryType": 1,
+    "secondaryType": 0
+  },
+  {
+    "id": 10,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 70,
+    "primaryType": 7,
+    "secondaryType": 0
+  },
+  {
+    "id": 11,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 60,
+    "primaryType": 6,
+    "secondaryType": 0
+  },
+  {
+    "id": 12,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 60,
+    "primaryType": 4,
+    "secondaryType": 0
+  },
+  {
+    "id": 13,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 60,
+    "primaryType": 2,
+    "secondaryType": 0
+  },
+  {
+    "id": 15,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 60,
+    "primaryType": 5,
+    "secondaryType": 0
+  },
+  {
+    "id": 16,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 11,
+    "secondaryType": 0
+  },
+  {
+    "id": 19,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 20,
+    "primaryType": 2,
+    "secondaryType": 12
+  },
+  {
+    "id": 20,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 50,
+    "primaryType": 5,
+    "secondaryType": 4
+  },
+  {
+    "id": 22,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 40,
+    "primaryType": 6,
+    "secondaryType": 1
+  },
+  {
+    "id": 25,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 40,
+    "primaryType": 3,
+    "secondaryType": 7
+  },
+  {
+    "id": 26,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 70,
+    "primaryType": 3,
+    "secondaryType": 5
+  },
+  {
+    "id": 28,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 40,
+    "primaryType": 4,
+    "secondaryType": 0
+  },
+  {
+    "id": 30,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 5,
+    "secondaryType": 0
+  },
+  {
+    "id": 33,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 50,
+    "primaryType": 3,
+    "secondaryType": 11
+  },
+  {
+    "id": 34,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 40,
+    "primaryType": 5,
+    "secondaryType": 12
+  },
+  {
+    "id": 35,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 20,
+    "primaryType": 1,
+    "secondaryType": 0
+  },
+  {
+    "id": 37,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 80,
+    "primaryType": 11,
+    "secondaryType": 8
+  },
+  {
+    "id": 39,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 60,
+    "primaryType": 8,
+    "secondaryType": 4
+  },
+  {
+    "id": 40,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 70,
+    "primaryType": 11,
+    "secondaryType": 0
+  },
+  {
+    "id": 42,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 30,
+    "primaryType": 12,
+    "secondaryType": 0
+  },
+  {
+    "id": 43,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 6,
+    "secondaryType": 0
+  },
+  {
+    "id": 45,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 60,
+    "primaryType": 5,
+    "secondaryType": 0
+  },
+  {
+    "id": 46,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 40,
+    "primaryType": 2,
+    "secondaryType": 0
+  },
+  {
+    "id": 48,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 30,
+    "primaryType": 9,
+    "secondaryType": 2
+  },
+  {
+    "id": 50,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 50,
+    "primaryType": 11,
+    "secondaryType": 5
+  },
+  {
+    "id": 51,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 20,
+    "primaryType": 12,
+    "secondaryType": 1
+  },
+  {
+    "id": 53,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 20,
+    "primaryType": 7,
+    "secondaryType": 12
+  },
+  {
+    "id": 54,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 1,
+    "secondaryType": 0
+  },
+  {
+    "id": 55,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 80,
+    "primaryType": 11,
+    "secondaryType": 1
+  },
+  {
+    "id": 56,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 70,
+    "primaryType": 11,
+    "secondaryType": 7
+  },
+  {
+    "id": 59,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 80,
+    "primaryType": 6,
+    "secondaryType": 4
+  },
+  {
+    "id": 61,
+    "enabled": true,
+    "weight": 4,
+    "malePercentage": 50,
+    "primaryType": 11,
+    "secondaryType": 9
+  },
+  {
+    "id": 63,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 30,
+    "primaryType": 8,
+    "secondaryType": 0
+  },
+  {
+    "id": 64,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 60,
+    "primaryType": 7,
+    "secondaryType": 0
+  },
+  {
+    "id": 66,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 20,
+    "primaryType": 5,
+    "secondaryType": 2
+  },
+  {
+    "id": 68,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 8,
+    "secondaryType": 0
+  },
+  {
+    "id": 69,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 90,
+    "primaryType": 5,
+    "secondaryType": 1
+  },
+  {
+    "id": 70,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 3,
+    "secondaryType": 0
+  },
+  {
+    "id": 75,
+    "enabled": true,
+    "weight": 4,
+    "malePercentage": 20,
+    "primaryType": 3,
+    "secondaryType": 9
+  },
+  {
+    "id": 77,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 5,
+    "secondaryType": 0
+  },
+  {
+    "id": 78,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 2,
+    "secondaryType": 0
+  },
+  {
+    "id": 81,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 4,
+    "secondaryType": 0
+  },
+  {
+    "id": 83,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 40,
+    "primaryType": 2,
+    "secondaryType": 0
+  },
+  {
+    "id": 84,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 40,
+    "primaryType": 12,
+    "secondaryType": 0
+  },
+  {
+    "id": 85,
+    "enabled": true,
+    "weight": 3,
+    "malePercentage": 70,
+    "primaryType": 10,
+    "secondaryType": 1
+  },
+  {
+    "id": 86,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 20,
+    "primaryType": 11,
+    "secondaryType": 4
+  },
+  {
+    "id": 89,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 12,
+    "secondaryType": 0
+  },
+  {
+    "id": 91,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 8,
+    "secondaryType": 0
+  },
+  {
+    "id": 93,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 8,
+    "secondaryType": 0
+  },
+  {
+    "id": 96,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 50,
+    "primaryType": 6,
+    "secondaryType": 0
+  },
+  {
+    "id": 97,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 50,
+    "primaryType": 6,
+    "secondaryType": 1
+  },
+  {
+    "id": 100,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 30,
+    "primaryType": 7,
+    "secondaryType": 0
+  },
+  {
+    "id": 102,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 10,
+    "primaryType": 3,
+    "secondaryType": 5
+  },
+  {
+    "id": 103,
+    "enabled": true,
+    "weight": 6,
+    "malePercentage": 70,
+    "primaryType": 10,
+    "secondaryType": 0
+  },
+  {
+    "id": 106,
+    "enabled": true,
+    "weight": 8,
+    "malePercentage": 50,
+    "primaryType": 9,
+    "secondaryType": 0
+  },
+  {
+    "id": 109,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 50,
+    "primaryType": 7,
+    "secondaryType": 0
+  },
+  {
+    "id": 117,
+    "enabled": true,
+    "weight": 6,
+    "malePercentage": 70,
+    "primaryType": 10,
+    "secondaryType": 0
+  },
+  {
+    "id": 120,
+    "enabled": true,
+    "weight": 7,
+    "malePercentage": 50,
+    "primaryType": 11,
+    "secondaryType": 6
+  },
+  {
+    "id": 122,
+    "enabled": true,
+    "weight": 10,
+    "malePercentage": 30,
+    "primaryType": 12,
+    "secondaryType": 0
+  },
+  {
+    "id": 125,
+    "enabled": true,
+    "weight": 4,
+    "malePercentage": 30,
+    "primaryType": 9,
+    "secondaryType": 6
+  }
+]

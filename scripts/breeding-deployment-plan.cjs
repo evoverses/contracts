@@ -21,6 +21,8 @@ console.log(JSON.stringify({dryRun:true,chainId,treasury,addresses,
     'Verify live ABI, implementation, authority, wrapper configuration and deployed dependency versions.',
     'Validate the additive Evo upgrade against verified deployed source and storage before proposing it.',
     'Verify and freeze the species order/weights and complete adult metadata snapshot.',
+    'Verify original Gen0 egg provenance, treatment directly from the original contract, and all legacy pending hatches; do not trust indexed treatment alone.',
+    'Commit the reviewed Genesis Merkle snapshot for the exact chain/collection; unknown dates remain zero sentinels and OG incubation is bypassed.',
     'Review legacy entry points and coordinate authoritative breeding counts before launch.',
     'Independent security review and successful Fuji end-to-end validation.'
   ],
@@ -31,9 +33,10 @@ console.log(JSON.stringify({dryRun:true,chainId,treasury,addresses,
   wiring:[
     'Hermann.setBreeder(<BERTHA>) once; verified dependency addresses must match.',
     'Assign Evo.mintNewWithId selector to a dedicated Bertha minter role; grant that role to Bertha with zero execution delay.',
+    'Assign Hermann.configureGenesis and importGenesisEggs to dedicated configuration/verified-import roles; configure the immutable Genesis root and original species pool once, then import proofs in batches of at most 32.',
     'Assign Hermann.importAdult selector to a dedicated verified-data importer role.',
     'Keep configuration, pauses, subsidy policy and authority administration restricted to the administrator.',
-    'Hermann.configureSpecies(<REVIEWED_SPECIES>) creates immutable version 1.',
+    'Hermann.configureGenesis(<REVIEWED_ROOT>, <ORIGINAL_GENESIS_POOL>) creates a frozen species version. Hermann.configureSpecies(<REVIEWED_BRED_POOL>) may then create a separate immutable version for bred eggs.',
     'Import existing adult traits/breed history exactly once; never import unknown-gender eggs as adults.'
   ],
   verification:[
