@@ -2,7 +2,7 @@
 pragma solidity ^0.8.28;
 import {EvoBreedingRules as Rules} from "./EvoBreedingRules.sol";
 
-/// @notice Genesis Harry rules, preserving chunk order, integer/modulo boundaries and species order.
+/// @notice Genesis Harry trait draws, with a separate random size draw from unused entropy.
 library GenesisHatchRules {
     function hatch(Rules.Species[] memory pool, bool treated, uint256 word)
         internal pure returns (uint256 speciesId, Rules.Attributes memory attributes, Rules.Stats memory stats)
@@ -14,8 +14,9 @@ library GenesisHatchRules {
         for (uint256 i; i < pool.length; ++i) if (pool[i].id == speciesId) { species = pool[i]; break; }
         bool epic = chunks[1] % (treated ? 3000 : 5000) < (treated ? 9 : 1);
         bool chroma = chunks[1] % (treated ? 3000 : 1000) < (treated ? 45 : 1);
+        // The nine legacy chunks are consumed unchanged. Remaining entropy rolls size independently.
         attributes = Rules.Attributes(chunks[2] % 100 < species.malePercentage ? 1 : 0,
-            epic ? 2 : (chroma ? 1 : 0), species.primaryType, species.secondaryType, chunks[3] % 21, 10);
+            epic ? 2 : (chroma ? 1 : 0), species.primaryType, species.secondaryType, chunks[3] % 21, word % 21);
         stats = Rules.Stats(50, chunks[4] % 51, chunks[5] % 51, chunks[6] % 51, chunks[7] % 51, chunks[8] % 51);
     }
 }

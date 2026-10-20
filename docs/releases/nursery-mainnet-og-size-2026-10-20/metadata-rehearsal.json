@@ -1,0 +1,105 @@
+{
+  "passed": true,
+  "localDatabaseOnly": true,
+  "publicDatabaseWrites": 0,
+  "blockNumber": 98003849,
+  "blockHash": "0xb1df1769ef2b76871a0d35edd43cf8acfbe6c635ff9c0fb4ddcef972c738eedd",
+  "hashPinnedContractReads": 38,
+  "records": [
+    {
+      "tokenId": "532",
+      "type": "EVO",
+      "species": "fugush",
+      "generation": 0,
+      "totalBreeds": 5,
+      "xp": 0,
+      "imageVersion": "88721b986aedea9dc340"
+    },
+    {
+      "tokenId": "3429",
+      "type": "EVO",
+      "species": "sauderon",
+      "generation": 1,
+      "totalBreeds": 2,
+      "xp": 0,
+      "imageVersion": "3b2586f14d7920b38e22"
+    },
+    {
+      "tokenId": "4092",
+      "type": "EVO",
+      "species": "hodeon",
+      "generation": 1,
+      "totalBreeds": 1,
+      "xp": 0,
+      "imageVersion": "0febecfc91b362cbfed7"
+    },
+    {
+      "tokenId": "4503",
+      "type": "EVO",
+      "species": "krokon",
+      "generation": 1,
+      "totalBreeds": 1,
+      "xp": 0,
+      "imageVersion": "b88a52aa334891d61a76"
+    },
+    {
+      "tokenId": "5109",
+      "type": "EVO",
+      "species": "fluozacil",
+      "generation": 2,
+      "totalBreeds": 0,
+      "xp": 0,
+      "imageVersion": "313f9ae72efb68948bc6"
+    },
+    {
+      "tokenId": "5110",
+      "type": "EVO",
+      "species": "fluozacil",
+      "generation": 2,
+      "totalBreeds": 0,
+      "xp": 0,
+      "imageVersion": "aff99f32cf8e388a3759"
+    },
+    {
+      "tokenId": "19",
+      "type": "EVO",
+      "species": "kapryno",
+      "generation": 0,
+      "totalBreeds": 0,
+      "xp": 0,
+      "imageVersion": "176fc8f3fa41efc2074a"
+    },
+    {
+      "tokenId": "20",
+      "type": "EVO",
+      "species": "geckaiba",
+      "generation": 0,
+      "totalBreeds": 0,
+      "xp": 0,
+      "imageVersion": "14fc932e56575eb8c9fc"
+    },
+    {
+      "tokenId": "51",
+      "type": "EVO",
+      "species": "tytan",
+      "generation": 0,
+      "totalBreeds": 0,
+      "xp": 0,
+      "imageVersion": "f20f8551007c03d72eab"
+    }
+  ],
+  "wallets": [
+    {
+      "owner": "0x575ceb9e9ca3d05be1ca18997173c4e3d10f26f1",
+      "total": 6
+    },
+    {
+      "owner": "0x9f64c4beca7bbda647b9a755b29f7f9687bc4303",
+      "total": 2
+    },
+    {
+      "owner": "0x7cc853dbcdce909f37db4655db7c67fb6595cea9",
+      "total": 1
+    }
+  ]
+}

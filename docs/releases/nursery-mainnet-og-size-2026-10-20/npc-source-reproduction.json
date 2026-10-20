@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "compiler": "0.8.28+commit.7893614a.Emscripten.clang",
+  "records": [
+    {
+      "contract": "Hatcher_Hermann",
+      "compiler": "0.8.28+commit.7893614a.Emscripten.clang",
+      "inputFile": "npc-input-d77aa478ac8421d9a168f1de24152851f47be20d4b856fcc6470af35783fb1ef.json",
+      "inputSha256": "d77aa478ac8421d9a168f1de24152851f47be20d4b856fcc6470af35783fb1ef",
+      "sourceSha256": "9e9a22beafd3f5c58fb0f6d81ddcfb19ab08f060b45fe82815b0a9abc689c6ec",
+      "creationBytecodeReproduced": true,
+      "runtimeTemplateReproduced": true,
+      "releaseArtifactSha256": "28e4c7700293828e7cfd724679c13f6bddeca66f1c215026889711668c06bd62"
+    },
+    {
+      "contract": "Breeder_Bertha",
+      "compiler": "0.8.28+commit.7893614a.Emscripten.clang",
+      "inputFile": "npc-input-d77aa478ac8421d9a168f1de24152851f47be20d4b856fcc6470af35783fb1ef.json",
+      "inputSha256": "d77aa478ac8421d9a168f1de24152851f47be20d4b856fcc6470af35783fb1ef",
+      "sourceSha256": "d23d4690a1f797603db9f4fac42c76b09ffb81debf229d215f0525ac1be2fc94",
+      "creationBytecodeReproduced": true,
+      "runtimeTemplateReproduced": true,
+      "releaseArtifactSha256": "6d3aedb3eeadd6e88abdc41d4cccef3b327280f0445717210ee0811a96d22581"
+    }
+  ]
+}

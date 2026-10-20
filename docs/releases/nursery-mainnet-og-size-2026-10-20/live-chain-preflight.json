@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-20T02:24:28.229Z",
+  "chainId": 43114,
+  "blockNumber": 98020221,
+  "blockHash": "0x308ef0c518c3341c734642023c10f2010a1c1905ecaa0eacea24f9b3614531af",
+  "implementation": "0x6BcF190B3b3B55B017D91fE236784D1760B32d3f",
+  "collectionPaused": false,
+  "pilotOwnersUnchanged": true,
+  "predictedAddressesUndeployed": true,
+  "nonceMatches": true,
+  "publicTransactionsSubmitted": 0
+}

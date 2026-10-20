@@ -27,7 +27,7 @@ async function fixture() {
   for (const id of [1,2,3,4]) await (await nft.mintTo(user.address,id)).wait();
   await (await hatcher.importAdult(1,adult())).wait();
   await (await hatcher.importAdult(2,adult({species:2,attributes:{...adult().attributes,gender:1}}))).wait();
-  await (await manager.setTargetFunctionRole(nft.target,[nft.interface.getFunction('mintNewWithId').selector],42)).wait();
+  await (await manager.setTargetFunctionRole(nft.target,[nft.interface.getFunction('mintNew').selector],42)).wait();
   await (await manager.grantRole(42,breeder.target,0)).wait();
   await (await token.mint(user.address,ethers.parseEther('100000'))).wait();
   await (await token.connect(user).approve(breeder.target,ethers.MaxUint256)).wait();

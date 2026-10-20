@@ -1,0 +1,16 @@
+{
+  "localComparison": true,
+  "publicTransactionsSubmitted": 0,
+  "checks": [
+    {
+      "tokenId": 3,
+      "size": "11",
+      "allOtherTraitsMatchVerifiedLegacy": true
+    },
+    {
+      "tokenId": 4,
+      "size": "19",
+      "allOtherTraitsMatchVerifiedLegacy": true
+    }
+  ]
+}

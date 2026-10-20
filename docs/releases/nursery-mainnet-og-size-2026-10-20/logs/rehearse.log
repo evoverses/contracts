@@ -1,0 +1,53 @@
+Checking dedicated loopback fork
+Pinned local fork ready
+Rehearsing: Deploy Hatcher_Hermann
+Rehearsing: Deploy Breeder_Bertha
+Rehearsing: Pause Hermann until readiness verified
+Rehearsing: Pause Bertha until readiness verified
+Rehearsing: Pin reciprocal breeder
+Rehearsing: Freeze original Genesis root and pool
+Rehearsing: Freeze separate bred species version
+Rehearsing: Preserve existing mintNew permission for 0x4082e997Ec720A4894EFec53b0d9AabfeeA44cBE
+Rehearsing: Restrict existing mintNew selector to dedicated minter role
+Rehearsing: Grant Bertha zero-delay mint permission
+Rehearsing: Assign dedicated verified-import selectors
+Rehearsing: Grant temporary import permission
+Rehearsing: Import verified adult #532
+Rehearsing: Import verified adult #3429
+Rehearsing: Import verified adult #4092
+Rehearsing: Import verified adult #4503
+Rehearsing: Remove temporary import permission
+Rehearsing: Activate Hermann after readiness acceptance
+Rehearsing: Activate Bertha after readiness acceptance
+Rehearsing: Legacy mintNew remains usable
+Rehearsing: Existing NFT transfer remains usable
+Rehearsing: Approve only proposed breeding budget
+Rehearsing: Approve one bred treatment
+Rehearsing: Breed 3429/4092
+Rehearsing: Simulated coordinator callback
+Rehearsing: Collect egg 1
+Rehearsing: Breed 532/4503
+Rehearsing: Simulated coordinator callback
+Rehearsing: Collect egg 2
+Rehearsing: Treat first bred egg once
+Rehearsing: Request production hatch 5109
+Rehearsing: Simulated coordinator callback
+Rehearsing: Complete production hatch 5109
+Rehearsing: Request production hatch 5110
+Rehearsing: Simulated coordinator callback
+Rehearsing: Complete production hatch 5110
+Rehearsing: Rehearsal-only grant for OG cases
+Rehearsing: Rehearsal-only OG registration
+Rehearsing: Rehearsal-only remove OG import grant
+Rehearsing: Request OG hatch 19
+Rehearsing: Simulated coordinator callback
+Rehearsing: Complete OG hatch 19
+Rehearsing: Approve OG optional treatment
+Rehearsing: Buy OG optional treatment
+Rehearsing: Request OG hatch 20
+Rehearsing: Simulated coordinator callback
+Rehearsing: Complete OG hatch 20
+Rehearsing: Request OG hatch 51
+Rehearsing: Simulated coordinator callback
+Rehearsing: Complete OG hatch 51
+{"passed":true,"setupGasUsed":"28333072","setupAvaxAt30Gwei":"0.84999216","bred":["5109","5110"],"og":["19","20","51"]}

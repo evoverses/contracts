@@ -1,0 +1,15 @@
+{
+  "sourceBlock": 98003826,
+  "sourceHash": "0x5d02f4058ee9611dbb284ea0a6d70e5cb35715561cd3a007a6028007164d2ba2",
+  "authority": "0x204fc7955F816352afDe77D84e4e8719D2C28A0A",
+  "verifiedContractName": "SecurityGuardSamuel",
+  "grantedEvents": 1,
+  "administrators": [
+    {
+      "account": "0x4082e997Ec720A4894EFec53b0d9AabfeeA44cBE",
+      "executionDelay": "0",
+      "canUpgrade": true,
+      "upgradeDelay": "0"
+    }
+  ]
+}

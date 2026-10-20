@@ -39,7 +39,7 @@ describe('Genesis eggs retain original rules and NFT ownership',function(){
   const egg=await f.hatcher.eggs(3);assert.equal(egg.speciesVersion,version);await fail(f.hatcher.connect(f.user).requestHatch(3,{value:await f.wrapper.price()}),'InvalidEggState');
   await fail(f.hatcher.completeHatch(3),'RandomnessNotReady');await wait(f.wrapper.fulfill(egg.vrfRequestId,123456789n));
   await wait(f.hatcher.connect(f.other).completeHatch(3));const adult=await f.hatcher.adultOf(3);
-  assert.equal(adult.generation,0n);assert.equal(adult.totalBreeds,0n);assert.equal(adult.lastBreedTime,0n);assert.equal(adult.attributes.size,10n);assert.equal(adult.stats.health,50n);
+  assert.equal(adult.generation,0n);assert.equal(adult.totalBreeds,0n);assert.equal(adult.lastBreedTime,0n);assert.equal(adult.attributes.size,0n);assert.equal(adult.stats.health,50n);
   assert.equal(await f.nft.ownerOf(3),f.user.address);assert.equal(await f.nft.nextId(),5109n);assert.equal(await f.token.balanceOf(f.user.address),balance);assert.ok(await f.hatcher.hatchCompletedAt(3)>0n);
   await fail(f.hatcher.completeHatch(3),'InvalidEggState');
  });
@@ -53,13 +53,26 @@ describe('Genesis eggs retain original rules and NFT ownership',function(){
   await wait(f.hatcher.connect(f.user).requestHatch(4,{value:await f.wrapper.price()}));const egg=await f.hatcher.eggs(4);await wait(f.nft.connect(f.user).transferFrom(f.user.address,f.other.address,4));
   await fail(f.hatcher.connect(f.other).treat(4),'InvalidEggState');await wait(f.wrapper.fulfill(egg.vrfRequestId,42));await wait(f.hatcher.completeHatch(4));assert.equal(await f.nft.ownerOf(4),f.other.address);
  });
- it('matches the exact explorer-verified original Harry contract for fixed, boundary and random words',async()=>{
+ it('preserves every original Harry trait except the separately rolled size for fixed, boundary and random words',async()=>{
   const implementation=await new ethers.ContractFactory(legacy.abi,legacy.bytecode,f.admin).deploy();await implementation.waitForDeployment();
   const init=implementation.interface.encodeFunctionData('initialize');const proxy=await deploy('ERC1967Proxy',implementation.target,init);const reference=new ethers.Contract(proxy.target,legacy.abi,f.admin);
   await wait(reference.setBaseAttributes(originalPool.map(s=>s.id),originalPool.map(s=>[s.enabled?1:0,s.weight,s.malePercentage,s.primaryType,s.secondaryType])));
   const rules=await deploy('GenesisRulesHarness');
   const words=[0n,1n,569n,570n,9999n,ethers.MaxUint256,...[0,1,8,9,44,45,999,1000,2999,3000,4999,5000,9000,9999].map(x=>word([125,x,99,20,50,51,9999,0,1234]))];
   for(let i=0;i<20;i++)words.push(BigInt(ethers.keccak256(ethers.toUtf8Bytes('legacy-genesis-vector-'+i))));
-  for(const treated of [false,true])for(const seed of words){const old=await reference.roll(19,treated,seed),actual=await rules.hatch(originalPool,treated,seed);assert.equal(actual[0],old.species);assert.deepEqual(Array.from(actual[1]),Array.from(old.attributes));assert.deepEqual(Array.from(actual[2]),Array.from(old.stats));assert.equal(old.generation,0n);}
+  for(const treated of [false,true])for(const seed of words){const old=await reference.roll(19,treated,seed),actual=await rules.hatch(originalPool,treated,seed);assert.equal(actual[0],old.species);assert.deepEqual(Array.from(actual[1]).slice(0,5),Array.from(old.attributes).slice(0,5));assert.equal(actual[1].size,(seed/(10000n**9n))%21n);assert.deepEqual(Array.from(actual[2]),Array.from(old.stats));assert.equal(old.generation,0n);}
+ });
+ it('uses unused entropy to cover every OG size without changing other traits or treatment outcomes',async()=>{
+  const rules=await deploy('GenesisRulesHarness'),base=word([125,44,99,20,50,51,9999,0,1234]);
+  for(const treated of [false,true]){
+   const baseline=await rules.hatch(originalPool,treated,base);
+   const seen=new Set();
+   for(let size=0n;size<=20n;size++){
+    const actual=await rules.hatch(originalPool,treated,base+size*(10000n**9n));
+    assert.equal(actual[0],baseline[0]);assert.deepEqual(Array.from(actual[1]).slice(0,5),Array.from(baseline[1]).slice(0,5));
+    assert.deepEqual(Array.from(actual[2]),Array.from(baseline[2]));assert.equal(actual[1].size,size);seen.add(String(actual[1].size));
+   }
+   assert.equal(seen.size,21);
+  }
  });
 });

@@ -1,0 +1,281 @@
+{
+  "sourceBlock": 98003799,
+  "sourceHash": "0x09f9f4cc8a04274dd661051b6b937c1d8d3ce188d1980d4d12f3962d688ab84c",
+  "wallet": "0x575CEb9E9ca3d05be1ca18997173C4e3D10f26f1",
+  "proposedOnly": true,
+  "approvedNftIds": false,
+  "approvedSpendingCap": false,
+  "imports": [
+    {
+      "tokenId": "532",
+      "adult": {
+        "species": 55,
+        "generation": 0,
+        "totalBreeds": 4,
+        "lastBreedTime": 1667140896,
+        "attributes": {
+          "gender": 0,
+          "rarity": 0,
+          "primaryType": 11,
+          "secondaryType": 1,
+          "nature": 16,
+          "size": 20
+        },
+        "stats": {
+          "health": 50,
+          "attack": 21,
+          "defense": 14,
+          "special": 6,
+          "resistance": 19,
+          "speed": 37
+        }
+      },
+      "sourceMetadataSha256": "76b94a9aab1ae5309f82964f4ccd770bc36fbe7138731e3120e7591d42a115d3"
+    },
+    {
+      "tokenId": "3429",
+      "adult": {
+        "species": 125,
+        "generation": 1,
+        "totalBreeds": 1,
+        "lastBreedTime": 1666671703,
+        "attributes": {
+          "gender": 1,
+          "rarity": 0,
+          "primaryType": 9,
+          "secondaryType": 6,
+          "nature": 10,
+          "size": 20
+        },
+        "stats": {
+          "health": 50,
+          "attack": 7,
+          "defense": 8,
+          "special": 44,
+          "resistance": 6,
+          "speed": 17
+        }
+      },
+      "sourceMetadataSha256": "44142fa91b04df87c689a895368a540323c0737ca6303d7f82a66679eb895d56"
+    },
+    {
+      "tokenId": "4092",
+      "adult": {
+        "species": 5,
+        "generation": 1,
+        "totalBreeds": 0,
+        "lastBreedTime": 0,
+        "attributes": {
+          "gender": 0,
+          "rarity": 0,
+          "primaryType": 9,
+          "secondaryType": 0,
+          "nature": 12,
+          "size": 10
+        },
+        "stats": {
+          "health": 50,
+          "attack": 4,
+          "defense": 38,
+          "special": 16,
+          "resistance": 13,
+          "speed": 45
+        }
+      },
+      "sourceMetadataSha256": "9e3b0b588908928b32f0c9a5384cde611241afd068d664f84ced9b2ccc01d10f"
+    },
+    {
+      "tokenId": "4503",
+      "adult": {
+        "species": 35,
+        "generation": 1,
+        "totalBreeds": 0,
+        "lastBreedTime": 0,
+        "attributes": {
+          "gender": 1,
+          "rarity": 0,
+          "primaryType": 1,
+          "secondaryType": 0,
+          "nature": 0,
+          "size": 20
+        },
+        "stats": {
+          "health": 50,
+          "attack": 5,
+          "defense": 38,
+          "special": 43,
+          "resistance": 35,
+          "speed": 36
+        }
+      },
+      "sourceMetadataSha256": "87530904cf238edb781f5b4447bd5129847ef29d888735d84aeb063272c7beca"
+    }
+  ],
+  "pairs": [
+    {
+      "parents": [
+        "3429",
+        "4092"
+      ],
+      "evoCost": "3000000000000000000000"
+    },
+    {
+      "parents": [
+        "532",
+        "4503"
+      ],
+      "evoCost": "3500000000000000000000"
+    }
+  ],
+  "breedEvoTotal": "6500000000000000000000",
+  "optionalTreatmentEvoEach": "250000000000000000000",
+  "ownedGenesis": [],
+  "excluded": [
+    {
+      "tokenId": "576",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "609",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "664",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "686",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "962",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "1066",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "1175",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "1722",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "1911",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "1917",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "2120",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "2577",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "2578",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3060",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3095",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3309",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3366",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3395",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3396",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3397",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3428",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3675",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3756",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3774",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3775",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3776",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3812",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "3931",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "4000",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "4015",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "4091",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "4093",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "4499",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "4500",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "4501",
+      "reason": "Invalid numeric adult metadata"
+    },
+    {
+      "tokenId": "4502",
+      "reason": "Invalid numeric adult metadata"
+    }
+  ],
+  "metadataAuthoritativeForImport": false,
+  "requires": "Confirm legacy breeding writer is stopped/reconciled before final snapshot approval."
+}

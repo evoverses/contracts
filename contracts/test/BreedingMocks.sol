@@ -24,14 +24,27 @@ contract MockEVO is ERC20 {
 contract MockEvoNFT is ERC721, AccessManaged {
     uint256 public nextId = 5109;
     bool public failMint;
+    uint8 public callbackMode;
     event MetadataUpdate(uint256 tokenId);
     constructor(address authority_) ERC721("Mock Evo", "Evo") AccessManaged(authority_) {}
     function mintTo(address to, uint256 id) external restricted { require(id < nextId); _safeMint(to, id); }
-    function mintNewWithId(address to) external restricted returns (uint256 id) {
+    function mintNew(address to) external restricted {
         require(!failMint, "mint unavailable");
-        id = nextId++;
-        _safeMint(to, id);
+        uint256 id = nextId++;
+        if (callbackMode == 0) _safeMint(to, id);
+        else {
+            _mint(to, id);
+            if (callbackMode == 2) {
+                IERC721Receiver(to).onERC721Received(msg.sender, address(0), id, "");
+                IERC721Receiver(to).onERC721Received(msg.sender, address(0), id, "");
+            } else if (callbackMode == 3) {
+                IERC721Receiver(to).onERC721Received(address(0), address(0), id, "");
+            } else if (callbackMode == 4) {
+                IERC721Receiver(to).onERC721Received(msg.sender, msg.sender, id, "");
+            }
+        }
     }
+    function setCallbackMode(uint8 value) external { callbackMode = value; }
     function setFailMint(bool value) external { failMint = value; }
     function requestMetadataUpdate(uint256 id) external { emit MetadataUpdate(id); }
 }
@@ -72,8 +85,11 @@ contract MockAuthority {
     function canCall(address, address, bytes4) external pure returns (bool immediate, uint32 delay) { return (true, 0); }
 }
 
+interface HatcherKnown { function known(uint256 id) external view returns (bool); }
 contract RejectingBreeder is IERC721Receiver {
     bool public reject = true;
+    address public registry;
+    function setRegistry(address value) external { registry = value; }
     address public attackTarget;
     bytes public attackData;
     bool public attempted;
@@ -85,7 +101,8 @@ contract RejectingBreeder is IERC721Receiver {
         require(ok, "execution failed");
         return result;
     }
-    function onERC721Received(address, address, uint256, bytes calldata) external returns (bytes4) {
+    function onERC721Received(address, address, uint256 tokenId, bytes calldata) external returns (bytes4) {
+        if (registry != address(0)) require(HatcherKnown(registry).known(tokenId), "egg not registered before delivery");
         if (attackTarget != address(0)) {
             attempted=true;
             (reentrySucceeded,) = attackTarget.call(attackData);

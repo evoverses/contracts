@@ -35,6 +35,50 @@ describe('Bertha / Hermann local integration',function(){
     assert.equal(await f.nft.nextId(),5110n);
   });
 
+  it('rejects forged receiver callbacks and unsolicited NFTs without losing ownership',async()=>{
+    await fail(f.breeder.onERC721Received(f.breeder.target,ethers.ZeroAddress,999,'0x'),'InvalidMintCallback');
+    await fail(f.nft.connect(f.user)['safeTransferFrom(address,address,uint256)'](f.user.address,f.breeder.target,1),'InvalidMintCallback');
+    assert.equal(await f.nft.ownerOf(1),f.user.address);
+    // Even the configured collection cannot inject a mint outside completion.
+    await fail(f.nft.mintTo(f.breeder.target,100),'InvalidMintCallback');
+    await fail(f.nft.ownerOf(100));
+  });
+
+  it('uses callback ID despite unrelated mints and registers before recipient delivery',async()=>{
+    await wait(f.manager.grantRole(42,f.admin.address,0));
+    await wait(f.nft.mintNew(f.other.address));
+    const id=await readyBreed(f);
+    const receipt=await wait(f.breeder.completeBreed(id));
+    assert.equal((await f.breeder.requests(id)).tokenId,5110n);
+    assert.equal(await f.nft.ownerOf(5110),f.user.address);
+    assert.equal(await f.nft.balanceOf(f.breeder.target),0n);
+    const transfers=receipt.logs.filter(x=>x.address===f.nft.target).map(x=>{try{return f.nft.interface.parseLog(x);}catch{return null;}}).filter(x=>x?.name==='Transfer');
+    assert.equal(transfers.length,2);
+    assert.equal(transfers[0].args.from,ethers.ZeroAddress);
+    assert.equal(transfers[0].args.to,f.breeder.target);
+    assert.equal(transfers[1].args.from,f.breeder.target);
+    assert.equal(transfers[1].args.to,f.user.address);
+  });
+
+  it('rolls back missing, duplicate and malformed mint callbacks without consuming the request or seed',async()=>{
+    const id=await readyBreed(f,123n);
+    for(const mode of [1,2,3,4]) {
+      await wait(f.nft.setCallbackMode(mode));
+      await fail(f.breeder.completeBreed(id),'InvalidMintCallback');
+      assert.equal((await f.breeder.requests(id)).status,2n);
+      assert.equal((await f.breeder.randomness(1)).word,123n);
+      assert.equal(await f.nft.nextId(),5109n);
+      assert.equal(await f.nft.balanceOf(f.breeder.target),0n);
+      assert.equal(await f.hatcher.known(5109),false);
+      assert.equal((await f.hatcher.adultOf(1)).totalBreeds,0n);
+      assert.equal(await f.breeder.escrowedEvo(),E('1000'));
+    }
+    await wait(f.nft.setCallbackMode(0));
+    await wait(f.breeder.completeBreed(id));
+    assert.equal(await f.nft.ownerOf(5109),f.user.address);
+    assert.equal((await f.hatcher.adultOf(1)).totalBreeds,1n);
+  });
+
   it('rejects ineligible/unimported parents, incorrect ownership and duplicate parent requests before payment',async()=>{
     const balance=await f.token.balanceOf(f.user.address);
     await fail(f.breeder.connect(f.user).breed(1,1,E('1000'),{value:E('.01')}),'IncompatibleParents');
@@ -125,6 +169,7 @@ describe('Bertha / Hermann local integration',function(){
     await fail(receiver.execute(f.breeder.target,f.breeder.interface.encodeFunctionData('cancelBreed',[1])));
     assert.equal(await f.breeder.escrowedEvo(),E('1000'));
     await wait(receiver.setReject(false));
+    await wait(receiver.setRegistry(f.hatcher.target));
     await wait(receiver.setAttack(f.breeder.target,f.breeder.interface.encodeFunctionData('completeBreed',[1])));
     await wait(f.breeder.completeBreed(1));
     assert.equal(await receiver.attempted(),true);
@@ -224,7 +269,7 @@ describe('Bertha / Hermann local integration',function(){
   });
 
   it('enforces dedicated NFT mint permissions rather than giving Bertha admin access',async()=>{
-    await fail(f.nft.connect(f.other).mintNewWithId(f.other.address),'AccessManagedUnauthorized');
+    await fail(f.nft.connect(f.other).mintNew(f.other.address),'AccessManagedUnauthorized');
     await wait(f.manager.revokeRole(42,f.breeder.target));
     const id=await readyBreed(f);
     await fail(f.breeder.completeBreed(id),'AccessManagedUnauthorized');
@@ -264,14 +309,14 @@ describe('Bertha / Hermann local integration',function(){
     }
   });
 
-  it('new Evo entrypoint allocates IDs without changing historical mintTo semantics',async()=>{
+  it('existing Evo mint functions allocate IDs and preserve historical mintTo limits',async()=>{
     const authority=await deploy('MockAuthority');
     await network.provider.send('hardhat_setCode',['0x204fc7955F816352afDe77D84e4e8719D2C28A0A',await ethers.provider.getCode(authority.target)]);
     const implementation=await deploy('Evo');
     const proxy=await deploy('ERC1967Proxy',implementation.target,implementation.interface.encodeFunctionData('initialize'));
     const evo=await ethers.getContractAt('Evo',proxy.target);
-    assert.equal(await evo.mintNewWithId.staticCall(f.user.address),5109n);
-    await wait(evo.mintNewWithId(f.user.address));
+    await wait(evo.mintNew(f.user.address));
+    assert.equal(await evo.ownerOf(5109),f.user.address);
     await wait(evo.mintNew(f.user.address));
     assert.equal(await evo.ownerOf(5110),f.user.address);
     await wait(evo.mintTo(f.user.address,5));

@@ -1,0 +1,342 @@
+{
+  "chainId": 43114,
+  "collection": "0x4151b8afa10653d304FdAc9a781AFccd45EC164c",
+  "hermann": "0x3B752a9644374e69ADB8141E52d2b09eafE8F8c4",
+  "blockNumber": 98003849,
+  "blockHash": "0xb1df1769ef2b76871a0d35edd43cf8acfbe6c635ff9c0fb4ddcef972c738eedd",
+  "records": [
+    {
+      "tokenId": "532",
+      "owner": "0x575CEb9E9ca3d05be1ca18997173C4e3D10f26f1",
+      "adult": {
+        "species": "55",
+        "generation": "0",
+        "totalBreeds": "5",
+        "lastBreedTime": "1792446594",
+        "attributes": {
+          "gender": "0",
+          "rarity": "0",
+          "primaryType": "11",
+          "secondaryType": "1",
+          "nature": "16",
+          "size": "20"
+        },
+        "stats": {
+          "health": "50",
+          "attack": "21",
+          "defense": "14",
+          "special": "6",
+          "resistance": "19",
+          "speed": "37"
+        }
+      },
+      "egg": {
+        "parent1": "0",
+        "parent2": "0",
+        "speciesVersion": "0",
+        "createdAt": "0",
+        "treated": false,
+        "status": "0",
+        "vrfRequestId": "0"
+      },
+      "eggKind": "0",
+      "hatchCompletedAt": "0"
+    },
+    {
+      "tokenId": "3429",
+      "owner": "0x575CEb9E9ca3d05be1ca18997173C4e3D10f26f1",
+      "adult": {
+        "species": "125",
+        "generation": "1",
+        "totalBreeds": "2",
+        "lastBreedTime": "1792446591",
+        "attributes": {
+          "gender": "1",
+          "rarity": "0",
+          "primaryType": "9",
+          "secondaryType": "6",
+          "nature": "10",
+          "size": "20"
+        },
+        "stats": {
+          "health": "50",
+          "attack": "7",
+          "defense": "8",
+          "special": "44",
+          "resistance": "6",
+          "speed": "17"
+        }
+      },
+      "egg": {
+        "parent1": "0",
+        "parent2": "0",
+        "speciesVersion": "0",
+        "createdAt": "0",
+        "treated": false,
+        "status": "0",
+        "vrfRequestId": "0"
+      },
+      "eggKind": "0",
+      "hatchCompletedAt": "0"
+    },
+    {
+      "tokenId": "4092",
+      "owner": "0x575CEb9E9ca3d05be1ca18997173C4e3D10f26f1",
+      "adult": {
+        "species": "5",
+        "generation": "1",
+        "totalBreeds": "1",
+        "lastBreedTime": "1792446591",
+        "attributes": {
+          "gender": "0",
+          "rarity": "0",
+          "primaryType": "9",
+          "secondaryType": "0",
+          "nature": "12",
+          "size": "10"
+        },
+        "stats": {
+          "health": "50",
+          "attack": "4",
+          "defense": "38",
+          "special": "16",
+          "resistance": "13",
+          "speed": "45"
+        }
+      },
+      "egg": {
+        "parent1": "0",
+        "parent2": "0",
+        "speciesVersion": "0",
+        "createdAt": "0",
+        "treated": false,
+        "status": "0",
+        "vrfRequestId": "0"
+      },
+      "eggKind": "0",
+      "hatchCompletedAt": "0"
+    },
+    {
+      "tokenId": "4503",
+      "owner": "0x575CEb9E9ca3d05be1ca18997173C4e3D10f26f1",
+      "adult": {
+        "species": "35",
+        "generation": "1",
+        "totalBreeds": "1",
+        "lastBreedTime": "1792446594",
+        "attributes": {
+          "gender": "1",
+          "rarity": "0",
+          "primaryType": "1",
+          "secondaryType": "0",
+          "nature": "0",
+          "size": "20"
+        },
+        "stats": {
+          "health": "50",
+          "attack": "5",
+          "defense": "38",
+          "special": "43",
+          "resistance": "35",
+          "speed": "36"
+        }
+      },
+      "egg": {
+        "parent1": "0",
+        "parent2": "0",
+        "speciesVersion": "0",
+        "createdAt": "0",
+        "treated": false,
+        "status": "0",
+        "vrfRequestId": "0"
+      },
+      "eggKind": "0",
+      "hatchCompletedAt": "0"
+    },
+    {
+      "tokenId": "5109",
+      "owner": "0x575CEb9E9ca3d05be1ca18997173C4e3D10f26f1",
+      "adult": {
+        "species": "97",
+        "generation": "2",
+        "totalBreeds": "0",
+        "lastBreedTime": "0",
+        "attributes": {
+          "gender": "0",
+          "rarity": "0",
+          "primaryType": "6",
+          "secondaryType": "1",
+          "nature": "18",
+          "size": "5"
+        },
+        "stats": {
+          "health": "50",
+          "attack": "7",
+          "defense": "8",
+          "special": "44",
+          "resistance": "6",
+          "speed": "17"
+        }
+      },
+      "egg": {
+        "parent1": "3429",
+        "parent2": "4092",
+        "speciesVersion": "2",
+        "createdAt": "1792446593",
+        "treated": true,
+        "status": "3",
+        "vrfRequestId": "72536396926450209895736947377159186911869789369104177150615816706816218601028"
+      },
+      "eggKind": "2",
+      "hatchCompletedAt": "1792705799"
+    },
+    {
+      "tokenId": "5110",
+      "owner": "0x575CEb9E9ca3d05be1ca18997173C4e3D10f26f1",
+      "adult": {
+        "species": "97",
+        "generation": "2",
+        "totalBreeds": "0",
+        "lastBreedTime": "0",
+        "attributes": {
+          "gender": "0",
+          "rarity": "0",
+          "primaryType": "6",
+          "secondaryType": "1",
+          "nature": "0",
+          "size": "5"
+        },
+        "stats": {
+          "health": "50",
+          "attack": "21",
+          "defense": "14",
+          "special": "6",
+          "resistance": "19",
+          "speed": "37"
+        }
+      },
+      "egg": {
+        "parent1": "532",
+        "parent2": "4503",
+        "speciesVersion": "2",
+        "createdAt": "1792446596",
+        "treated": false,
+        "status": "3",
+        "vrfRequestId": "93954004989998040596326407432971715570883824120936447399845812740188681090691"
+      },
+      "eggKind": "2",
+      "hatchCompletedAt": "1792705802"
+    },
+    {
+      "tokenId": "19",
+      "owner": "0x9F64C4bECa7BBda647B9A755B29F7F9687bc4303",
+      "adult": {
+        "species": "12",
+        "generation": "0",
+        "totalBreeds": "0",
+        "lastBreedTime": "0",
+        "attributes": {
+          "gender": "1",
+          "rarity": "0",
+          "primaryType": "4",
+          "secondaryType": "0",
+          "nature": "0",
+          "size": "0"
+        },
+        "stats": {
+          "health": "50",
+          "attack": "0",
+          "defense": "0",
+          "special": "0",
+          "resistance": "0",
+          "speed": "0"
+        }
+      },
+      "egg": {
+        "parent1": "0",
+        "parent2": "0",
+        "speciesVersion": "1",
+        "createdAt": "0",
+        "treated": false,
+        "status": "3",
+        "vrfRequestId": "48839256060635515300600939950762692580981982947678627936108457330555394094380"
+      },
+      "eggKind": "1",
+      "hatchCompletedAt": "1792705808"
+    },
+    {
+      "tokenId": "20",
+      "owner": "0x9F64C4bECa7BBda647B9A755B29F7F9687bc4303",
+      "adult": {
+        "species": "122",
+        "generation": "0",
+        "totalBreeds": "0",
+        "lastBreedTime": "0",
+        "attributes": {
+          "gender": "1",
+          "rarity": "0",
+          "primaryType": "12",
+          "secondaryType": "0",
+          "nature": "0",
+          "size": "10"
+        },
+        "stats": {
+          "health": "50",
+          "attack": "0",
+          "defense": "0",
+          "special": "0",
+          "resistance": "0",
+          "speed": "0"
+        }
+      },
+      "egg": {
+        "parent1": "0",
+        "parent2": "0",
+        "speciesVersion": "1",
+        "createdAt": "0",
+        "treated": true,
+        "status": "3",
+        "vrfRequestId": "33658293414073571846798717650082119215535010048538709239429781603908467625810"
+      },
+      "eggKind": "1",
+      "hatchCompletedAt": "1792705813"
+    },
+    {
+      "tokenId": "51",
+      "owner": "0x7CC853dBcdCe909f37db4655DB7c67Fb6595cEa9",
+      "adult": {
+        "species": "68",
+        "generation": "0",
+        "totalBreeds": "0",
+        "lastBreedTime": "0",
+        "attributes": {
+          "gender": "0",
+          "rarity": "0",
+          "primaryType": "8",
+          "secondaryType": "0",
+          "nature": "0",
+          "size": "20"
+        },
+        "stats": {
+          "health": "50",
+          "attack": "0",
+          "defense": "0",
+          "special": "0",
+          "resistance": "0",
+          "speed": "0"
+        }
+      },
+      "egg": {
+        "parent1": "0",
+        "parent2": "0",
+        "speciesVersion": "1",
+        "createdAt": "0",
+        "treated": true,
+        "status": "3",
+        "vrfRequestId": "3914769432161251517638824825621774372322265213996817551522350896373643075213"
+      },
+      "eggKind": "1",
+      "hatchCompletedAt": "1792705816"
+    }
+  ]
+}

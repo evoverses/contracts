@@ -1,0 +1,28 @@
+{
+  "quotedAtBlock": 98020198,
+  "currentGasPriceWei": "2500000150",
+  "deployer": {
+    "transactions": 2,
+    "gasUsed": "6351980",
+    "gasLimitTotal": "7939976",
+    "estimatedAvax": "0.015879950952797",
+    "gasLimitAvaxAtCurrentPrice": "0.0198499411909964",
+    "avaxBalance": "2.00723768049297342"
+  },
+  "administrator": {
+    "transactions": 17,
+    "gasUsed": "21981092",
+    "gasLimitTotal": "27488719",
+    "estimatedAvax": "0.0549527332971638",
+    "gasLimitAvaxAtCurrentPrice": "0.06872180162330785",
+    "avaxBalance": "2.679974953577834711"
+  },
+  "fullRehearsalActionGasUsed": "9785051",
+  "fullRehearsalVrfMaximumAt30Gwei": "0.079763376",
+  "pilotBreedEvo": "6500.0",
+  "treatmentEvoEach": "250",
+  "approvedSpendingCap": null,
+  "nonceStillMatches": true,
+  "includesPublicOracleCallbackGas": false,
+  "feeWarning": "Estimates only. Requote network gas and per-request VRF payment immediately before signing; simulated callbacks and rehearsal-only imports are excluded."
+}

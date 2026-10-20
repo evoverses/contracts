@@ -1,0 +1,322 @@
+TAP version 13
+# Subtest: anonymous beta visits redirect with the same path and query without a session lookup
+ok 1 - anonymous beta visits redirect with the same path and query without a session lookup
+  ---
+  duration_ms: 2.353153
+  type: 'test'
+  ...
+# Subtest: verified owner can enter beta and private responses cannot become cached public pages
+ok 2 - verified owner can enter beta and private responses cannot become cached public pages
+  ---
+  duration_ms: 2.640251
+  type: 'test'
+  ...
+# Subtest: another player cannot enter, even with the owner display name or a forged query
+ok 3 - another player cannot enter, even with the owner display name or a forged query
+  ---
+  duration_ms: 0.846107
+  type: 'test'
+  ...
+# Subtest: invalid, expired, unavailable and malformed identity responses fail closed
+ok 4 - invalid, expired, unavailable and malformed identity responses fail closed
+  ---
+  duration_ms: 2.378306
+  type: 'test'
+  ...
+# Subtest: missing owner configuration or duplicate/empty cookies cannot grant access
+ok 5 - missing owner configuration or duplicate/empty cookies cannot grant access
+  ---
+  duration_ms: 0.549574
+  type: 'test'
+  ...
+# Subtest: blocked writes use 303 so mutations are not replayed on main
+ok 6 - blocked writes use 303 so mutations are not replayed on main
+  ---
+  duration_ms: 0.240453
+  type: 'test'
+  ...
+# Subtest: API, download and Next data routes are covered by the same owner check
+ok 7 - API, download and Next data routes are covered by the same owner check
+  ---
+  duration_ms: 0.315404
+  type: 'test'
+  ...
+# Subtest: exact sign-in and OAuth routes remain available for owner session recovery
+ok 8 - exact sign-in and OAuth routes remain available for owner session recovery
+  ---
+  duration_ms: 1.379634
+  type: 'test'
+  ...
+# Subtest: public build assets still load for the sign-in page
+ok 9 - public build assets still load for the sign-in page
+  ---
+  duration_ms: 0.408513
+  type: 'test'
+  ...
+# Subtest: main and local runtime requests retain existing behavior
+ok 10 - main and local runtime requests retain existing behavior
+  ---
+  duration_ms: 0.926385
+  type: 'test'
+  ...
+# Subtest: canonical Genesis assets preserve treatment and unknown dates without reading parents or revealing species
+ok 11 - canonical Genesis assets preserve treatment and unknown dates without reading parents or revealing species
+  ---
+  duration_ms: 352.91585
+  type: 'test'
+  ...
+# Subtest: single-token reveal reads canonical hatched OG traits and follows current NFT ownership
+ok 12 - single-token reveal reads canonical hatched OG traits and follows current NFT ownership
+  ---
+  duration_ms: 39.342535
+  type: 'test'
+  ...
+# Subtest: single-token API denies non-master sessions before canonical reads and rejects invalid IDs
+ok 13 - single-token API denies non-master sessions before canonical reads and rejects invalid IDs
+  ---
+  duration_ms: 26.142849
+  type: 'test'
+  ...
+# Subtest: durable hatch records reject malformed browser data and do not repeat an acknowledged celebration
+ok 14 - durable hatch records reject malformed browser data and do not repeat an acknowledged celebration
+  ---
+  duration_ms: 5.235311
+  type: 'test'
+  ...
+# Subtest: preserved adults keep canonical prior-registry hatch dates and genealogy after a Fuji refill cutover
+ok 15 - preserved adults keep canonical prior-registry hatch dates and genealogy after a Fuji refill cutover
+  ---
+  duration_ms: 39.891738
+  type: 'test'
+  ...
+# Subtest: explicit mainnet release pins real dependencies and defaults to read-only
+ok 16 - explicit mainnet release pins real dependencies and defaults to read-only
+  ---
+  duration_ms: 0.935248
+  type: 'test'
+  ...
+# Subtest: mainnet signing requires the reviewed build setting as well as valid wiring
+ok 17 - mainnet signing requires the reviewed build setting as well as valid wiring
+  ---
+  duration_ms: 0.280465
+  type: 'test'
+  ...
+# Subtest: unknown network, missing registry version, missing/duplicate addresses fail closed
+ok 18 - unknown network, missing registry version, missing/duplicate addresses fail closed
+  ---
+  duration_ms: 0.281802
+  type: 'test'
+  ...
+# Subtest: existing Fuji release remains the default and cannot use the mainnet assets
+ok 19 - existing Fuji release remains the default and cannot use the mainnet assets
+  ---
+  duration_ms: 0.241493
+  type: 'test'
+  ...
+# Subtest: mainnet imports preserve settled XP, dates and ancestry while chain counters prevail
+ok 20 - mainnet imports preserve settled XP, dates and ancestry while chain counters prevail
+  ---
+  duration_ms: 0.338286
+  type: 'test'
+  ...
+# Subtest: unknown imported dates remain unknown instead of a synthetic current date
+ok 21 - unknown imported dates remain unknown instead of a synthetic current date
+  ---
+  duration_ms: 0.117415
+  type: 'test'
+  ...
+# Subtest: imported adults fail closed on missing or mismatched provenance
+ok 22 - imported adults fail closed on missing or mismatched provenance
+  ---
+  duration_ms: 0.319703
+  type: 'test'
+  ...
+# Subtest: new confirmed chain-born adults can display before indexing without synthetic imported history
+ok 23 - new confirmed chain-born adults can display before indexing without synthetic imported history
+  ---
+  duration_ms: 0.112203
+  type: 'test'
+  ...
+# Subtest: legacy zero-sentinel dates and old ancestry field names retain their meaning
+ok 24 - legacy zero-sentinel dates and old ancestry field names retain their meaning
+  ---
+  duration_ms: 0.415879
+  type: 'test'
+  ...
+# Subtest: access is denied to signed-out, ordinary, regular-admin and absent-master sessions; errors fail closed
+ok 25 - access is denied to signed-out, ordinary, regular-admin and absent-master sessions; errors fail closed
+  ---
+  duration_ms: 24.983535
+  type: 'test'
+  ...
+# Subtest: access succeeds only after the server requires master status
+ok 26 - access succeeds only after the server requires master status
+  ---
+  duration_ms: 5.431656
+  type: 'test'
+  ...
+# Subtest: browser permission helper refuses missing flags, stale/failed responses and redirects
+ok 27 - browser permission helper refuses missing flags, stale/failed responses and redirects
+  ---
+  duration_ms: 12.07479
+  type: 'test'
+  ...
+# Subtest: intent uses server actor/time, rejects mainnet, foreign targets and browser actor fields
+ok 28 - intent uses server actor/time, rejects mainnet, foreign targets and browser actor fields
+  ---
+  duration_ms: 129.790334
+  type: 'test'
+  ...
+# Subtest: audit receipt belongs to its master actor and arbitrary payload/error strings are refused
+ok 29 - audit receipt belongs to its master actor and arbitrary payload/error strings are refused
+  ---
+  duration_ms: 25.118293
+  type: 'test'
+  ...
+# Subtest: confirmed and reverted outcomes require matching chain transaction, sender, calldata, value and receipt
+ok 30 - confirmed and reverted outcomes require matching chain transaction, sender, calldata, value and receipt
+  ---
+  duration_ms: 28.682519
+  type: 'test'
+  ...
+# Subtest: audit storage failure prevents returning a signing intent
+ok 31 - audit storage failure prevents returning a signing intent
+  ---
+  duration_ms: 19.115368
+  type: 'test'
+  ...
+# Subtest: audit mutation and history both require master before storage; cross-origin mutation fails
+ok 32 - audit mutation and history both require master before storage; cross-origin mutation fails
+  ---
+  duration_ms: 9.448135
+  type: 'test'
+  ...
+# Subtest: real transaction flow records intent and wallet request before signing and saves hash before polling
+ok 33 - real transaction flow records intent and wallet request before signing and saves hash before polling
+  ---
+  duration_ms: 10.372392
+  type: 'test'
+  ...
+# Subtest: permission revoked, simulation failure and audit outage each prevent wallet signing
+ok 34 - permission revoked, simulation failure and audit outage each prevent wallet signing
+  ---
+  duration_ms: 27.657823
+  type: 'test'
+  ...
+# Subtest: cancelled wallet and receipt timeout have distinct outcomes, hashes survive logging failure
+ok 35 - cancelled wallet and receipt timeout have distinct outcomes, hashes survive logging failure
+  ---
+  duration_ms: 16.797122
+  type: 'test'
+  ...
+# Subtest: rendered treatment and hatch buttons require master access even for an otherwise eligible owned egg
+ok 36 - rendered treatment and hatch buttons require master access even for an otherwise eligible owned egg
+  ---
+  duration_ms: 117.02941
+  type: 'test'
+  ...
+# Subtest: short test incubation uses the canonical duration while production defaults remain three days
+ok 37 - short test incubation uses the canonical duration while production defaults remain three days
+  ---
+  duration_ms: 9.996228
+  type: 'test'
+  ...
+# Subtest: age formatting accepts days without reinterpreting them as an epoch date
+ok 38 - age formatting accepts days without reinterpreting them as an epoch date
+  ---
+  duration_ms: 13.629654
+  type: 'test'
+  ...
+# Subtest: manual fulfilment is rejected on the Chainlink deployment
+ok 39 - manual fulfilment is rejected on the Chainlink deployment
+  ---
+  duration_ms: 14.265386
+  type: 'test'
+  ...
+# Subtest: canonical Chainlink callback evidence binds request and receipt, persists once and detects failure
+ok 40 - canonical Chainlink callback evidence binds request and receipt, persists once and detects failure
+  ---
+  duration_ms: 118.467035
+  type: 'test'
+  ...
+# Subtest: Chainlink reconciliation refuses ordinary users and cross-origin calls before accessing chain/storage
+ok 41 - Chainlink reconciliation refuses ordinary users and cross-origin calls before accessing chain/storage
+  ---
+  duration_ms: 4.597589
+  type: 'test'
+  ...
+# Subtest: egg art uses each canonical species and retains Genesis variant selection
+ok 42 - egg art uses each canonical species and retains Genesis variant selection
+  ---
+  duration_ms: 7.833948
+  type: 'test'
+  ...
+# Subtest: egg species is recovered from canonical creation events, including old eggs beyond recent log ranges
+ok 43 - egg species is recovered from canonical creation events, including old eggs beyond recent log ranges
+  ---
+  duration_ms: 15.29784
+  type: 'test'
+  ...
+# Subtest: Nursery gas budgets round upward and reject missing or invalid estimates
+ok 44 - Nursery gas budgets round upward and reject missing or invalid estimates
+  ---
+  duration_ms: 2.94466
+  type: 'test'
+  ...
+# Subtest: actual Nursery send path simulates and signs the same padded gas limit; failed estimates/simulations never sign
+ok 45 - actual Nursery send path simulates and signs the same padded gas limit; failed estimates/simulations never sign
+  ---
+  duration_ms: 64.350789
+  type: 'test'
+  ...
+# Subtest: persistent EVO approval is granted once per spender, reused after spending, and renewed after revocation
+ok 46 - persistent EVO approval is granted once per spender, reused after spending, and renewed after revocation
+  ---
+  duration_ms: 25.947768
+  type: 'test'
+  ...
+# Subtest: progress distinguishes wallet prompts from network confirmation and keeps button labels short
+ok 47 - progress distinguishes wallet prompts from network confirmation and keeps button labels short
+  ---
+  duration_ms: 2.755182
+  type: 'test'
+  ...
+# Subtest: breeding history follows the full egg lifecycle and rejects unknown or missing egg state
+ok 48 - breeding history follows the full egg lifecycle and rejects unknown or missing egg state
+  ---
+  duration_ms: 4.730313
+  type: 'test'
+  ...
+# Subtest: all nursery cards share one in-flight audit queue delivery
+ok 49 - all nursery cards share one in-flight audit queue delivery
+  ---
+  duration_ms: 3.560449
+  type: 'test'
+  ...
+# Subtest: mainnet audit accepts only the configured chain and refuses signing before release approval
+ok 50 - mainnet audit accepts only the configured chain and refuses signing before release approval
+  ---
+  duration_ms: 23.324344
+  type: 'test'
+  ...
+# Subtest: previous Fuji receipt recovery verifies stored intents but never authorizes a new legacy action
+ok 51 - previous Fuji receipt recovery verifies stored intents but never authorizes a new legacy action
+  ---
+  duration_ms: 15.229453
+  type: 'test'
+  ...
+# Subtest: Fuji queues are deployment scoped and retry the retained v1 queue without deleting unconfirmed deliveries
+ok 52 - Fuji queues are deployment scoped and retry the retained v1 queue without deleting unconfirmed deliveries
+  ---
+  duration_ms: 6.446567
+  type: 'test'
+  ...
+1..52
+# tests 52
+# suites 0
+# pass 52
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1102.530522

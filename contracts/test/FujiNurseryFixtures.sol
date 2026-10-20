@@ -22,6 +22,7 @@ contract FujiTestEvoNFT is ERC721Enumerable, AccessManaged {
         require(block.chainid == 43113 || block.chainid == 31337, "test networks only");
     }
     function mintTo(address to, uint256 id) external restricted { require(id < nextId); _safeMint(to, id); }
+    function mintNew(address to) external restricted { uint256 id = nextId++; _safeMint(to, id); }
     function mintNewWithId(address to) external restricted returns (uint256 id) { id = nextId++; _safeMint(to, id); }
     function requestMetadataUpdate(uint256 id) external { ownerOf(id); emit MetadataUpdate(id); }
 }

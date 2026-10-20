@@ -1,0 +1,142 @@
+TAP version 13
+# Subtest: skin and rarity flags select consistent common, Chroma and Epic accents
+ok 1 - skin and rarity flags select consistent common, Chroma and Epic accents
+  ---
+  duration_ms: 0.643628
+  type: 'test'
+  ...
+# Subtest: both duplicate records are named even before their sale window begins
+ok 2 - both duplicate records are named even before their sale window begins
+  ---
+  duration_ms: 0.9647
+  type: 'test'
+  ...
+# Subtest: expired, cancelled, sold, other NFTs and other sellers do not block
+ok 3 - expired, cancelled, sold, other NFTs and other sellers do not block
+  ---
+  duration_ms: 0.236632
+  type: 'test'
+  ...
+# Subtest: checks later pages with inclusive ranges
+ok 4 - checks later pages with inclusive ranges
+  ---
+  duration_ms: 0.831567
+  type: 'test'
+  ...
+# Subtest: failed or excessive reads block submission rather than pretending there is no listing
+ok 5 - failed or excessive reads block submission rather than pretending there is no listing
+  ---
+  duration_ms: 0.453408
+  type: 'test'
+  ...
+# Subtest: both transactions use the pinned external owner, regardless of a separate login account
+ok 6 - both transactions use the pinned external owner, regardless of a separate login account
+  ---
+  duration_ms: 1.49848
+  type: 'test'
+  ...
+# Subtest: missing, in-app and smart wallets cannot submit
+ok 7 - missing, in-app and smart wallets cannot submit
+  ---
+  duration_ms: 0.439462
+  type: 'test'
+  ...
+# Subtest: non-owner fails before approval or listing
+ok 8 - non-owner fails before approval or listing
+  ---
+  duration_ms: 0.245569
+  type: 'test'
+  ...
+# Subtest: already approved owner skips approval and still checks ownership before listing
+ok 9 - already approved owner skips approval and still checks ownership before listing
+  ---
+  duration_ms: 0.242788
+  type: 'test'
+  ...
+# Subtest: switches the selected external wallet to the contract chain
+ok 10 - switches the selected external wallet to the contract chain
+  ---
+  duration_ms: 0.267379
+  type: 'test'
+  ...
+# Subtest: network-switch rejection cannot send transactions
+ok 11 - network-switch rejection cannot send transactions
+  ---
+  duration_ms: 0.149604
+  type: 'test'
+  ...
+# Subtest: account changes, wallet switches and disconnects during reads prevent sends
+ok 12 - account changes, wallet switches and disconnects during reads prevent sends
+  ---
+  duration_ms: 0.612351
+  type: 'test'
+  ...
+# Subtest: ownership or wallet changes after approval prevent listing
+ok 13 - ownership or wallet changes after approval prevent listing
+  ---
+  duration_ms: 0.76117
+  type: 'test'
+  ...
+# Subtest: failed ownership reads and duplicate checks fail closed
+ok 14 - failed ownership reads and duplicate checks fail closed
+  ---
+  duration_ms: 0.490777
+  type: 'test'
+  ...
+# Subtest: duplicate appearing after approval prevents another listing
+ok 15 - duplicate appearing after approval prevents another listing
+  ---
+  duration_ms: 0.483146
+  type: 'test'
+  ...
+# Subtest: approval rejection cannot become listing success
+ok 16 - approval rejection cannot become listing success
+  ---
+  duration_ms: 0.204453
+  type: 'test'
+  ...
+# Subtest: reverted approval prevents listing and reverted listing cannot show success
+ok 17 - reverted approval prevents listing and reverted listing cannot show success
+  ---
+  duration_ms: 0.356424
+  type: 'test'
+  ...
+# Subtest: confirmed purchase links with approval false
+ok 18 - confirmed purchase links with approval false
+  ---
+  duration_ms: 68.902614
+  type: 'test'
+  ...
+# Subtest: confirmed purchase links with approval true
+ok 19 - confirmed purchase links with approval true
+  ---
+  duration_ms: 19.637231
+  type: 'test'
+  ...
+# Subtest: authored list, summary and individual Evo reads use fixed upstream without browser Origin or credentials
+ok 20 - authored list, summary and individual Evo reads use fixed upstream without browser Origin or credentials
+  ---
+  duration_ms: 7.074668
+  type: 'test'
+  ...
+# Subtest: forged operations, queries, variables, excessive limits and oversized bodies never reach upstream
+ok 21 - forged operations, queries, variables, excessive limits and oversized bodies never reach upstream
+  ---
+  duration_ms: 2.963032
+  type: 'test'
+  ...
+# Subtest: upstream HTTP, invalid JSON and GraphQL failures remain errors rather than an empty inventory
+ok 22 - upstream HTTP, invalid JSON and GraphQL failures remain errors rather than an empty inventory
+  ---
+  duration_ms: 3.283291
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 315.104092

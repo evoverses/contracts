@@ -66,13 +66,6 @@ UUPSUpgradeable
     _safeMint(to, tokenId);
   }
 
-  /// @notice Allocates a new ID for the separate Bertha breeding path.
-  /// Existing mintNew/mintTo semantics and storage remain unchanged.
-  function mintNewWithId(address to) external restricted returns (uint256 tokenId) {
-    tokenId = _nextTokenId++;
-    _safeMint(to, tokenId);
-  }
-
   function batchMintNew(address[] calldata to) public restricted {
     for (uint256 i = 0; i < to.length; i++) {
       uint256 tokenId = _nextTokenId++;

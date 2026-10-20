@@ -1,0 +1,17 @@
+{
+  "method": "Zero storage inferred only for nonce-zero code-empty non-precompile accounts at the pinned block",
+  "verified": [
+    {
+      "address": "0x3B752a9644374e69ADB8141E52d2b09eafE8F8c4",
+      "block": "0x5d76b57",
+      "code": "0x",
+      "nonce": "0x0"
+    },
+    {
+      "address": "0x9A72dcf37eE3e2f4A33895AcBF735c1a5cb834Ba",
+      "block": "0x5d76b57",
+      "code": "0x",
+      "nonce": "0x0"
+    }
+  ]
+}

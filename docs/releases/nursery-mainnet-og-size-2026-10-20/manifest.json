@@ -1,0 +1,126 @@
+{
+  "createdAt": "2026-10-20T02:24:28.449Z",
+  "rule": "OG size = remaining VRF entropy after nine legacy base-10000 chunks modulo 21",
+  "artifactHashes": {
+    "Hatcher_Hermann": "28e4c7700293828e7cfd724679c13f6bddeca66f1c215026889711668c06bd62",
+    "Breeder_Bertha": "6d3aedb3eeadd6e88abdc41d4cccef3b327280f0445717210ee0811a96d22581"
+  },
+  "automatedTests": {
+    "website-nursery": 52,
+    "wallet": 36,
+    "marketplace": 22,
+    "indexer": 37,
+    "release-tools": 4,
+    "contracts": 28
+  },
+  "totalAutomatedTests": 179,
+  "typechecks": "passed",
+  "mainnetFork": "passed",
+  "mainnetSetupReceiptsVerified": 19,
+  "independentReceiptVerificationRuns": 2,
+  "metadataRehearsal": "passed",
+  "compilerInputReproduction": "passed",
+  "exactHermannArtifactTestedLiveOnFuji": true,
+  "liveFujiOgSizes": [
+    {
+      "id": 3,
+      "size": "11"
+    },
+    {
+      "id": 4,
+      "size": "19"
+    }
+  ],
+  "existingFujiEvosUnchanged": true,
+  "mainnetTransactionsSubmitted": 0,
+  "productionDatabaseWrites": 0,
+  "websiteDeployments": 0,
+  "mainnetExecutionApproved": false,
+  "mainnetReady": false,
+  "snapshotScope": "Retained earlier pinned inventory/Genesis snapshots; refresh/reconcile and approve final imports before live execution.",
+  "websiteBuildScope": "No website source/configuration changed by this contract revision. Previous successful beta build retained; consumer tests and all three type checks rerun.",
+  "gaps": [
+    {
+      "id": "ADMIN_CONTROL",
+      "status": "external_administrator_required"
+    },
+    {
+      "id": "PILOT_APPROVAL",
+      "status": "awaiting_review"
+    },
+    {
+      "id": "OG_SELECTION",
+      "status": "awaiting_input"
+    },
+    {
+      "id": "AWS_READINESS",
+      "status": "checked_partial_database_checks_pending"
+    },
+    {
+      "id": "IMPORT_CUTOVER",
+      "status": "requires_live_verification"
+    },
+    {
+      "id": "LEGACY_SIZE",
+      "status": "mapping_agreed_import_and_output_conversion_pending"
+    },
+    {
+      "id": "SECURITY_REVIEW",
+      "status": "not_independent_audit"
+    },
+    {
+      "id": "LIVE_ACCEPTANCE",
+      "status": "after_approval"
+    },
+    {
+      "id": "FUJI_REGRESSION",
+      "status": "live_og_and_mint_passed_bred_incubation_pending"
+    }
+  ],
+  "sha256": {
+    "authority-snapshot.json": "8b4fa3fb9e203d945e0e26ba86e0724a4c9b6c41213854fd1a0b2136065967d7",
+    "cost-estimate.json": "42aee6928d507057f9670541108d5b2e565a5fc823aa24ac55f4cb079a711a9d",
+    "fork-canonical-records.json": "0b18bd91d7632b7d9dde014b6dde32d81ca2f2517caf6a0f3ef68b07e207da10",
+    "fork-receipt-map.json": "29b9f564bc19796aeefc85b341e7e4704412d25d054dfda43be56632738964d5",
+    "fork-rehearsal.json": "e7198cedeae1da57b89f436b7214ad3db603f3cf5a377d6e51e7cc721368dd03",
+    "gaps.json": "ed6e012a52694705be64365ee6ba99c2013b4f28ebed657528c6dff1f6d4804a",
+    "genesis-snapshot.json": "733b2c6ebf68519706a5afba819c0dec93e7d5226798016d2a03b35bd69317ac",
+    "live-chain-preflight.json": "cf12a90bf5a1c16ea653c672e00e86f68c36f6882a0706e8d9c70a04d206a6a5",
+    "mainnet-inventory.json": "5ae4b3ae45b26aa1f42afef4bad5d4132dfa26d2cfca6606e22aa7b0b67e4d76",
+    "metadata-rehearsal.json": "727c0c54e5acc9640182e7b1a73adc07c59e0313c09a52fb5d4260a025df4795",
+    "npc-artifacts.json": "5bd380b7f3d5ee852d5aa59b28d088db941531237646966e5280c397ae9ef8d0",
+    "npc-input-d77aa478ac8421d9a168f1de24152851f47be20d4b856fcc6470af35783fb1ef.json": "145211829e88134e614e18cafffa7da0c73f20a0b90485bf025fb61c30d67fbd",
+    "npc-source-reproduction.json": "e75532ca04b38a89a59b8ee171be04e9c5dd2fcaec67edad21faa18c4d4d6785",
+    "pilot-proposal.json": "854dacea07fdab8e4d15ea2fe475792c9ce2e6c35046ca0cc1e41f4b9ca0edb0",
+    "pristine-accounts.json": "268990f4a09e3988d785506274e698a9333756ee0561f332f7ce493751b362b0",
+    "README.md": "634cf115b551b4d4a97ab70e8e39242bbc90097f0b5b2691fc25f00acb891835",
+    "receipt-verification-local.json": "e55a80ca4d4df2229768ccc58fd0851ccdb13c40eb32226ac985ddc08bccf594",
+    "trait-mappings.json": "343048724078928e033f9953fcb2167f022ba1c4ed8617d124be9468e1a0ba42",
+    "transactions.md": "68e54e04aa8369d74901a9f4ac29139c2913a820e347501985d7ca1938f08f3d",
+    "unsigned-release.json": "c6806396177847b75375ace07cb2fa42946b83097e76a05be9782e201536ac48",
+    "verified-evo-source.json": "39ed2c23ac8899c53c2bd18aca807c8d66e502735bc20b5728efe18eb3a4f58f",
+    "live-fuji-og-size/contract-tests.log": "0d61bdacb2d45d2f919753bf48a55161d9d8e45eec2bddc4ebe22dfce44893c6",
+    "live-fuji-og-size/genesis-tests.js": "7ad0ae8308a6846ce03219ed14f2482babb51cff48a3877fa046d4f82a64ffad",
+    "live-fuji-og-size/GenesisHatchRules.sol": "e9ee58ce09d502f4e98c3ace8622582e6fe43d740a32ddfe19159986047d0be0",
+    "live-fuji-og-size/live-trait-comparison.json": "13fa53fde0939a8182241c6830381091087f9787ee4a4aeb26413e57bca0c72f",
+    "live-fuji-og-size/plan.json": "ec8df3d0a375a477bb91de6b8361ffde853ccc4da686f5761990ec2c9db0451b",
+    "live-fuji-og-size/progress.json": "912b178c78fe22f781c683a729743b5c61c1eb9a6af11cfd77c3484a1afeedd0",
+    "live-fuji-og-size/results.json": "931c07e473f8ee2a5b674e5f080c23481de6c626bd19e72886d2974fe7a71065",
+    "logs/api-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/budget.log": "42aee6928d507057f9670541108d5b2e565a5fc823aa24ac55f4cb079a711a9d",
+    "logs/build-release.log": "92623bbf8fb351e39e01848acfdd458bc0ff32eafc93d9c94ac487cfa501f72d",
+    "logs/contracts.log": "afac2eec205e23307722738331bd205eac8dae9e93703411b5e75662cde82649",
+    "logs/freeze-npc-inputs.log": "50d22a905a9aa9f705040cf16d793ebac73d4f0ef2723d124137473e367437d1",
+    "logs/indexer.log": "edd8fc527570f8e5878d962441f8431686622da2f91331cfe18926a888c10656",
+    "logs/marketplace.log": "d601c9c578eeec2caca334467b13f0b855dc935fc7076abb193542097f334d93",
+    "logs/receipt-verification-1.log": "00f0592eb28dee6a5711ce201bda4fcb585f8137c41df69b47887a9a05fc148e",
+    "logs/receipt-verification-2.log": "00f0592eb28dee6a5711ce201bda4fcb585f8137c41df69b47887a9a05fc148e",
+    "logs/rehearse.log": "1dce24402bd49eddf617eed33fd4d3dc85579c167acfd303b79d4d62924c3514",
+    "logs/release-tools.log": "4c41bf9c8ca29418fd1bfac9487f640adc860e31bee9f25bc296d5b2fb5ddbd8",
+    "logs/squid-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/verify-metadata.log": "b6fd0681fde89cdff21e209e8931a345ad854944b3d26d8dfe4fcb303c8865b4",
+    "logs/wallet.log": "29583ec885b0e1ed93aad063b1967b30dc22cd26138b0839ce144b3c6e8d2e48",
+    "logs/website-nursery.log": "5eb5187efdff54d6807133e612c9d47b09577509bc1579f39255c108a57ca4f1",
+    "logs/website-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

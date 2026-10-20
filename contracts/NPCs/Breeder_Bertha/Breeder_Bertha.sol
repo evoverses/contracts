@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
+import {IERC721Receiver} from "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {IEvoBreedingMint} from "../Breeding/IEvoBreedingMint.sol";
@@ -9,7 +10,7 @@ import {Hatcher_Hermann} from "../Hatcher_Hermann/Hatcher_Hermann.sol";
 
 /// @notice New deployment, NOT an implementation upgrade for Brenda's proxy.
 /// EVO remains escrowed until minting; committed VRF requests cannot be cancelled or rerolled.
-contract Breeder_Bertha is NativeVRFConsumer {
+contract Breeder_Bertha is NativeVRFConsumer, IERC721Receiver {
     using SafeERC20 for IERC20;
     enum Status { NONE, PREPARED, RANDOM_PENDING, COMPLETE, CANCELLED }
     struct Request {
@@ -30,6 +31,11 @@ contract Breeder_Bertha is NativeVRFConsumer {
     uint256 public escrowedEvo;
     mapping(uint256 => Request) public requests;
 
+    bool private _awaitingMint;
+    bool private _mintReceived;
+    uint256 private _mintedTokenId;
+
+    error InvalidMintCallback();
     error InvalidRequestState();
     error NotRequester();
     error PriceExceedsLimit(uint256 price, uint256 limit);
@@ -110,12 +116,35 @@ contract Breeder_Bertha is NativeVRFConsumer {
         if (!random.fulfilled) revert RandomnessNotReady();
         r.status = Status.COMPLETE;
         escrowedEvo -= r.amount;
-        tokenId = evoNft.mintNewWithId(r.breeder);
+        // Existing Evo.mintNew has no return value. Mint into this receiver so
+        // the collection supplies its allocated ID through the safe-mint callback.
+        // No supply/count inference, off-chain ID allocation or collection upgrade.
+        _awaitingMint = true;
+        evoNft.mintNew(address(this));
+        if (!_mintReceived) revert InvalidMintCallback();
+        tokenId = _mintedTokenId;
+        _awaitingMint = false;
+        _mintReceived = false;
+        delete _mintedTokenId;
+        if (evoNft.ownerOf(tokenId) != address(this)) revert InvalidMintCallback();
         r.tokenId = tokenId;
         hatcher.recordEgg(tokenId, r.parent1, r.parent2, r.speciesVersion, id, r.committedAt, random.word);
+        evoNft.safeTransferFrom(address(this), r.breeder, tokenId);
         evoToken.safeTransfer(TREASURY, r.amount);
         emit BreedCompleted(id, tokenId, r.breeder, r.amount);
         evoNft.requestMetadataUpdate(tokenId);
+    }
+
+    /// @dev Accept exactly one mint from the configured collection during completion.
+    /// This callback deliberately has no nonReentrant modifier: completeBreed holds it.
+    function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata)
+        external returns (bytes4)
+    {
+        if (msg.sender != address(evoNft) || operator != address(this) ||
+            from != address(0) || !_awaitingMint || _mintReceived) revert InvalidMintCallback();
+        _mintReceived = true;
+        _mintedTokenId = tokenId;
+        return IERC721Receiver.onERC721Received.selector;
     }
 
     function _stillOwned(Request storage r) private view returns (bool) {

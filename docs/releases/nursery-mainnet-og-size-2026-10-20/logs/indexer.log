@@ -1,0 +1,232 @@
+TAP version 13
+# Subtest: NFT metadata exposes unlimited Gen0 breeds and capped other-generation remaining breeds
+ok 1 - NFT metadata exposes unlimited Gen0 breeds and capped other-generation remaining breeds
+  ---
+  duration_ms: 1.860976
+  type: 'test'
+  ...
+# Subtest: Epic is exposed as rarity, without changing chroma or ordinary metadata
+ok 2 - Epic is exposed as rarity, without changing chroma or ordinary metadata
+  ---
+  duration_ms: 0.137155
+  type: 'test'
+  ...
+# Subtest: image versions change on treatment, hatching or XP updates and restore on rollback
+ok 3 - image versions change on treatment, hatching or XP updates and restore on rollback
+  ---
+  duration_ms: 0.540404
+  type: 'test'
+  ...
+# Subtest: unknown or epoch dates are omitted while real hatch dates stay exact
+ok 4 - unknown or epoch dates are omitted while real hatch dates stay exact
+  ---
+  duration_ms: 0.189053
+  type: 'test'
+  ...
+# Subtest: the shared metadata topic cannot reclassify the configured Evo collection as ERC1155
+ok 5 - the shared metadata topic cannot reclassify the configured Evo collection as ERC1155
+  ---
+  duration_ms: 0.762485
+  type: 'test'
+  ...
+# Subtest: the real migration makes an unindexed egg visible in both single-token and wallet queries
+ok 6 - the real migration makes an unindexed egg visible in both single-token and wallet queries
+  ---
+  duration_ms: 1058.821248
+  type: 'test'
+  ...
+# Subtest: treatment and hatching update API/list traits without allocating a new token or changing owner
+ok 7 - treatment and hatching update API/list traits without allocating a new token or changing owner
+  ---
+  duration_ms: 27.590991
+  type: 'test'
+  ...
+# Subtest: canonical parent counts override stale legacy data while retaining settled XP and original dates
+ok 8 - canonical parent counts override stale legacy data while retaining settled XP and original dates
+  ---
+  duration_ms: 8.409684
+  type: 'test'
+  ...
+# Subtest: ownership stays with NFT transfers, and the overlay cannot leak to another collection with the same token number
+ok 9 - ownership stays with NFT transfers, and the overlay cannot leak to another collection with the same token number
+  ---
+  duration_ms: 33.050381
+  type: 'test'
+  ...
+# Subtest: legacy counter SQL refuses canonical parents regardless of request replay
+ok 10 - legacy counter SQL refuses canonical parents regardless of request replay
+  ---
+  duration_ms: 4.259765
+  type: 'test'
+  ...
+# Subtest: actual Subsquid change tracking rolls back canonical updates and inserted rows
+ok 11 - actual Subsquid change tracking rolls back canonical updates and inserted rows
+  ---
+  duration_ms: 41.212702
+  type: 'test'
+  ...
+# Subtest: migration down restores legacy readers, and a re-apply installs the same read model
+ok 12 - migration down restores legacy readers, and a re-apply installs the same read model
+  ---
+  duration_ms: 36.179731
+  type: 'test'
+  ...
+# Subtest: single and list metadata preserve original Genesis treatment and null dates through reveal
+ok 13 - single and list metadata preserve original Genesis treatment and null dates through reveal
+  ---
+  duration_ms: 31.974804
+  type: 'test'
+  ...
+# Subtest: the additive provenance migration preserves XP and represents epoch dates as unknown
+ok 14 - the additive provenance migration preserves XP and represents epoch dates as unknown
+  ---
+  duration_ms: 17.127062
+  type: 'test'
+  ...
+# Subtest: decodes only trusted registry/collection events from the configured deployment block
+ok 15 - decodes only trusted registry/collection events from the configured deployment block
+  ---
+  duration_ms: 1.347253
+  type: 'test'
+  ...
+# Subtest: pins every registry call to the event's canonical hash and caches versioned pools
+ok 16 - pins every registry call to the event's canonical hash and caches versioned pools
+  ---
+  duration_ms: 1.55749
+  type: 'test'
+  ...
+# Subtest: rejects wrong-chain, miswired-registry and unavailable historical reads
+ok 17 - rejects wrong-chain, miswired-registry and unavailable historical reads
+  ---
+  duration_ms: 0.715649
+  type: 'test'
+  ...
+# Subtest: persists egg and canonical parent counts once, including duplicate event replay
+ok 18 - persists egg and canonical parent counts once, including duplicate event replay
+  ---
+  duration_ms: 93.065891
+  type: 'test'
+  ...
+# Subtest: retains egg history through treatment, hatch request and final hatch in the actual handler
+ok 19 - retains egg history through treatment, hatch request and final hatch in the actual handler
+  ---
+  duration_ms: 2.912841
+  type: 'test'
+  ...
+# Subtest: a failed later block stages no partial metadata writes from the batch
+ok 20 - a failed later block stages no partial metadata writes from the batch
+  ---
+  duration_ms: 0.915093
+  type: 'test'
+  ...
+# Subtest: decodes Genesis registration as a token-only touch without invented breeding parents
+ok 21 - decodes Genesis registration as a token-only touch without invented breeding parents
+  ---
+  duration_ms: 0.280815
+  type: 'test'
+  ...
+# Subtest: indexes mint-to-Bertha followed by delivery as one NFT owned by the breeder, including replay
+ok 22 - indexes mint-to-Bertha followed by delivery as one NFT owned by the breeder, including replay
+  ---
+  duration_ms: 91.12659
+  type: 'test'
+  ...
+# Subtest: the configuration plan prints public settings without connecting to a database or chain
+ok 23 - the configuration plan prints public settings without connecting to a database or chain
+  ---
+  duration_ms: 28.043466
+  type: 'test'
+  ...
+# Subtest: imports adult traits without inventing XP or original birth dates; maps legacy zero-based nature/gender
+ok 24 - imports adult traits without inventing XP or original birth dates; maps legacy zero-based nature/gender
+  ---
+  duration_ms: 1.270626
+  type: 'test'
+  ...
+# Subtest: creates an egg from its emitted token/species/generation and versioned pool, without adultOf
+ok 25 - creates an egg from its emitted token/species/generation and versioned pool, without adultOf
+  ---
+  duration_ms: 0.946879
+  type: 'test'
+  ...
+# Subtest: treatment and hatch request retain the original offspring history
+ok 26 - treatment and hatch request retain the original offspring history
+  ---
+  duration_ms: 0.234011
+  type: 'test'
+  ...
+# Subtest: hatching publishes actual adult stats/Epic and preserves token, parents and creation time
+ok 27 - hatching publishes actual adult stats/Epic and preserves token, parents and creation time
+  ---
+  duration_ms: 0.297988
+  type: 'test'
+  ...
+# Subtest: chroma is distinct from Epic
+ok 28 - chroma is distinct from Epic
+  ---
+  duration_ms: 0.277897
+  type: 'test'
+  ...
+# Subtest: deduplicates events, sorts blocks, and refreshes both parent counters on egg recording
+ok 29 - deduplicates events, sorts blocks, and refreshes both parent counters on egg recording
+  ---
+  duration_ms: 0.913289
+  type: 'test'
+  ...
+# Subtest: assigns authoritative counters on replay and never overwrites them with an older block
+ok 30 - assigns authoritative counters on replay and never overwrites them with an older block
+  ---
+  duration_ms: 0.360966
+  type: 'test'
+  ...
+# Subtest: requires rollback before replacing a same-height fork, but accepts a restored earlier snapshot
+ok 31 - requires rollback before replacing a same-height fork, but accepts a restored earlier snapshot
+  ---
+  duration_ms: 0.638577
+  type: 'test'
+  ...
+# Subtest: fails closed on missing history, impossible state/traits, registry replacement and RPC failure
+ok 32 - fails closed on missing history, impossible state/traits, registry replacement and RPC failure
+  ---
+  duration_ms: 0.625618
+  type: 'test'
+  ...
+# Subtest: unimported legacy NFTs are left to the existing metadata path
+ok 33 - unimported legacy NFTs are left to the existing metadata path
+  ---
+  duration_ms: 0.568635
+  type: 'test'
+  ...
+# Subtest: configuration requires the chain, all deployment settings and transfer indexing
+ok 34 - configuration requires the chain, all deployment settings and transfer indexing
+  ---
+  duration_ms: 0.563063
+  type: 'test'
+  ...
+# Subtest: legacy off-chain randomness/token allocation is opt-in and cannot coexist with Hermann
+ok 35 - legacy off-chain randomness/token allocation is opt-in and cannot coexist with Hermann
+  ---
+  duration_ms: 0.199486
+  type: 'test'
+  ...
+# Subtest: projects registered Genesis eggs without parents, revealed species or a fake epoch age
+ok 36 - projects registered Genesis eggs without parents, revealed species or a fake epoch age
+  ---
+  duration_ms: 1.089628
+  type: 'test'
+  ...
+# Subtest: fails closed on an unregistered or invalid v2 egg kind
+ok 37 - fails closed on an unregistered or invalid v2 egg kind
+  ---
+  duration_ms: 0.340918
+  type: 'test'
+  ...
+1..37
+# tests 37
+# suites 0
+# pass 37
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1599.43223

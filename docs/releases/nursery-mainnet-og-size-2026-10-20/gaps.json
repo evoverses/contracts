@@ -1,0 +1,47 @@
+[
+  {
+    "id": "ADMIN_CONTROL",
+    "status": "external_administrator_required",
+    "detail": "The user does not control the administrator wallet and knows its owner. Coordinate narrowly scoped permission transactions; no collection upgrade is required."
+  },
+  {
+    "id": "PILOT_APPROVAL",
+    "status": "awaiting_review",
+    "detail": "Proposed parent pairs 3429/4092, 532/4503; 6500 EVO breeding, optional treatment and refreshed native caps remain unapproved."
+  },
+  {
+    "id": "OG_SELECTION",
+    "status": "awaiting_input",
+    "detail": "Connected wallet owns no OG eggs. Live holder/IDs are not selected; the unsigned package imports no OGs."
+  },
+  {
+    "id": "AWS_READINESS",
+    "status": "checked_partial_database_checks_pending",
+    "detail": "Live indexer image/task, service health, log progress and seven-day backups checked. No Hermann configuration is deployed. Direct migration/checkpoint SQL and restore drill remain unverified; ECS Exec is disabled and the public checkpoint query is permission-denied."
+  },
+  {
+    "id": "IMPORT_CUTOVER",
+    "status": "requires_live_verification",
+    "detail": "Reconcile/stop legacy breeding writer and refresh trusted adult metadata before approving immutable imports."
+  },
+  {
+    "id": "LEGACY_SIZE",
+    "status": "mapping_agreed_import_and_output_conversion_pending",
+    "detail": "The user confirmed percentage=(raw-10)*10. The existing unsigned pilot still imports its previously selected numeric metadata unchanged. Apply and verify the agreed inverse for final imports and the forward conversion for mainnet read-model output before approving immutable imports. Do not treat numeric 0-20 checks as unit validation."
+  },
+  {
+    "id": "SECURITY_REVIEW",
+    "status": "not_independent_audit",
+    "detail": "Technical storage, ABI, fork and integration checks passed. Independent artifact/permissions/VRF non-delivery review remains."
+  },
+  {
+    "id": "LIVE_ACCEPTANCE",
+    "status": "after_approval",
+    "detail": "Real mainnet oracle delivery and private funded UI/metadata acceptance remain unexecuted."
+  },
+  {
+    "id": "FUJI_REGRESSION",
+    "status": "live_og_and_mint_passed_bred_incubation_pending",
+    "detail": "Previous live breeds and OG treatment cases passed. Corrected OG size uses the exact release artifact and two genuine Fuji callbacks; all other traits and existing Evos verified. Two bred eggs still require final hatches after 23 October 2026 10:09 Australia/Brisbane."
+  }
+]

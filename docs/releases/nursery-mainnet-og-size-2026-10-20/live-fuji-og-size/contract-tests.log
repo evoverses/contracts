@@ -1,0 +1,37 @@
+Compiled 5 Solidity files successfully (evm target: london).
+
+
+  Bertha / Hermann local integration
+    ✔ charges the 500 EVO base and Gen0 cap at four previous breeds
+    ✔ escrows EVO, allocates a new NFT ID, pays only treasury and settles exactly once
+    ✔ rejects forged receiver callbacks and unsolicited NFTs without losing ownership
+    ✔ uses callback ID despite unrelated mints and registers before recipient delivery
+    ✔ rolls back missing, duplicate and malformed mint callbacks without consuming the request or seed (43ms)
+    ✔ rejects ineligible/unimported parents, incorrect ownership and duplicate parent requests before payment
+    ✔ checks price slippage, AVAX funding and wrapper availability atomically
+    ✔ refunds a prepared request and releases parents while paused, but never after VRF commitment
+    ✔ permits pre-commit refund after a parent sale, and binds post-commit offspring to the original wallet
+    ✔ accepts zero randomness, rejects forged callbacks and ignores duplicate callbacks within the gas budget
+    ✔ retries failed mint/treasury transfers with the same seed, without double charging or counting
+    ✔ blocks receiver reentrancy and prevents a rejecting wallet from refunding or rerolling its result
+    ✔ keeps failed token transfers from creating funded requests
+    ✔ enforces five breeds for non-Gen0 and generation-specific recovery boundaries
+    ✔ incubates three days, charges treatment to treasury once, locks treatment before rarity and hatches the same ID
+    ✔ does not allow treatment after an untreated hatch has requested randomness
+    ✔ preserves immutable imported traits, configuration versions and one-time wiring
+    ✔ credits only AVAX overpayment, protects it from admin withdrawals and supports an explicitly funded subsidy
+    ✔ enforces dedicated NFT mint permissions rather than giving Bertha admin access
+    ✔ preserves legacy species boundary behaviour and Harry trait inheritance for fixed seeds
+    ✔ keeps inherited traits within their game bounds over 128 deterministic random seeds (183ms)
+    ✔ existing Evo mint functions allocate IDs and preserve historical mintTo limits
+
+  Genesis eggs retain original rules and NFT ownership
+    ✔ restricts snapshot setup/import and verifies the chain, collection, treatment and date in every proof
+    ✔ rejects already imported adults and nonexistent NFTs atomically (84ms)
+    ✔ lets a newly registered Genesis egg hatch immediately and preserves owner, ID, generation and counters (39ms)
+    ✔ preserves prior treatment, charges untreated eggs once, and follows transfers before and during hatching (45ms)
+    ✔ preserves every original Harry trait except the separately rolled size for fixed, boundary and random words (937ms)
+    ✔ uses unused entropy to cover every OG size without changing other traits or treatment outcomes
+
+
+  28 passing (2s)

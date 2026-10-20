@@ -74,11 +74,15 @@ user, UI or an automation keeper; that caller pays their network gas. The AVAX
 VRF surcharge covers Chainlink's quoted request, not a keeper's later gas. The
 website must display this distinction and offer completion/recovery controls.
 
-The new `Evo.mintNewWithId(address)` returns the contract's allocated ID. This is
-an additive mint function with no new storage. Historical `mintTo` bounds and
-existing `mintNew` behaviour remain unchanged. It needs a separately reviewed
-Evo implementation upgrade and a dedicated minter permission; **these local
-changes alone cannot breed using the currently deployed implementation**.
+Bertha uses the deployed collection's existing `mintNew(address)` function.
+It mints to itself and accepts exactly one safe-mint callback from the configured
+collection, with zero sender and Bertha as operator. The callback supplies the
+allocated token ID without guessing from supply, owner enumeration or an off-chain
+counter. Bertha registers the egg with Hermann, then safely transfers it to the
+original breeder in the same guarded transaction. Failed registration, receiver
+acceptance or treasury payment rolls everything back, retaining the original
+request/randomness for retry. No collection implementation upgrade is required.
+A dedicated mintNew role must preserve all existing authorised minters.
 
 For hatching, the current egg owner calls `requestHatch` after incubation, paying
 that request's AVAX surcharge. This locks treatment before rarity randomness is
@@ -98,6 +102,12 @@ funds are distinct from user credits and EVO escrow.
 rarity, gender, nature, size, health and other stat formulas. Health starts at 50;
 new offspring have no prior breeds; initial experience and moves are zero in
 metadata. Two Gen0 parents receive the original stat modifier.
+
+Genesis hatching preserves the nine original trait chunks, but rolls size from
+the unused remainder of the committed VRF word modulo 21. OG size is therefore
+0-20 instead of the legacy fixed 10. This consumes no existing trait draw,
+does not shift species, rarity, gender, nature or stats, and never rerolls an
+already-hatched Evo. Bred size inheritance remains unchanged.
 
 The original source's `<= 500` matching-species boundary is retained (501 of
 1,000 outcomes). Harry's species threshold comparison and retained disabled
@@ -127,7 +137,7 @@ with explicit placeholders. There is no automatic mainnet deployment script.
 
 The new NPCs are non-upgradeable. Policy subsidy toggles and new species versions
 are explicit administrator actions. Do not grant Bertha the global admin role.
-Grant only the new Evo mint selector. Assign the data importer its own role, and
+Grant only the existing Evo mintNew selector; preserve every existing authorised minter when assigning a dedicated role. Bertha receives the mint ID through a guarded ERC721 receiver callback, registers it, then safely delivers the egg atomically. No Evo implementation upgrade is required. Assign the data importer its own role, and
 retain pause/configuration controls for administration. Existing legitimate
 mint selectors and roles remain unchanged.
 
@@ -140,15 +150,12 @@ contract security audit; legacy tooling dependencies need review before release.
 ## Validation performed on this branch
 
 - Solidity compilation passed; Bertha/Hermann are below the EIP-170 runtime size limit.
-- 19 local integration tests passed, including 128 deterministic genetics seeds,
+- 27 local contract tests passed, including 128 deterministic genetics seeds,
   receiver reentrancy, rejected mints, duplicate callbacks/settlement, payment
   failures, refunds before commitment, treatment locking and version snapshots.
 - Both VRF callbacks were exercised with the configured 100,000-gas allowance.
 - The guarded local fixture deployment and transaction-free mainnet plan generator passed.
-- Comparing cached explorer-verified Evo source with the modified implementation
-  using Solidity 0.8.28 found the raw counter layout, six ERC-7201 namespaces and
-  existing function ABI unchanged. This structural comparison is not full
-  OpenZeppelin upgrade validation or an independent audit of the deployed build.
+- The revised mint/receiver/delivery path passed against the unchanged deployed Evo implementation on a mainnet fork. Both proposed NPC bytecodes reproduce exactly from frozen solc 0.8.28/London/optimizer-200 input. Mainnet imports, independent review and live Fuji/mainnet acceptance remain separate gates.
 - Package audit reported 88 existing-toolchain/dependency findings, including
   five critical entries. No broad automatic dependency upgrades were applied.
   Production signing/deployment tooling needs remediation and verification.
