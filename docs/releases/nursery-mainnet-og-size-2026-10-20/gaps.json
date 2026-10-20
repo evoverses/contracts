@@ -16,8 +16,8 @@
   },
   {
     "id": "AWS_READINESS",
-    "status": "checked_partial_database_checks_pending",
-    "detail": "Live indexer image/task, service health, log progress and seven-day backups checked. No Hermann configuration is deployed. Direct migration/checkpoint SQL and restore drill remain unverified; ECS Exec is disabled and the public checkpoint query is permission-denied."
+    "status": "builds_ready_live_database_probe_pending",
+    "detail": "Existing services are running but the deployed indexer has no nursery configuration. Updated website/API/indexer builds and local backend images pass. Production migration ledger, checkpoint and legacy pending/writer checks await the approved private database connection or read-only diagnostic task. No production migration/service update has been made."
   },
   {
     "id": "IMPORT_CUTOVER",
@@ -26,8 +26,8 @@
   },
   {
     "id": "LEGACY_SIZE",
-    "status": "mapping_agreed_import_and_output_conversion_pending",
-    "detail": "The user confirmed percentage=(raw-10)*10. The existing unsigned pilot still imports its previously selected numeric metadata unchanged. Apply and verify the agreed inverse for final imports and the forward conversion for mainnet read-model output before approving immutable imports. Do not treat numeric 0-20 checks as unit validation."
+    "status": "closed_conversion_and_preservation_verified",
+    "detail": "All 49 legacy percentage sizes round-trip through raw imports. The selected pilot IDs, costs and non-size traits are unchanged. Registry projection, direct reads and NFT metadata now expose percentages once. Boundary and all-value tests plus the fresh mainnet-fork/database rehearsal passed."
   },
   {
     "id": "SECURITY_REVIEW",

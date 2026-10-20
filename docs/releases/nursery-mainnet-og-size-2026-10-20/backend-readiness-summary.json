@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-20T12:32:00.549181+10:00",
+  "readOnly": true,
+  "services": [
+    {
+      "name": "indexer",
+      "running": 1,
+      "desired": 1
+    },
+    {
+      "name": "graphql",
+      "running": 1,
+      "desired": 1
+    },
+    {
+      "name": "nextjs-api",
+      "running": 1,
+      "desired": 1
+    }
+  ],
+  "deployedNurseryConfigured": false,
+  "databaseAvailable": true,
+  "backupRetentionDays": 7,
+  "liveMigrationLedgerVerified": false,
+  "liveCheckpointVerified": false,
+  "legacyPendingRequestsVerified": false,
+  "temporaryReadOnlyProbe": "prepared; awaiting approval",
+  "deploymentPerformed": false
+}

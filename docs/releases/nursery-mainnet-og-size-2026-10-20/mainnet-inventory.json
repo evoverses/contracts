@@ -1,7 +1,7 @@
 {
-  "createdAt": "2026-10-19T21:49:45.459Z",
-  "sourceBlock": 98003799,
-  "sourceHash": "0x09f9f4cc8a04274dd661051b6b937c1d8d3ce188d1980d4d12f3962d688ab84c",
+  "createdAt": "2026-10-20T02:38:01.490Z",
+  "sourceBlock": 98021010,
+  "sourceHash": "0xfa798893d0c58e0345c9055e4ae425a0e21f44a4630e1a6f460dd718de91767e",
   "addresses": {
     "chainId": 43114,
     "token": "0x42006Ab57701251B580bDFc24778C43c9ff589A1",

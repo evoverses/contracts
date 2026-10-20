@@ -1,0 +1,14 @@
+{
+  "name": "evoverses-nursery-mainnet-review-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Unsigned nursery release preparation and loopback-only rehearsal",
+  "scripts": {
+    "test": "node --test test.cjs"
+  },
+  "dependencies": {
+    "ethers": "6.15.0",
+    "solc-0.8.20": "npm:solc@0.8.20",
+    "@openzeppelin/upgrades-core": "1.44.1"
+  }
+}

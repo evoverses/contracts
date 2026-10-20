@@ -10,8 +10,8 @@ Bertha uses the existing collection's `mintNew(address)` interface and captures 
 
 ## Validation
 
-- 179 tests: 28 contracts, 52 website nursery/owner security, 36 wallet, 22 marketplace, 37 indexer and four release-tool checks.
-- Website, indexer and API type checks passed. No website source/configuration changed in this revision, so the prior successful production build was retained.
+- 182 tests: 28 contracts, 53 website nursery/owner security, 36 wallet, 22 marketplace, 38 indexer and five release-tool checks.
+- Fresh website/API production builds, indexer build, OpenNext packaging/dry run, owner-login runtime and all type checks passed. Both backend container images built locally and passed isolated runtime smoke checks; neither image has been published.
 - Exact 19-step deployment/configuration/import sequence passed on a mainnet fork. Existing collection implementation, owners, legacy mint/transfer behaviour and production three-day incubation boundaries were verified.
 - The three OG paths (untreated, purchased treatment and originally treated) produced the expected boundary/midpoint sizes 0, 10 and 20 on the fork.
 - Nine resulting metadata records, disposable database migrations and three wallet lists passed the actual registry reader/projection/API rehearsal. No production database was written.
@@ -31,10 +31,10 @@ Bertha uses the existing collection's `mintNew(address)` interface and captures 
 
 ## Remaining gates
 
-The earlier pinned inventory, Genesis eligibility snapshot and unapproved pilot selection are retained for reproducibility. They are not newly approved imports. Refresh/reconcile final traits, breeding counts, cooldowns and legacy writers before signing.
+Mainnet ownership and Genesis eligibility were refreshed at blocks 98021010/98021026, and administrator permissions at block 98021113. The original pilot IDs and EVO costs are retained. They are not newly approved imports. Final cutover must still reconcile pending legacy requests/writers before signing imports.
 
-The user confirmed `percentage = (raw - 10) * 10`. Applying and verifying that conversion at import/output boundaries remains pending; the old pilot's raw numeric bounds alone do not validate its units. This package does not silently change any existing Evo's size.
+The agreed `percentage = (raw - 10) * 10` conversion is implemented at import and output boundaries. All 49 existing sizes round-trip exactly. The fresh fork/database/API rehearsal verifies that imported sizes and XP stay unchanged and that new sizes are exposed as percentages once. Invalid values fail closed.
 
-Administrator signing coordination, production database/indexer readiness, pilot NFT IDs and spending cap, actual OG-holding wallet/IDs and independent security review remain open. The two prior bred Fuji eggs also still require their real incubation period before their final hatches on 23 October 2026 after 10:09 am Australia/Brisbane.
+`colleague-signing-review.json` separates the 19 exact transactions into five phases and identifies each signer. `backend-runtime-plan.json` stages the existing backend migration/configuration order. The deployed indexer still lacks nursery configuration. Live migration-ledger/checkpoint/pending-request verification awaits the prepared read-only private-database probe or an existing connection. Pilot NFT IDs and spending cap, actual OG-holding wallet/IDs and the colleague's security review still require acceptance. The two prior bred Fuji eggs also still require their real incubation period before their final hatches on 23 October 2026 after 10:09 am Australia/Brisbane.
 
 Requote and regenerate if the mainnet deployer's nonce, permission assignments, addresses, final imports or source changes. Website rollback cannot reverse paid randomness or minting. Maintain pending requests and use reviewed pause/unpause recovery. Keep public activation separate from private mainnet acceptance.

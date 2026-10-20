@@ -1,0 +1,280 @@
+⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+   ▲ Next.js 15.5.27
+   - Environments: .env.production
+   - Experiments (use with caution):
+     ✓ typedEnv
+     ✓ authInterrupts
+
+   Creating an optimized production build ...
+ ⚠ Compiled with warnings in 63s
+
+../../node_modules/.pnpm/@opentelemetry+instrumentation@0.57.2_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+Critical dependency: the request of a dependency is an expression
+
+Import trace for requested module:
+../../node_modules/.pnpm/@opentelemetry+instrumentation@0.57.2_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+../../node_modules/.pnpm/@opentelemetry+instrumentation@0.57.2_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+../../node_modules/.pnpm/@opentelemetry+instrumentation@0.57.2_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+../../node_modules/.pnpm/@opentelemetry+instrumentation@0.57.2_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/index.js
+../../node_modules/.pnpm/@sentry+node@9.37.0/node_modules/@sentry/node/build/cjs/integrations/tracing/postgresjs.js
+../../node_modules/.pnpm/@sentry+node@9.37.0/node_modules/@sentry/node/build/cjs/index.js
+../../node_modules/.pnpm/@sentry+nextjs@9.37.0_@opentelemetry+context-async-hooks@1.30.1_@opentelemetry+api@1.9._5935398c376a095cc44dbcf409a82727/node_modules/@sentry/nextjs/build/cjs/index.server.js
+
+   Linting and checking validity of types ...
+
+./src/app/api/downloads/admin/route.ts
+17:112  Warning: '_' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+28:20  Warning: '_' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/assets/[slug]/[token_id]/asset-activity.tsx
+6:11  Warning: 'data' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/assets/[slug]/[token_id]/asset-marketplace-card.tsx
+24:9  Warning: 'addresses' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/marketplace/[slug]/sidebar.tsx
+4:10  Warning: 'Species' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/privacy/page.tsx
+9:13  Warning: 'tjs' is never reassigned. Use 'const' instead.  prefer-const
+13:5  Warning: 'js' is never reassigned. Use 'const' instead.  prefer-const
+23:9  Warning: Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free.  @typescript-eslint/ban-ts-comment
+
+./src/app/profile/_components/fetch.ts
+61:36  Warning: 'lastRewardTime' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+61:52  Warning: 'accGovTokenPerShare' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+72:29  Warning: 'rewardDebt' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+72:41  Warning: 'rewardDebtAtTime' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+72:95  Warning: 'userTimeDelta' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+72:110  Warning: 'lastDepositTime' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+84:43  Warning: '_blockTimestampLast' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/profile/_components/profile-form.tsx
+5:10  Warning: 'useConnectedSiweWallets' is defined but never used.  @typescript-eslint/no-unused-vars
+5:48  Warning: 'useSmartWalletAdmin' is defined but never used.  @typescript-eslint/no-unused-vars
+59:20  Warning: 'dirtyFields' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+60:27  Warning: 'data' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/profile/_components/smart-wallet-drawers.tsx
+39:16  Warning: 'isEvoBalanceLoading' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+40:17  Warning: 'isEvoBalanceFetching' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/profile/liquidity/buttons.tsx
+339:30  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/app/profile/liquidity/cards.tsx
+12:10  Warning: 'fetchPriceOf' is defined but never used.  @typescript-eslint/no-unused-vars
+17:10  Warning: 'formatUsd' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/profile/liquidity/smart-drawers.tsx
+37:7  Warning: 'FarmActions' is assigned a value but only used as a type.  @typescript-eslint/no-unused-vars
+151:7  Warning: 'xevoActions' is assigned a value but only used as a type.  @typescript-eslint/no-unused-vars
+216:30  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/components/address-or-ens-name-input.tsx
+41:54  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+46:54  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+54:53  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+58:50  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/components/connect-embed.tsx
+11:9  Warning: 'searchParams' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+33:19  Warning: 'wallet' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/drawers/period-drawer-footer.tsx
+58:3  Warning: 'className' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/player/pro-entry-panel.tsx
+21:232  Warning: Empty block statement.  no-empty
+22:108  Warning: Empty block statement.  no-empty
+
+./src/components/providers/client-account-provider.tsx
+3:8  Warning: 'AccountCookieManager' is defined but never used.  @typescript-eslint/no-unused-vars
+11:5  Warning: 'accountCookie' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/views/table-view.tsx
+242:14  Warning: 'row' is defined but never used.  @typescript-eslint/no-unused-vars
+291:3  Warning: 'isLoading' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/lib/cookies/account.middleware.ts
+16:9  Warning: IMPERSONATE is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+16:62  Warning: IMPERSONATE_ADDRESS is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+17:24  Warning: IMPERSONATE_ADDRESS is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+
+./src/lib/cookies/account.server.ts
+13:9  Warning: 'cookiesList' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./src/lib/dexscreener/actions.ts
+3:10  Warning: 'NATIVE_TOKEN_ADDRESS' is defined but never used.  @typescript-eslint/no-unused-vars
+5:27  Warning: 'zeroAddress' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/lib/leaderboard/rewards-core.ts
+15:119  Warning: Unexpected control character(s) in regular expression: \x00, \x1f.  no-control-regex
+
+./src/lib/node/url-search-params.ts
+92:96  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+93:58  Warning: '_parent' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/lib/opensea/types.ts
+1:8  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+32:10  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+50:10  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+107:12  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+120:10  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+229:12  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+310:14  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+317:12  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+
+./src/lib/player/handlers.ts
+4:43  Warning: 'getPlayerInventory' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/lib/player/server.ts
+11:75  Warning: EVOVERSES_LOCAL_EPIC_ACCOUNT_LOGIN is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+12:75  Warning: EVOVERSES_HOSTED_BETA is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+26:18  Warning: EVOVERSES_LOCAL_EPIC_RUN_ROOT is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+32:22  Warning: AUTH_EPIC_ID is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+33:26  Warning: AUTH_EPIC_SECRET is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+69:28  Warning: EVOVERSES_LOCAL_STORE_PAYMENTS is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+69:82  Warning: EVOROS_STRIPE_MODE is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+71:16  Warning: EVOVERSES_LOCAL_EPIC_RUN_ROOT is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+72:17  Warning: EVOVERSES_LOCAL_STORE_SERVICE_TOKEN is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+76:32  Warning: EVOROS_STRIPE_ACCOUNT is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+87:47  Warning: EVOVERSES_LOCAL_EPIC_RUN_ROOT is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+
+./src/lib/playfab/types.ts
+1:8  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+12:10  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+14:12  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+51:25  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+54:21  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+203:29  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+259:14  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+297:12  Warning: ES2015 module syntax is preferred over namespaces.  @typescript-eslint/no-namespace
+321:23  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+322:24  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/lib/viem.ts
+27:31  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+30:16  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+42:13  Warning: 'rawKey' is never reassigned. Use 'const' instead.  prefer-const
+43:13  Warning: 'value' is never reassigned. Use 'const' instead.  prefer-const
+
+./src/middleware.ts
+4:56  Warning: 'event' is defined but never used.  @typescript-eslint/no-unused-vars
+8:69  Warning: EVOVERSES_LOCAL_EPIC_ACCOUNT_LOGIN is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+8:234  Warning: EVOVERSES_HOSTED_BETA is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+
+./src/store/index.ts
+2:38  Warning: 'Middlewares' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/types/cookies.ts
+3:34  Warning: The `{}` ("empty object") type allows any non-nullish value, including literals like `0` and `""`.
+- If that's what you want, disable this lint rule with an inline comment or configure the 'allowObjectTypes' rule option.
+- If you want a type meaning "any object", you probably want `object` instead.
+- If you want a type meaning "any value", you probably want `unknown` instead.  @typescript-eslint/no-empty-object-type
+
+./src/utils/node.ts
+1:56  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+1:62  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+8:55  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+8:61  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/utils/strings.ts
+109:38  Warning: '_i' is defined but never used.  @typescript-eslint/no-unused-vars
+109:50  Warning: '_a' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/utils/url.ts
+8:5  Warning: 'chainId' is defined but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/34) ...
+   Generating static pages (8/34)
+   Generating static pages (16/34)
+   Generating static pages (25/34)
+ ✓ Generating static pages (34/34)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ƒ /                                      803 B         238 kB
+├ ƒ /_not-found                          1.01 kB         231 kB
+├ ƒ /api/downloads/admin                   253 B         231 kB
+├ ƒ /api/downloads/file                    253 B         231 kB
+├ ƒ /api/launcher/access                   253 B         231 kB
+├ ƒ /api/leaderboard                       253 B         231 kB
+├ ƒ /api/leaderboard/me                    253 B         231 kB
+├ ƒ /api/leaderboard/overall               253 B         231 kB
+├ ƒ /api/leaderboard/overall/me            253 B         231 kB
+├ ƒ /api/leaderboard/pro                   253 B         231 kB
+├ ƒ /api/leaderboard/pro/entry             253 B         231 kB
+├ ƒ /api/leaderboard/pvbot                 253 B         231 kB
+├ ƒ /api/leaderboard/pvbot/me              253 B         231 kB
+├ ƒ /api/leaderboard/rewards               253 B         231 kB
+├ ƒ /api/leaderboard/rewards/archive       253 B         231 kB
+├ ƒ /api/leaderboard/rewards/me            253 B         231 kB
+├ ƒ /api/marketplace/query                 253 B         231 kB
+├ ƒ /api/nursery/access                    253 B         231 kB
+├ ƒ /api/nursery/audit                     253 B         231 kB
+├ ƒ /api/nursery/evos                      253 B         231 kB
+├ ƒ /api/nursery/evos/[tokenId]            253 B         231 kB
+├ ƒ /api/nursery/randomness                253 B         231 kB
+├ ƒ /api/player/auth/epic/callback         253 B         231 kB
+├ ƒ /api/player/auth/epic/confirm          253 B         231 kB
+├ ƒ /api/player/auth/epic/start            253 B         231 kB
+├ ƒ /api/player/auth/logout                253 B         231 kB
+├ ƒ /api/player/beta-admin                 253 B         231 kB
+├ ƒ /api/player/inventory                  253 B         231 kB
+├ ƒ /api/player/me                         253 B         231 kB
+├ ƒ /api/player/wallet                     253 B         231 kB
+├ ƒ /api/store/evo-quote                   253 B         231 kB
+├ ƒ /api/store/evo/order                   253 B         231 kB
+├ ƒ /api/store/evo/reserve                 253 B         231 kB
+├ ƒ /api/store/evo/verify                  253 B         231 kB
+├ ƒ /api/store/stripe/checkout             253 B         231 kB
+├ ƒ /api/store/stripe/order                253 B         231 kB
+├ ƒ /api/store/stripe/webhook              253 B         231 kB
+├ ƒ /assets                                878 B         238 kB
+├ ● /assets/[slug]                       13.5 kB         412 kB
+├   └ /assets/evo
+├ ƒ /assets/[slug]/[token_id]             109 kB         815 kB
+├ ƒ /beta-admin                          9.68 kB         259 kB
+├ ƒ /beta-admin/downloads                2.74 kB         235 kB
+├ ƒ /beta-admin/leaderboard              11.5 kB         284 kB
+├ ƒ /beta-admin/nursery                  4.22 kB         258 kB
+├ ƒ /cards                                2.1 kB         245 kB
+├ ƒ /download                              253 B         231 kB
+├ ○ /icon.png                                0 B            0 B
+├ ƒ /leaderboard                         19.1 kB         339 kB
+├ ƒ /leaderboard/overall                   150 B         262 kB
+├ ƒ /leaderboard/pvbot                     151 B         262 kB
+├ ƒ /links                                 609 B         238 kB
+├ ƒ /liquidity                           1.67 kB         588 kB
+├ ƒ /marketplace                           878 B         238 kB
+├ ƒ /marketplace/[slug]                  4.48 kB         703 kB
+├ ƒ /nursery                               190 B         238 kB
+├ ƒ /nursery/bertha                      11.3 kB         649 kB
+├ ƒ /nursery/hermann                     15.3 kB         655 kB
+├ ƒ /privacy                               527 B         231 kB
+├ ƒ /profile                             41.4 kB         655 kB
+├ ƒ /profile/assets/evos                  2.3 kB         686 kB
+├ ƒ /profile/liquidity                     276 B         586 kB
+├ ƒ /roadmap                             11.8 kB         302 kB
+├ ƒ /signin                                190 B         238 kB
+├ ƒ /signout                               253 B         231 kB
+├ ƒ /signup                              1.65 kB         246 kB
+├ ○ /sitemap.xml                           253 B         231 kB
+└ ƒ /store                               15.6 kB         521 kB
++ First Load JS shared by all             230 kB
+  ├ chunks/1dfd2651-71a68a9bb1b2f86a.js  54.2 kB
+  ├ chunks/66776-9270458ef061d5f5.js      123 kB
+  ├ chunks/b1f1522c-6f748efba57038b7.js  37.7 kB
+  ├ chunks/webpack-b090a73afaa295cb.js   15.3 kB
+  └ other shared chunks (total)            579 B
+
+
+ƒ Middleware                              125 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand

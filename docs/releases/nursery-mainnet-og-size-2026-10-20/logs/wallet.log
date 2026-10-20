@@ -3,237 +3,237 @@ TAP version 13
     # Subtest: uses the current gas price and the displayed limits, with an exact EVO approval
     ok 1 - uses the current gas price and the displayed limits, with an exact EVO approval
       ---
-      duration_ms: 0.998906
+      duration_ms: 1.542368
       type: 'test'
       ...
     # Subtest: does not approve EVO when the first quote has changed
     ok 2 - does not approve EVO when the first quote has changed
       ---
-      duration_ms: 0.29594
+      duration_ms: 0.333374
       type: 'test'
       ...
     # Subtest: does not spend after a price change while an approval was confirming
     ok 3 - does not spend after a price change while an approval was confirming
       ---
-      duration_ms: 0.18639
+      duration_ms: 0.275578
       type: 'test'
       ...
     # Subtest: does not spend above the displayed AVAX limit
     ok 4 - does not spend above the displayed AVAX limit
       ---
-      duration_ms: 0.151175
+      duration_ms: 0.26183
       type: 'test'
       ...
     # Subtest: aborts if the wallet changes after approval
     ok 5 - aborts if the wallet changes after approval
       ---
-      duration_ms: 0.159113
+      duration_ms: 0.270966
       type: 'test'
       ...
     # Subtest: does not start breeding if approval is rejected
     ok 6 - does not start breeding if approval is rejected
       ---
-      duration_ms: 0.176434
+      duration_ms: 0.309222
       type: 'test'
       ...
     # Subtest: sends no AVAX surcharge for a subsidised quote
     ok 7 - sends no AVAX surcharge for a subsidised quote
       ---
-      duration_ms: 0.305225
+      duration_ms: 0.256251
       type: 'test'
       ...
     1..7
 ok 1 - Breeding payment limits and wallet changes
   ---
-  duration_ms: 3.023144
+  duration_ms: 4.386783
   type: 'suite'
   ...
 # Subtest: discovers new owned eggs without indexed records or remembered IDs, across every page
 ok 2 - discovers new owned eggs without indexed records or remembered IDs, across every page
   ---
-  duration_ms: 2.022466
+  duration_ms: 1.977287
   type: 'test'
   ...
 # Subtest: returns no eggs for an empty wallet without enumeration
 ok 3 - returns no eggs for an empty wallet without enumeration
   ---
-  duration_ms: 0.266837
+  duration_ms: 0.270343
   type: 'test'
   ...
 # Subtest: does not present an RPC failure as an empty or complete wallet
 ok 4 - does not present an RPC failure as an empty or complete wallet
   ---
-  duration_ms: 0.357358
+  duration_ms: 0.53441
   type: 'test'
   ...
 # Subtest: rejects incomplete or duplicate enumeration rather than silently losing eggs
 ok 5 - rejects incomplete or duplicate enumeration rather than silently losing eggs
   ---
-  duration_ms: 0.262422
+  duration_ms: 0.326248
   type: 'test'
   ...
 # Subtest: rejects malformed registry responses
 ok 6 - rejects malformed registry responses
   ---
-  duration_ms: 0.268769
+  duration_ms: 0.344016
   type: 'test'
   ...
 # Subtest: stops a retired wallet query before subsequent RPC work
 ok 7 - stops a retired wallet query before subsequent RPC work
   ---
-  duration_ms: 0.196556
+  duration_ms: 0.373972
   type: 'test'
   ...
 # Subtest: rejects malformed wallet and balance inputs
 ok 8 - rejects malformed wallet and balance inputs
   ---
-  duration_ms: 0.2302
+  duration_ms: 0.346897
   type: 'test'
   ...
 # Subtest: finds a recent egg without exceeding the provider's 100-block limit
 ok 9 - finds a recent egg without exceeding the provider's 100-block limit
   ---
-  duration_ms: 51.801799
+  duration_ms: 49.823992
   type: 'test'
   ...
 # Subtest: recovers an older egg using its creation timestamp and a bounded log range
 ok 10 - recovers an older egg using its creation timestamp and a bounded log range
   ---
-  duration_ms: 10.573189
+  duration_ms: 11.455276
   type: 'test'
   ...
 # Subtest: finds the correct egg when multiple blocks share its creation timestamp
 ok 11 - finds the correct egg when multiple blocks share its creation timestamp
   ---
-  duration_ms: 10.840568
+  duration_ms: 10.510478
   type: 'test'
   ...
 # Subtest: reuses only a cache entry whose creation block is still canonical
 ok 12 - reuses only a cache entry whose creation block is still canonical
   ---
-  duration_ms: 12.602448
+  duration_ms: 10.705444
   type: 'test'
   ...
 # Subtest: missing or mismatched origin events remain errors
 ok 13 - missing or mismatched origin events remain errors
   ---
-  duration_ms: 17.187583
+  duration_ms: 16.619973
   type: 'test'
   ...
 # Subtest: recovers only a correctly decoded request for this wallet and this Bertha
 ok 14 - recovers only a correctly decoded request for this wallet and this Bertha
   ---
-  duration_ms: 2.743815
+  duration_ms: 1.962872
   type: 'test'
   ...
 # Subtest: loads a paginated wallet list through the local route and forwards cancellation
 ok 15 - loads a paginated wallet list through the local route and forwards cancellation
   ---
-  duration_ms: 20.489632
+  duration_ms: 22.551321
   type: 'test'
   ...
 # Subtest: reports upstream failures rather than presenting an empty wallet
 ok 16 - reports upstream failures rather than presenting an empty wallet
   ---
-  duration_ms: 0.500668
+  duration_ms: 0.420128
   type: 'test'
   ...
 # Subtest: Nursery parent selection and pricing
     # Subtest: requires distinct parents, opposite known genders and a shared element
     ok 1 - requires distinct parents, opposite known genders and a shared element
       ---
-      duration_ms: 0.560378
+      duration_ms: 0.685086
       type: 'test'
       ...
     # Subtest: uses the canonical numeric genders and type identifiers
     ok 2 - uses the canonical numeric genders and type identifiers
       ---
-      duration_ms: 0.13257
+      duration_ms: 0.226553
       type: 'test'
       ...
     # Subtest: preserves the generation multiplier and caps generation-zero pricing at 2500 EVO
     ok 3 - preserves the generation multiplier and caps generation-zero pricing at 2500 EVO
       ---
-      duration_ms: 0.198701
+      duration_ms: 0.212203
       type: 'test'
       ...
     # Subtest: blocks spent breeds, reserved or unavailable adults and cooldowns
     ok 4 - blocks spent breeds, reserved or unavailable adults and cooldowns
       ---
-      duration_ms: 0.161915
+      duration_ms: 0.377944
       type: 'test'
       ...
     1..4
 ok 17 - Nursery parent selection and pricing
   ---
-  duration_ms: 1.698614
+  duration_ms: 2.200502
   type: 'suite'
   ...
 # Subtest: Hermann incubation, treatment and native surcharge
     # Subtest: opens hatching at exactly three days and locks treatment before randomness
     ok 1 - opens hatching at exactly three days and locks treatment before randomness
       ---
-      duration_ms: 0.191961
+      duration_ms: 0.249383
       type: 'test'
       ...
     # Subtest: rounds the 10 percent native budget up without floating point or a subsidy surcharge
     ok 2 - rounds the 10 percent native budget up without floating point or a subsidy surcharge
       ---
-      duration_ms: 0.105952
+      duration_ms: 0.105521
       type: 'test'
       ...
     1..2
 ok 18 - Hermann incubation, treatment and native surcharge
   ---
-  duration_ms: 0.451614
+  duration_ms: 0.559088
   type: 'suite'
   ...
 # Subtest: wallet signing preserves the checked transaction and never forces an SDK nonce
 ok 19 - wallet signing preserves the checked transaction and never forces an SDK nonce
   ---
-  duration_ms: 1.031192
+  duration_ms: 1.477821
   type: 'test'
   ...
 # Subtest: wallet rejection is returned once without automatic resubmission
 ok 20 - wallet rejection is returned once without automatic resubmission
   ---
-  duration_ms: 0.463978
+  duration_ms: 0.536709
   type: 'test'
   ...
 # Subtest: shared locks notify all cards, reject competing starts and release idempotently
 ok 21 - shared locks notify all cards, reject competing starts and release idempotently
   ---
-  duration_ms: 0.253624
+  duration_ms: 0.28752
   type: 'test'
   ...
 # Subtest: nursery discovery and transactions use the external wallet, independently of login
 ok 22 - nursery discovery and transactions use the external wallet, independently of login
   ---
-  duration_ms: 85.282515
+  duration_ms: 81.273938
   type: 'test'
   ...
 # Subtest: an account change prevents nursery transactions
 ok 23 - an account change prevents nursery transactions
   ---
-  duration_ms: 31.936782
+  duration_ms: 26.397531
   type: 'test'
   ...
 # Subtest: a contract account remains blocked from nursery transactions
 ok 24 - a contract account remains blocked from nursery transactions
   ---
-  duration_ms: 28.418128
+  duration_ms: 26.867925
   type: 'test'
   ...
 # Subtest: different egg cards share the wallet lock for the entire approval and action workflow
 ok 25 - different egg cards share the wallet lock for the entire approval and action workflow
   ---
-  duration_ms: 22.431129
+  duration_ms: 22.198793
   type: 'test'
   ...
 # Subtest: a rejected wallet workflow releases the shared lock
 ok 26 - a rejected wallet workflow releases the shared lock
   ---
-  duration_ms: 23.956282
+  duration_ms: 20.633406
   type: 'test'
   ...
 1..26
@@ -244,4 +244,4 @@ ok 26 - a rejected wallet workflow releases the shared lock
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 590.313559
+# duration_ms 560.660256

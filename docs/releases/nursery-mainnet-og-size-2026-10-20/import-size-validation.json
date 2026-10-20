@@ -1,0 +1,303 @@
+{
+  "sourceBlock": 98021010,
+  "allSizesPreserved": true,
+  "count": 49,
+  "pilotIdsUnchanged": true,
+  "pilotCostsUnchanged": true,
+  "records": [
+    {
+      "tokenId": "532",
+      "percentage": 20,
+      "raw": 12,
+      "percentageRestored": 20
+    },
+    {
+      "tokenId": "576",
+      "percentage": 70,
+      "raw": 17,
+      "percentageRestored": 70
+    },
+    {
+      "tokenId": "609",
+      "percentage": 80,
+      "raw": 18,
+      "percentageRestored": 80
+    },
+    {
+      "tokenId": "664",
+      "percentage": 40,
+      "raw": 14,
+      "percentageRestored": 40
+    },
+    {
+      "tokenId": "686",
+      "percentage": 30,
+      "raw": 13,
+      "percentageRestored": 30
+    },
+    {
+      "tokenId": "908",
+      "percentage": 0,
+      "raw": 10,
+      "percentageRestored": 0
+    },
+    {
+      "tokenId": "962",
+      "percentage": -60,
+      "raw": 4,
+      "percentageRestored": -60
+    },
+    {
+      "tokenId": "1066",
+      "percentage": -80,
+      "raw": 2,
+      "percentageRestored": -80
+    },
+    {
+      "tokenId": "1175",
+      "percentage": -40,
+      "raw": 6,
+      "percentageRestored": -40
+    },
+    {
+      "tokenId": "1722",
+      "percentage": -100,
+      "raw": 0,
+      "percentageRestored": -100
+    },
+    {
+      "tokenId": "1911",
+      "percentage": 100,
+      "raw": 20,
+      "percentageRestored": 100
+    },
+    {
+      "tokenId": "1917",
+      "percentage": -30,
+      "raw": 7,
+      "percentageRestored": -30
+    },
+    {
+      "tokenId": "2120",
+      "percentage": 80,
+      "raw": 18,
+      "percentageRestored": 80
+    },
+    {
+      "tokenId": "2577",
+      "percentage": -70,
+      "raw": 3,
+      "percentageRestored": -70
+    },
+    {
+      "tokenId": "2578",
+      "percentage": -90,
+      "raw": 1,
+      "percentageRestored": -90
+    },
+    {
+      "tokenId": "2903",
+      "percentage": 0,
+      "raw": 10,
+      "percentageRestored": 0
+    },
+    {
+      "tokenId": "2919",
+      "percentage": 10,
+      "raw": 11,
+      "percentageRestored": 10
+    },
+    {
+      "tokenId": "3060",
+      "percentage": 70,
+      "raw": 17,
+      "percentageRestored": 70
+    },
+    {
+      "tokenId": "3095",
+      "percentage": 80,
+      "raw": 18,
+      "percentageRestored": 80
+    },
+    {
+      "tokenId": "3309",
+      "percentage": -50,
+      "raw": 5,
+      "percentageRestored": -50
+    },
+    {
+      "tokenId": "3366",
+      "percentage": -30,
+      "raw": 7,
+      "percentageRestored": -30
+    },
+    {
+      "tokenId": "3395",
+      "percentage": -40,
+      "raw": 6,
+      "percentageRestored": -40
+    },
+    {
+      "tokenId": "3396",
+      "percentage": -50,
+      "raw": 5,
+      "percentageRestored": -50
+    },
+    {
+      "tokenId": "3397",
+      "percentage": 30,
+      "raw": 13,
+      "percentageRestored": 30
+    },
+    {
+      "tokenId": "3428",
+      "percentage": -10,
+      "raw": 9,
+      "percentageRestored": -10
+    },
+    {
+      "tokenId": "3429",
+      "percentage": 20,
+      "raw": 12,
+      "percentageRestored": 20
+    },
+    {
+      "tokenId": "3653",
+      "percentage": 10,
+      "raw": 11,
+      "percentageRestored": 10
+    },
+    {
+      "tokenId": "3675",
+      "percentage": -50,
+      "raw": 5,
+      "percentageRestored": -50
+    },
+    {
+      "tokenId": "3756",
+      "percentage": 30,
+      "raw": 13,
+      "percentageRestored": 30
+    },
+    {
+      "tokenId": "3774",
+      "percentage": -40,
+      "raw": 6,
+      "percentageRestored": -40
+    },
+    {
+      "tokenId": "3775",
+      "percentage": -90,
+      "raw": 1,
+      "percentageRestored": -90
+    },
+    {
+      "tokenId": "3776",
+      "percentage": 50,
+      "raw": 15,
+      "percentageRestored": 50
+    },
+    {
+      "tokenId": "3812",
+      "percentage": -20,
+      "raw": 8,
+      "percentageRestored": -20
+    },
+    {
+      "tokenId": "3813",
+      "percentage": 20,
+      "raw": 12,
+      "percentageRestored": 20
+    },
+    {
+      "tokenId": "3891",
+      "percentage": 20,
+      "raw": 12,
+      "percentageRestored": 20
+    },
+    {
+      "tokenId": "3931",
+      "percentage": -100,
+      "raw": 0,
+      "percentageRestored": -100
+    },
+    {
+      "tokenId": "3932",
+      "percentage": 0,
+      "raw": 10,
+      "percentageRestored": 0
+    },
+    {
+      "tokenId": "4000",
+      "percentage": -60,
+      "raw": 4,
+      "percentageRestored": -60
+    },
+    {
+      "tokenId": "4015",
+      "percentage": -50,
+      "raw": 5,
+      "percentageRestored": -50
+    },
+    {
+      "tokenId": "4046",
+      "percentage": 20,
+      "raw": 12,
+      "percentageRestored": 20
+    },
+    {
+      "tokenId": "4091",
+      "percentage": -70,
+      "raw": 3,
+      "percentageRestored": -70
+    },
+    {
+      "tokenId": "4092",
+      "percentage": 10,
+      "raw": 11,
+      "percentageRestored": 10
+    },
+    {
+      "tokenId": "4093",
+      "percentage": 50,
+      "raw": 15,
+      "percentageRestored": 50
+    },
+    {
+      "tokenId": "4372",
+      "percentage": 0,
+      "raw": 10,
+      "percentageRestored": 0
+    },
+    {
+      "tokenId": "4499",
+      "percentage": -10,
+      "raw": 9,
+      "percentageRestored": -10
+    },
+    {
+      "tokenId": "4500",
+      "percentage": 70,
+      "raw": 17,
+      "percentageRestored": 70
+    },
+    {
+      "tokenId": "4501",
+      "percentage": -40,
+      "raw": 6,
+      "percentageRestored": -40
+    },
+    {
+      "tokenId": "4502",
+      "percentage": -10,
+      "raw": 9,
+      "percentageRestored": -10
+    },
+    {
+      "tokenId": "4503",
+      "percentage": 20,
+      "raw": 12,
+      "percentageRestored": 20
+    }
+  ]
+}

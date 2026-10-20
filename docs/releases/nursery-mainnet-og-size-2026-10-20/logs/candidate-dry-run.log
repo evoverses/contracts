@@ -1,0 +1,63 @@
+
+ ⛅️ wrangler 4.149.0
+────────────────────
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mComparison with -0 using the "===" operator will also match 0[0m [equals-negative-zero]
+
+    .open-next/server-functions/default/apps/website/handler.mjs:698:71883:
+[37m      698 │ ...gned){if(h<0)h+=e;else if(h===[32m-0[37m)return 0}return h}}a.exports=...
+          ╵                                  [32m~~[0m
+
+  Floating-point equality is defined such that 0 and -0 are equal, so "x === -0" returns true for both 0 and -0. You need to use "Object.is(x, -0)" instead to test for -0.
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mComparison with -0 using the "===" operator will also match 0[0m [equals-negative-zero]
+
+    .open-next/server-functions/default/apps/website/handler.mjs:10506:41204:
+[37m      10506 │ ...ned){if(h<0)h+=e;else if(h===[32m-0[37m)return 0}return h}}a.exports...
+            ╵                                 [32m~~[0m
+
+  Floating-point equality is defined such that 0 and -0 are equal, so "x === -0" returns true for both 0 and -0. You need to use "Object.is(x, -0)" instead to test for -0.
+
+
+✨ Read 1331 files from the assets directory /var/tmp/evoverses-mainnet-ready-20261020/apps/website/.open-next/assets
+Total Upload: 36642.87 KiB / gzip: 8745.84 KiB
+Your Worker has access to the following bindings:
+Binding                                                                                    Resource
+env.GAME_BUILDS (evoverses-beta-builds)                                                    R2 Bucket
+env.WORKER_SELF_REFERENCE (evoverses-beta)                                                 Worker
+env.ASSETS                                                                                 Assets
+env.EVOVERSES_HOSTED_BETA ("1")                                                            Environment Variable
+env.EVOVERSES_ACCOUNT_API_ORIGIN ("https://beta-accounts.evoverses.com")                   Environment Variable
+env.EVOVERSES_EPIC_DEPLOYMENT_ID ("0eeeae4a3a994e0e9c3003ee6d615e04")                      Environment Variable
+env.EVOVERSES_EPIC_APPLICATION_ID ("fghi4567d1yDjn0tjuMtOqkL1USlMIC4")                     Environment Variable
+env.AUTH_EPIC_ID ("xyza7891pYyJBBWl9JM5GaAOt7zWIaiK")                                      Environment Variable
+env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN ("beta.evoverses.com")                                Environment Variable
+env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID ("e9cc45db934afb8275fa2b1da8ce6ab6")                    Environment Variable
+env.NEXT_PUBLIC_EVOVERSES_GRAPHQL_URL ("https://api.evoverses.com/graphql")                Environment Variable
+env.NEXT_PUBLIC_BASE_API_IMAGE_URL ("https://imagedelivery.net/rnUCH_14xCv...")            Environment Variable
+env.NEXT_PUBLIC_API_IMAGE_SUFFIX ("public")                                                Environment Variable
+env.NEXT_PUBLIC_AUTH_URL ("https://beta.evoverses.com")                                    Environment Variable
+env.NEXT_PUBLIC_FUJI_EVO_ADDRESS ("0x8DEE7Bc23aB2956F99E4830D5C7Da233617...")              Environment Variable
+env.NEXT_PUBLIC_FUJI_EVO_NFT_ADDRESS ("0x72D7DF32dF4C3CA2B690b434DC36086b65E...")          Environment Variable
+env.NEXT_PUBLIC_FUJI_BERTHA_ADDRESS ("0x4C84e969766Be884F6Edc4505615491478a...")           Environment Variable
+env.NEXT_PUBLIC_FUJI_HERMANN_ADDRESS ("0x6E1D28710880b5f073cecd30BBf772dE518...")          Environment Variable
+env.NEXT_PUBLIC_FUJI_WRAPPER_ADDRESS ("0x327B83F409E1D5f13985c6d0584420FA648...")          Environment Variable
+env.NEXT_PUBLIC_NURSERY_REGISTRY_VERSION ("2")                                             Environment Variable
+env.NEXT_PUBLIC_FUJI_HERMANN_HISTORY ("")                                                  Environment Variable
+env.NEXT_PUBLIC_NURSERY_NETWORK ("mainnet-pilot")                                          Environment Variable
+env.NEXT_PUBLIC_NURSERY_MAINNET_APPROVED ("0")                                             Environment Variable
+env.EVOVERSES_UPDATER_PUBLIC_KEY ("<RSAKeyValue><Modulus>y4s5McxJFPt8Vw/...")              Environment Variable
+env.EVOROS_STRIPE_ENABLED ("true")                                                         Environment Variable
+env.EVOROS_STRIPE_MODE ("live")                                                            Environment Variable
+env.EVOROS_STRIPE_ACCOUNT ("acct_1UN0wpI8Ec1gWS2X")                                        Environment Variable
+env.EVOROS_STORE_ORIGIN ("https://beta.evoverses.com")                                     Environment Variable
+env.EVOROS_STRIPE_PRICES ("{"bundle_pouch":{"priceId":"price_1UR...")                      Environment Variable
+env.EVOROS_STRIPE_WEBHOOK_ORIGINS ("["https://beta.evoverses.com","https:...")             Environment Variable
+env.EVOVERSES_BETA_OWNER_PLAYER_ID ("9d6a70e4-d887-41ad-a7c3-f7e2656cf9bd")                Environment Variable
+env.NEXT_PUBLIC_NURSERY_EVO_ADDRESS ("0x42006Ab57701251B580bDFc24778C43c9ff...")           Environment Variable
+env.NEXT_PUBLIC_NURSERY_NFT_ADDRESS ("0x4151b8afa10653d304FdAc9a781AFccd45E...")           Environment Variable
+env.NEXT_PUBLIC_NURSERY_BERTHA_ADDRESS ("0x9A72dcf37eE3e2f4A33895AcBF735c1a5cb...")        Environment Variable
+env.NEXT_PUBLIC_NURSERY_HERMANN_ADDRESS ("0x3B752a9644374e69ADB8141E52d2b09eafE...")       Environment Variable
+env.NEXT_PUBLIC_NURSERY_WRAPPER_ADDRESS ("0x62Fb87c10A917580cA99AB9a86E213Eb98a...")       Environment Variable
+
+--dry-run: exiting now.

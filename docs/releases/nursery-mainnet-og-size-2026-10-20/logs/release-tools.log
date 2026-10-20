@@ -2,33 +2,39 @@ TAP version 13
 # Subtest: fork cache never substitutes stale head, fee, pending or canonicality-sensitive reads
 ok 1 - fork cache never substitutes stale head, fee, pending or canonicality-sensitive reads
   ---
-  duration_ms: 0.772611
+  duration_ms: 0.642629
   type: 'test'
   ...
 # Subtest: independent verification accepts only exact signed transaction and canonical receipt
 ok 2 - independent verification accepts only exact signed transaction and canonical receipt
   ---
-  duration_ms: 1.474516
+  duration_ms: 1.063014
   type: 'test'
   ...
 # Subtest: adult imports preserve valid metadata and generation-zero price cap
 ok 3 - adult imports preserve valid metadata and generation-zero price cap
   ---
-  duration_ms: 0.325518
+  duration_ms: 0.262055
   type: 'test'
   ...
-# Subtest: oversized legacy traits, unknown gender, wrong species and future timestamps cannot be silently normalized
-ok 4 - oversized legacy traits, unknown gender, wrong species and future timestamps cannot be silently normalized
+# Subtest: invalid legacy sizes, unknown gender, wrong species and future timestamps cannot be silently normalized
+ok 4 - invalid legacy sizes, unknown gender, wrong species and future timestamps cannot be silently normalized
   ---
-  duration_ms: 0.157097
+  duration_ms: 0.233781
   type: 'test'
   ...
-1..4
-# tests 4
+# Subtest: all 21 percentage sizes round-trip through imports without changing any other trait
+ok 5 - all 21 percentage sizes round-trip through imports without changing any other trait
+  ---
+  duration_ms: 0.840346
+  type: 'test'
+  ...
+1..5
+# tests 5
 # suites 0
-# pass 4
+# pass 5
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 142.725694
+# duration_ms 152.59902

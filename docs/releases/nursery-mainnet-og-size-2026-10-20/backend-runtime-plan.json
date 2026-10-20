@@ -1,0 +1,39 @@
+{
+  "deployNow": false,
+  "existingCluster": "infra-cluster",
+  "services": [
+    "indexer",
+    "graphql",
+    "nextjs-api"
+  ],
+  "databaseMigrationOrder": [
+    "NurseryMetadata1791158400000",
+    "NurseryProvenanceDates1792368000000"
+  ],
+  "indexerEnvironment": {
+    "CHAIN_ID": "43114",
+    "NURSERY_HERMANN_ADDRESS": "0x3B752a9644374e69ADB8141E52d2b09eafE8F8c4",
+    "NURSERY_EVO_ADDRESS": "0x4151b8afa10653d304FdAc9a781AFccd45EC164c",
+    "NURSERY_REGISTRY_VERSION": "2",
+    "NURSERY_FROM_BLOCK": "REPLACE_WITH_VERIFIED_DEPLOYMENT_BLOCK",
+    "BREEDING_BACKEND": "hermann"
+  },
+  "webEnvironment": {
+    "NEXT_PUBLIC_NURSERY_NETWORK": "mainnet-pilot",
+    "NEXT_PUBLIC_NURSERY_EVO_ADDRESS": "0x42006Ab57701251B580bDFc24778C43c9ff589A1",
+    "NEXT_PUBLIC_NURSERY_NFT_ADDRESS": "0x4151b8afa10653d304FdAc9a781AFccd45EC164c",
+    "NEXT_PUBLIC_NURSERY_BERTHA_ADDRESS": "0x9A72dcf37eE3e2f4A33895AcBF735c1a5cb834Ba",
+    "NEXT_PUBLIC_NURSERY_HERMANN_ADDRESS": "0x3B752a9644374e69ADB8141E52d2b09eafE8F8c4",
+    "NEXT_PUBLIC_NURSERY_WRAPPER_ADDRESS": "0x62Fb87c10A917580cA99AB9a86E213Eb98aa820C",
+    "NEXT_PUBLIC_NURSERY_REGISTRY_VERSION": "2",
+    "NEXT_PUBLIC_NURSERY_MAINNET_APPROVED": "0"
+  },
+  "requirements": [
+    "Use verified deployment block; never reset the existing global transfer cursor",
+    "Backfill nursery registry events from deployment without losing or replaying existing NFT ownership incorrectly",
+    "Block legacy breeder runtime before importing canonical breed counts",
+    "Run production migrations only after approved ledger check and backup checkpoint",
+    "Preserve existing XP, dates and size percentages; never reimport or reroll existing Evos"
+  ],
+  "activationBlockedUntilLiveReadiness": true
+}

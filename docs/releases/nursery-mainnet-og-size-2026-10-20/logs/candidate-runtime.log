@@ -1,0 +1,9 @@
+Beta redirect /: HTTP 302, private, no-store
+Beta redirect /profile: HTTP 302, private, no-store
+Beta redirect /nursery/bertha?egg=5112: HTTP 302, private, no-store
+Beta redirect /api/nursery/access: HTTP 302, private, no-store
+Beta redirect /api/player/me: HTTP 302, private, no-store
+Beta redirect /api/leaderboard/pvbot: HTTP 302, private, no-store
+Beta redirect /api/downloads/file: HTTP 302, private, no-store
+Blocked beta POST: HTTP 303, no mutation replay
+Owner sign-in recovery: HTTP 200

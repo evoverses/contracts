@@ -1,0 +1,35 @@
+⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+   ▲ Next.js 15.3.4
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 2000ms
+   Linting and checking validity of types ...
+
+./src/app/metadata/[collection]/[tokenId]/[option]/route.ts
+16:49  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/3) ...
+ ✓ Generating static pages (3/3)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                       Size  First Load JS
+┌ ƒ /health                                      142 B         101 kB
+├ ƒ /metadata/[collection]/[tokenId]             142 B         101 kB
+└ ƒ /metadata/[collection]/[tokenId]/[option]    142 B         101 kB
++ First Load JS shared by all                   100 kB
+  ├ chunks/6b4a6958-a880a9682e17ac27.js        53.2 kB
+  ├ chunks/748-6c9257668489c65b.js             45.6 kB
+  └ other shared chunks (total)                 1.6 kB
+
+Route (pages)                                     Size  First Load JS
+─ ○ /404                                         190 B        93.7 kB
++ First Load JS shared by all                  93.5 kB
+  ├ chunks/framework-d63ad537bb7b96f8.js       57.7 kB
+  ├ chunks/main-471ce1d5aa5d0ad1.js            34.1 kB
+  └ other shared chunks (total)                1.66 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand

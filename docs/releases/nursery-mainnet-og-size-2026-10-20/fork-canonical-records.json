@@ -2,8 +2,8 @@
   "chainId": 43114,
   "collection": "0x4151b8afa10653d304FdAc9a781AFccd45EC164c",
   "hermann": "0x3B752a9644374e69ADB8141E52d2b09eafE8F8c4",
-  "blockNumber": 98003849,
-  "blockHash": "0xb1df1769ef2b76871a0d35edd43cf8acfbe6c635ff9c0fb4ddcef972c738eedd",
+  "blockNumber": 98021060,
+  "blockHash": "0x17ff73c2a346355442c45dacf8be87cbfeace2768ec8577728fc9f1fbc6944e8",
   "records": [
     {
       "tokenId": "532",
@@ -12,14 +12,14 @@
         "species": "55",
         "generation": "0",
         "totalBreeds": "5",
-        "lastBreedTime": "1792446594",
+        "lastBreedTime": "1792463925",
         "attributes": {
           "gender": "0",
           "rarity": "0",
           "primaryType": "11",
           "secondaryType": "1",
           "nature": "16",
-          "size": "20"
+          "size": "12"
         },
         "stats": {
           "health": "50",
@@ -49,14 +49,14 @@
         "species": "125",
         "generation": "1",
         "totalBreeds": "2",
-        "lastBreedTime": "1792446591",
+        "lastBreedTime": "1792463922",
         "attributes": {
           "gender": "1",
           "rarity": "0",
           "primaryType": "9",
           "secondaryType": "6",
           "nature": "10",
-          "size": "20"
+          "size": "12"
         },
         "stats": {
           "health": "50",
@@ -86,14 +86,14 @@
         "species": "5",
         "generation": "1",
         "totalBreeds": "1",
-        "lastBreedTime": "1792446591",
+        "lastBreedTime": "1792463922",
         "attributes": {
           "gender": "0",
           "rarity": "0",
           "primaryType": "9",
           "secondaryType": "0",
           "nature": "12",
-          "size": "10"
+          "size": "11"
         },
         "stats": {
           "health": "50",
@@ -123,14 +123,14 @@
         "species": "35",
         "generation": "1",
         "totalBreeds": "1",
-        "lastBreedTime": "1792446594",
+        "lastBreedTime": "1792463925",
         "attributes": {
           "gender": "1",
           "rarity": "0",
           "primaryType": "1",
           "secondaryType": "0",
           "nature": "0",
-          "size": "20"
+          "size": "12"
         },
         "stats": {
           "health": "50",
@@ -182,13 +182,13 @@
         "parent1": "3429",
         "parent2": "4092",
         "speciesVersion": "2",
-        "createdAt": "1792446593",
+        "createdAt": "1792463924",
         "treated": true,
         "status": "3",
-        "vrfRequestId": "72536396926450209895736947377159186911869789369104177150615816706816218601028"
+        "vrfRequestId": "33658293414073571846798717650082119215535010048538709239429781603908467625810"
       },
       "eggKind": "2",
-      "hatchCompletedAt": "1792705799"
+      "hatchCompletedAt": "1792723131"
     },
     {
       "tokenId": "5110",
@@ -219,13 +219,13 @@
         "parent1": "532",
         "parent2": "4503",
         "speciesVersion": "2",
-        "createdAt": "1792446596",
+        "createdAt": "1792463928",
         "treated": false,
         "status": "3",
-        "vrfRequestId": "93954004989998040596326407432971715570883824120936447399845812740188681090691"
+        "vrfRequestId": "3914769432161251517638824825621774372322265213996817551522350896373643075213"
       },
       "eggKind": "2",
-      "hatchCompletedAt": "1792705802"
+      "hatchCompletedAt": "1792723134"
     },
     {
       "tokenId": "19",
@@ -259,10 +259,10 @@
         "createdAt": "0",
         "treated": false,
         "status": "3",
-        "vrfRequestId": "48839256060635515300600939950762692580981982947678627936108457330555394094380"
+        "vrfRequestId": "65817473114846720572900222436098656856159922759780704344623648792390930417663"
       },
       "eggKind": "1",
-      "hatchCompletedAt": "1792705808"
+      "hatchCompletedAt": "1792723140"
     },
     {
       "tokenId": "20",
@@ -296,10 +296,10 @@
         "createdAt": "0",
         "treated": true,
         "status": "3",
-        "vrfRequestId": "33658293414073571846798717650082119215535010048538709239429781603908467625810"
+        "vrfRequestId": "17576341790161208476337660769766593598700269904880316320244735033235133628017"
       },
       "eggKind": "1",
-      "hatchCompletedAt": "1792705813"
+      "hatchCompletedAt": "1792723145"
     },
     {
       "tokenId": "51",
@@ -333,10 +333,10 @@
         "createdAt": "0",
         "treated": true,
         "status": "3",
-        "vrfRequestId": "3914769432161251517638824825621774372322265213996817551522350896373643075213"
+        "vrfRequestId": "17054176750636754419773562955808391496138781017269216985160476053908518936095"
       },
       "eggKind": "1",
-      "hatchCompletedAt": "1792705816"
+      "hatchCompletedAt": "1792723149"
     }
   ]
 }

@@ -2,7 +2,7 @@
 
 Review candidate only. Execution is not approved. No collection upgrade. Existing snapshot/pilot data is retained and not approved for import.
 
-Source snapshot: block 98003799. Fresh nonce, permissions, fees and dependency preflight are recorded separately.
+Source snapshot: block 98021010. Fresh nonce, permissions, fees and dependency preflight are recorded separately.
 Expected mainnet deployer nonce: 312.
 
 | Step | Action | Sender | Gas limit |

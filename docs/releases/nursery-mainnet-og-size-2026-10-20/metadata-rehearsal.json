@@ -2,8 +2,8 @@
   "passed": true,
   "localDatabaseOnly": true,
   "publicDatabaseWrites": 0,
-  "blockNumber": 98003849,
-  "blockHash": "0xb1df1769ef2b76871a0d35edd43cf8acfbe6c635ff9c0fb4ddcef972c738eedd",
+  "blockNumber": 98021060,
+  "blockHash": "0x17ff73c2a346355442c45dacf8be87cbfeace2768ec8577728fc9f1fbc6944e8",
   "hashPinnedContractReads": 38,
   "records": [
     {
@@ -13,7 +13,8 @@
       "generation": 0,
       "totalBreeds": 5,
       "xp": 0,
-      "imageVersion": "88721b986aedea9dc340"
+      "size": 20,
+      "imageVersion": "20f138cd27d5a9f33d5d"
     },
     {
       "tokenId": "3429",
@@ -22,7 +23,8 @@
       "generation": 1,
       "totalBreeds": 2,
       "xp": 0,
-      "imageVersion": "3b2586f14d7920b38e22"
+      "size": 20,
+      "imageVersion": "04808ef06151dfc4c508"
     },
     {
       "tokenId": "4092",
@@ -31,7 +33,8 @@
       "generation": 1,
       "totalBreeds": 1,
       "xp": 0,
-      "imageVersion": "0febecfc91b362cbfed7"
+      "size": 10,
+      "imageVersion": "fd0d4b6a32d1c5509932"
     },
     {
       "tokenId": "4503",
@@ -40,7 +43,8 @@
       "generation": 1,
       "totalBreeds": 1,
       "xp": 0,
-      "imageVersion": "b88a52aa334891d61a76"
+      "size": 20,
+      "imageVersion": "1eb667d2d42b6df9c18d"
     },
     {
       "tokenId": "5109",
@@ -49,7 +53,8 @@
       "generation": 2,
       "totalBreeds": 0,
       "xp": 0,
-      "imageVersion": "313f9ae72efb68948bc6"
+      "size": -50,
+      "imageVersion": "c3151cc0ccd8b3293063"
     },
     {
       "tokenId": "5110",
@@ -58,7 +63,8 @@
       "generation": 2,
       "totalBreeds": 0,
       "xp": 0,
-      "imageVersion": "aff99f32cf8e388a3759"
+      "size": -50,
+      "imageVersion": "cd0a7a5ca8a3aacfa5c9"
     },
     {
       "tokenId": "19",
@@ -67,7 +73,8 @@
       "generation": 0,
       "totalBreeds": 0,
       "xp": 0,
-      "imageVersion": "176fc8f3fa41efc2074a"
+      "size": -100,
+      "imageVersion": "c6070792e4e5e9171ead"
     },
     {
       "tokenId": "20",
@@ -76,7 +83,8 @@
       "generation": 0,
       "totalBreeds": 0,
       "xp": 0,
-      "imageVersion": "14fc932e56575eb8c9fc"
+      "size": 0,
+      "imageVersion": "b3e88b5f8edd4232a158"
     },
     {
       "tokenId": "51",
@@ -85,7 +93,8 @@
       "generation": 0,
       "totalBreeds": 0,
       "xp": 0,
-      "imageVersion": "f20f8551007c03d72eab"
+      "size": 100,
+      "imageVersion": "a6f216cb1b12e11d124f"
     }
   ],
   "wallets": [

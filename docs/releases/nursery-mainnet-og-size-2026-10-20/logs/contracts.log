@@ -5,7 +5,7 @@
     ✔ escrows EVO, allocates a new NFT ID, pays only treasury and settles exactly once
     ✔ rejects forged receiver callbacks and unsolicited NFTs without losing ownership
     ✔ uses callback ID despite unrelated mints and registers before recipient delivery
-    ✔ rolls back missing, duplicate and malformed mint callbacks without consuming the request or seed (43ms)
+    ✔ rolls back missing, duplicate and malformed mint callbacks without consuming the request or seed (47ms)
     ✔ rejects ineligible/unimported parents, incorrect ownership and duplicate parent requests before payment
     ✔ checks price slippage, AVAX funding and wrapper availability atomically
     ✔ refunds a prepared request and releases parents while paused, but never after VRF commitment
@@ -21,16 +21,16 @@
     ✔ credits only AVAX overpayment, protects it from admin withdrawals and supports an explicitly funded subsidy
     ✔ enforces dedicated NFT mint permissions rather than giving Bertha admin access
     ✔ preserves legacy species boundary behaviour and Harry trait inheritance for fixed seeds
-    ✔ keeps inherited traits within their game bounds over 128 deterministic random seeds (224ms)
+    ✔ keeps inherited traits within their game bounds over 128 deterministic random seeds (223ms)
     ✔ existing Evo mint functions allocate IDs and preserve historical mintTo limits
 
   Genesis eggs retain original rules and NFT ownership
-    ✔ restricts snapshot setup/import and verifies the chain, collection, treatment and date in every proof (42ms)
-    ✔ rejects already imported adults and nonexistent NFTs atomically (103ms)
-    ✔ lets a newly registered Genesis egg hatch immediately and preserves owner, ID, generation and counters (50ms)
-    ✔ preserves prior treatment, charges untreated eggs once, and follows transfers before and during hatching (48ms)
-    ✔ preserves every original Harry trait except the separately rolled size for fixed, boundary and random words (1030ms)
-    ✔ uses unused entropy to cover every OG size without changing other traits or treatment outcomes (321ms)
+    ✔ restricts snapshot setup/import and verifies the chain, collection, treatment and date in every proof (38ms)
+    ✔ rejects already imported adults and nonexistent NFTs atomically (96ms)
+    ✔ lets a newly registered Genesis egg hatch immediately and preserves owner, ID, generation and counters (41ms)
+    ✔ preserves prior treatment, charges untreated eggs once, and follows transfers before and during hatching (43ms)
+    ✔ preserves every original Harry trait except the separately rolled size for fixed, boundary and random words (977ms)
+    ✔ uses unused entropy to cover every OG size without changing other traits or treatment outcomes (308ms)
 
 
   28 passing (5s)

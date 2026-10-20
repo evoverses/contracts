@@ -1,0 +1,44 @@
+
+┌─────────────────────────────┐
+│ OpenNext — Cloudflare build │
+└─────────────────────────────┘
+
+Monorepo detected at /var/tmp/evoverses-mainnet-ready-20261020
+App directory: /var/tmp/evoverses-mainnet-ready-20261020/apps/website
+Next.js version : 15.5.27
+@opennextjs/cloudflare version: 1.20.10
+@opennextjs/aws version: 4.1.9
+workerd compatibility_date: 2026-10-09
+WARN Skipping Next.js build
+
+┌──────────────────────────────┐
+│ OpenNext — Generating bundle │
+└──────────────────────────────┘
+
+Bundling middleware function...
+Bundling static assets...
+Bundling cache assets...
+Building server function: default...
+Applying code patches: 3.880s
+# copyPackageTemplateFiles
+[35m⚙️ Bundling the OpenNext server...
+[0m
+▲ [WARNING] Comparison with -0 using the "===" operator will also match 0 [equals-negative-zero]
+
+    .open-next/server-functions/default/apps/website/.next/server/chunks/55165.js:1:19331:
+      1 │ ....unsigned){if(h<0)h+=e;else if(-0===h)return 0}return h}}a.expor...
+        ╵                                   ~~
+
+  Floating-point equality is defined such that 0 and -0 are equal, so "x === -0" returns true for both 0 and -0. You need to use "Object.is(x, -0)" instead to test for -0.
+
+▲ [WARNING] Comparison with -0 using the "===" operator will also match 0 [equals-negative-zero]
+
+    .open-next/server-functions/default/apps/website/.next/server/chunks/90795.js:4816:39156:
+      4816 │ ...unsigned){if(h<0)h+=e;else if(-0===h)return 0}return h}}a.exp...
+           ╵                                  ~~
+
+  Floating-point equality is defined such that 0 and -0 are equal, so "x === -0" returns true for both 0 and -0. You need to use "Object.is(x, -0)" instead to test for -0.
+
+[35mWorker saved in `.open-next/worker.js` 🚀
+[0m
+OpenNext build complete.

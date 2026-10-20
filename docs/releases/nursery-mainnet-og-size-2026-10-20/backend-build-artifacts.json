@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-10-20T02:51:51.975062+00:00",
+  "images": [
+    {
+      "tag": "evoverses-nursery-indexer-candidate:20261020",
+      "id": "sha256:b4365cfa3a13192b15127420c4e367ce0738f5bccadbeec84d40d594047d0d2c",
+      "os": "linux",
+      "architecture": "amd64",
+      "published": false
+    },
+    {
+      "tag": "evoverses-nursery-api-candidate:20261020",
+      "id": "sha256:9fb0820fa72b20a543e5efa76435d1b79849e02a72c7f5b9cb45354b80a2718d",
+      "os": "linux",
+      "architecture": "amd64",
+      "published": false
+    }
+  ],
+  "indexerRuntimeSmoke": {
+    "passed": true,
+    "networkDisabled": true,
+    "migrationsPresent": true,
+    "pgClientPresent": true,
+    "percentageConversionPresent": true
+  },
+  "apiRuntimeSmoke": {
+    "passed": true,
+    "networkDisabled": true,
+    "httpStatus": 404,
+    "fontsPresent": true
+  },
+  "sourceSha256": {
+    "apps/squid/src/nursery/projection.ts": "dc79029c0f761d8f321097b6050f395ad3912f142edcd08e2811914daa2ae7bd",
+    "apps/website/src/lib/nursery/chain-assets.ts": "a68e70c67ac5e00253a12ab683305ed0eec5e68f2ee2300a0a5fc3c73768e584",
+    "apps/website/src/lib/nursery/asset-provenance.ts": "4e0db3e9d59a24d6b5ecfb61c677f759a019a38255a628a31c34aa995bf0704e",
+    "apps/api/src/lib/metadata/nursery-traits.ts": "7e840b8dd040947af521d4c5b46f15082dcfb87faebf91bf457cd1821d00a9f4",
+    "apps/api/src/app/metadata/[collection]/[tokenId]/route.ts": "c642e8021dd795464d89b4bd531be3eb280d785013467bf4eaaea7ab0b24b224",
+    ".dockerignore": "15afe8bb31da738b12873f0a53fc700f5e6fe5a200e86f71fe26e14bcedc4d13"
+  },
+  "serviceUpdates": 0,
+  "productionDatabaseWrites": 0
+}
