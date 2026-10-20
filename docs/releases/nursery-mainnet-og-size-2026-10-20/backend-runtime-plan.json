@@ -10,6 +10,8 @@
     "NurseryMetadata1791158400000",
     "NurseryProvenanceDates1792368000000"
   ],
+  "databaseOwnerStep": "database-owner-migration.sql",
+  "databaseOwnerRehearsal": "database-owner-rehearsal.json",
   "indexerEnvironment": {
     "CHAIN_ID": "43114",
     "NURSERY_HERMANN_ADDRESS": "0x3B752a9644374e69ADB8141E52d2b09eafE8F8c4",
@@ -28,12 +30,27 @@
     "NEXT_PUBLIC_NURSERY_REGISTRY_VERSION": "2",
     "NEXT_PUBLIC_NURSERY_MAINNET_APPROVED": "0"
   },
+  "cutoverSequence": [
+    "After separate infrastructure/database approval, confirm the existing database-owner execution path, snapshot and frozen source hashes",
+    "Hold indexer at desired count zero before transaction 1; await its task stopping and record the final committed processor checkpoint",
+    "Submit approved deployments/configuration/permission steps 1-12; keep new NPCs paused and verify all receipts and the actual deployment block",
+    "Recheck migration ledger and empty legacy-request table, stop legacy breeding writers, and apply the owner SQL transaction with ON_ERROR_STOP",
+    "Run the migration tool in inspection mode or verify five ledger entries before process:prod; it must find no pending migration",
+    "Publish the frozen backend images only after approval; update indexer with actual deployment block and resume from its unchanged global checkpoint",
+    "Verify catch-up, registry events, API reads and unchanged ownership/XP/size; do not import until these checks pass",
+    "Revalidate immutable pilot data and sign approved steps 13-17, then verify canonical metadata, permissions and owner-only beta read mode",
+    "After explicit activation/spending approval, sign steps 18-19 and enable private beta signing; main public website stays disabled"
+  ],
   "requirements": [
-    "Use verified deployment block; never reset the existing global transfer cursor",
-    "Backfill nursery registry events from deployment without losing or replaying existing NFT ownership incorrectly",
-    "Block legacy breeder runtime before importing canonical breed counts",
-    "Run production migrations only after approved ledger check and backup checkpoint",
+    "Never reset or advance the existing global transfer cursor manually",
+    "If the old indexer processes past deployment, stop and produce a separately rehearsed event backfill; do not assume NURSERY_FROM_BLOCK rewinds it",
+    "Existing squid login cannot apply metadata DDL; use the reviewed owner transaction and its narrow runtime grants",
     "Preserve existing XP, dates and size percentages; never reimport or reroll existing Evos"
+  ],
+  "recovery": [
+    "If the owner transaction fails, roll it back and leave the new NPCs paused; do not start the new indexer with pending migrations",
+    "After nursery events exist, do not resume an older indexer that ignores them; preserve the saved checkpoint and registry for forward recovery",
+    "Pause new NPCs and disable private signing on failure. Keep pending requests and genuine callbacks recoverable; do not drop registry data or roll back minting"
   ],
   "activationBlockedUntilLiveReadiness": true
 }

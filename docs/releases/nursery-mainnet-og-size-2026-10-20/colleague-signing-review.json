@@ -18,6 +18,8 @@
       "requires": [
         "Explicit mainnet deployment approval and spending cap",
         "Fresh deployer nonce equals the frozen package",
+        "Indexer held at a recorded checkpoint before the first deployment; resume only with nursery support",
+        "Database-owner execution path and backup checkpoint confirmed",
         "No collection upgrade"
       ],
       "transactions": [

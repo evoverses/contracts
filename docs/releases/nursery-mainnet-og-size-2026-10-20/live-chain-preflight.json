@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-10-20T02:52:52.409Z",
+  "checkedAt": "2026-10-20T03:09:08.382Z",
   "chainId": 43114,
-  "blockNumber": 98022019,
-  "blockHash": "0x21d2c9b1949bf171981da3d242df5f92db48cce0b7297d31e3710ec88d87f9ce",
+  "blockNumber": 98023063,
+  "blockHash": "0x4b3208548863d4996f132b5eae5ea2bf948024b44edb0f19dfcf1448652755e2",
   "implementation": "0x6BcF190B3b3B55B017D91fE236784D1760B32d3f",
   "collectionPaused": false,
   "pilotOwnersUnchanged": true,

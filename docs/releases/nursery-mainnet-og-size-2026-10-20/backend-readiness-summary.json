@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-20T12:32:00.549181+10:00",
+  "checkedAt": "2026-10-20T03:03:00.457Z",
   "readOnly": true,
   "services": [
     {
@@ -21,9 +21,47 @@
   "deployedNurseryConfigured": false,
   "databaseAvailable": true,
   "backupRetentionDays": 7,
-  "liveMigrationLedgerVerified": false,
-  "liveCheckpointVerified": false,
-  "legacyPendingRequestsVerified": false,
-  "temporaryReadOnlyProbe": "prepared; awaiting approval",
-  "deploymentPerformed": false
+  "liveMigrationLedgerVerified": true,
+  "liveCheckpointVerified": true,
+  "legacyPendingRequestsVerified": true,
+  "temporaryReadOnlyProbe": "completed; both diagnostic tasks stopped and their task definitions deregistered",
+  "deploymentPerformed": false,
+  "databaseVersion": "15.17",
+  "transactionReadOnly": true,
+  "migrationLedger": [
+    {
+      "id": 1,
+      "timestamp": "1749079541557",
+      "name": "Data1749079541557"
+    },
+    {
+      "id": 2,
+      "timestamp": "1749080326985",
+      "name": "Data1749080326985"
+    },
+    {
+      "id": 3,
+      "timestamp": "1756344326859",
+      "name": "Data1756344326859"
+    }
+  ],
+  "checkpoint": {
+    "id": 0,
+    "height": 98022707,
+    "hash": "0x9e45938f277f1200a7f6d3e96657826467b5201ba3f09313a626268d07db7c34",
+    "nonce": 711099
+  },
+  "legacyRequestRows": 0,
+  "legacyWriterStoppedVerified": false,
+  "nurseryTableExists": false,
+  "databaseOwnerMigrationRequired": true,
+  "databaseOwnerMigrationRehearsed": true,
+  "indexerMetadataSchemaAccess": false,
+  "productionOwnerExecutionPrivilegesVerified": false,
+  "fullDatabaseSizeCoverageVerified": false,
+  "fullDatabaseSizeCoverageReason": "Existing indexer account has no metadata schema access (42501); all 49 pilot-wallet metadata sizes were independently round-trip verified through public metadata.",
+  "requiredDatabaseStep": "database-owner-migration.sql; existing owner connection, reviewed backup and separate change approval required",
+  "mainnetTransactionsSubmitted": 0,
+  "productionDatabaseWrites": 0,
+  "serviceUpdates": 0
 }

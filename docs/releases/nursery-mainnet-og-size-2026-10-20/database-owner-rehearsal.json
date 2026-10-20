@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "localDatabaseOnly": true,
+  "productionDatabaseWrites": 0,
+  "liveFunctionSignaturesMatch": true,
+  "restrictedIndexerRoleReproduced": true,
+  "ownerMigrationPassed": true,
+  "indexerRegistryWritePassed": true,
+  "graphqlReadPassed": true,
+  "graphqlWriteDenied": true,
+  "repeatExecutionRejected": true,
+  "migrationLedgerCount": 5,
+  "sqlSha256": "7231164a9258d0d4c3a2883a9bc212001eeca74f6773f54948982cdca7854a50",
+  "migrationInputSha256": [
+    "0d6a4c8ce7bf9b4729598c01d78d39aa0e8779199cfa43f2bcfbcf1a91542f6c",
+    "a021055119cdb31c7e05196019230b1a4361adfc17102bc4a6c1807d63bb5a5d"
+  ],
+  "readFunctionInputSha256": [
+    "d31c934ec2e2cb2f1df35f16c9ade779a444c142cb563713fdb19ffca19d7d85",
+    "fbed14b485dbd6e28affae395cd2139f8b56418d770df468232e8a88aa9ea77f",
+    "411b3a08a7f595f201c1b78b3040806202ebf3239bee07b776e8eaaa64df4b14"
+  ],
+  "approvalRequired": true
+}

@@ -16,8 +16,8 @@
   },
   {
     "id": "AWS_READINESS",
-    "status": "builds_ready_live_database_probe_pending",
-    "detail": "Existing services are running but the deployed indexer has no nursery configuration. Updated website/API/indexer builds and local backend images pass. Production migration ledger, checkpoint and legacy pending/writer checks await the approved private database connection or read-only diagnostic task. No production migration/service update has been made."
+    "status": "live_readiness_verified_owner_cutover_staged",
+    "detail": "Approved read-only AWS tasks verified the three-entry migration ledger, current processor checkpoint and empty legacy request table. The deployed indexer has no nursery support and cannot access metadata. A database-owner migration transaction with narrow runtime grants passes a role-aware local rehearsal. Owner execution privileges, stopped legacy writers, approved cutover and real mainnet acceptance remain pre-execution gates. No production migration/service update was made."
   },
   {
     "id": "IMPORT_CUTOVER",
